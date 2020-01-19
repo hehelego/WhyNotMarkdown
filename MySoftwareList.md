@@ -24,4 +24,5 @@
 * PanDownload
 * LocaleEmulator
 * ONScripter
-
+* VisualNovelReader
+* Yuki[github yuki](<https://github.com/project-yuki/YUKI>)
