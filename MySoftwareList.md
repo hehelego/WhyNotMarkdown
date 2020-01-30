@@ -12,11 +12,12 @@
 * LibreOffice
 * splayer `video player`
 * VirtualBox+putty+(linuxmint)
-* python
+* python3
 * Shadowsocket
 * telegram
 * tim `clean version for tencentQQ`
 * typora `markdown pad`  
+* SageMath[link](<https://www.sagemath.org/>)
 
 -----
 
