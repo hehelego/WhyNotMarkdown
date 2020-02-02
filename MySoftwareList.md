@@ -11,6 +11,7 @@
 * lemon+LemonLime
 * LibreOffice
 * splayer `video player`
+* VLC media player
 * VirtualBox+putty+(linuxmint)
 * python3
 * Shadowsocket
