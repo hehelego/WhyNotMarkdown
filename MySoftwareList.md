@@ -3,8 +3,8 @@
 * avast antivirus
 * huorong antivirus
 * ccleaner
-* cloudmusic
-* codeblocks
+* cloudmusic(netease music)
+* codeblocks(for mingw)
 * everything
 * GithubDesktop
 * gvim
@@ -19,6 +19,7 @@
 * tim `clean version for tencentQQ`
 * typora `markdown pad`  
 * SageMath[link](<https://www.sagemath.org/>)
+* stack(for haskell [link](<https://docs.haskellstack.org/en/stable/README/>))
 
 -----
 
