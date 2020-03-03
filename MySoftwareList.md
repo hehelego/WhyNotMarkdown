@@ -24,6 +24,7 @@
 * stack(for haskell [link](<https://docs.haskellstack.org/en/stable/README/>))
 * pandoc(with pdflatex)
 * doPDF+(pdfkit,wkHTMLtoPDF)
+* MiKTeX
 
 
 
