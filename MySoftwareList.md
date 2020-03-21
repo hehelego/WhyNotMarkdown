@@ -22,6 +22,9 @@
 * typora `markdown pad`  
 * SageMath[link](<https://www.sagemath.org/>)
 * stack(for haskell [link](<https://docs.haskellstack.org/en/stable/README/>))
+* pandoc+ffmpeg(file format converters)
+
+
 
 
 
