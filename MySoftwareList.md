@@ -23,6 +23,10 @@
 * SageMath[link](<https://www.sagemath.org/>)
 * stack(for haskell [link](<https://docs.haskellstack.org/en/stable/README/>))
 * pandoc+ffmpeg(file format converters)
+* BILIdrive+CDNdrive
+  * [cdn drive-pypi](https://pypi.org/project/CDNDrive/) [cdn drive-git](https://github.com/apachecn/CDNDrive)
+  * [bili drive-pypi](https://pypi.org/project/BiliDriveEx/) [bili drive-git](https://github.com/apachecn/BiliDriveEx)
+  * [ORIGIN-pypi](https://pypi.org/project/BiliDrive/) [ORIGIN-git](https://github.com/Hsury/BiliDrive)
 
 
 
