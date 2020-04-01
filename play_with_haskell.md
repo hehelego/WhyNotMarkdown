@@ -5,7 +5,7 @@
 
 ## start up
 
-### some useful resources for learners. 
+### some useful resources. 
 
 - [Learn X in Y minutes:haskell](https://learnxinyminutes.com/docs/haskell/) 一个cheat sheet,快速熟悉用HS写程序的基本要素.
 - [read it online:LYH4GG](http://learnyouahaskell.com/chapters) 大名鼎鼎的入门书,中文书名叫Haskell趣学指南,对于理论的讲解不够.
@@ -20,9 +20,10 @@
 
 
 
-### setup Haskell programming environment
+### setup Haskell environment
 
-**Installing Haskell via ‘stack’ is highly recommended** see [this page](<https://docs.haskellstack.org/en/stable/install_and_upgrade/>) for stack installation,after that try `stack ghci` in your console.get Haskell packages with the help of [tuna mirros](<https://mirrors.tuna.tsinghua.edu.cn/help/stackage/>).
+**Installing Haskell via ‘stack’ is highly recommended** see [this page](<https://docs.haskellstack.org/en/stable/install_and_upgrade/>) for stack installation,after that try `stack ghci` in your console.
+get Haskell packages(stackages+hackages) with the help of [tuna mirros](<https://mirrors.tuna.tsinghua.edu.cn/help/stackage/>).
 安装的时候,记得选择安装本地文档,直接看
 
 ```
@@ -70,53 +71,55 @@ stack runghc
 
 haskell uses **indentation ** to mark code-blocks rather than `{}` 
 
-Haskell doesn’t allow a identifier to start with a capitalized letter(`QaQ=1`and`let Abs_1926=1926` are not allowed).Name starting with a capitalized letter like `Bool,MyADT` is for typenames.
+Haskell doesn’t allow a identifier to start with a capitalized letter(`QaQ=1`and`let Abs_1926=1926 in Abs_1929+1` are not allowed).Name starting with a capitalized letter like `Bool,MyADT` is for type names.
 
-```haskell
--- assume that we have this simple implementation of flip in temp.hs
-my_flip [] = []
-my_flip (x:xs) = (my_flip xs) ++ [x]
 
-simple_function_infile=my_flip -- use this in a hs file
-let sf=my_flip -- use this in the ghci REPL
+
+### adding packages to your project
+
+当前目录没有`stack.yaml`时stack会使用global project,它不会屏蔽任何库(尽量不要在global project中安装库),而在stack sandbox中,它仅仅引入`packages.yaml`,`stack.yaml`中指定的包,比如你新建了一个stack sandbox,然后运行GHCi,尝试导入`Data.Set`就会出错,它提示你
+
+```
+<no location info>: error:
+    Could not load module ‘Data.Set’
+    It is a member of the hidden package ‘containers-0.6.2.1’.
+    You can run ‘:set -package containers’ to expose it.
+    (Note: this unloads all the modules in the current scope.)
 ```
 
 
 
-#### list
+怎么解决呢?找到当前目录下的`packages.yaml`在dependencies中加入containers(当然你可以不指定版本让stack去找最新的)之后再次启动GHCi就能成功导入`Data.Set`了.
 
-```haskell
-(1,1.0,'c',"str") -- numbers,character and string.
+```yaml
+dependencies:
+- base >= 4.7 && < 5
+- containers
 
+library:
+  source-dirs: src
 
-[1,2,3] -- ok,fine
-['1',2,"3"] -- error,qwq; the elements in a list must be the same type.
-[[1,3,2],[],[1926]] -- ok,fine
+executables:
+  learn-hs-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - learn-hs
 
-[0..] !! 2 -- zero based index,this will return 2
-1:[]
-123:[1..30] -- use (x : ls)
-[]++[1]
-[1,2,3]++[1..] --use (xs ++ ys)
-
--- some useful functions on list
-null [] -- True
-null [null] -- False
-head [1..5] -- 1
-tail [1..5] -- [2, 3, 4, 5]
-init [1..5] -- [1, 2, 3, 4]
-last [1..5] -- 5
-length [x*2 | x<-[1..1926],mod x 2 == 1,(<) x 100] -- 50
-take 3 [1,2,3,4,5] -- [1,2,3]
-take 10 [1,2,3] -- [1,2,3]
-take 0 [1..] -- []
-drop 3 [8,4,2,1,5,6] -- [1,5,6]  
-drop 10 [1] -- []
-drop 0 [1] -- [1]
-
-
--- list comprehension
--- [f(x,y) | x<-S,y<-T,ax1(x),ax2(x),ay1(y),ay2(y)]
+tests:
+  learn-hs-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - learn-hs
 ```
 
 
@@ -139,8 +142,6 @@ HS的类型系统是非常强大的,但是有时候你不得不指定类型,比�
 (read::[Char]->Int) "1926"  -- specify the type of read
 (read "3.1415926")::Double  -- specify the type of the result of read,at let the complier decide the type of function read
 ```
-
-
 
 
 
