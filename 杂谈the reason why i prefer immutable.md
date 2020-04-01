@@ -123,3 +123,4 @@ rust不允许borrow mut和其他borrow共存,比如这里尝试对`vec[i]`进行
 
 
 但是rust并非完美,而且不少rust中的东西是没有形式化验证的.如果没有特殊需求,我更愿意直接使用Haskell,严格分离副作用,pure code不允许side effect,干掉变量这个概念上面的问题都无从出现.
+如果你不能直接使用haskell(当然其他类似的语言也可以),可以试试ghc.js这种将Haskell编译为其他语言的东西.
