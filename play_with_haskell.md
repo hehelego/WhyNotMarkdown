@@ -135,7 +135,9 @@ tests:
 
 
 
-HS的类型系统是非常强大的,但是有时候你不得不指定类型,比如读入一个string,转换成integer.
+#### 0000 有时候你需要钦定类型帮助推导
+
+HS的extended HM类型系统是非常强大的,但是有时候你不得不指定类型,比如读入一个string,转换成integer.
 
 ```haskell
 -- read::(Read a)->String->a
@@ -144,6 +146,8 @@ HS的类型系统是非常强大的,但是有时候你不得不指定类型,比�
 ```
 
 
+
+#### 0001 haskell对标识符的要求很弱
 
 一个有趣的程序,模仿它的样子,我们也可以在Haskell中做运算符重载
 
@@ -155,7 +159,7 @@ main=putStrLn $ show $ (let 2*-3="NSML" in 2*-3)
 
 
 
-一个效率非常低的素数筛…
+#### 0002 一个效率非常低的素数筛…
 
 ```haskell
 import Data.List
@@ -168,7 +172,8 @@ p_leq_100 = primes_leq 100
 
 
 
-一个写得非常垃圾的排序,以及对于惰性求值的测试.
+#### 0003 merge sort
+
 ```haskell
 my_merge::(Ord a)=>[a]->[a]->[a]
 my_merge xs []=xs
@@ -205,6 +210,8 @@ main=do
 
 
 
+#### 0004 递归求解中的技巧:计数器(累加器)
+
 hs中简单的记忆化搜索,因为没有副作用,不能实时更新数据结构,那就只好把数据结构带着扔进参数列表里面,每次换一个了…大概就这样,效率很低…对于参数多的,试试Data.Map
 
 ```haskell
@@ -212,4 +219,48 @@ fib n=solve n 0 1  where
   solve 0 a b =a
   solve n a b =solve (n-1) b (a+b)
 ```
+
+
+
+####0005 luoguP1118
+
+这个题目是[USACO06FEB]Backward Digit Sums G/S
+求出一个$[1..n]$的排列$p$,使得$\sum_{i=1}^n p_i\binom{n-1}{i-1}=s$其中$n$非常小,允许阶乘/指数复杂度.
+
+```haskell
+main::IO()
+main=do
+  --putStrLn "-->start"
+
+  line<-getLine
+  let q=( (fmap read) . words $line )::[Int]
+  let (n,s)=(q!!0,q!!1)
+  let ret=search n 0 s [] 
+  putStrLn . sm $ ret
+
+  --putStrLn "-->end"
+
+getfactorial = (1:scanl1 (*) [1..])::[Int]
+fac n=getfactorial !! n
+getbinom n=[div (fac n) $ fac(i)*fac(n-i) | i<-[0..]]::[Int]
+binom n m=(getbinom n)!!m
+
+merge::Maybe a->Maybe a->Maybe a
+merge Nothing  x = x
+merge (Just x) _ = Just x
+
+rev n s=filter (\x->not $ elem x s) [1..n]
+sm (Just a)=foldl (\acc x->acc++(show x)++" ") "" $reverse a
+sm Nothing =""
+
+search::Int->Int->Int->[Int]->Maybe [Int]
+search n i s use=
+  if i==n
+  then if s==0 then Just use else Nothing
+  else foldl merge Nothing qaq
+    where qwq=filter (\x->s>=x*binom (n-1) i) (rev n use)
+          qaq=(\x->search n (i+1) (s-x*binom (n-1) i) (x:use))<$>qwq
+```
+
+
 
