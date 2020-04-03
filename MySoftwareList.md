@@ -55,3 +55,9 @@
 * windows10更新出锅,启动后desktop不显示.建议(ctrl+alt+del,alt+T),召唤任务管理器,(alt+F+N)输入explorer,启动windows资源管理器(explorer.exe)…
 * 上面的软件不少是open source的,并且有国内镜像,可以尝试到tuna(Thu建立),ustc mirror找找镜像,在GFW之内也能高速下载/更新.
 * Windows的console中,使用`chcp 65001`钦定console使用utf-8编码.
+* vim for windows中有些奇怪的map使得`Ctrl+V`无法进入`visual-block`模式(批量注释之类的功能),找到vim安装目录中的`mswin.vim`,注释掉这一行.
+
+```vim
+" CTRL-V and SHIFT-Insert are Paste
+map <C-V> "+gP
+```
