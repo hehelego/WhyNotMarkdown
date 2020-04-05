@@ -264,3 +264,60 @@ search n i s use=
 
 
 
+#### 0006 CF27E的haskell solution
+
+关于怎么不使用共享可变状态表示当前可行解的情况下,如何表达最优性剪枝.
+
+> 大概还是正常地写, 把当前最优解作为一个参数,再加一个参数表述当前尝试过的决策集合.
+>
+> ```haskell
+> f::Parameters->[Decesion]->Answer->Answer
+> f package used_decisions temporary_ans=?
+> ```
+> 
+> 尝试决策d,深入搜索树,等从搜索树深层回来时,常规参数package不变,used加入d,当前最优解取个min,再调用自己.
+> 可用决策集合为空,决策全都扔进used里面的时候就返回当前最优解...
+
+另外这里haskell中的`Prelude.Int`范围不够…
+
+```haskell
+import qualified Data.Set as QAQ
+main::IO()
+main=do
+  line<-getLine
+  let n=(read line)::Int
+  putStrLn . show  $ dfs (n,1,0,n) QAQ.empty max_possible_ans
+
+max_possible_ans=(10^18)
+
+--dvs::Int->[Int]
+dvs k=[y|y<- [2..k],0==k `mod` y,y<64]
+
+
+--primes::[Int]
+primes = sieve [2..]
+  where sieve (x:xs)=(:) x $  sieve [y | y<-xs,0/=mod y x]
+
+--getlog::Int->Int->Int
+getlog 0 y=0
+getlog x y=let x'=div x y in 1+getlog x' y
+
+--pw::Int->Int->Int->Int
+pw p q ans=if q>=getlog ans p
+  then -1
+  else
+    raw_pw p q
+    where raw_pw p 0=1
+          raw_pw p q=p*raw_pw p (q-1)
+
+--dfs::(Int,Int,Int,Int)->QAQ.Set Int->Int->Int
+dfs (n,now,i,last) used ans=let dcs=[x|x<-dvs n,x `QAQ.notMember` used,x<=last] in
+  if null dcs
+  then (if n==1 then min ans now else ans)
+  else let q=head dcs in let r=pw (primes!!i) (q-1) ans in
+    if (r<0) || ((div ans r)<=now) then ans
+    else
+      let ans'=dfs (div n q,now*r,i+1,q) QAQ.empty ans
+      in  dfs (n,now,i,last) (QAQ.insert q used) ans'
+```
+
