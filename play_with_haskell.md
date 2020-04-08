@@ -321,3 +321,37 @@ dfs (n,now,i,last) used ans=let dcs=[x|x<-dvs n,x `QAQ.notMember` used,x<=last] 
       in  dfs (n,now,i,last) (QAQ.insert q used) ans'
 ```
 
+#### 0007 请不要用加法举例子
+
+对于许多定义在`Foldable` typeclass中的操作,初看难以理解其行为,这时候不少人会用加法举例,比如
+
+```haskell
+sumList::(Num a)=>[a]->a
+sumList []=0
+sumList (x:xs)=x+sumList(xs)
+
+sumList s=foldl (+) 0 s
+sumList =\s->foldl (+) 0 s
+sumList = foldl (+) 0
+```
+
+然而这根本不make sense,我们看看那些fold的签名吧.看看这个`b->a->b`加法的`(+)::(Num a)=>a->a->a`太特殊了,加法有交换律,结合律,从左向右/从右向左都一样,并且加法的零元就是0太常见了,foldl的初值的作用没体现出来.
+```
+foldl :: Foldable t => (b -> a -> b) -> b -> t a -> b
+foldr :: Foldable t => (a -> b -> b) -> b -> t a -> b
+foldl1 :: Foldable t => (a -> a -> a) -> t a -> a
+foldr1 :: Foldable t => (a -> a -> a) -> t a -> a
+
+scanl :: (b -> a -> b) -> b -> [a] -> [b]
+scanl :: (b -> a -> b) -> b -> [a] -> [b]
+```
+
+fold函数实际上干的事情,应该是这样:给定一个初值作为累积器,指定一个可迭代对象,再给出一个累积函数将新遇到的东西加入到累积器中去. 我们看看一个靠谱的解释,它来自GHC document,它是这样说的.
+
+```
+foldl f z [x1, x2, ..., xn] == (...((z `f` x1) `f` x2) `f`...) `f` xn`
+scanl f z [x1, x2, ...] == [z, z `f` x1, (z `f` x1) `f` x2, ...]
+last (scanl f z xs) == foldl f z xs.
+```
+
+这才是我想要的东西啊,它的行为一目了然.
