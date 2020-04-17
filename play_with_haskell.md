@@ -36,6 +36,8 @@ stack build
 stack ghc
 stack ghci
 stack runghc
+
+stack ghc -- --version(WTF!)
 ```
 
 ### basic commands in GHCi
@@ -63,6 +65,9 @@ stack runghc
 
 :load qwq.hs -- compile and load the file qwq.hs, :l for short
 :reload -- reload all packages
+
+
+-- (help,quit) (t,k,i,doc) (l,r)
 ```
 
 
