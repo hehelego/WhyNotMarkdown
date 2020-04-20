@@ -15,6 +15,7 @@
 * splayer `video player`
 * VLC media player
 * VirtualBox+putty+(linuxmint)
+* windows sandbox
 * python3
 * Shadowsocket
 * telegram
@@ -61,3 +62,11 @@
 " CTRL-V and SHIFT-Insert are Paste
 map <C-V> "+gP
 ```
+
+- windows sandbox需要在`控制面板>程序与功能>启动关闭windows功能`中启动
+  - hyper-V的全部功能
+  - windows sandbox
+  - windows 虚拟机监控程序平台
+- 关于hyper-v启动之后无法实用virtualbox,这是hyper-v和vt-x冲突了,需要admin权限来修改配置.
+  - bcdedit /set hypervisorlaunchtype Auto(用hyper-v比如sandbox的时候)
+  - bcdedit /set hypervisorlaunchtype off(用vt-x比如virtualbox时)
