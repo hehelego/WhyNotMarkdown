@@ -68,5 +68,5 @@ map <C-V> "+gP
   - windows sandbox
   - windows 虚拟机监控程序平台
 - 关于hyper-v启动之后无法实用virtualbox,这是hyper-v和vt-x冲突了,需要admin权限来修改配置.
-  - bcdedit /set hypervisorlaunchtype Auto(用hyper-v比如sandbox的时候)
+  - bcdedit /set hypervisorlaunchtype auto(用hyper-v比如sandbox的时候)
   - bcdedit /set hypervisorlaunchtype off(用vt-x比如virtualbox时)
