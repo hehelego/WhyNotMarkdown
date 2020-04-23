@@ -50,6 +50,7 @@
 * Firefox(Print Edit We+Save Page We) + chrome(CtrlP print to PDF) -> perfect PDF
 
 #### useful tricks&solution to frequently happening problems
+* **windows/linux上面的不少问题都可以 重启 解决**
 * markdown:`[TOC]`建立可以生成token表,当目录用..
 * win+shift+s (screen shot)
 * windows10更新出锅,一堆应用启动不了,能查到进程,但是UI显实不了/进入不了REPL,敲入命令后卡住.建议清空windows临时文件,可以everything手动查找临时文件(C:/Users/{UserName}/AppData/Local/Temp)删除,或者使用Ccleaner自动清空….如果仍然不行,可以重启explorer.exe
@@ -67,6 +68,18 @@ map <C-V> "+gP
   - hyper-V的全部功能
   - windows sandbox
   - windows 虚拟机监控程序平台
+  
 - 关于hyper-v启动之后无法实用virtualbox,这是hyper-v和vt-x冲突了,需要admin权限来修改配置.
   - bcdedit /set hypervisorlaunchtype auto(用hyper-v比如sandbox的时候)
   - bcdedit /set hypervisorlaunchtype off(用vt-x比如virtualbox时)
+  
+- 突然发现按键盘方向键鼠标会跟着移动?某些按键组合可以触发鼠标双击/右键?这是玄妙的`鼠标键`功能.
+
+  - 首先需要去control panel关掉它(control panel>ease of access)
+  - 然后还要从硬件层次ban掉(这里不同的物理机是不一样的,比如dell和Lenovo是不同的).
+
+- 突然无端弹出`windows资源管理器`(就按下ctrl+E可以启动的那个东西,他叫`explorer.exe`)
+
+  - 问问baidu,bing,google.是软件设置的锅…
+
+  
