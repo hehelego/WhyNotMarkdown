@@ -72,6 +72,7 @@ map <C-V> "+gP
 - 关于hyper-v启动之后无法实用virtualbox,这是hyper-v和vt-x冲突了,需要admin权限来修改配置.
   - bcdedit /set hypervisorlaunchtype auto(用hyper-v比如sandbox的时候)
   - bcdedit /set hypervisorlaunchtype off(用vt-x比如virtualbox时)
+  - 之后还需要修改control panel>features>enable/disable windows feature中的hyper-v的
   
 - 突然发现按键盘方向键鼠标会跟着移动?某些按键组合可以触发鼠标双击/右键?这是玄妙的`鼠标键`功能.
 
