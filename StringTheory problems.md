@@ -60,8 +60,8 @@ if(tr(q,c)!=NULL){
 ```
 
 首先尝试走一个$c=T[i]$的trans,这样再缩短$L$对应的就一定是$suf(T[1..i])$了.
-之后就是要让这个suffix出现在$S[l..r]$中了.对于匹配到$(q,L)$,如果$[l+L,r]\cap right(q)\neq \phi$那就是出现了.
-需要注意以下这个$l+L$,考虑以下$L=3$,而$L+1\in right$显然不足以说明它是$S[l..r]$的子串.
+之后就是要让这个suffix出现在$S[l..r]$中了.对于匹配到$(q,L)$,如果$[l+L-1,r]\cap right(q)\neq \phi$那就是出现了.
+需要注意以下这个$l+L-1$,考虑下$L=3$,而$L+1\in right$的情况,显然不足以说明它是$S[l..r]$的子串.
 
 这里就有两种办法来扩大交集了,减小$L$,或者增大$right(q)$.后者就是跳到parent了.
 当然,减小$L$到一定程度的时候,就不能在处于$q$了,因为$SAM$上面对于$q$而言,$qs\to q$的路径长度恰好覆盖$[1+len(parent(q)),len(q)]$.所以$L$小于$1+len(par)$的时候,这个串的$right$应该是$right(parent(q))$.
@@ -73,7 +73,7 @@ if(tr(q,c)!=NULL){
 
 #### code
 
-[link:loj](https://loj.ac/submission/794673)
+[link:loj sol1](https://loj.ac/submission/794673) [link:loj sol2](https://loj.ac/submission/422810)
 
 #### another solution
 
