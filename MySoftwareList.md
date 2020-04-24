@@ -53,6 +53,8 @@
 #### useful tricks&solution to frequently happening problems
 * **windows/linux上面的不少问题都可以 重启 解决**
 * markdown:`[TOC]`建立可以生成token表,当目录用..
+* git clone比download zip快很多,下载不成功的时候试试用git CLI进行clone吧
+* python -m http.server创建临时http静态文件服务器.
 * win+shift+s (screen shot)
 * windows10更新出锅,一堆应用启动不了,能查到进程,但是UI显实不了/进入不了REPL,敲入命令后卡住.建议清空windows临时文件,可以everything手动查找临时文件(C:/Users/{UserName}/AppData/Local/Temp)删除,或者使用Ccleaner自动清空….如果仍然不行,可以重启explorer.exe
 * windows10更新出锅,启动后desktop不显示.建议(ctrl+alt+del,alt+T),召唤任务管理器,(alt+F+N)输入explorer,启动windows资源管理器(explorer.exe)…
