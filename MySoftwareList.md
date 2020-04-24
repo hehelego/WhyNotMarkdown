@@ -1,12 +1,13 @@
 #### installed softwares
 
-* chorme `browser`
-* firefox `browser`
-* avast antivirus
+* chrome `browser`
+* Firefox`browser`
+* GitHub desktop[link](https://desktop.github.com/)(with git CLI)
+* Avast antivirus
 * huorong antivirus
 * ccleaner
 * cloudmusic(netease music)
-* codeblocks(for mingw)
+* codeblocks(for mingw/cygwin)
 * everything
 * GithubDesktop
 * gvim
