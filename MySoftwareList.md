@@ -2,29 +2,29 @@
 
 * chrome `browser`
 * Firefox`browser`
-* GitHub desktop[link](https://desktop.github.com/)(with git CLI)
 * Avast antivirus
 * huorong antivirus
 * ccleaner
 * cloudmusic(netease music)
-* codeblocks(for mingw/cygwin)
-* everything
-* GithubDesktop
-* gvim
-* lemon+LemonLime
+* tim `tencentQQ`+wechat
+* telegram
 * LibreOffice
-* splayer `video player`
 * VLC media player
+* Shadowsocket
+* everything
+* codeblocks(for mingw/cygwin)
+* python3
+* stack(for haskell GHC)
+* GitHub desktop(with git CLI)
+* gvim(with vimplug)
+* typora `markdown pad`  
+* lemon+LemonLime
 * VirtualBox+putty+(linuxmint)
 * windows sandbox
-* python3
-* Shadowsocket
-* telegram
-* tim `tencentQQ`
-* typora `markdown pad`  
-* SageMath[link](<https://www.sagemath.org/>)
-* stack(for haskell [link](<https://docs.haskellstack.org/en/stable/README/>))
+* powershell
+* SageMath
 * pandoc+ffmpeg(file format converters)
+* OneDrive
 * BILIdrive+CDNdrive
   * [cdn drive-pypi](https://pypi.org/project/CDNDrive/) [cdn drive-git](https://github.com/apachecn/CDNDrive)
   * [bili drive-pypi](https://pypi.org/project/BiliDriveEx/) [bili drive-git](https://github.com/apachecn/BiliDriveEx)
@@ -37,11 +37,10 @@
 
 
 * qBittorrent
-* PanDownload
 * LocaleEmulator
 * ONScripter
-* VisualNovelReader
-* Yuki[github yuki](<https://github.com/project-yuki/YUKI>)
+* [Yuki](https://github.com/project-yuki/YUKI)
+* syncthing
 
 #### browser plugins
 * charset(to automaticly change the encoding of a web page,on chrome)
@@ -78,12 +77,10 @@ map <C-V> "+gP
   - 之后还需要修改control panel>features>enable/disable windows feature中的hyper-v的
   
 - 突然发现按键盘方向键鼠标会跟着移动?某些按键组合可以触发鼠标双击/右键?这是玄妙的`鼠标键`功能.
-
   - 首先需要去control panel关掉它(control panel>ease of access)
   - 然后还要从硬件层次ban掉(这里不同的物理机是不一样的,比如dell和Lenovo是不同的).
 
 - 突然无端弹出`windows资源管理器`(就按下ctrl+E可以启动的那个东西,他叫`explorer.exe`)
-
   - 问问baidu,bing,google.是软件设置的锅…
 
   
