@@ -1,4 +1,4 @@
-#### installed softwares
+#### installed software
 
 * chrome `browser`
 * Firefox`browser`
@@ -10,9 +10,9 @@
 * telegram
 * LibreOffice
 * VLC media player
-* Shadowsocket
+* shadowsocket
 * everything
-* codeblocks(for mingw/cygwin)
+* msys2([link:tuna mirror](https://mirrors.tuna.tsinghua.edu.cn/help/msys2/))
 * python3
 * stack(for haskell GHC)
 * GitHub desktop(with git CLI)
