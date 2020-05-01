@@ -12,7 +12,7 @@
 * VLC media player
 * shadowsocket
 * everything
-* msys2([link:tuna mirror](https://mirrors.tuna.tsinghua.edu.cn/help/msys2/))
+* msys2([link:tuna mirror](https://mirrors.tuna.tsinghua.edu.cn/help/msys2/) for GCC/G++)
 * python3
 * stack(for haskell GHC)
 * GitHub desktop(with git CLI)
