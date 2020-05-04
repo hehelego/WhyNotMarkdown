@@ -1,4 +1,4 @@
-#### installed software
+## installed software
 
 * chrome `browser`
 * Firefox`browser`
@@ -6,14 +6,14 @@
 * huorong antivirus
 * ccleaner
 * cloudmusic(netease music)
-* tim `tencentQQ`+wechat
+* tim(QQ)+wechat
 * telegram
 * LibreOffice
 * VLC media player
 * shadowsocket
 * everything
 * msys2([link:tuna mirror](https://mirrors.tuna.tsinghua.edu.cn/help/msys2/) for GCC/G++)
-* python3
+* python3(pip+virtualenv)
 * stack(for haskell GHC)
 * GitHub desktop(with git CLI)
 * gvim(with vimplug)
@@ -25,10 +25,11 @@
 * SageMath
 * pandoc+ffmpeg(file format converters)
 * OneDrive
-* BILIdrive+CDNdrive
+* BILIdrive+CDNdrive+YouGet
   * [cdn drive-pypi](https://pypi.org/project/CDNDrive/) [cdn drive-git](https://github.com/apachecn/CDNDrive)
   * [bili drive-pypi](https://pypi.org/project/BiliDriveEx/) [bili drive-git](https://github.com/apachecn/BiliDriveEx)
   * [ORIGIN-pypi](https://pypi.org/project/BiliDrive/) [ORIGIN-git](https://github.com/Hsury/BiliDrive)
+  * [youget.git](https://github.com/soimort/you-get)
 
 
 
@@ -42,14 +43,14 @@
 * [Yuki](https://github.com/project-yuki/YUKI)
 * syncthing
 
-#### browser plugins
+## browser plugins
 * charset(to automaticly change the encoding of a web page,on chrome)
 * Tampermonkey(userscript manager)
 * OneTab(on chrome+firefox)
 * Cookie Quick Manager(on firefox)
 * Firefox(Print Edit We+Save Page We) + chrome(CtrlP print to PDF) -> perfect PDF
 
-#### useful tricks&solution to frequently happening problems
+## useful tricks&solution to frequently happening problems
 * **windows/linux上面的不少问题都可以 重启 解决**
 * markdown:`[TOC]`建立可以生成token表,当目录用..
 * git clone比download zip快很多,下载不成功的时候试试用git CLI进行clone吧
@@ -83,4 +84,9 @@ map <C-V> "+gP
 - 突然无端弹出`windows资源管理器`(就按下ctrl+E可以启动的那个东西,他叫`explorer.exe`)
   - 问问baidu,bing,google.是软件设置的锅…
 
-  
+
+
+
+## stared repositories
+
+[github stars:hehelego](https://github.com/hehelego?tab=stars)
