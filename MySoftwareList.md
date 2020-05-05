@@ -12,14 +12,14 @@
 * VLC media player
 * shadowsocket
 * everything
-* msys2([link:tuna mirror](https://mirrors.tuna.tsinghua.edu.cn/help/msys2/) for GCC/G++)
+* msys2([link:tuna mirror](https://mirrors.tuna.tsinghua.edu.cn/help/msys2/) Linux environment on Windows)
 * python3(pip+virtualenv)
-* stack(for haskell GHC)
+* stack(for haskell toolchain)
 * GitHub desktop(with git CLI)
 * gvim(with vimplug)
 * typora `markdown pad`  
 * lemon+LemonLime
-* VirtualBox+putty+(linuxmint)
+* VirtualBox+putty
 * windows sandbox
 * powershell
 * SageMath
@@ -44,16 +44,16 @@
 * syncthing
 
 ## browser plugins
-* charset(to automaticly change the encoding of a web page,on chrome)
-* Tampermonkey(userscript manager)
-* OneTab(on chrome+firefox)
+* charset(automatically detect&change encoding of a page)
+* Tampermonkey
+* OneTab
 * Cookie Quick Manager(on firefox)
-* Firefox(Print Edit We+Save Page We) + chrome(CtrlP print to PDF) -> perfect PDF
+* Firefox(Print Edit We+Save Page We) / chrome(CtrlP print to PDF)
 
 ## useful tricks&solution to frequently happening problems
 * **windows/linux上面的不少问题都可以 重启 解决**
 * markdown:`[TOC]`建立可以生成token表,当目录用..
-* git clone比download zip快很多,下载不成功的时候试试用git CLI进行clone吧
+* git clone比http传输文件快很多,下载不成功的时候试试用git CLI进行clone吧
 * python -m http.server创建临时http静态文件服务器.
 * win+shift+s (screen shot)
 * windows10更新出锅,一堆应用启动不了,能查到进程,但是UI显实不了/进入不了REPL,敲入命令后卡住.建议清空windows临时文件,可以everything手动查找临时文件(C:/Users/{UserName}/AppData/Local/Temp)删除,或者使用Ccleaner自动清空….如果仍然不行,可以重启explorer.exe
