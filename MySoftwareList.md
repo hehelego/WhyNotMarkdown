@@ -12,7 +12,7 @@
 * VLC media player
 * shadowsocket
 * everything
-* msys2([link:tuna mirror](https://mirrors.tuna.tsinghua.edu.cn/help/msys2/) Linux environment on Windows)
+* **msys2**([link:tuna mirror](https://mirrors.tuna.tsinghua.edu.cn/help/msys2/) Linux environment on Windows)
 * python3(pip+virtualenv)
 * stack(for haskell toolchain)
 * GitHub desktop(with git CLI)
