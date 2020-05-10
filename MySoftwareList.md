@@ -5,6 +5,7 @@
 * Avast antivirus
 * huorong antivirus
 * ccleaner
+* 7zip
 * cloudmusic(netease music)
 * tim(QQ)+wechat
 * telegram
@@ -12,7 +13,7 @@
 * VLC media player
 * shadowsocket
 * everything
-* **msys2**([link:tuna mirror](https://mirrors.tuna.tsinghua.edu.cn/help/msys2/) Linux environment on Windows)
+* **msys2**([link:tuna mirror](https://mirrors.tuna.tsinghua.edu.cn/help/msys2/) for GNU toolchain)
 * python3(pip+virtualenv)
 * stack(for haskell toolchain)
 * GitHub desktop(with git CLI)
