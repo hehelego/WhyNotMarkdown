@@ -13,6 +13,7 @@
 * VLC media player
 * shadowsocket
 * everything
+* **pacman**
 * **msys2**([link:tuna mirror](https://mirrors.tuna.tsinghua.edu.cn/help/msys2/) for GNU toolchain)
 * python3(pip+virtualenv)
 * stack(for haskell toolchain)
