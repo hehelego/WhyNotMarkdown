@@ -21,7 +21,7 @@
 * gvim(with vimplug)
 * typora `markdown pad`  
 * lemon+LemonLime
-* VirtualBox(mint+artix)+putty
+* VirtualBox(mint+manjaro)+putty
 * windows sandbox
 * powershell
 * SageMath
