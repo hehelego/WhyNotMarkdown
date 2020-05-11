@@ -23,7 +23,7 @@
 * lemon+LemonLime
 * VirtualBox(mint+manjaro)+putty
 * windows sandbox
-* powershell
+* powershell/fish
 * SageMath
 * pandoc+ffmpeg(file format converters)
 * OneDrive
