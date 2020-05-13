@@ -25,6 +25,7 @@
 **Installing Haskell via ‘stack’ is highly recommended** see [this page](<https://docs.haskellstack.org/en/stable/install_and_upgrade/>) for stack installation,after that try `stack ghci` in your console.
 get Haskell packages(stackages+hackages) with the help of [tuna mirros](<https://mirrors.tuna.tsinghua.edu.cn/help/stackage/>).
 安装的时候,记得选择安装本地文档,直接看
+**tuna上面关于config.yaml的配置可能是过时的,取stack官方的doc里面找吧**
 
 ```
 stack --version (ver>=2.1.3)
