@@ -1,58 +1,77 @@
 ## installed software
 
+### 通用跨平台软件
 * chrome `browser`
 * Firefox`browser`
+* SageMath
+* LibreOffice
+* VLC media player
+* ffmpeg
+* 7zip
+* telegram
+* shadowsocks
+* git
+* vim/neovim(with vim-plug)
+* GNU toolchain(gcc,g++,gdb,make...)
+* python(pip+virtualenv)
+* rustup
+* stack(for haskell toolchain)
+* typora
+* pandoc
+* virtualbox
+* lemon(project-lemon 一个OI比赛测试系统)
+* qBittorrent
+* syncthing
+
+
+### windows
 * Avast antivirus
 * huorong antivirus
 * ccleaner
-* 7zip
-* cloudmusic(netease music)
 * tim(QQ)+wechat
-* telegram
-* LibreOffice
-* VLC media player
-* shadowsocket
+* cloudmusic(netease music)
+* **msys2**(Gnu toolchain,git,ssh....轻量级的模拟linux环境)
 * everything
-* **pacman**
-* **msys2**([link:tuna mirror](https://mirrors.tuna.tsinghua.edu.cn/help/msys2/) for GNU toolchain)
-* python3(pip+virtualenv)
-* stack(for haskell toolchain)
-* GitHub desktop(with git CLI)
-* gvim(with vimplug)
-* typora `markdown pad`  
-* lemon+LemonLime
-* VirtualBox(mint+manjaro)+putty
 * windows sandbox
-* powershell/fish
-* SageMath
-* pandoc+ffmpeg(file format converters)
+* powershell
+* github desktop
 * OneDrive
-* BILIdrive+CDNdrive+YouGet
+* 
+* krkr2
+* ONScripter
+* LocaleEmulator
+* Yuki(https://github.com/project-yuki/YUKI alternative to VNR)
+
+### linux
+> preferred distro:manjaro
+> desktop environment:kde
+* pacman
+* fish
+
+
+
+### 小工具
+* BILIdrive+CDNdrive
   * [cdn drive-pypi](https://pypi.org/project/CDNDrive/) [cdn drive-git](https://github.com/apachecn/CDNDrive)
   * [bili drive-pypi](https://pypi.org/project/BiliDriveEx/) [bili drive-git](https://github.com/apachecn/BiliDriveEx)
   * [ORIGIN-pypi](https://pypi.org/project/BiliDrive/) [ORIGIN-git](https://github.com/Hsury/BiliDrive)
   * [youget.git](https://github.com/soimort/you-get)
-
-
-
-
-
-
-
-* qBittorrent
-* LocaleEmulator
-* ONScripter
-* [Yuki](https://github.com/project-yuki/YUKI)
-* syncthing
-
-## browser plugins
+* YouGet
+* ipython
+### 浏览器插件
 * charset(automatically detect&change encoding of a page)
 * Tampermonkey
 * OneTab
 * Cookie Quick Manager(on firefox)
 * Firefox(Print Edit We+Save Page We) / chrome(CtrlP print to PDF)
 
-## useful tricks&solution to frequently happening problems
+
+
+
+
+
+
+## useful tricks&FAQ
 * **windows/linux上面的不少问题都可以 重启 解决**
 * markdown:`[TOC]`建立可以生成token表,当目录用..
 * git clone比http传输文件快很多,下载不成功的时候试试用git CLI进行clone吧
