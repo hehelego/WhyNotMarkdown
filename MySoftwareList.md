@@ -41,6 +41,8 @@
 * ONScripter
 * LocaleEmulator
 * Yuki(https://github.com/project-yuki/YUKI alternative to VNR)
+* AlphaROMdiE [link](http://azure.kdays.cn/onekeyunlock/)
+* winCDemu
 
 ### linux
 > preferred distro:manjaro
