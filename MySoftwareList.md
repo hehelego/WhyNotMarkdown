@@ -93,10 +93,10 @@ map <C-V> "+gP
   - hyper-V的全部功能
   - windows sandbox
   - windows 虚拟机监控程序平台
-- 关于hyper-v启动之后无法实用virtualbox,这是hyper-v和vt-x冲突了,需要admin权限来修改配置.
+  - 用bcdedit让hyper-v自动启动.
+- hyper-v功能启动后virtualbox无法使用,这是hyper-v和vt-x冲突了.需要关掉hyper-v的自启动.
   - bcdedit /set hypervisorlaunchtype auto(用hyper-v比如sandbox的时候)
   - bcdedit /set hypervisorlaunchtype off(用vt-x比如virtualbox时)
-  - 之后还需要修改control panel>features>enable/disable windows feature中的hyper-v的
 - 突然发现按键盘方向键鼠标会跟着移动?某些按键组合可以触发鼠标双击/右键?这是玄妙的`鼠标键`功能.
   - 首先需要去control panel关掉它(control panel>ease of access)
   - 然后还要从硬件层次ban掉(这里不同的物理机是不一样的,比如dell和Lenovo是不同的).
