@@ -49,6 +49,9 @@
 > desktop environment:kde
 * pacman
 * fish
+* fzf
+* ranger
+* albert([link](https://github.com/albertlauncher/albert))
 
 
 
