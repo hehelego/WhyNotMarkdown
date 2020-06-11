@@ -18,12 +18,11 @@ F(S)=\sum_{i=k}^n(-1)^{i-k}\binom{n-k}{i-k}\ \left(\binom{n}{i}i!2^i\times (2n-2
 F(S)=n!(n-k)!\sum_{i=k}^na_{i-k}b_{n-i}=n!(n-k)!\sum_{i=0}^{n-k}a_{n-k-i}b_{i}
 $$
 
-
-
-
 最后对于$k$的答案就是$|S|=k$的$S$计算$\binom{n}{k}F(S)$.
 
 
+
+==之后的部分,暂且不会==
 
 ### code
 
