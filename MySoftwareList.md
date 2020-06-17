@@ -20,7 +20,9 @@
 * pandoc
 * virtualbox
 * lemon(project-lemon 一个OI比赛测试系统)
+* aria2
 * qBittorrent
+* motrix
 * syncthing
 
 
@@ -40,7 +42,7 @@
 * krkr2
 * ONScripter
 * LocaleEmulator
-* Yuki(https://github.com/project-yuki/YUKI alternative to VNR)
+* Yuki([link](https://github.com/project-yuki/YUKI) alternative to VNR)
 * AlphaROMdiE [link](http://azure.kdays.cn/onekeyunlock/)
 * winCDemu
 
@@ -48,10 +50,11 @@
 > preferred distro:manjaro
 > desktop environment:kde
 * pacman
+* yay(for aur)
 * fish
 * fzf
 * ranger
-* albert([link](https://github.com/albertlauncher/albert))
+* krunner(or albert)
 
 
 
