@@ -24,6 +24,7 @@
 * qBittorrent
 * motrix
 * syncthing
+* etcher
 
 
 ### windows
