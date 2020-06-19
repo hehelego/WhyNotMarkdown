@@ -39,6 +39,7 @@
 * powershell
 * github desktop
 * OneDrive
+* rufus
 * 
 * krkr2
 * ONScripter
@@ -138,8 +139,10 @@ export XMODIFIERS="@im=fcitx"
 参考[arch wiki:本地化](https://wiki.archlinux.org/index.php/Localization_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)/Simplified_Chinese_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#locale%E8%AE%BE%E7%BD%AE),[字体配置](https://wiki.archlinux.org/index.php/Font_configuration_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29),[中文字体设置](https://wiki.archlinux.org/index.php/Font_Configuration_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)/Chinese_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
 
 修改`/etc/locale.gen`然后`sudo locale-gen`
+之后在`settings>manjaro settings manager>locale settings`切换本地化选项(用kde/gnome等DE也是类似的操作).
+按照arch wiki上面中文字体设置中android显示效果参考配置进行配置即可.
 
-用pacman装一些中文字体,然后在`.config/fontconfig/fonts.conf`中加入
+用pacman装一些中文字体,然后在`/etc/fonts/local.font`中加入
 ```xml
 <?xml version="1.0"?>
 <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
