@@ -116,7 +116,7 @@ map <C-V> "+gP
 
 ## tips(on Linux)
 > distro:manjaro
-> de:xfce
+> de:xfce,kde
 - 多看arch wiki/manjaro wiki,多去forum找找解决方案.
 - manjaro是滚动发行版,可能出现新问题,旧问题可能被消除,解决方案可能会失效,尽量自己找第一手信息.
 - 换中国境内的软件源排`sudo pacman-mirrors -i -c China -m rank` 推荐thu,sjtu的镜像,不推荐ustc的镜像. 
@@ -135,7 +135,7 @@ export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS="@im=fcitx"
 ```
-- 字体,locale等本地化配置
+- 字体,locale等本地化配置(**使用经验:KDE默认设置就很好,换个可以正常渲染的中文字体就行了**)
 参考[arch wiki:本地化](https://wiki.archlinux.org/index.php/Localization_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)/Simplified_Chinese_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#locale%E8%AE%BE%E7%BD%AE),[字体配置](https://wiki.archlinux.org/index.php/Font_configuration_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29),[中文字体设置](https://wiki.archlinux.org/index.php/Font_Configuration_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)/Chinese_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
 
 修改`/etc/locale.gen`然后`sudo locale-gen`
