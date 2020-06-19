@@ -141,6 +141,7 @@ export XMODIFIERS="@im=fcitx"
 修改`/etc/locale.gen`然后`sudo locale-gen`
 之后在`settings>manjaro settings manager>locale settings`切换本地化选项(用kde/gnome等DE也是类似的操作).
 按照arch wiki上面中文字体设置中android显示效果参考配置进行配置即可.
+根据我的实践经验,最好不要把locale改成zh\_CN会有各种本地化做得不靠谱的地方,直接用英文的即可..
 
 用pacman装一些中文字体,然后在`/etc/fonts/local.font`中加入
 ```xml
