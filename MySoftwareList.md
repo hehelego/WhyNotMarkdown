@@ -124,6 +124,9 @@ map <C-V> "+gP
 - 换中国境内的软件源排`sudo pacman-mirrors -i -c China -m rank` 推荐thu,sjtu的镜像,不推荐ustc的镜像. 
 - [manjaro wiki:improve font rendering](https://wiki.manjaro.org/index.php?title=Improve_Font_Rendering)
 - [ban掉beep,参考arch wiki修改配置文件即可](https://wiki.archlinux.org/index.php/PC_speaker)
+
+在`/etc/modprobe.d/nobeep.conf`写入`blacklist pcspkr`之后reboot即可.
+
 - fcitx输入法(参考wiki配置)
 ```bash
 sudo pacman -S fcitx-sunpinyin
@@ -142,7 +145,7 @@ export XMODIFIERS="@im=fcitx"
 
 修改`/etc/locale.gen`然后`sudo locale-gen`  
 之后在`settings>manjaro settings manager>locale settings`切换本地化选项(用kde/gnome等DE也是类似的操作).  
-按照arch wiki上面中文字体设置中android显示效果参考配置进行配置即可.  
+按照arch wiki上面字体配置部分修改`/etc/fonts/fonts.conf`加入抗锯齿,禁止缩放等设定,参考中文字体设置中android显示效果的配置修改`/etc/fonts/local.conf`即可,reboot.  
 根据我的实践经验,最好不要把locale改成zh\_CN会有各种本地化做得不靠谱的地方,直接用英文的即可.  
 推荐去`settings>hardware>display>scaling`修改缩放为125%或者150%  
 
