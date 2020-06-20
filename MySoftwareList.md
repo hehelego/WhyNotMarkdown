@@ -144,10 +144,14 @@ export XMODIFIERS="@im=fcitx"
   首先找到启动命令,比如用`wps pdf reader`发现启动用的shell脚本是`/usr/bin/wpp`
   之后`sudo vim /usr/bin/wpp`在开头加入.
   ```bash
-  export XMODIFIERS="@im=fcitx" 
-  export QT_IM_MODULE=fcitx
-  export GTK_IM_MODULE=fcitx
+export XIM=fcitx
+export XIM_PROGRAM=fcitx
+export LC_CTYPE=zh_CN.UTF-8
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS="@im=fcitx"
   ```
+对于wine的应用,比如arch上面的deepin-wine-qq发现它的启动脚本是`"/opt/deepinwine/apps/Deepin-QQ/run.sh" -u %u`那么在那个`run.sh`中加入即可.
 如果没找到启动脚本而是找到二进制文件就比较麻烦了...大概自己手写个启动脚本,加入配置也行.
   
 
