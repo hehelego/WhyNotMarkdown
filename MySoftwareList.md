@@ -144,8 +144,10 @@ export XMODIFIERS="@im=fcitx"
 之后在`settings>manjaro settings manager>locale settings`切换本地化选项(用kde/gnome等DE也是类似的操作).  
 按照arch wiki上面中文字体设置中android显示效果参考配置进行配置即可.  
 根据我的实践经验,最好不要把locale改成zh\_CN会有各种本地化做得不靠谱的地方,直接用英文的即可.  
+推荐去`settings>hardware>display>scaling`修改缩放为125%或者150%  
 
 - 虽然manjaro是个linux distro,但是reboot还是一个能解决不少问题的方法...
+
 
 
 ## stared repositories
