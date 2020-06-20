@@ -59,6 +59,7 @@
 * ranger
 * krunner(or albert)
 * QDirStat(or ncdu)
+* fcitx5
 
 
 
@@ -127,6 +128,7 @@ map <C-V> "+gP
 
 在`/etc/modprobe.d/nobeep.conf`写入`blacklist pcspkr`之后reboot即可.
 
+- ==(输入法看这里)==经过各种尝试,使用fctix5是目前最好的方案.参考[archwiki:fcitx5](https://wiki.archlinux.org/index.php/Fcitx5)进行安装,配置即可,不再需要`找启动脚本,手动编辑,插入输入法环境变量`的繁琐过程.(经过实际检测,qt/gtk应用可以正常使用输入法,基于wine的移植应用也都没问题).
 - fcitx输入法(参考wiki配置)
 ```bash
 sudo pacman -S fcitx-sunpinyin
@@ -154,13 +156,13 @@ export XMODIFIERS="@im=fcitx"
 对于wine的应用,比如arch上面的deepin-wine-qq发现它的启动脚本是`"/opt/deepinwine/apps/Deepin-QQ/run.sh" -u %u`那么在那个`run.sh`中加入即可.
 如果没找到启动脚本而是找到二进制文件就比较麻烦了...大概自己手写个启动脚本,加入配置也行.
   
+- 安装的基于wine移植的应用启动不了?也许是改变了安装目录,没有按照默认配置安装,找到这个应用的启动脚本(一般是在`/opt/deepinwine/apps/Deepin-{appname}/run.sh`),其中的`CallApp()`函数中`env WINEPREFIX=$WINEPREFIX$.....`一行中把应用的实际安装路径(最好用绝对路径)写入即可.
 
-  
 - 字体,locale等本地化配置(**使用经验:KDE默认设置就很好,换个可以正常渲染的中文字体就行了**)
 参考[arch wiki:本地化](https://wiki.archlinux.org/index.php/Localization_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)/Simplified_Chinese_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#locale%E8%AE%BE%E7%BD%AE),[字体配置](https://wiki.archlinux.org/index.php/Font_configuration_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29),[中文字体设置](https://wiki.archlinux.org/index.php/Font_Configuration_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)/Chinese_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
 
 修改`/etc/locale.gen`然后`sudo locale-gen`  
-之后在`settings>manjaro settings manager>locale settings`切换本地化选项(用kde/gnome等DE也是类似的操作).  
+之后(对于XFCE环境)在`settings>manjaro settings manager>locale settings`切换本地化选项(用kde/gnome等DE也是类似的操作).  
 按照arch wiki上面字体配置部分修改`/etc/fonts/fonts.conf`加入抗锯齿,禁止缩放等设定,参考中文字体设置中android显示效果的配置修改`/etc/fonts/local.conf`即可,reboot.  
 根据我的实践经验,最好不要把locale改成zh\_CN会有各种本地化做得不靠谱的地方,直接用英文的即可.  
 推荐去`settings>hardware>display>scaling`修改缩放为125%或者150%  
