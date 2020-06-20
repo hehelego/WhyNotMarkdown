@@ -120,6 +120,7 @@ map <C-V> "+gP
 ## tips(on Linux)
 > distro:manjaro
 > de:kde
+
 - 多看arch wiki/manjaro wiki,多去forum找找解决方案.
 - manjaro是滚动发行版,可能出现新问题,旧问题可能被消除,解决方案可能会失效,尽量自己找第一手信息.
 - 换中国境内的软件源排`sudo pacman-mirrors -i -c China -m rank` 推荐thu,sjtu的镜像,不推荐ustc的镜像. 
@@ -135,7 +136,7 @@ sudo pacman -S fcitx-sunpinyin
 sudo pacman -S fcitx-im 
 sudo pacman -S fcitx-configtool
 ```
-在`~/.profile`中加入(或者`~/.xprofile`)
+在`~/.profile`中加入
 ```bash
 export LC_CTYPE=zh_CN.UTF-8
 export GTK_IM_MODULE=fcitx
@@ -143,16 +144,16 @@ export QT_IM_MODULE=fcitx
 export XMODIFIERS="@im=fcitx"
 ```
 - 发现某个应用启动后没法切换fcitx的输入法?**这只是使用X的解决方案,如果是wayland需要不一样的配置,中文输入法在linux桌面上是无底大坑,目前没有完美解决方案.**
-  首先找到启动命令,比如用`wps pdf reader`发现启动用的shell脚本是`/usr/bin/wpp`
-  之后`sudo vim /usr/bin/wpp`在开头加入.
-  ```bash
+首先找到启动命令,比如用`wps pdf reader`发现启动用的shell脚本是`/usr/bin/wpp`
+之后`sudo vim /usr/bin/wpp`在开头加入.
+```bash
 export XIM=fcitx
 export XIM_PROGRAM=fcitx
 export LC_CTYPE=zh_CN.UTF-8
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
-export XMODIFIERS="@im=fcitx"
-  ```
+  export XMODIFIERS="@im=fcitx"
+```
 对于wine的应用,比如arch上面的deepin-wine-qq发现它的启动脚本是`"/opt/deepinwine/apps/Deepin-QQ/run.sh" -u %u`那么在那个`run.sh`中加入即可.
 如果没找到启动脚本而是找到二进制文件就比较麻烦了...大概自己手写个启动脚本,加入配置也行.
   
