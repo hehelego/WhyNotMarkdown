@@ -124,7 +124,7 @@ map <C-V> "+gP
 - 换中国境内的软件源排`sudo pacman-mirrors -i -c China -m rank` 推荐thu,sjtu的镜像,不推荐ustc的镜像. 
 - [manjaro wiki:improve font rendering](https://wiki.manjaro.org/index.php?title=Improve_Font_Rendering)
 - [ban掉beep,参考arch wiki修改配置文件即可](https://wiki.archlinux.org/index.php/PC_speaker)
-- fcitx输入法
+- fcitx输入法(参考wiki配置)
 ```bash
 sudo pacman -S fcitx-sunpinyin
 sudo pacman -S fcitx-im 
@@ -140,12 +140,11 @@ export XMODIFIERS="@im=fcitx"
 - 字体,locale等本地化配置(**使用经验:KDE默认设置就很好,换个可以正常渲染的中文字体就行了**)
 参考[arch wiki:本地化](https://wiki.archlinux.org/index.php/Localization_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)/Simplified_Chinese_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#locale%E8%AE%BE%E7%BD%AE),[字体配置](https://wiki.archlinux.org/index.php/Font_configuration_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29),[中文字体设置](https://wiki.archlinux.org/index.php/Font_Configuration_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)/Chinese_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
 
-修改`/etc/locale.gen`然后`sudo locale-gen`
-之后在`settings>manjaro settings manager>locale settings`切换本地化选项(用kde/gnome等DE也是类似的操作).
-按照arch wiki上面中文字体设置中android显示效果参考配置进行配置即可.
-根据我的实践经验,最好不要把locale改成zh\_CN会有各种本地化做得不靠谱的地方,直接用英文的即可..
+修改`/etc/locale.gen`然后`sudo locale-gen`  
+之后在`settings>manjaro settings manager>locale settings`切换本地化选项(用kde/gnome等DE也是类似的操作).  
+按照arch wiki上面中文字体设置中android显示效果参考配置进行配置即可.  
+根据我的实践经验,最好不要把locale改成zh\_CN会有各种本地化做得不靠谱的地方,直接用英文的即可.  
 
-- [网友的字体配置+中文输入法配置](https://yq.aliyun.com/articles/696518)
 - 虽然manjaro是个linux distro,但是reboot还是一个能解决不少问题的方法...
 
 
