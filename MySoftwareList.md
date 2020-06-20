@@ -140,7 +140,7 @@ export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS="@im=fcitx"
 ```
-- 发现某个应用启动后没法切换fcitx的输入法?
+- 发现某个应用启动后没法切换fcitx的输入法?**这只是使用X的解决方案,如果是wayland需要不一样的配置,中文输入法在linux桌面上是无底大坑,目前没有完美解决方案.**
   首先找到启动命令,比如用`wps pdf reader`发现启动用的shell脚本是`/usr/bin/wpp`
   之后`sudo vim /usr/bin/wpp`在开头加入.
   ```bash
