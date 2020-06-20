@@ -31,6 +31,7 @@
 * Avast antivirus
 * huorong antivirus
 * ccleaner
+* treesize
 * tim(QQ)+wechat
 * cloudmusic(netease music)
 * **msys2**(Gnu toolchain,git,ssh....轻量级的模拟linux环境)
@@ -57,6 +58,7 @@
 * fzf
 * ranger
 * krunner(or albert)
+* QDirStat(or ncdu)
 
 
 
