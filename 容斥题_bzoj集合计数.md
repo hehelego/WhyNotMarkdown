@@ -1,4 +1,6 @@
 题目在[这里 BZOJ2839](<https://oi-archive.memset0.cn/problem/bzoj/2839>)
+对于$\{1,2,3\dots n\}$的所有子集(共$2^n$个),选出其中一些$T=\{A_1,A_2\dots A_m\}$使得$|\cap_{i=1}^m A_i|=k$.
+求满足这样约束的集合簇$T$的数量.
 
 ---
 
@@ -16,7 +18,7 @@
 
 计算$g(S)$考虑$T^\prime=(A_1,A_2\dots A_m)$,其中$A_i\cap S=\phi$.则$T=(A_1\cup S,A_2\cup S\dots A_m\cup S)$为一个对$g(S)$有贡献$1$的方案,$T$与$T^\prime$是一一对应的.
 
-考虑对$T^\prime$计数.$A_i\subseteq (all\setminus S)$,有$2^{n-|S|}$个子集,随便选其中一些那就是$pow(2,2^{n-|S|})-1$.
+考虑对$T^\prime$计数.$A_i\subseteq (all\setminus S)$,有$2^{n-|S|}$个子集,随便选其中一些(不能选出$T'=\{\}$)那就是$pow(2,2^{n-|S|})-1$.
 
 于是$g(S)=pow(2,2^{n-|S|})-1$.我们发现这是个和$|S|$有关,而和$S$具体取值没有关系,于是我们设$k=|S|,g(S)=G(|S|)=G(k)=pow(2,2^{n-k})-1$.此外再设$f(S)=F(|S|)$.
 
