@@ -16,6 +16,7 @@
 * python(pip+virtualenv)
 * rustup
 * stack(for haskell toolchain)
+* Texlive
 * typora
 * pandoc
 * virtualbox
@@ -156,7 +157,7 @@ export QT_IM_MODULE=fcitx
 ```
 对于wine的应用,比如arch上面的deepin-wine-qq发现它的启动脚本是`"/opt/deepinwine/apps/Deepin-QQ/run.sh" -u %u`那么在那个`run.sh`中加入即可.
 如果没找到启动脚本而是找到二进制文件就比较麻烦了...大概自己手写个启动脚本,加入配置也行.
-  
+
 - 安装的基于wine移植的应用启动不了?也许是改变了安装目录,没有按照默认配置安装,找到这个应用的启动脚本(一般是在`/opt/deepinwine/apps/Deepin-{appname}/run.sh`),其中的`CallApp()`函数中`env WINEPREFIX=$WINEPREFIX$.....`一行中把应用的实际安装路径(最好用绝对路径)写入即可.
 
 - 字体,locale等本地化配置(**使用经验:KDE默认设置就很好,换个可以正常渲染的中文字体就行了**)
