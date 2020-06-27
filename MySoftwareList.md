@@ -116,6 +116,7 @@ map <C-V> "+gP
   - 问问baidu,bing,google.是软件设置的锅…
 - 在virtualbox中使用某OS的iso镜像安装成功,reboot之后又回到了安装界面而没有地由bootloader加载OS?
   - 关掉虚拟机,回到virtualbox的启动界面,进入`settings>storage(设置-存储)`把直接加入的ISO光盘从存储介质中移除.重新启动,这样就可以从分配的虚拟硬盘上面的bootloader启动而不是ISO镜像里面的东西启动安装了.
+- 在virtualbox中虚拟机的分辨率不能自适应,调整也不起效.这是因为使用`VMSVGA`显卡选项,换成`VBoxSVGA/VBoxVGA`就行了.
 
 
 ## tips(on Linux)
@@ -131,33 +132,6 @@ map <C-V> "+gP
 在`/etc/modprobe.d/nobeep.conf`写入`blacklist pcspkr`之后reboot即可.
 
 - ==(输入法看这里)==经过各种尝试,使用fctix5是目前最好的方案.参考[archwiki:fcitx5](https://wiki.archlinux.org/index.php/Fcitx5)进行安装,配置即可,不再需要`找启动脚本,手动编辑,插入输入法环境变量`的繁琐过程.(经过实际检测,qt/gtk应用可以正常使用输入法,基于wine的移植应用也都没问题).
-- fcitx输入法(参考wiki配置)
-```bash
-sudo pacman -S fcitx-sunpinyin
-sudo pacman -S fcitx-im 
-sudo pacman -S fcitx-configtool
-```
-在`~/.profile`中加入
-```bash
-export LC_CTYPE=zh_CN.UTF-8
-export GTK_IM_MODULE=fcitx
-export QT_IM_MODULE=fcitx
-export XMODIFIERS="@im=fcitx"
-```
-- 发现某个应用启动后没法切换fcitx的输入法?**这只是使用X的解决方案,如果是wayland需要不一样的配置,中文输入法在linux桌面上是无底大坑,目前没有完美解决方案.**
-首先找到启动命令,比如用`wps pdf reader`发现启动用的shell脚本是`/usr/bin/wpp`
-之后`sudo vim /usr/bin/wpp`在开头加入.
-```bash
-export XIM=fcitx
-export XIM_PROGRAM=fcitx
-export LC_CTYPE=zh_CN.UTF-8
-export GTK_IM_MODULE=fcitx
-export QT_IM_MODULE=fcitx
-  export XMODIFIERS="@im=fcitx"
-```
-对于wine的应用,比如arch上面的deepin-wine-qq发现它的启动脚本是`"/opt/deepinwine/apps/Deepin-QQ/run.sh" -u %u`那么在那个`run.sh`中加入即可.
-如果没找到启动脚本而是找到二进制文件就比较麻烦了...大概自己手写个启动脚本,加入配置也行.
-
 - 安装的基于wine移植的应用启动不了?也许是改变了安装目录,没有按照默认配置安装,找到这个应用的启动脚本(一般是在`/opt/deepinwine/apps/Deepin-{appname}/run.sh`),其中的`CallApp()`函数中`env WINEPREFIX=$WINEPREFIX$.....`一行中把应用的实际安装路径(最好用绝对路径)写入即可.
 
 - 字体,locale等本地化配置(**使用经验:KDE默认设置就很好,换个可以正常渲染的中文字体就行了**)
@@ -169,6 +143,7 @@ export QT_IM_MODULE=fcitx
 根据我的实践经验,最好不要把locale改成zh\_CN会有各种本地化做得不靠谱的地方,直接用英文的即可.  
 推荐去`settings>hardware>display>scaling`修改缩放为125%或者150%  
 
+- 使用arch的官方源安装texlive之后使用不了tlmgr管理CTAN包,这是个官方软件源bug,按照arch wiki上面[Texlive-tlmgr](https://wiki.archlinux.org/index.php/TeX_Live#tlmgr)修改配置即可,记得让tlmgr使用国内的CTAN镜像.
 - 虽然manjaro是个linux distro,但是reboot还是一个能解决不少问题的方法...
 
 
