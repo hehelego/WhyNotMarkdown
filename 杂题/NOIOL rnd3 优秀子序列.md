@@ -28,12 +28,67 @@ $$
 f(d)=\sum_{k=0}^{n}\sum_{1\leq b_1\lt b_2\dots b_k\leq n}[\forall (i,j),(i\neq j)\implies a_{b_i}\and a_{b_j}=0][\sum a_{b_i}=d]\\
 =\sum_{k=0}^{n}\sum_{1\leq b_1\lt b_2\dots b_k\leq n}[\forall (i,j),(i\neq j)\implies a_{b_i}\and a_{b_j}=0][\oplus a_{b_i}=d]\\
 $$
-这个还是非常套路,非常可做的,我们定义$g(i,S)$表示选$(a_1,a_2\dots a_i)$的子序列,满足任意两元素and为0,且和/异或和为$S$的方案计数.可以有$g(i+1,S)=g(i,S)+g(i,S\setminus a_{i+1})$和初始条件$g(0,\phi)=1$以及终止条件$f(d)=g(n,\text{binary}(d))$
-还是不太够,考虑目前选了一个异或和为$T$的子序列,保证满足约束的情况下加入一个新的元素,异或和一定是单调不减的,这告诉我们可以对于$d$从小到大,依次求出$f(d)$.
-这里我们令$c_k=\sum [a_i=k]$初始的$f(0)=c_0$,递推式$(S\gt 0)\implies f(S)=\sum_{T\subseteq S}f(S\setminus T)c_{T}$
+我们令$c_k=\sum [a_i=k]$初始的$f(0)=1$,递推式$f(S)=\sum_{\phi\subsetneq T\subseteq S}f(S\setminus T)c_{T}$不过这样有点小问题,就是$\{1,2\}$和$\{2,1\}$会被认为是不同方案,我们可以强制$T$是选中子序列中的最大元素(强制是选最小也行),因为这个and为0的约束所以这个子序列没有相等元素,于是$T\gt T-S$.
+最后$f(S)\to 2^{c_0}f(S)$把最特殊可以随便选的$0$考虑进来.
 
-到这里已经是可做的了,需要一些实现上的技巧,可以做到$O(\max a_i+3^m)$其中$m=\lceil\log_2\max a_i\rceil$.还可以用FWT处理转移(是个子集卷积,大概找找集合幂级数 沃尔什变换 子集卷积等关键词就会有,我不清楚它的英文叫什么)做到更好的复杂度.
+
+到这里已经可以做到$O(\max a_i+3^m)$其中$m=\lceil\log_2\max a_i\rceil$.还可以用FWT处理转移(是个子集卷积,大概找找集合幂级数 沃尔什变换 子集卷积等关键词就会有,我不清楚它的英文叫什么)做到更好的复杂度.
 
 ## code
 
-暂时不太会写…也不是不好写吧,大概比较懒.
+强制$T$是凑出异或和为$S$的子序列中的最大值,可以更方便一点,考虑$T,S$的二进制表示,其最高的非0位置应当相同.
+这可以用gcc提供的`__builtin_clz`来判定,它求的是32位二进制表示下的前导零数量.
+
+```cpp
+#include <bits/stdc++.h>
+int read(){
+	int x=0;char c;
+	do{c=getchar();}while(!isdigit(c));
+	do{x=x*10+c-'0';c=getchar();}while(isdigit(c));
+	return x;
+}
+const int N=400000+10;
+const int M=18; // ceil(ln(N) / ln(2))
+const int mod=1000000007;
+int n,c[N],f[N];
+
+int vis[N],prime[N],cnt,phi[N];
+void sieve(){
+	phi[1]=1; for(int i=2;i<N;i++){
+		if(!vis[i]){
+			prime[cnt++]=i;
+			phi[i]=i-1;
+		}
+		for(int j=0;j<cnt&&i*prime[j]<N;j++){
+			int t=i*prime[j]; vis[t]=1;
+			if(i%prime[j]==0){phi[t]=phi[i]*prime[j]; break;}
+			phi[t]=phi[i]*(prime[j]-1);
+		}
+	}
+}
+
+#define clz __builtin_clz
+
+int main(){
+	sieve(); n=read();
+	for(int i=0;i<n;i++) c[read()]++;
+	int pw2=1; for(int i=0;i<c[0];i++) pw2=2LL*pw2%mod;
+
+	c[0]=0; f[0]=1;
+	for(int s=1;s<(1<<M);s++){
+		for(int i=s;i>0;i=(i-1)&s){
+			if(clz(i)==clz(s)) f[s]=(f[s]+1LL*f[s^i]*c[i])%mod;
+		}
+	}
+
+	int ans=0;
+	for(int i=1;i<N;i++){
+		f[i-1]=1LL*f[i-1]*pw2%mod;
+		ans=(ans+1LL*phi[i]*f[i-1]%mod)%mod;
+	}
+	std::cout<<ans<<std::endl;
+
+	return 0;
+}
+```
+
