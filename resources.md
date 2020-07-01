@@ -1,7 +1,7 @@
 ## bookmarks
 - [wikipedia](https://www.wikipedia.org/)
 - [OI wiki](https://oi-wiki.org/)
-- [CP_ALGO](https://cp-algorithms.com/)
+- [CP-ALGO](https://cp-algorithms.com/)
 - [cpp reference](https://en.cppreference.com/w/)
 - [nju tcs wiki](http://tcs.nju.edu.cn/wiki/index.php/Main_Page)
 - [oeis](https://oeis.org/)
