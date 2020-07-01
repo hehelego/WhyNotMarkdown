@@ -61,6 +61,7 @@
 * krunner(or albert)
 * QDirStat(or ncdu)
 * fcitx5
+* alacritty(a better terminal emulator)
 
 
 
