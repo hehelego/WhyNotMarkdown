@@ -42,7 +42,7 @@
 * github desktop
 * OneDrive
 * rufus
-* 
+* .
 * krkr2
 * ONScripter
 * LocaleEmulator
@@ -55,13 +55,14 @@
 > desktop environment:kde
 * pacman
 * yay(for aur)
+* alacritty(a better terminal emulator)
+* tmux
 * fish
 * fzf
 * ranger
 * krunner(or albert)
-* QDirStat(or ncdu)
+* filelight(or ncdu)
 * fcitx5
-* alacritty(a better terminal emulator)
 
 
 
