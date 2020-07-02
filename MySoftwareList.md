@@ -63,6 +63,7 @@
 * krunner(or albert)
 * filelight(or ncdu)
 * fcitx5
+* fontweak(get it in archlinuxcn repositry)
 
 
 
@@ -145,8 +146,12 @@ map <C-V> "+gP
 根据我的实践经验,最好不要把locale改成zh\_CN会有各种本地化做得不靠谱的地方,直接用英文的即可.  
 推荐去`settings>hardware>display>scaling`修改缩放为125%或者150%  
 
-- 使用arch的官方源安装texlive之后使用不了tlmgr管理CTAN包,这是个官方软件源bug,按照arch wiki上面[Texlive-tlmgr](https://wiki.archlinux.org/index.php/TeX_Live#tlmgr)修改配置即可,记得让tlmgr使用国内的CTAN镜像.
+**有一个叫fontweak的软件可以图形化配置fontconfig,在archlinuxcn里面**
+
+- 使用arch的官方源安装texlive之后使用不了tlmgr管理CTAN包,这是个官方软件源bug,按照arch wiki上面[Texlive-tlmgr](https://wiki.archlinux.org/index.php/TeX_Live#tlmgr)修改配置即可,记得让tlmgr使用国内的CTAN镜像.**这里最好直接去tuna mirrors上面找texlive的最新版本iso来安装.**
+- fish shell有些配置是不兼容bash的,比如path,manpath之类的,他的配置文件是`~/.config/fish/config.fish`配置的语法也和bash不同...尽量不要用`set -U VAR, set -g VAR`这种会影响全局配置甚至其他shell的配置.
 - 虽然manjaro是个linux distro,但是reboot还是一个能解决不少问题的方法...
+  也可以试试logout一下再登录...
 
 
 
