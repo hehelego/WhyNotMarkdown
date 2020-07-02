@@ -150,6 +150,7 @@ map <C-V> "+gP
 
 - 使用arch的官方源安装texlive之后使用不了tlmgr管理CTAN包,这是个官方软件源bug,按照arch wiki上面[Texlive-tlmgr](https://wiki.archlinux.org/index.php/TeX_Live#tlmgr)修改配置即可,记得让tlmgr使用国内的CTAN镜像.**这里最好直接去tuna mirrors上面找texlive的最新版本iso来安装.**
 - fish shell有些配置是不兼容bash的,比如path,manpath之类的,他的配置文件是`~/.config/fish/config.fish`配置的语法也和bash不同...尽量不要用`set -U VAR, set -g VAR`这种会影响全局配置甚至其他shell的配置.
+  **不要在bashrc,config.fish中配置MANPATH,只要配置了PATH就可以正常的被mandb索引到了,修改MANPATH会出现奇怪问题**
 - 虽然manjaro是个linux distro,但是reboot还是一个能解决不少问题的方法...
   也可以试试logout一下再登录...
 
