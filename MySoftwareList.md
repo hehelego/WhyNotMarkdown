@@ -1,26 +1,24 @@
 ## installed software
 
 ### 通用跨平台软件
-* chrome `browser`
-* Firefox`browser`
+* firefox
 * SageMath
 * LibreOffice
-* VLC media player
+* VLC
 * ffmpeg
-* 7zip
+* 7zip(gui frontend:ark,gnome archive manager)
 * telegram
 * shadowsocks
 * git
 * vim/neovim(with vim-plug)
-* GNU toolchain(gcc,g++,gdb,make...) (`sudo pacman -S base-devel`)
-* python(pip+virtualenv)
+* GNU toolchain(gcc,g++,gdb,make...) (via `sudo pacman -S base-devel`,`sudo pacman -S gdb`)
+* python(with pip,virtualenv)
 * rustup
 * stack(for haskell toolchain)
-* Texlive
-* typora
+* texlive
+* typora(opensource alternatives: vnote,marktext)
 * pandoc
 * virtualbox
-* lemon(project-lemon 一个OI比赛测试系统)
 * aria2
 * qBittorrent
 * motrix
@@ -51,7 +49,7 @@
 * winCDemu
 
 ### linux
-> preferred distro:manjaro
+> preferred distro:manjaro  
 > desktop environment:kde
 * pacman
 * yay(for aur)
@@ -64,15 +62,14 @@
 * filelight(or ncdu)
 * fcitx5
 * fontweak(get it in archlinuxcn repositry)
-* baloo
+* baloo(kde file indexing and searching service)
+* nmtui(network manager TUI)
 
 
 
 ### 小工具
 * BILIdrive+CDNdrive
-  * [cdn drive-pypi](https://pypi.org/project/CDNDrive/) [cdn drive-git](https://github.com/apachecn/CDNDrive)
-  * [bili drive-pypi](https://pypi.org/project/BiliDriveEx/) [bili drive-git](https://github.com/apachecn/BiliDriveEx)
-  * [ORIGIN-pypi](https://pypi.org/project/BiliDrive/) [ORIGIN-git](https://github.com/Hsury/BiliDrive)
+  * [cdn drive-pypi](https://pypi.org/project/CDNDrive/) [cdn drive-git](https://github.com/apachecn/CDNDrive) * [bili drive-pypi](https://pypi.org/project/BiliDriveEx/) [bili drive-git](https://github.com/apachecn/BiliDriveEx) * [ORIGIN-pypi](https://pypi.org/project/BiliDrive/) [ORIGIN-git](https://github.com/Hsury/BiliDrive)
   * [youget.git](https://github.com/soimort/you-get)
 * YouGet
 * ipython
@@ -124,37 +121,30 @@ map <C-V> "+gP
 
 
 ## tips(on Linux)
-> distro:manjaro
+> distro:manjaro  
 > de:kde
 
 - 多看arch wiki/manjaro wiki,多去forum找找解决方案.
+- 虽然linux distro和windows不一样,不用经常reboot,但是reboot还是一个能解决不少问题的方法...当然有时候logout一下再回来,重启一下DE/WM就好了..
 - manjaro是滚动发行版,可能出现新问题,旧问题可能被消除,解决方案可能会失效,尽量自己找第一手信息.
-- 换中国境内的软件源排`sudo pacman-mirrors -i -c China -m rank` 推荐thu,sjtu的镜像,不推荐ustc的镜像. 
-- [manjaro wiki:improve font rendering](https://wiki.manjaro.org/index.php?title=Improve_Font_Rendering)
-- [ban掉beep,参考arch wiki修改配置文件即可](https://wiki.archlinux.org/index.php/PC_speaker)
-
-在`/etc/modprobe.d/nobeep.conf`写入`blacklist pcspkr`之后reboot即可.
-
+- manjaro特色之一: mhwd,有`mhwd-tui,mhwd`分别对应TUI和CLI,可以轻松配置driver,kernel.
+- 换中国境内的软件源`sudo pacman-mirrors -i -c China -m rank`,也可以和arch一样直接编辑`/etc/pacman.conf /etc/pacman.d/mirrorlist`全球镜像列表自行去manjaro/arch官网找.
+- [ban掉beep,参考arch wiki修改配置文件即可](https://wiki.archlinux.org/index.php/PC_speaker):在`/etc/modprobe.d/nobeep.conf`写入`blacklist pcspkr`之后reboot即可.
 - ==(输入法看这里)==经过各种尝试,使用fctix5是目前最好的方案.参考[archwiki:fcitx5](https://wiki.archlinux.org/index.php/Fcitx5)进行安装,配置即可,不再需要`找启动脚本,手动编辑,插入输入法环境变量`的繁琐过程.(经过实际检测,qt/gtk应用可以正常使用输入法,基于wine的移植应用也都没问题).
 - 安装的基于wine移植的应用启动不了?也许是改变了安装目录,没有按照默认配置安装,找到这个应用的启动脚本(一般是在`/opt/deepinwine/apps/Deepin-{appname}/run.sh`),其中的`CallApp()`函数中`env WINEPREFIX=$WINEPREFIX$.....`一行中把应用的实际安装路径(最好用绝对路径)写入即可.
-
-- 字体,locale等本地化配置(**使用经验:KDE默认设置就很好,换个可以正常渲染的中文字体就行了**)
-参考[arch wiki:本地化](https://wiki.archlinux.org/index.php/Localization_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)/Simplified_Chinese_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#locale%E8%AE%BE%E7%BD%AE),[字体配置](https://wiki.archlinux.org/index.php/Font_configuration_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29),[中文字体设置](https://wiki.archlinux.org/index.php/Font_Configuration_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)/Chinese_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
-
-修改`/etc/locale.gen`然后`sudo locale-gen`  
-之后(对于XFCE环境)在`settings>manjaro settings manager>locale settings`切换本地化选项(用kde/gnome等DE也是类似的操作).  
-按照arch wiki上面字体配置部分修改`/etc/fonts/fonts.conf`加入抗锯齿,禁止缩放等设定,参考中文字体设置中android显示效果的配置修改`/etc/fonts/local.conf`即可,reboot.  
-根据我的实践经验,最好不要把locale改成zh\_CN会有各种本地化做得不靠谱的地方,直接用英文的即可.  
-推荐去`settings>hardware>display>scaling`修改缩放为125%或者150%  
-
-**有一个叫fontweak的软件可以图形化配置fontconfig,在archlinuxcn里面**
+- [manjaro wiki:improve font rendering](https://wiki.manjaro.org/index.php?title=Improve_Font_Rendering)
+- ==(DE/WM字体配置看这里)==font,locale,参考[arch wiki:localization](),[arch wiki:font configuration]()
+  修改`/etc/locale.gen`然后`sudo locale-gen`  
+  你的DE可能会覆盖手动编写的`locale.gen`有DE时可以直接在DE中配置本地化(关键词 language,locale,format).  
+  按照arch wiki上面字体配置部分修改`/etc/fonts/fonts.conf`加入抗锯齿,禁止缩放等设定,参考中文字体设置中android显示效果的配置修改`/etc/fonts/local.conf`,之后reboot即可.  
+  一般还需要在DE中设置gui应用的字体.另外推荐去DE中`display>scaling`修改缩放为125%或者150%   
+  **有一个叫fontweak的软件可以图形化配置fontconfig,挂在github,可以在archlinuxcn repo里面直接获取编译打包好的二进制文件**
 
 - 使用arch的官方源安装texlive之后使用不了tlmgr管理CTAN包,这是个官方软件源bug,按照arch wiki上面[Texlive-tlmgr](https://wiki.archlinux.org/index.php/TeX_Live#tlmgr)修改配置即可,记得让tlmgr使用国内的CTAN镜像.**这里最好直接去tuna mirrors上面找texlive的最新版本iso来安装.**
 - fish shell有些配置是不兼容bash的,比如path,manpath之类的,他的配置文件是`~/.config/fish/config.fish`配置的语法也和bash不同...尽量不要用`set -U VAR, set -g VAR`这种会影响全局配置甚至其他shell的配置.
   **不要在bashrc,config.fish中配置MANPATH,只要配置了PATH就可以正常的被mandb索引到了,修改MANPATH会出现奇怪问题**
-- 虽然manjaro是个linux distro,但是reboot还是一个能解决不少问题的方法...
-  也可以试试logout一下再登录...
 - 字体配置推荐,无脑`Noto Sans CJK Sc`即可,个人体验来讲`Noto Sans`比`Source Sans`好一些,`Serif`字体不太习惯.对于等宽的编程字体,推荐`Source Code Pro`和`Liberation Mono`
+- 选择困难症?不妨看看[arch wiki:general recommendation](),[arch wiki:List of applications/Utilities]()
 
 
 
