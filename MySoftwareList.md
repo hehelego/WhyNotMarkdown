@@ -140,12 +140,15 @@ map <C-V> "+gP
   按照arch wiki上面字体配置部分修改`/etc/fonts/fonts.conf`加入抗锯齿,禁止缩放等设定,参考中文字体设置中android显示效果的配置修改`/etc/fonts/local.conf`,之后reboot即可.  
   一般还需要在DE中设置gui应用的字体.另外推荐去DE中`display>scaling`修改缩放为125%或者150%   
   **有一个叫fontweak的软件可以图形化配置fontconfig,挂在github,可以在archlinuxcn repo里面直接获取编译打包好的二进制文件**
-
 - 使用arch的官方源安装texlive之后使用不了tlmgr管理CTAN包,这是个官方软件源bug,按照arch wiki上面[Texlive-tlmgr](https://wiki.archlinux.org/index.php/TeX_Live#tlmgr)修改配置即可,记得让tlmgr使用国内的CTAN镜像.**这里最好直接去tuna mirrors上面找texlive的最新版本iso来安装.**
 - fish shell有些配置是不兼容bash的,比如path,manpath之类的,他的配置文件是`~/.config/fish/config.fish`配置的语法也和bash不同...尽量不要用`set -U VAR, set -g VAR`这种会影响全局配置甚至其他shell的配置.
   **不要在bashrc,config.fish中配置MANPATH,只要配置了PATH就可以正常的被mandb索引到了,修改MANPATH会出现奇怪问题**
 - 字体配置推荐,无脑`Noto Sans CJK Sc`即可,个人体验来讲`Noto Sans`比`Source Sans`好一些,`Serif`字体不太习惯.对于等宽的编程字体,推荐`Source Code Pro`和`Liberation Mono`
 - 选择困难症?不妨看看[arch wiki:general recommendation](),[arch wiki:List of applications/Utilities]()
+- ~~基于QT的应用字体不正常?和electron,gtk的字体有很大区别?每次开机必须手动点开kcm-font重新设定字体?  
+比如konsole(kde自带的terminal emulator)的menu bar字体不受控制.  
+`pacman -S qtcurve`换一个应用程序风格.  
+然后去`kcm>appearance>application appearance`都改成qtcurve,这个主题允许你自行配置很多东西.~~ 经过本人实验,这个目前无解(2020.07.03)
 
 
 
