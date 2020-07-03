@@ -73,6 +73,7 @@
   * [youget.git](https://github.com/soimort/you-get)
 * YouGet
 * ipython
+* [rich](https://github.com/willmcgugan/rich)
 ### 浏览器插件
 * charset(automatically detect&change encoding of a page)
 * Tampermonkey
