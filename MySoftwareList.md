@@ -154,6 +154,7 @@ map <C-V> "+gP
   **不要在bashrc,config.fish中配置MANPATH,只要配置了PATH就可以正常的被mandb索引到了,修改MANPATH会出现奇怪问题**
 - 虽然manjaro是个linux distro,但是reboot还是一个能解决不少问题的方法...
   也可以试试logout一下再登录...
+- 字体配置推荐,无脑`Noto Sans CJK Sc`即可,个人体验来讲`Noto Sans`比`Source Sans`好一些,`Serif`字体不太习惯.对于等宽的编程字体,推荐`Source Code Pro`和`Liberation Mono`
 
 
 
