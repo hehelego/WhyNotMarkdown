@@ -64,6 +64,7 @@
 * filelight(or ncdu)
 * fcitx5
 * fontweak(get it in archlinuxcn repositry)
+* baloo
 
 
 
