@@ -63,7 +63,9 @@
 * fcitx5
 * fontweak(get it in archlinuxcn repositry)
 * baloo(kde file indexing and searching service)
+* `the_silver_search/ag`(a code-searching tool)
 * nmtui(network manager TUI)
+
 
 
 
