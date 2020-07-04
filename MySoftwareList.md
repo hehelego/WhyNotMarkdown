@@ -145,10 +145,6 @@ map <C-V> "+gP
   **不要在bashrc,config.fish中配置MANPATH,只要配置了PATH就可以正常的被mandb索引到了,修改MANPATH会出现奇怪问题**
 - 字体配置推荐,无脑`Noto Sans CJK Sc`即可,个人体验来讲`Noto Sans`比`Source Sans`好一些,`Serif`字体不太习惯.对于等宽的编程字体,推荐`Source Code Pro`和`Liberation Mono`
 - 选择困难症?不妨看看[arch wiki:general recommendation](),[arch wiki:List of applications/Utilities]()
-- ~~基于QT的应用字体不正常?和electron,gtk的字体有很大区别?每次开机必须手动点开kcm-font重新设定字体?  
-比如konsole(kde自带的terminal emulator)的menu bar字体不受控制.  
-`pacman -S qtcurve`换一个应用程序风格.  
-然后去`kcm>appearance>application appearance`都改成qtcurve,这个主题允许你自行配置很多东西.~~ 经过本人实验,这个目前无解(2020.07.03)
 
 
 
