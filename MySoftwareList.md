@@ -146,6 +146,7 @@ map <C-V> "+gP
 - fish shell有些配置是不兼容bash的,比如path,manpath之类的,他的配置文件是`~/.config/fish/config.fish`配置的语法也和bash不同...尽量不要用`set -U VAR, set -g VAR`这种会影响全局配置甚至其他shell的配置.
   **不要在bashrc,config.fish中配置MANPATH,只要配置了PATH就可以正常的被mandb索引到了,修改MANPATH会出现奇怪问题**
 - 字体配置推荐,无脑`Noto Sans CJK Sc`即可,个人体验来讲`Noto Sans`比`Source Sans`好一些,`Serif`字体不太习惯.对于等宽的编程字体,推荐`Source Code Pro`和`Liberation Mono`
+- 基于QT的应用字体表现玄妙(比如KDE中的konsole,kcm,常用的qbittorrent),试试`xsettingsd`.
 - 选择困难症?不妨看看[arch wiki:general recommendation](),[arch wiki:List of applications/Utilities]()
 
 
