@@ -6,6 +6,7 @@
 * LibreOffice
 * VLC
 * ffmpeg
+* gtkhash
 * 7zip(gui frontend:ark,gnome archive manager)
 * telegram
 * shadowsocks
@@ -64,6 +65,7 @@
 * baloo(kde file indexing and searching service)
 * `the_silver_search/ag`(a code-searching tool)
 * nmtui(network manager TUI)
+
 
 
 
