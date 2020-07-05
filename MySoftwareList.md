@@ -138,7 +138,7 @@ map <C-V> "+gP
   修改`/etc/locale.gen`然后`sudo locale-gen`  
   你的DE可能会覆盖手动编写的`locale.gen`有DE时可以直接在DE中配置本地化(关键词 language,locale,format).  
   按照arch wiki上面字体配置部分修改`/etc/fonts/local.conf`加入抗锯齿,禁止缩放等设定,参考中文字体设置中android显示效果的配置,之后reboot即可.  
-  如果有DE的话,还需要在DE中设置gui应用的字体  
+  如果有DE的话,还需要在DE中设置gui应用的字体,尽量和fontconfig的配置保持一致. 
   ~~另外推荐去DE中`display>scaling`修改缩放为125%或者150%~~不推荐配置缩放,这会使得一些位图显示出现问题,以及屏幕撕裂...    
 - 使用arch的官方源安装texlive之后使用不了tlmgr管理CTAN包,这是个官方软件源bug,按照arch wiki上面[Texlive-tlmgr](https://wiki.archlinux.org/index.php/TeX_Live#tlmgr)修改配置即可,记得让tlmgr使用国内的CTAN镜像.**这里最好直接去tuna mirrors上面找texlive的最新版本iso来安装.**
 - fish shell有些配置是不兼容bash的,比如path,manpath之类的,他的配置文件是`~/.config/fish/config.fish`配置的语法也和bash不同...尽量不要用`set -U VAR, set -g VAR`这种会影响全局配置甚至其他shell的配置.
