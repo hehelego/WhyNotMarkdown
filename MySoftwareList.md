@@ -61,7 +61,6 @@
 * krunner(or albert)
 * filelight(or ncdu)
 * fcitx5
-* fontweak(get it in archlinuxcn repositry)
 * baloo(kde file indexing and searching service)
 * `the_silver_search/ag`(a code-searching tool)
 * nmtui(network manager TUI)
@@ -135,18 +134,16 @@ map <C-V> "+gP
 - [ban掉beep,参考arch wiki修改配置文件即可](https://wiki.archlinux.org/index.php/PC_speaker):在`/etc/modprobe.d/nobeep.conf`写入`blacklist pcspkr`之后reboot即可.
 - ==(输入法看这里)==经过各种尝试,使用fctix5是目前最好的方案.参考[archwiki:fcitx5](https://wiki.archlinux.org/index.php/Fcitx5)进行安装,配置即可,不再需要`找启动脚本,手动编辑,插入输入法环境变量`的繁琐过程.(经过实际检测,qt/gtk应用可以正常使用输入法,基于wine的移植应用也都没问题).
 - 安装的基于wine移植的应用启动不了?也许是改变了安装目录,没有按照默认配置安装,找到这个应用的启动脚本(一般是在`/opt/deepinwine/apps/Deepin-{appname}/run.sh`),其中的`CallApp()`函数中`env WINEPREFIX=$WINEPREFIX$.....`一行中把应用的实际安装路径(最好用绝对路径)写入即可.
-- [manjaro wiki:improve font rendering](https://wiki.manjaro.org/index.php?title=Improve_Font_Rendering)
 - ==(DE/WM字体配置看这里)==font,locale,参考[arch wiki:localization](),[arch wiki:font configuration]()
   修改`/etc/locale.gen`然后`sudo locale-gen`  
   你的DE可能会覆盖手动编写的`locale.gen`有DE时可以直接在DE中配置本地化(关键词 language,locale,format).  
-  按照arch wiki上面字体配置部分修改`/etc/fonts/fonts.conf`加入抗锯齿,禁止缩放等设定,参考中文字体设置中android显示效果的配置修改`/etc/fonts/local.conf`,之后reboot即可.  
-  ~~一般还需要在DE中设置gui应用的字体.另外推荐去DE中`display>scaling`修改缩放为125%或者150%~~不推荐配置缩放,这会使得一些位图显示出现问题,以及屏幕撕裂...    
-  **有一个叫fontweak的软件可以图形化配置fontconfig,挂在github,可以在archlinuxcn repo里面直接获取编译打包好的二进制文件**
+  按照arch wiki上面字体配置部分修改`/etc/fonts/local.conf`加入抗锯齿,禁止缩放等设定,参考中文字体设置中android显示效果的配置,之后reboot即可.  
+  如果有DE的话,还需要在DE中设置gui应用的字体  
+  ~~另外推荐去DE中`display>scaling`修改缩放为125%或者150%~~不推荐配置缩放,这会使得一些位图显示出现问题,以及屏幕撕裂...    
 - 使用arch的官方源安装texlive之后使用不了tlmgr管理CTAN包,这是个官方软件源bug,按照arch wiki上面[Texlive-tlmgr](https://wiki.archlinux.org/index.php/TeX_Live#tlmgr)修改配置即可,记得让tlmgr使用国内的CTAN镜像.**这里最好直接去tuna mirrors上面找texlive的最新版本iso来安装.**
 - fish shell有些配置是不兼容bash的,比如path,manpath之类的,他的配置文件是`~/.config/fish/config.fish`配置的语法也和bash不同...尽量不要用`set -U VAR, set -g VAR`这种会影响全局配置甚至其他shell的配置.
   **不要在bashrc,config.fish中配置MANPATH,只要配置了PATH就可以正常的被mandb索引到了,修改MANPATH会出现奇怪问题**
 - 字体配置推荐,无脑`Noto Sans CJK Sc`即可,个人体验来讲`Noto Sans`比`Source Sans`好一些,`Serif`字体不太习惯.对于等宽的编程字体,推荐`Source Code Pro`和`Liberation Mono`
-- 基于QT的应用字体表现玄妙(比如KDE中的konsole,kcm,常用的qbittorrent),试试`xsettingsd`.
 - 选择困难症?不妨看看[arch wiki:general recommendation](),[arch wiki:List of applications/Utilities]()
 
 
