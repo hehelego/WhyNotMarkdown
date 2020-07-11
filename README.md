@@ -40,3 +40,4 @@
   - `杂谈the reason why i prefer imutable.md`怎么避免程序中的UB?怎么消除data race?目前来讲没完美解决方案,但是干掉可变性是个可行方案.
 - 杂题:各种做题记录
 - `resources.md` 一些有用的资源的链接(大概变成了我的浏览器书签备份罢)
+- `course_notes/`一些课程的重要笔记

@@ -9,7 +9,7 @@
 * gtkhash
 * 7zip(gui frontend:ark,gnome archive manager)
 * telegram
-* shadowsocks
+* v2ray+shadowsocks(for proxy)
 * git
 * vim/neovim(with vim-plug)
 * GNU toolchain(gcc,g++,gdb,make...) (via `sudo pacman -S base-devel`,`sudo pacman -S gdb`)
@@ -76,8 +76,9 @@
 * BILIdrive+CDNdrive
   * [cdn drive-pypi](https://pypi.org/project/CDNDrive/) [cdn drive-git](https://github.com/apachecn/CDNDrive) * [bili drive-pypi](https://pypi.org/project/BiliDriveEx/) [bili drive-git](https://github.com/apachecn/BiliDriveEx) * [ORIGIN-pypi](https://pypi.org/project/BiliDrive/) [ORIGIN-git](https://github.com/Hsury/BiliDrive)
   * [youget.git](https://github.com/soimort/you-get)
-* YouGet
-* ipython
+* YouGet(pip install you-get)
+* coursera-dl(pip install coursera-dl)
+* ipython notebook
 * [rich](https://github.com/willmcgugan/rich)
 ### 浏览器插件
 * charset(automatically detect&change encoding of a page)
