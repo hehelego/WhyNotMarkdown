@@ -66,6 +66,7 @@
 * baloo(kde file indexing and searching service)
 * `the_silver_search/ag`(a code-searching tool)
 * nmtui(network manager TUI)
+* screenkey+simplescreenrecorder+kdenlive
 
 
 
