@@ -156,6 +156,10 @@ map <C-V> "+gP
 - - fish shell有些配置是不兼容bash的,比如path,manpath之类的,他的配置文件是`~/.config/fish/config.fish`配置的语法也和bash不同...尽量不要用`set -U VAR, set -g VAR`这种会影响全局配置甚至其他shell的配置.
 - - bash中的`pacman -S $(cat softwarelist)`在fish中是`pacman -S (cat softwarelist)`.更常见的例子:`rm $(fzf -m)`应替换为`rm (fzf -m)`.
 - - 中fish中一些regex的语法和fish shell的语法有冲突,使用单引号来标识他们,比如查询以rc结尾的配置文件应该这么写`ls ~/.config/ | grep 'rc$'`.
+- 关于vim的一些事情
+- - 插件管理器推荐`vim-plug`在github可以找到它.
+- - `:set hlsearch`使得vim给搜索匹配的文本加上高亮.搜索结束,暂时取消高亮用`:noh`即可.
+- - 推荐插件:`nerdtree`,`nerdcommenter`,`indentLine`,`vim-airline`,`vim-startify`
 
 
 
