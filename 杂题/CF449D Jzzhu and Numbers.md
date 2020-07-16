@@ -1,18 +1,18 @@
 ## CF449D Jzzhu and Numbers
 
 ### statement
-[link](https://www.luogu.com.cn/problem/CF449D) 
+[link:luogu](https://www.luogu.com.cn/problem/CF449D) 
 给定$n$个$20$位二进制数.
-$1..n$的非空子集$S$使得$(\&_{i\in S}a_i)=\phi$其中$\&$位按位与操作.
+$1..n$的非空子集$S$使得$(\&_{i\in S}a_i)=\phi$其中$\&$位按位与操作,$phi=\{\}$是空集.
 对这样的S进行计数.
 
 ### solution
 
-设$F(S)$为$(\&a_i)=S$的计数
-$G(S)$为$S\subseteq (\&a_i)$的计数.
+设$F(S)$为$(\&a_i)=S$的计数,答案即为$F(\phi)$
+设$G(S)$为$S\subseteq (\&a_i)$的计数.
 
-根据定义$G(S)=\sum_{S\subseteq T}F(T),F(S)=\sum_{S\subseteq T}(-1)^{|T-S|}G(T)$
-答案即为$F(\phi)$
+根据定义$G(S)=\sum_{S\subseteq T}F(T)$
+子集反演$F(S)=\sum_{S\subseteq T}(-1)^{|T-S|}G(T)$
 
 若$S\subseteq a_i$的$a_i$数量为$k(S)$则$G(S)=2^{k(S)}-1$
 先统计$cnt(x)=\sum [a_i=x]$
