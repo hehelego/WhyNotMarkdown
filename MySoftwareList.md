@@ -134,32 +134,59 @@ map <C-V> "+gP
 > de:kde
 
 - 多看arch wiki/manjaro wiki,多去forum找找解决方案.
+
 - 虽然linux distro和windows不一样,不用经常reboot,但是reboot还是一个能解决不少问题的方法...当然有时候logout一下再回来,重启一下DE/WM就好了..
+
 - manjaro是滚动发行版,可能出现新问题,旧问题可能被消除,解决方案可能会失效,尽量自己找第一手信息.
+
 - manjaro特色之一: mhwd,有`mhwd-tui,mhwd`分别对应TUI和CLI,可以轻松配置driver,kernel.
+
 - 换中国境内的软件源`sudo pacman-mirrors -i -c China -m rank`,也可以和arch一样直接编辑`/etc/pacman.conf /etc/pacman.d/mirrorlist`全球镜像列表自行去manjaro/arch官网找.
+
 - [ban掉beep,参考arch wiki修改配置文件即可](https://wiki.archlinux.org/index.php/PC_speaker):在`/etc/modprobe.d/nobeep.conf`写入`blacklist pcspkr`之后reboot即可.
+
 - ==(输入法看这里)==经过各种尝试,使用fctix5是目前最好的方案.参考[archwiki:fcitx5](https://wiki.archlinux.org/index.php/Fcitx5)进行安装,配置即可,不再需要`找启动脚本,手动编辑,插入输入法环境变量`的繁琐过程.(经过实际检测,qt/gtk应用可以正常使用输入法,基于wine的移植应用也都没问题).
+
 - 安装的基于wine移植的应用启动不了?也许是改变了安装目录,没有按照默认配置安装,找到这个应用的启动脚本(一般是在`/opt/deepinwine/apps/Deepin-{appname}/run.sh`),其中的`CallApp()`函数中`env WINEPREFIX=$WINEPREFIX$.....`一行中把应用的实际安装路径(最好用绝对路径)写入即可.
+
 - ==(DE/WM字体配置看这里)==font,locale,参考[arch wiki:localization](),[arch wiki:font configuration]()
   修改`/etc/locale.gen`然后`sudo locale-gen`  
   你的DE可能会覆盖手动编写的`locale.gen`有DE时可以直接在DE中配置本地化(关键词 language,locale,format).  
   按照arch wiki上面字体配置部分修改`/etc/fonts/local.conf`加入抗锯齿,禁止缩放等设定,参考中文字体设置中android显示效果的配置,之后reboot即可.  
   不要配置`~/.config/fontconfig/local.conf`,有`/etc/fonts/local.conf`的全局设定就够了.  
   如果有DE的话,还需要在DE中设置gui应用的字体,尽量和fontconfig的配置保持一致.   
+  
 - 使用arch的官方源安装texlive之后使用不了tlmgr管理CTAN包,这是个官方软件源bug,按照arch wiki上面[Texlive-tlmgr](https://wiki.archlinux.org/index.php/TeX_Live#tlmgr)修改配置即可,记得让tlmgr使用国内的CTAN镜像.**这里最好直接去tuna mirrors上面找texlive的最新版本iso来安装.**
   **不要在bashrc,config.fish中配置MANPATH,只要配置了PATH就可以正常的被mandb索引到了,修改MANPATH会出现奇怪问题**
+  
 - 字体配置推荐,无脑`Noto Sans CJK Sc`即可,个人体验来讲`Noto Sans`比`Source Sans`好一些,`Serif`字体不太习惯.对于等宽的编程字体,推荐`Source Code Pro`和`Liberation Mono`
+
 - KDE中`display>scaling`缩放有bug,建议不要使用.屏幕上可能会无端出现一根白线,并且icon及font的渲染都会有问题.
+
 - 选择困难症?不妨看看[arch wiki:general recommendation](),[arch wiki:List of applications/Utilities]()
+
 - 关于fish shell的一些事情
+
 - - fish shell有些配置是不兼容bash的,比如path,manpath之类的,他的配置文件是`~/.config/fish/config.fish`配置的语法也和bash不同...尽量不要用`set -U VAR, set -g VAR`这种会影响全局配置甚至其他shell的配置.
+
 - - bash中的`pacman -S $(cat softwarelist)`在fish中是`pacman -S (cat softwarelist)`.更常见的例子:`rm $(fzf -m)`应替换为`rm (fzf -m)`.
+
 - - 中fish中一些regex的语法和fish shell的语法有冲突,使用单引号来标识他们,比如查询以rc结尾的配置文件应该这么写`ls ~/.config/ | grep 'rc$'`.
+
 - 关于vim的一些事情
+
 - - 插件管理器推荐`vim-plug`在github可以找到它.
+
 - - `:set hlsearch`使得vim给搜索匹配的文本加上高亮.搜索结束,暂时取消高亮用`:noh`即可.
+
 - - 推荐插件:`nerdtree`,`nerdcommenter`,`indentLine`,`vim-airline`,`vim-startify`
+
+- 关于deepin wine qq/wechat/tim不能查看图片(2020.7.16)
+- - ipv6有一点问题,导致连不上腾讯的图片cdn,需要做一个本机的http proxy.
+- - 安装`privoxy`,之后`systemctl enable,start`启动服务(manjaro的init是systemd,不是用systemd的话略有区别).
+- - qq/wechat/tim登陆的时候配置http代理.默认是`http://127.0.0.1:8118`
+- - 有其他问题,自行查阅`man privoxy`查找对应的配置文件进行修改...
+- - 还不行的话只能暂时禁用ipv6...或者virtualbox装个windows虚拟机跑了.
 
 
 
