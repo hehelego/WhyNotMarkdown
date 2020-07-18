@@ -188,6 +188,12 @@ map <C-V> "+gP
 - - 有其他问题,自行查阅`man privoxy`查找对应的配置文件进行修改...
 - - 还不行的话只能暂时禁用ipv6...或者virtualbox装个windows虚拟机跑了.
 
+- 关于pandoc+xelatex下的`markdown+latex -> tex -> pdf`工作流.
+- - 需要修改pandoc的转换模板,使得`markdown->tex`时具有正常的文档结构和设定的常用包以及字体配置.
+- - 推荐使用[link:Eisvogel](https://github.com/Wandmalfarbe/pandoc-latex-template)这个LaTeX模板.参考他们的readme就可以正常使用了.
+- - 这里因为`tex->pdf`是LaTeX提供的,所以比mathjax的语法要求要强一些,版本升级会产生语法不向后兼容的问题,请自行查找资料或询问网友.
+- - 字体配置比较麻烦,参考arch wiki中关于texlive的帮助页,自行将texlive安装时带有的字体加入系统的字体中.
+
 
 
 ## stared repositories
