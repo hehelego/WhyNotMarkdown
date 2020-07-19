@@ -25,6 +25,7 @@
 * motrix
 * syncthing
 * etcher
+* graphviz
 
 
 ### windows
