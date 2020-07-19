@@ -18,7 +18,7 @@
 
 计算$g(S)$考虑$T^\prime=(A_1,A_2\dots A_m)$,其中$A_i\cap S=\phi$.则$T=(A_1\cup S,A_2\cup S\dots A_m\cup S)$为一个对$g(S)$有贡献$1$的方案,$T$与$T^\prime$是一一对应的.
 
-考虑对$T^\prime$计数.$A_i\subseteq (all\setminus S)$,有$2^{n-|S|}$个子集,随便选其中一些(不能选出$T'=\{\}$)那就是$pow(2,2^{n-|S|})-1$.
+考虑对$T^\prime$计数.$A_i\subseteq (all\backslash S)$,有$2^{n-|S|}$个子集,随便选其中一些(不能选出$T'=\{\}$)那就是$pow(2,2^{n-|S|})-1$.
 
 于是$g(S)=pow(2,2^{n-|S|})-1$.我们发现这是个和$|S|$有关,而和$S$具体取值没有关系,于是我们设$k=|S|,g(S)=G(|S|)=G(k)=pow(2,2^{n-k})-1$.此外再设$f(S)=F(|S|)$.
 
@@ -30,11 +30,11 @@
 
 ---
 
-实现的时候有一个小问题,就是$pow(2,2^{n-i})\equiv pow(2,2^{n-i}\bmod \varphi(p))\pmod p$,其中$p$是一个质数,如果膜的不是质数(求解幂的时候不能保证底数和模数互质),按照扩展欧拉定理$a^b\equiv \begin{cases}a^b&(b\lt \varphi(p))\\a^{(b\bmod \varphi(p))+\varphi(p)}&(b\ge \varphi(p))\end{cases}\pmod p$进行计算,复杂度不变.
+实现的时候有一个小问题,就是$pow(2,2^{n-i})\equiv pow(2,2^{n-i}\bmod \varphi(p))\pmod p$,其中$p$是一个质数,如果膜的不是质数(求解幂的时候不能保证底数和模数互质),按照扩展欧拉定理$a^b\equiv \begin{cases}a^b&(b< \varphi(p))\\ a^{(b\bmod \varphi(p))+\varphi(p)}&(b\ge \varphi(p))\end{cases}\pmod p$进行计算,复杂度不变.
 
 我写得复杂度多个$O(\log p)$,考虑$pow(2,2^k)=pow^2(2,2^{k-1})$递推求解它,就可以去掉这个求解幂所用的$O(\log p)$.
 
-组合数的话,用到的$\binom{n}{m}=\frac{n!}{m!(n-m)!}$都满足$n,m\lt p$,而且又有$p$是质素,所以下面的逆元都是存在的,直接预处理阶乘算就行了…$n,m\geq p$的话使用$lucas$定理求解,同时复杂度多一个$O(\log n)$,模数不是质数,是square free的好做,拆开分别lucas求解,CRT合并,不然的话需要些奇特技巧(OI里面似乎叫扩展lucas…).
+组合数的话,用到的$\binom{n}{m}=\frac{n!}{m!(n-m)!}$都满足$n,m< p$,而且又有$p$是质素,所以下面的逆元都是存在的,直接预处理阶乘算就行了…$n,m\geq p$的话使用$lucas$定理求解,同时复杂度多一个$O(\log n)$,模数不是质数,是square free的好做,拆开分别lucas求解,CRT合并,不然的话需要些奇特技巧(OI里面似乎叫扩展lucas…).
 
 
 

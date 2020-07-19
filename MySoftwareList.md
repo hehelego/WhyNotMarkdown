@@ -51,7 +51,8 @@
 
 ### linux
 > preferred distro:manjaro  
-> desktop environment:kde
+> desktop environment:kde  
+
 * pacman
 * yay(for aur)
 * alacritty(a better terminal emulator)
@@ -76,12 +77,15 @@
 
 ### 小工具
 * BILIdrive+CDNdrive
-  * [cdn drive-pypi](https://pypi.org/project/CDNDrive/) [cdn drive-git](https://github.com/apachecn/CDNDrive) * [bili drive-pypi](https://pypi.org/project/BiliDriveEx/) [bili drive-git](https://github.com/apachecn/BiliDriveEx) * [ORIGIN-pypi](https://pypi.org/project/BiliDrive/) [ORIGIN-git](https://github.com/Hsury/BiliDrive)
+  * [cdn drive-pypi](https://pypi.org/project/CDNDrive/) [cdn drive-git](https://github.com/apachecn/CDNDrive)
+  * [bili drive-pypi](https://pypi.org/project/BiliDriveEx/) [bili drive-git](https://github.com/apachecn/BiliDriveEx)
+  * [ORIGIN-pypi](https://pypi.org/project/BiliDrive/) [ORIGIN-git](https://github.com/Hsury/BiliDrive)
   * [youget.git](https://github.com/soimort/you-get)
 * YouGet(pip install you-get)
 * coursera-dl(pip install coursera-dl)
 * ipython notebook
 * [rich](https://github.com/willmcgugan/rich)
+
 ### 浏览器插件
 * charset(automatically detect&change encoding of a page)
 * Tampermonkey
@@ -116,7 +120,7 @@ map <C-V> "+gP
   - windows sandbox
   - windows 虚拟机监控程序平台
   - 用bcdedit让hyper-v自动启动.
-- hyper-v功能启动后virtualbox无法使用,这是hyper-v和vt-x冲突了.需要关掉hyper-v的自启动.
+  - hyper-v功能启动后virtualbox无法使用,这是hyper-v和vt-x冲突了.需要关掉hyper-v的自启动.
   - bcdedit /set hypervisorlaunchtype auto(用hyper-v比如sandbox的时候)
   - bcdedit /set hypervisorlaunchtype off(用vt-x比如virtualbox时)
 - 突然发现按键盘方向键鼠标会跟着移动?某些按键组合可以触发鼠标双击/右键?这是玄妙的`鼠标键`功能.
@@ -156,8 +160,8 @@ map <C-V> "+gP
   不要配置`~/.config/fontconfig/local.conf`,有`/etc/fonts/local.conf`的全局设定就够了.  
   如果有DE的话,还需要在DE中设置gui应用的字体,尽量和fontconfig的配置保持一致.   
   
-- 使用arch的官方源安装texlive之后使用不了tlmgr管理CTAN包,这是个官方软件源bug,按照arch wiki上面[Texlive-tlmgr](https://wiki.archlinux.org/index.php/TeX_Live#tlmgr)修改配置即可,记得让tlmgr使用国内的CTAN镜像.**这里最好直接去tuna mirrors上面找texlive的最新版本iso来安装.**
-  **不要在bashrc,config.fish中配置MANPATH,只要配置了PATH就可以正常的被mandb索引到了,修改MANPATH会出现奇怪问题**
+- 使用arch的官方源安装texlive之后使用不了tlmgr管理CTAN包,这是个官方软件源bug,按照arch wiki上面[Texlive-tlmgr](https://wiki.archlinux.org/index.php/TeX_Live#tlmgr)修改配置即可,记得让tlmgr使用国内的CTAN镜像.**这里最好直接去tuna mirrors上面找texlive的最新版本iso来安装.**  
+  **不要在bashrc,config.fish中配置MANPATH,只要配置了PATH就可以正常的被mandb索引到了,修改MANPATH会出现奇怪问题**  
   
 - 字体配置推荐,无脑`Noto Sans CJK Sc`即可,个人体验来讲`Noto Sans`比`Source Sans`好一些,`Serif`字体不太习惯.对于等宽的编程字体,推荐`Source Code Pro`和`Liberation Mono`
 
@@ -167,32 +171,32 @@ map <C-V> "+gP
 
 - 关于fish shell的一些事情
 
-- - fish shell有些配置是不兼容bash的,比如path,manpath之类的,他的配置文件是`~/.config/fish/config.fish`配置的语法也和bash不同...尽量不要用`set -U VAR, set -g VAR`这种会影响全局配置甚至其他shell的配置.
+  - fish shell有些配置是不兼容bash的,比如path,manpath之类的,他的配置文件是`~/.config/fish/config.fish`配置的语法也和bash不同...尽量不要用`set -U VAR, set -g VAR`这种会影响全局配置甚至其他shell的配置.
 
-- - bash中的`pacman -S $(cat softwarelist)`在fish中是`pacman -S (cat softwarelist)`.更常见的例子:`rm $(fzf -m)`应替换为`rm (fzf -m)`.
+  - bash中的`pacman -S $(cat softwarelist)`在fish中是`pacman -S (cat softwarelist)`.更常见的例子:`rm $(fzf -m)`应替换为`rm (fzf -m)`.
 
-- - 中fish中一些regex的语法和fish shell的语法有冲突,使用单引号来标识他们,比如查询以rc结尾的配置文件应该这么写`ls ~/.config/ | grep 'rc$'`.
+  - 中fish中一些regex的语法和fish shell的语法有冲突,使用单引号来标识他们,比如查询以rc结尾的配置文件应该这么写`ls ~/.config/ | grep 'rc$'`.
 
-- 关于vim的一些事情
+  关于vim的一些事情
 
-- - 插件管理器推荐`vim-plug`在github可以找到它.
+  - 插件管理器推荐`vim-plug`在github可以找到它.
 
-- - `:set hlsearch`使得vim给搜索匹配的文本加上高亮.搜索结束,暂时取消高亮用`:noh`即可.
+  - `:set hlsearch`使得vim给搜索匹配的文本加上高亮.搜索结束,暂时取消高亮用`:noh`即可.
 
-- - 推荐插件:`nerdtree`,`nerdcommenter`,`indentLine`,`vim-airline`,`vim-startify`
+  - 推荐插件:`nerdtree`,`nerdcommenter`,`indentLine`,`vim-airline`,`vim-startify`
 
 - 关于deepin wine qq/wechat/tim不能查看图片(2020.7.16)
-- - ipv6有一点问题,导致连不上腾讯的图片cdn,需要做一个本机的http proxy.
-- - 安装`privoxy`,之后`systemctl enable,start`启动服务(manjaro的init是systemd,不是用systemd的话略有区别).
-- - qq/wechat/tim登陆的时候配置http代理.默认是`http://127.0.0.1:8118`
-- - 有其他问题,自行查阅`man privoxy`查找对应的配置文件进行修改...
-- - 还不行的话只能暂时禁用ipv6...或者virtualbox装个windows虚拟机跑了.
+  - ipv6有一点问题,导致连不上腾讯的图片cdn,需要做一个本机的http proxy.
+  - 安装`privoxy`,之后`systemctl enable,start`启动服务(manjaro的init是systemd,不是用systemd的话略有区别).
+  - qq/wechat/tim登陆的时候配置http代理.默认是`http://127.0.0.1:8118`
+  - 有其他问题,自行查阅`man privoxy`查找对应的配置文件进行修改...
+  - 还不行的话只能暂时禁用ipv6...或者virtualbox装个windows虚拟机跑了.
 
 - 关于pandoc+xelatex下的`markdown+latex -> tex -> pdf`工作流.
-- - 需要修改pandoc的转换模板,使得`markdown->tex`时具有正常的文档结构和设定的常用包以及字体配置.
-- - 推荐使用[link:Eisvogel](https://github.com/Wandmalfarbe/pandoc-latex-template)这个LaTeX模板.参考他们的readme就可以正常使用了(参考命令`pandoc note.md -o book.pdf  --template eisvogel --listings --pdf-engine=xelatex`).
-- - 这里因为`tex->pdf`是LaTeX提供的,所以比mathjax的语法要求要强一些,版本升级会产生语法不向后兼容的问题,请自行查找资料或询问网友.
-- - 字体配置比较麻烦,参考arch wiki中关于texlive的帮助页,自行将texlive安装时带有的字体加入系统的字体中.
+  - 需要修改pandoc的转换模板,使得`markdown->tex`时具有正常的文档结构和设定的常用包以及字体配置.
+  - 推荐使用[link:Eisvogel](https://github.com/Wandmalfarbe/pandoc-latex-template)这个LaTeX模板.参考他们的readme就可以正常使用了(参考命令`pandoc note.md -o book.pdf  --template eisvogel --listings --pdf-engine=xelatex`).
+  - 这里因为`tex->pdf`是LaTeX提供的,所以比mathjax的语法要求要强一些,版本升级会产生语法不向后兼容的问题,请自行查找资料或询问网友.
+  - 字体配置比较麻烦,参考arch wiki中关于texlive的帮助页,自行将texlive安装时带有的字体加入系统的字体中.
 
 
 

@@ -132,7 +132,7 @@ tests:
 
 
 
-##随笔
+## 随笔
 
 > 这里会记录一些学习中遇到的有趣的例子.
 >
@@ -141,7 +141,7 @@ tests:
 
 
 
-#### 0000 有时候你需要钦定类型帮助推导
+### 0000 有时候你需要钦定类型帮助推导
 
 HS的extended HM类型系统是非常强大的,但是有时候你不得不指定类型,比如读入一个string,转换成integer.
 
@@ -153,7 +153,7 @@ HS的extended HM类型系统是非常强大的,但是有时候你不得不指定
 
 
 
-#### 0001 haskell对标识符的要求很弱
+### 0001 haskell对标识符的要求很弱
 
 一个有趣的程序,模仿它的样子,我们也可以在Haskell中做运算符重载
 
@@ -165,7 +165,7 @@ main=putStrLn $ show $ (let 2*-3="NSML" in 2*-3)
 
 
 
-#### 0002 一个效率非常低的素数筛…
+### 0002 一个效率非常低的素数筛…
 
 ```haskell
 import Data.List
@@ -178,7 +178,7 @@ p_leq_100 = primes_leq 100
 
 
 
-#### 0003 merge sort
+### 0003 merge sort
 
 ```haskell
 my_merge::(Ord a)=>[a]->[a]->[a]
@@ -216,7 +216,7 @@ main=do
 
 
 
-#### 0004 递归求解中的技巧:计数器(累加器)
+### 0004 递归求解中的技巧:计数器(累加器)
 
 hs中简单的记忆化搜索,因为没有副作用,不能实时更新数据结构,那就只好把数据结构带着扔进参数列表里面,每次换一个了…大概就这样,效率很低…对于参数多的,试试Data.Map
 
@@ -228,7 +228,7 @@ fib n=solve n 0 1  where
 
 
 
-####0005 luoguP1118
+### 0005 luoguP1118
 
 这个题目是[USACO06FEB]Backward Digit Sums G/S
 求出一个$[1..n]$的排列$p$,使得$\sum_{i=1}^n p_i\binom{n-1}{i-1}=s$其中$n$非常小,允许阶乘/指数复杂度.
@@ -270,7 +270,7 @@ search n i s use=
 
 
 
-#### 0006 CF27E的haskell solution
+### 0006 CF27E的haskell solution
 
 关于怎么不使用共享可变状态表示当前可行解的情况下,如何表达最优性剪枝.
 
@@ -281,7 +281,7 @@ search n i s use=
 > f package used_decisions temporary_ans=?
 > ```
 > 
-> 尝试决策d,深入搜索树,等从搜索树深层回来时,常规参数package不变,used加入d,当前最优解取个min,再调用自己.
+> 尝试决策d,深入搜索树,等从搜索树深层回来时,常规参数package不变,used加入d,当前最优解取个min,再调用自己.  
 > 可用决策集合为空,决策全都扔进used里面的时候就返回当前最优解...
 
 另外这里haskell中的`Prelude.Int`范围不够…
@@ -327,7 +327,7 @@ dfs (n,now,i,last) used ans=let dcs=[x|x<-dvs n,x `QAQ.notMember` used,x<=last] 
       in  dfs (n,now,i,last) (QAQ.insert q used) ans'
 ```
 
-#### 0007 请不要用加法举例子
+### 0007 请不要用加法举例子
 
 对于许多定义在`Foldable` typeclass中的操作,初看难以理解其行为,这时候不少人会用加法举例,比如
 
