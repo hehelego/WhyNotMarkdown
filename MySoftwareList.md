@@ -191,6 +191,7 @@ map <C-V> "+gP
   - 安装`privoxy`,之后`systemctl enable,start`启动服务(manjaro的init是systemd,不是用systemd的话略有区别).
   - qq/wechat/tim登陆的时候配置http代理.默认是`http://127.0.0.1:8118`
   - 有其他问题,自行查阅`man privoxy`查找对应的配置文件进行修改...
+  - 请自行找`/etc/privoxy/config`里面的内容过滤,搜素`toggle`把它们都关掉.
   - 还不行的话只能暂时禁用ipv6...或者virtualbox装个windows虚拟机跑了.
 
 - 关于pandoc+xelatex下的`markdown+latex -> tex -> pdf`工作流.
