@@ -27,6 +27,7 @@
 * syncthing
 * etcher
 * graphviz
+* scrcpy
 
 
 ### windows
