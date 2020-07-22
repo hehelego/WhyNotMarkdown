@@ -22,7 +22,8 @@
 * virtualbox
 * aria2
 * qBittorrent
-* motrix
+* motrix(download manager)
+* persepolis(aria2 gui frontend)
 * syncthing
 * etcher
 * graphviz
