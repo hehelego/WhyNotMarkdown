@@ -71,7 +71,6 @@
 * nmtui(network manager TUI)
 * screenkey+simplescreenrecorder+kdenlive
 * wine(AUR:deepin-wine-qq,deepin-wine-wechat)
-* Onedrive client([link](https://github.com/abraunegg/onedrive)可在在archlinuxcn repo中直接找到打包的二进制)
 
 
 
