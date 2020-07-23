@@ -201,6 +201,11 @@ map <C-V> "+gP
   - 这里因为`tex->pdf`是LaTeX提供的,所以比mathjax的语法要求要强一些,版本升级会产生语法不向后兼容的问题,请自行查找资料或询问网友.
   - 字体配置比较麻烦,参考arch wiki中关于texlive的帮助页,自行将texlive安装时带有的字体加入系统的字体中.
 
+- how to show installed AUR packages? `pacman -Qm / pacman -Q --foreign`,原理如下.
+> Restrict or filter output to packages that were not found in the sync database(s). Typically these are packages that were downloaded manually and installed
+with --upgrade.
+
+
 
 
 ## LaTeX FAQ
