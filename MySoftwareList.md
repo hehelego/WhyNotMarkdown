@@ -72,6 +72,7 @@
 * nmtui(network manager TUI)
 * screenkey+simplescreenrecorder+kdenlive
 * wine(AUR:deepin-wine-qq,deepin-wine-wechat)
+* kolorpaint(alternative to mspaint)
 
 
 
