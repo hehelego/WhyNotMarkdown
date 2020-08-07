@@ -1,5 +1,4 @@
 ## installed software
-
 ### 通用跨平台软件
 * firefox
 * SageMath
@@ -72,7 +71,7 @@
 * nmtui(network manager TUI)
 * screenkey+simplescreenrecorder+kdenlive
 * wine(AUR:deepin-wine-qq,deepin-wine-wechat)
-* kolorpaint(alternative to mspaint)
+* kolourpaint(alternative to mspaint)
 
 
 
