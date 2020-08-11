@@ -65,7 +65,7 @@
 * ranger
 * krunner(or albert)
 * filelight(or ncdu)
-* fcitx5
+* fcitx5(with rime,rime-luna-pinyin)
 * baloo(kde file indexing and searching service)
 * `the_silver_search/ag`(a code-searching tool)
 * nmtui(network manager TUI)
@@ -151,7 +151,8 @@ map <C-V> "+gP
 
 - [ban掉beep,参考arch wiki修改配置文件即可](https://wiki.archlinux.org/index.php/PC_speaker):在`/etc/modprobe.d/nobeep.conf`写入`blacklist pcspkr`之后reboot即可.
 
-- ==(输入法看这里)==经过各种尝试,使用fctix5是目前最好的方案.参考[archwiki:fcitx5](https://wiki.archlinux.org/index.php/Fcitx5)进行安装,配置即可,不再需要`找启动脚本,手动编辑,插入输入法环境变量`的繁琐过程.(经过实际检测,qt/gtk应用可以正常使用输入法,基于wine的移植应用也都没问题).
+- ==(输入法看这里)==经过各种尝试,使用fctix5是目前最好的方案.参考[archwiki:fcitx5](https://wiki.archlinux.org/index.php/Fcitx5)进行安装,配置即可,不再需要`找启动脚本,手动编辑,插入输入法环境变量`的繁琐过程.(经过实际检测,qt/gtk应用可以正常使用输入法,基于wine的移植应用也都没问题).  
+推荐使用fcitx5-rime,配合luna-pinyin.使用rime时可以按`<F4>`进行配置简体繁体转化,全角半角转换等配置.
 
 - 安装的基于wine移植的应用启动不了?也许是改变了安装目录,没有按照默认配置安装,找到这个应用的启动脚本(一般是在`/opt/deepinwine/apps/Deepin-{appname}/run.sh`),其中的`CallApp()`函数中`env WINEPREFIX=$WINEPREFIX$.....`一行中把应用的实际安装路径(最好用绝对路径)写入即可.
 
@@ -197,7 +198,7 @@ map <C-V> "+gP
 
 - 关于pandoc+xelatex下的`markdown+latex -> tex -> pdf`工作流.
   - 需要修改pandoc的转换模板,使得`markdown->tex`时具有正常的文档结构和设定的常用包以及字体配置.
-  - 推荐使用[link:Eisvogel](https://github.com/Wandmalfarbe/pandoc-latex-template)这个LaTeX模板.参考他们的readme就可以正常使用了(参考命令`pandoc note.md -o book.pdf  --template eisvogel --listings --pdf-engine=xelatex`).
+  - 推荐使用[link:Eisvogel](https://github.com/Wandmalfarbe/pandoc-latex-template)这个LaTeX模板.参考他们的readme就可以正常使用了(参考命令`pandoc note.md -o book.pdf  --template eisvogel --listings --pdf-engine=xelatex`).我把我定制的eisvogel模板,以及编译脚本都放到了staic目录下面
   - 这里因为`tex->pdf`是LaTeX提供的,所以比mathjax的语法要求要强一些,版本升级会产生语法不向后兼容的问题,请自行查找资料或询问网友.
   - 字体配置比较麻烦,参考arch wiki中关于texlive的帮助页,自行将texlive安装时带有的字体加入系统的字体中.
 
