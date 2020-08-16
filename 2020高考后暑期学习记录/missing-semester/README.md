@@ -17,9 +17,12 @@
 
 课程时间有限,无法在每个工具的介绍中深入细节,但是他们会尽量给出可以供你深挖的学习资源.  
 
-## Topic 1: the shell
+$$\pagebreak$$
+
+## Topic 1: the shell  
 - When it comes to the `shell`, i prefer the `fish shell:Friendly Interactive SHell`.
 - And the terminal emulator which I am currently using is called `alacritty`.
+
 
 图形化,语音交互,甚至VR/AR的交互方式确实很方便,但是他们的功能有限.  
 
@@ -28,15 +31,16 @@
 
 GUI应用目前还无法完全取代TUI和CLI应用,所以,让我们开始学习使用shell吧.  
 
-使用shell工作的特点是.  
+使用shell工作的特点是:  
+
 - interactiv(当然也可以有scripting)
 - plain text(当然现代的shell+terminal emulator可以一定程度地使rich text,比如有趣的python库rich),unstructured.
 - using CLI,TUI rather than GUI
 - UNIX哲学:KISS(不要大而全,考虑小而精+易于组合的应用).比如使用redirection而不是把源/目标文件当作参数,使用pipe来组合操作.**阅读wikipedia,arch wiki获取更多更全的关于KISS的内涵与解读**
-- 一切皆为文件(任何一个应用不正是由I/O与数据处理组成的吗?只不过数据的来源,类型,特点以及输出方式有所不同罢了)
+- 一切皆为文件(任何一个应用不正是由I/O与数据处理组成的吗?只不过数据的来源,类型,特点以及输出方式有所不同罢了).可以去`/sys/class/backlight/intel_backlight`看看,并且尝试修改其中的文件,看看会发生神秘.
 
 
-> shell(尤其是年迈的bash)问题很多,比如没有类型检查(影响脚本编程,也影响了pipe的使用,有些时候structured,typed是必要的);比如空格分开参数;又比如程序调用,pipe,redirection的优先级,结合律不清晰.而且较为现代的shell(比如zsh,fish,posh-powersshell)也没有彻底解决这些问题.  
+> shell(尤其是年迈的bash)问题很多,比如没有类型检查(影响脚本编程,也影响了pipe的使用,有些时候structured,typed是必要的);比如空格分开参数;又比如程序调用,pipe,redirection的优先级,结合律不清晰;还有最广为人知的滥用template string.而且较为现代的shell(比如zsh,fish,posh-powersshell)也没有彻底解决这些问题.  
 > **所以shell的这个设计思维这个工作方式并不完美,甚至可以说问题非常多.但是,取其精华去其糟粕嘛.我们学习那种设计思维与工作方式以便提升工作效率;并且留意那些不完美甚至垃圾的设计,了解其成因和解决方案,在自己未来设计与实现程序时努力避免.**
 
 
@@ -75,6 +79,13 @@ cat,tee
 man
 sudo
 chmod,chown
+jobs,fg,bg,(Ctrl+Z)
+clear,(Ctrl+L)
+(Ctrl+C)
+history
+grep
+less
+env
 ```
 
 关于用户,用户组,权限:使用`ls -lah`会有一些而`rwx-`组成的长度为9的字符出.  
@@ -85,5 +96,36 @@ rwx的意义很明显了,就是read write execute(如果这个文件是个目录
 
 几个有趣的例子.
 ```bash
+$ ls -l / |sort| tail -n1
+> -rw-r--r--   1 root root  5037  6月  6 17:01 rootfs-pkgs.txt
+$ ls -l / |sort|  head -n1
+> 总用量 92
+> spinach@spinach-latitude5480 ~/w/g/W/2/missing-semester (master)> ls -l / |sort|  head -n2
 
+$ curl --head --silent https://www.bing.com | grep --ignore-case content-length | cut --delimiter=' ' -f2
+> 137
 ```
+
+下面这个例子,演示了shell中pipe,redirection的一些特性(或许可以称之为,非侵入式).  
+被pipe,redirection操作的程序,并不会直接互相通信,这个数据传输的工作是shell进行的,所以用sudo暂时获取的root权限并不能被下一个程序使用.  
+因为pipe仅仅是shell拿了一个程序的输入,给到另一个程序作为输入,中间没有任何其他工作.  
+redirection类似,也是shell建立的,而不是这个程序本身进行来redirection
+```bash
+$ sudo touch try-modify
+$ ls -lah
+> -rw-r--r-- 1 root root 0  8月 16 22:17 try-modify
+$ sudo echo qwq > try-modify
+> sh: try-modify: Permission denied
+$ sudo echo qwq | tee try-modify
+> tee: try-modify: Permission denied
+$ echo qwq | sudo tee try-modify
+$ cat try-modify
+> qwq
+```
+
+
+$$\pagebreak$$
+
+## Topic 2: shell tools and shell scripting
+
+
