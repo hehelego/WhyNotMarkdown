@@ -163,8 +163,8 @@ map <C-V> "+gP
   不要配置`~/.config/fontconfig/local.conf`,有`/etc/fonts/local.conf`的全局设定就够了.  
   如果有DE的话,还需要在DE中设置gui应用的字体,尽量和fontconfig的配置保持一致.   
   
-- 使用arch的官方源安装texlive之后使用不了tlmgr管理CTAN包,这是个官方软件源bug,按照arch wiki上面[Texlive-tlmgr](https://wiki.archlinux.org/index.php/TeX_Live#tlmgr)修改配置即可,记得让tlmgr使用国内的CTAN镜像.**这里最好直接去tuna mirrors上面找texlive的最新版本iso来安装.**  
-  **不要在bashrc,config.fish中配置MANPATH,只要配置了PATH就可以正常的被mandb索引到了,修改MANPATH会出现奇怪问题**  
+- 使用arch的官方源安装texlive之后使用不了tlmgr管理CTAN包,这是个官方软件源bug,按照arch wiki上面[Texlive-tlmgr](https://wiki.archlinux.org/index.php/TeX_Live#tlmgr)修改配置即可,记得让tlmgr使用国内的CTAN镜像.  
+  **这里最好直接去tuna mirrors上面找texlive的最新版本iso来安装.** 使用GUI installer需要`perl-tk`.把`add symbolic link`勾选上,这样就不用修改path了,正常让它安装完了就能使用了,不用再配置PATH之类的环境变量了.  
   
 - 字体配置推荐,无脑`Noto Sans CJK Sc`即可,个人体验来讲`Noto Sans`比`Source Sans`好一些,`Serif`字体不太习惯.对于等宽的编程字体,推荐`Source Code Pro`和`Liberation Mono`
 
