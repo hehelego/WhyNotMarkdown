@@ -205,6 +205,7 @@ map <C-V> "+gP
 - how to show installed AUR packages? `pacman -Qm / pacman -Q --foreign`,原理如下.
 > Restrict or filter output to packages that were not found in the sync database(s). Typically these are packages that were downloaded manually and installed
 with --upgrade.
+- 比较新的gdb中加入了`layout src`,`highlighting`,`struct pretty print`等features,使用更加便捷了,此外还有cgdb这个TUI应用,更加方便易用.
 
 
 
