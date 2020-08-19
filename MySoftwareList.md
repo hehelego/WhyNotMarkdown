@@ -70,7 +70,7 @@
 * `the_silver_search/ag`(a code-searching tool)
 * nmtui(network manager TUI)
 * screenkey+simplescreenrecorder+kdenlive
-* wine(for AURs deepin-wine-qq,deepin-wine-wechat)
+* wine(for AURs deepin.com.qq.office,deepin-wine-wechat **deepin-wine和virtualbox的效果没法比,如果性能足够,还是使用虚拟机**)
 * kolourpaint(alternative to mspaint)
 
 
@@ -151,6 +151,13 @@ map <C-V> "+gP
   使用rime时可以按`<F4>`快速进行配置(简体繁体转化,全角半角转换等).
 - 安装的基于wine移植的应用启动不了?也许是改变了安装目录,没有按照默认配置安装,找到这个应用的启动脚本(一般是在`/opt/deepinwine/apps/Deepin-{appname}/run.sh`),其中的`CallApp()`函数中`env WINEPREFIX=$WINEPREFIX$.....`一行中把应用的实际安装路径(最好用绝对路径)写入即可.
 - 某些wine应用在非Gnome环境下需要`xsettingsd`,安装并且把它加入`kde-autostart`即可.
+- 关于deepin wine qq/wechat/tim不能查看图片(2020.7.16)
+  - ipv6有一点问题,导致连不上腾讯的图片cdn,需要做一个本机的http proxy.
+  - 安装`privoxy`,之后`systemctl enable,start`启动服务(manjaro的init是systemd,不是用systemd的话略有区别).
+  - qq/wechat/tim登陆的时候配置http代理.默认是`http://127.0.0.1:8118`
+  - 有其他问题,自行查阅`man privoxy`查找对应的配置文件进行修改...
+  - 请自行找`/etc/privoxy/config`里面的内容过滤,搜素`toggle`把它们都关掉.
+  - 还不行的话只能暂时禁用ipv6...或者virtualbox装个windows虚拟机跑了.
 - ==(DE/WM字体配置看这里)==需要调整fontconfig,locale,参考arch wiki.也可以在DE的`system settings`中直接设置.  
   **对于manjaro-kde用户而言,可以不用任何配置直接使用;CJK fonts fallback需要手动设置一下,让SC优先级高于JP即可**  
 - 字体配置推荐,无脑`Noto Sans CJK Sc`即可,个人体验来讲`Noto Sans`比`Source Sans`好一些,`Serif`字体不太习惯.对于等宽的编程字体,推荐`Source Code Pro`和`Liberation Mono`.具体而言`noto-fonts,noto-fonts-{cjk,emoji,extra,compat}`
@@ -166,13 +173,6 @@ map <C-V> "+gP
   - 插件管理器推荐`vim-plug`在github可以找到它.
   - `:set hlsearch`使得vim给搜索匹配的文本加上高亮.搜索结束,暂时取消高亮用`:noh`即可.
   - 推荐插件:`nerdtree`,`nerdcommenter`,`indentLine`,`vim-airline`,`vim-startify`
-- 关于deepin wine qq/wechat/tim不能查看图片(2020.7.16)
-  - ipv6有一点问题,导致连不上腾讯的图片cdn,需要做一个本机的http proxy.
-  - 安装`privoxy`,之后`systemctl enable,start`启动服务(manjaro的init是systemd,不是用systemd的话略有区别).
-  - qq/wechat/tim登陆的时候配置http代理.默认是`http://127.0.0.1:8118`
-  - 有其他问题,自行查阅`man privoxy`查找对应的配置文件进行修改...
-  - 请自行找`/etc/privoxy/config`里面的内容过滤,搜素`toggle`把它们都关掉.
-  - 还不行的话只能暂时禁用ipv6...或者virtualbox装个windows虚拟机跑了.
 - 关于pandoc+xelatex下的`markdown+latex -> tex -> pdf`工作流.
   - 需要修改pandoc的转换模板,使得`markdown->tex`时具有正常的文档结构和设定的常用包以及字体配置.
   - 推荐使用[link:Eisvogel](https://github.com/Wandmalfarbe/pandoc-latex-template)这个LaTeX模板.参考他们的readme就可以正常使用了(参考命令`pandoc note.md -o book.pdf  --template eisvogel --listings --pdf-engine=xelatex`).我把我定制的eisvogel模板,以及编译脚本都放到了staic目录下面
