@@ -8,7 +8,7 @@
 * gtkhash
 * 7zip(gui frontend:ark,gnome archive manager)
 * telegram
-* v2ray+shadowsocks(for proxy)
+* v2ray(`sudo pacman -S v2ray qv2ray`)
 * git
 * vim/neovim(with vim-plug)
 * GNU toolchain(gcc,g++,gdb,make...) (via `sudo pacman -S base-devel`,`sudo pacman -S gdb`)
@@ -185,6 +185,7 @@ map <C-V> "+gP
 with --upgrade.
 
 - 比较新的gdb中加入了`layout src`,`highlighting`,`struct pretty print`等features,使用更加便捷了,此外还有cgdb这个前端,更加方便易用.
+- [v2ray proxy配置](https://qv2ray.net/),[github:qv2ray](https://github.com/Qv2ray/Qv2ray),[github:qv2ray-docs](https://github.com/Qv2ray/qv2ray.github.io)几乎是无脑配置. 代理路线推荐`JustMySocks`,国内有人做镜像/反响代理站可以正常访问,而且支持`Alipay(支付宝)`付款.
 
 
 
