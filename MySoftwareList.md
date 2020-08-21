@@ -159,7 +159,7 @@ map <C-V> "+gP
   - 请自行找`/etc/privoxy/config`里面的内容过滤,搜素`toggle`把它们都关掉.
   - 还不行的话只能暂时禁用ipv6...或者virtualbox装个windows虚拟机跑了.
 - ==(DE/WM字体配置看这里)==需要调整fontconfig,locale,参考arch wiki.也可以在DE的`system settings`中直接设置.  
-  **对于manjaro-kde用户而言,可以不用任何配置直接使用;CJK fonts fallback需要手动设置一下,让SC优先级高于JP即可**  
+  **对于manjaro-kde用户而言,可以不用任何配置直接使用;CJK fonts fallback需要手动设置一下,让SC优先级高于JP即可(参考arch wiki)**  
 - 字体配置推荐,无脑`Noto Sans CJK Sc`即可,个人体验来讲`Noto Sans`比`Source Sans`好一些,`Serif`字体不太习惯.对于等宽的编程字体,推荐`Source Code Pro`和`Liberation Mono`.具体而言`noto-fonts,noto-fonts-{cjk,emoji,extra,compat}`
 - 使用arch的官方源安装texlive之后使用不了tlmgr管理CTAN包,这是个官方软件源bug,按照arch wiki上面[Texlive-tlmgr](https://wiki.archlinux.org/index.php/TeX_Live#tlmgr)修改配置即可,记得让tlmgr使用国内的CTAN镜像.  
   **这里最好直接去tuna mirrors上面找texlive的最新版本iso来安装.** 使用GUI installer需要`perl-tk`.把`add symbolic link`勾选上,这样就不用修改path了,正常让它安装完了就能使用了,不用再配置PATH之类的环境变量了.  
