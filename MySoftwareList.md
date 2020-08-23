@@ -5,7 +5,6 @@
 * LibreOffice
 * VLC
 * ffmpeg
-* gtkhash
 * 7zip(gui frontend:ark,gnome archive manager)
 * telegram
 * v2ray(`sudo pacman -S v2ray qv2ray`)
@@ -27,6 +26,7 @@
 * etcher
 * graphviz
 * scrcpy
+* docker
 
 
 ### windows
@@ -59,6 +59,8 @@
 * yay(for aur)
 * alacritty(a better terminal emulator)
 * konsole
+* gedit+kate
+* gtkhash
 * tmux
 * fish
 * fzf
@@ -70,8 +72,9 @@
 * `the_silver_search/ag`(a code-searching tool)
 * nmtui(network manager TUI)
 * screenkey+simplescreenrecorder+kdenlive
-* wine(for AURs deepin.com.qq.office,deepin-wine-wechat **deepin-wine和virtualbox的效果没法比,如果性能足够,还是使用虚拟机**)
 * kolourpaint(alternative to mspaint)
+* wine(主要是为了使用QQ,Wechat**wine和virtualbox的体验没法比,如果性能足够,还是使用虚拟机**)
+* tlp(tlp,tlp-rdw) (use tlpui for GUI frontend) (manjaro用户不必手动配置这些东西)
 
 
 
@@ -149,15 +152,14 @@ map <C-V> "+gP
 - [ban掉烦人的beep](https://wiki.archlinux.org/index.php/PC_speaker):在`/etc/modprobe.d/nobeep.conf`写入`blacklist pcspkr`之后reboot即可.
 - ==(输入法看这里)==推荐使用fcitx5框架,rime输入法,luna-pinyin. 参考[archwiki:fcitx5](https://wiki.archlinux.org/index.php/Fcitx5)进行安装,配置即可.  
   使用rime时可以按`<F4>`快速进行配置(简体繁体转化,全角半角转换等).
-- 安装的基于wine移植的应用启动不了?也许是改变了安装目录,没有按照默认配置安装,找到这个应用的启动脚本(一般是在`/opt/deepinwine/apps/Deepin-{appname}/run.sh`),其中的`CallApp()`函数中`env WINEPREFIX=$WINEPREFIX$.....`一行中把应用的实际安装路径(最好用绝对路径)写入即可.
-- 某些wine应用在非Gnome环境下需要`xsettingsd`,安装并且把它加入`kde-autostart`即可.
-- 关于deepin wine qq/wechat/tim不能查看图片(2020.7.16)
+- 关于wine qq/wechat/tim不能查看图片(2020.7.16)
   - ipv6有一点问题,导致连不上腾讯的图片cdn,需要做一个本机的http proxy.
   - 安装`privoxy`,之后`systemctl enable,start`启动服务(manjaro的init是systemd,不是用systemd的话略有区别).
   - qq/wechat/tim登陆的时候配置http代理.默认是`http://127.0.0.1:8118`
   - 有其他问题,自行查阅`man privoxy`查找对应的配置文件进行修改...
   - 请自行找`/etc/privoxy/config`里面的内容过滤,搜素`toggle`把它们都关掉.
   - 还不行的话只能暂时禁用ipv6...或者virtualbox装个windows虚拟机跑了.
+- 关于wine的配置/修复bug主要使用`wincfg,winetricks`,需要注意配置`WINEPREFIX`来制定容器
 - ==(DE/WM字体配置看这里)==需要调整fontconfig,locale,参考arch wiki.也可以在DE的`system settings`中直接设置.  
   **对于manjaro-kde用户而言,可以不用任何配置直接使用;CJK fonts fallback需要手动设置一下,让SC优先级高于JP即可(参考arch wiki)**  
 - 字体配置推荐,无脑`Noto Sans CJK Sc`即可,个人体验来讲`Noto Sans`比`Source Sans`好一些,`Serif`字体不太习惯.对于等宽的编程字体,推荐`Source Code Pro`和`Liberation Mono`.具体而言`noto-fonts,noto-fonts-{cjk,emoji,extra,compat}`
