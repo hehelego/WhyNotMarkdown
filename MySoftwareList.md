@@ -157,6 +157,8 @@ map <C-V> "+gP
 	- 使用`WINEPREFIX=${path-to-container} WINEARCH={win32,win64} command`指定容器位置和wine运行时架构,默认是`WINEPREFIX~/.wine WINEARCH=win64`.
 	- 使用`wine a-program-built-for-windows.exe`来运行windows应用.
 	- 使用`winecfg`和`wine regedit`(如上配合环境变量设置)对wine进行设置,以及调整注册表.
+	- 需要先做个字体替换才能正常玩
+	- 出现 框框字 问号字 古文字 等等...是字体读取的问题,在命令前面加入`env LC_ALL=zh_CN.gbk / env LC_ALL=zh_CN.UTF-8`即可.
 - 关于wine qq/wechat/tim不能查看图片(2020.7.16)
   - ipv6有一点问题,导致连不上腾讯的图片cdn,需要做一个本机的http proxy.
   - 安装`privoxy`,之后`systemctl enable,start`启动服务(manjaro的init是systemd,不是用systemd的话略有区别).
