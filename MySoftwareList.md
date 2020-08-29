@@ -180,6 +180,7 @@ map <C-V> "+gP
 - 关于vim的一些事情
   - 插件管理器推荐`vim-plug`在github可以找到它.
   - `:set hlsearch`使得vim给搜索匹配的文本加上高亮.搜索结束,暂时取消高亮用`:noh`即可.
+	- `:set foldenable`,`:set foldmethod=manual`开启代码折叠功能. 用`visual-line`模式选中代码块,然后用`:fold`折叠它们. 使用`zc/zo`命令收起/展开.
   - 推荐插件:`nerdtree`,`nerdcommenter`,`indentLine`,`vim-airline`,`vim-startify`
 - 关于pandoc+xelatex下的`markdown+latex -> tex -> pdf`工作流.
   - 需要修改pandoc的转换模板,使得`markdown->tex`时具有正常的文档结构和设定的常用包以及字体配置.
