@@ -9,7 +9,7 @@
 * telegram
 * v2ray(`sudo pacman -S v2ray qv2ray`)
 * git
-* vim/neovim(with vim-plug)
+* vim/neovim(+vim-plug,**coc.nvim**,vim-airline,nerdtree,nerdcommenter)
 * GNU toolchain(gcc,g++,gdb,make...) (via `sudo pacman -S base-devel`,`sudo pacman -S gdb`)
 * python(with pip,virtualenv)
 * rustup
@@ -177,11 +177,11 @@ map <C-V> "+gP
   - fish shell有些配置是不兼容bash的,比如path,manpath之类的,他的配置文件是`~/.config/fish/config.fish`配置的语法也和bash不同...尽量不要用`set -U VAR, set -g VAR`这种会影响全局配置甚至其他shell的配置.
   - bash中的`pacman -S $(cat softwarelist)`在fish中是`pacman -S (cat softwarelist)`.更常见的例子:`rm $(fzf -m)`应替换为`rm (fzf -m)`.
   - 中fish中一些regex的语法和fish shell的语法有冲突,使用单引号来标识他们,比如查询以rc结尾的配置文件应该这么写`ls ~/.config/ | grep 'rc$'`.
-- 关于vim的一些事情
+- 关于vim的一些事情(推荐同时安装vim,neovim;vim zero configuration替代nano做为default text editor,而neovim打造集成开发环境)
   - 插件管理器推荐`vim-plug`在github可以找到它.
-  - `:set hlsearch`使得vim给搜索匹配的文本加上高亮.搜索结束,暂时取消高亮用`:noh`即可.
-	- `:set foldenable`,`:set foldmethod=manual`开启代码折叠功能. 用`visual-line`模式选中代码块,然后用`:fold`折叠它们. 使用`zc/zo`命令收起/展开.
-  - 推荐插件:`nerdtree`,`nerdcommenter`,`indentLine`,`vim-airline`,`vim-startify`
+  - `:termial`分屏出一个终端;`:set cursorcolumn,:set cursorline`提示光标所在col,row;
+  - 通过`set guicursor`来设置光标情况,推荐无脑全用block.
+  - 推荐插件:`nerdtree`,`nerdcommenter`,`indentLine`,`vim-airline`,`vim-startify`,`coc.nvim`
 - 关于pandoc+xelatex下的`markdown+latex -> tex -> pdf`工作流.
   - 需要修改pandoc的转换模板,使得`markdown->tex`时具有正常的文档结构和设定的常用包以及字体配置.
   - 推荐使用[link:Eisvogel](https://github.com/Wandmalfarbe/pandoc-latex-template)这个LaTeX模板.参考他们的readme就可以正常使用了(参考命令`pandoc note.md -o book.pdf  --template eisvogel --listings --pdf-engine=xelatex`).我把我定制的eisvogel模板,以及编译脚本都放到了staic目录下面
