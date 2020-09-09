@@ -51,6 +51,7 @@
 * AlphaROMdiE [link](http://azure.kdays.cn/onekeyunlock/)
 * winCDemu
 
+
 ### linux
 > preferred distro:manjaro  
 > desktop environment:kde  
@@ -75,7 +76,7 @@
 * kolourpaint(alternative to mspaint)
 * wine(主要是为了使用QQ,Wechat**wine和virtualbox的体验没法比,如果性能足够,还是使用虚拟机**)
 * tlp(tlp,tlp-rdw) (use tlpui for GUI frontend) (manjaro用户不必手动配置这些东西)
-
+* cpu-x(for hardware infomation and benchmark)
 
 
 
