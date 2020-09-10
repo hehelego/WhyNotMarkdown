@@ -11,7 +11,7 @@
 * git
 * vim/neovim(+vim-plug,**coc.nvim**,vim-airline,nerdtree,nerdcommenter)
 * GNU toolchain(gcc,g++,gdb,make...) (via `sudo pacman -S base-devel`,`sudo pacman -S gdb`)
-* python(with pip,virtualenv)
+* python(with pip,~~virtualenv~~ pipenv)
 * rustup
 * stack(for haskell toolchain)
 * texlive
