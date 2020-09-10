@@ -58,6 +58,7 @@
 
 * pacman
 * yay(for aur)
+* **timeshift**
 * alacritty(a better terminal emulator)
 * konsole
 * gedit+kate
