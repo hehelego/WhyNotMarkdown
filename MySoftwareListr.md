@@ -86,7 +86,9 @@
 
 ## tips(on Linux)
 > distro:manjaro  
-> de:kde
+> de:kde  
+> shell:fish
+> terminal-theme:gruvbox
 
 - 多看arch wiki/manjaro wiki,多去forum找找解决方案. 网速不够可以试试tuna/sjtug/ustc/aliyun/huawei mirror,以及github/gitlab难以访问时尝试gitee(码云).
 - 虽然linux distro和windows不一样,不用经常reboot,但是reboot还是一个能解决不少问题的方法...当然有时候logout一下再回来,重启一下DE/WM就好了..
