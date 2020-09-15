@@ -9,6 +9,7 @@
 * 7zip(gui frontend:ark,gnome archive manager)
 * telegram
 * v2ray(`sudo pacman -S v2ray qv2ray`)
+* proxychains-ng
 * git
 * vim/neovim(+vim-plug,**coc.nvim**,vim-airline,nerdtree,nerdcommenter)
 * GNU toolchain(gcc,g++,gdb,make...) (via `sudo pacman -S base-devel`,`sudo pacman -S gdb`)
