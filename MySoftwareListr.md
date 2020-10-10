@@ -2,33 +2,27 @@
 
 ### 通用跨平台软件
 * firefox
-* SageMath
+* SageMath+Octave
 * LibreOffice
 * VLC
 * ffmpeg
 * 7zip(gui frontend:ark,gnome archive manager)
 * telegram
-* v2ray(`sudo pacman -S v2ray qv2ray`)
-* proxychains-ng
+* v2ray + proxychains-ng
 * git
 * vim/neovim(+vim-plug,**coc.nvim**,vim-airline,nerdtree,nerdcommenter)
 * GNU toolchain(gcc,g++,gdb,make...) (via `sudo pacman -S base-devel`,`sudo pacman -S gdb`)
-* python(python-pip,~~virtualenv~~ pipenv)
-* rustup
-* stack(for haskell toolchain)
+* python(python,python-pip,~~virtualenv~~ pipenv),rust(rustup,rustc,cargo),haskell(stack),racket(racket,DRracket),coq,agda
 * texlive
 * typora(opensource alternatives: vnote,marktext)
 * pandoc
 * virtualbox
 * aria2
 * qBittorrent
-* motrix(download manager)
-* persepolis(aria2 gui frontend)
 * syncthing
 * etcher
 * graphviz
 * scrcpy
-* docker
 
 
 
@@ -42,7 +36,6 @@
 * alacritty(a better terminal emulator)
 * konsole
 * gedit+kate
-* gtkhash
 * tmux
 * fish
 * fzf
@@ -74,15 +67,11 @@
 * md2pdf\_helper.py (自己写的非常小的脚本,在`github/hehelego/whynotmarkdown/script`中,把它放到`~/.local/bin`里面就可以随处使用了)
 
 ### 浏览器插件
-* charset(automatically detect&change encoding of a page)
-* Tampermonkey
-* OneTab
-* Cookie Quick Manager(on firefox)
-* Firefox(Print Edit We+Save Page We) / chrome(CtrlP print to PDF)
-
-
-
-
+* tampermonkey
+* oneTab
+* auto discard tab
+* cookie quick manager(on firefox)
+* firefox(Print Edit We+Save Page We) / chrome(CtrlP print to PDF)
 
 
 ## tips(on Linux)
