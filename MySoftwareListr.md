@@ -66,12 +66,12 @@
 * rich(pip install rich) [rich.git](https://github.com/willmcgugan/rich)
 * md2pdf\_helper.py (自己写的非常小的脚本,在`github/hehelego/whynotmarkdown/script`中,把它放到`~/.local/bin`里面就可以随处使用了)
 
-### 浏览器插件
+### extensions/plugins for browser
 * tampermonkey
 * oneTab
 * auto discard tab
 * cookie quick manager(on firefox)
-* firefox(Print Edit We+Save Page We) / chrome(CtrlP print to PDF)
+* vimium(vim-mode on firefox)
 
 
 ## tips(on Linux)
