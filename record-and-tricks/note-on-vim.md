@@ -39,3 +39,17 @@
 - `markdown-preview`
 - `vim-latex`
 
+
+## COC.nvim
+
+> reference: [github: coc.nvim](https://github.com/neoclide/coc.nvim)
+
+```shell
+sudo pacman -S nodejs npm
+sudo pacman -S python-pynvim
+sudo npm install -g neovim
+```
+启动neovim,运行`:checkhealth`确认环境正常,可以安装coc.
+
+在`~/.config/nvim/init.vim`的`plugin`中加入`coc.nvim`
+
