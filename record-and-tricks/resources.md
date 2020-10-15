@@ -46,3 +46,10 @@
 - [nju tcs wiki](http://tcs.nju.edu.cn/wiki/index.php/Main_Page)
 - [vfk:一个关于反演的slides](http://vfleaking.blog.uoj.ac/slide/87/)
 
+
+-------------------------
+
+## MISC
+
+- [github stars:hehelego](https://github.com/hehelego?tab=stars)
+- [lshort: short introduction to LaTex](https://www.ctan.org/tex-archive/info/lshort/)

@@ -1,69 +1,77 @@
 ## installed software
 
-### 通用跨平台软件
-* firefox
-* SageMath+Octave
-* LibreOffice
-* VLC
-* ffmpeg
+### base
+
+> distro: manjaro/arch  
+> de: kde  
+> shell: fish  
+> terminal-emulator: alacritty/konsole  
+> font-family: (Noto Sans CJK SC,Source Code Pro,Liberation Mono)
+>
+> package-manager: pacman + yay(AUR manager) ; pip(python) ; cargo(rust) ; stack(haskell) ; tlmgr(texlive) ; npm(nodejs)
+
+### daily use
+
+* fcitx5(with rime,rime-luna-pinyin)
 * 7zip(gui frontend:ark,gnome archive manager)
+* firefox
+* Okular
+* LibreOffice
+* ffmpeg
+* VLC
 * telegram
-* v2ray + proxychains-ng
+* kmail
+* kolourpaint + GIMP + inkspace
+
+### working
+
+* v2ray(gui frontend `qv2ray`) + proxychains-ng
+
+* GNU toolchain(gcc,g++,gdb,make...) (package group `base-devel` and package `gdb`)
 * git
-* vim/neovim(+vim-plug,**coc.nvim**,vim-airline,nerdtree,nerdcommenter)
-* GNU toolchain(gcc,g++,gdb,make...) (via `sudo pacman -S base-devel`,`sudo pacman -S gdb`)
-* python(python,python-pip,~~virtualenv~~ pipenv),rust(rustup,rustc,cargo),haskell(stack),racket(racket,DRracket),coq,agda
+* vim/neovim(with vim-plug,**coc.nvim**)
+* ranger
+* fzf
+* tmux
+
 * texlive
-* typora(opensource alternatives: vnote,marktext)
 * pandoc
+* typora(opensource alternatives: vnote,marktext)
+* SageMath+Octave+Scipy(numpy,pandas,matplotlib,sympy)+Tensorflow/PyTorch/sciket-learn
+
+* python(package `python`,`python-pip`,~~virtualenv~~`pipenv`. **for global installation,use pacman instead of pip**)
+* jupyter/ipython/bpython
+* MISC
+  * rust(rustup,cargo)
+  * haskell(ghc,stack)
+  * racket(racket,DRracket)
+  * coq,agda,idris
+  * `the_silver_search/ag`(a code-searching tool)
+
+
+### MISC
+
+* etcher
+* graphviz
+* scrcpy
+* qemu
 * virtualbox
 * aria2
 * qBittorrent
 * syncthing
-* etcher
-* graphviz
-* scrcpy
-
-
-
-### linux
-> preferred distro:manjaro  
-> desktop environment:kde  
-
-* pacman
-* yay(for aur)
 * **timeshift**
-* alacritty(a better terminal emulator)
-* konsole
-* gedit+kate
-* tmux
-* fish
-* fzf
-* ranger
-* krunner(or albert)
-* filelight(or ncdu)
-* fcitx5(with rime,rime-luna-pinyin)
-* baloo(kde file indexing and searching service)
-* `the_silver_search/ag`(a code-searching tool)
+
+* filelight+ncdu
 * nmtui(network manager TUI)
 * screenkey+simplescreenrecorder+kdenlive
-* kolourpaint(alternative to mspaint)
-* wine(主要是为了使用QQ,Wechat**wine和virtualbox的体验没法比,如果性能足够,还是使用虚拟机**)
+* wine(**wine这种兼容层和原生应用的体验没法比**)
 * tlp(tlp,tlp-rdw) (use tlpui for GUI frontend) (manjaro用户不必手动配置这些东西)
 * cpu-x(for hardware infomation and benchmark)
 
-
-
-
-### 小工具
-* BILIdrive+CDNdrive
-  * [cdn drive-pypi](https://pypi.org/project/CDNDrive/) [cdn drive-git](https://github.com/apachecn/CDNDrive)
-  * [bili drive-pypi](https://pypi.org/project/BiliDriveEx/) [bili drive-git](https://github.com/apachecn/BiliDriveEx)
-  * [ORIGIN-pypi](https://pypi.org/project/BiliDrive/) [ORIGIN-git](https://github.com/Hsury/BiliDrive)
-* YouGet(pip install you-get) [youget.git](https://github.com/soimort/you-get)
-* coursera-dl(pip install coursera-dl) [courseradl.git](https://github.com/coursera-dl/coursera-dl)
-* ipython notebook(pip install ipython)
-* rich(pip install rich) [rich.git](https://github.com/willmcgugan/rich)
+* you-get (pypi)
+* coursera-dli (pypi)
+* BILIdrive+CDNdrive (pypi)
+* rich (pypi)
 * md2pdf\_helper.py (自己写的非常小的脚本,在`github/hehelego/whynotmarkdown/script`中,把它放到`~/.local/bin`里面就可以随处使用了)
 
 ### extensions/plugins for browser
@@ -74,11 +82,9 @@
 * vimium(vim-mode on firefox)
 
 
-## tips(on Linux)
-> distro:manjaro  
-> de:kde  
-> shell:fish
-> terminal-theme:gruvbox
+-----------------------------------------------------------------------
+
+## tips
 
 - 多看arch wiki/manjaro wiki,多去forum找找解决方案. 网速不够可以试试tuna/sjtug/ustc/aliyun/huawei mirror,以及github/gitlab难以访问时尝试gitee(码云).
 - 虽然linux distro和windows不一样,不用经常reboot,但是reboot还是一个能解决不少问题的方法...当然有时候logout一下再回来,重启一下DE/WM就好了..
@@ -135,72 +141,3 @@ with --upgrade.
   如果一个pypi的包是用`pacman`装的,`sudo pacman -Syyu`可以更新,但是用`pip`安装的并不会,需要自己时常手动更新,以及尽量不要全局安装,避免依赖版本冲突(推荐pipenv).`pip list --outdated`来查询可以更新的包.
 
 
-
-
-## LaTeX FAQ
-- 如何换行:直接使用`\\`是无法换行的,需要一个aligned环境才可以用(在aligned环境中需要注意使用`&`来标识对齐位置以及对齐起点),当然,你也可以用equation环境(默认居中对齐,不允许自定义对齐),如果不想要equation环境的自动编号,则用`\begin{equation*} \end{equation*}`代替.
-- 如何使用多行下标:使用`\begin{subarray}{l/r/c} \end{subarray}`创建多行下标的环境,参数标识左/右对齐或者居中(在这个环境中,不可以使用`&`来自定义对齐规则).
-- 为啥我用`p \and q`不行啊? 现在用的是`\land`不少参考资料已经过时了,建议查较近时间段的文档.
-- 关于不等号`\gt \lt`,它们已经被废弃了,现在可以直接用`> <`输入了,其他不等式关系符号基本上没有调整.
-- 为啥我空了一行就行了/不行了? 建议学习latex语法...不要乱用空格和反斜线,以及换行(大概就是:使用`\\`必须在一个允许它的环境;不能直接空行;连续`\\`不会打出空行,要使用`\newline`命令).
-- 使用`\pagebreak,\newpage`命令来换页,不让页面过于臃肿.
-- mathjax的渲染效果和pdflatex,xelatex是有很大不同的...对语法的严格程度也有天壤之别.
-- 编译为pdf的时候可能有`[WARNING] missing font for unicode character XXX`可以试试换其他代替符号,比如`\setminus <-> \backslash`当然这并不靠谱.**本人目前没有找到解决方案**
-
-
-## using git
-
-[git:official site](https://git-scm.com)  
-
-> git is a **distributed version-control system** for tracking changes in source code during software development.  
-> It is designed for coordinating work among programmers, but it can be used to track changes in any set of files.  
-> Its goals include **speed, data integrity, and support for distributed, non-linear workflows**.  
->   
-> git is free and open-source software distributed under the terms of GPL v2.  
->
-> -- from wikipedia:git
-
-- git虽然是分布式版本控制系统,为大规模协作开发而诞生,但是集中式管理,个人开发中仍然可以用得上.
-- git已经是实际上的行业标准(甚至有在IT之外的领域被广泛使用的趋势).
-- 已经有不少vim plugin,shell plugin(比如我喜欢的fish shell)集成了git操作.也有不少TUI,GUI的git client,还有gitlab,gitea,github等webapp提供便利操作.
-
-### git的概念与设计
-- git的分布式管理从实践来看,是比svn的集中式管理更优秀的.
-  - 不需要一个统一管理的中心服务器,可以轻松离线工作,轻松多人协同,不用每次都联网进行pull,update,push还要解决冲突.
-  - 在git中,每个人本地都有完整的版本仓库,把自己做的修改同步给其他人就可以完成协作(当然还需要解决不同修改的冲突).
-  - 为了方便,也可以建立一个中心服务器,不用搭建p2p网络,方便交换数据,比如程序员喜闻乐见的github与gitlab以及国内的gitee都是这种平台.
-- git除了分布式无需中心,方便离线工作的特点,最重要的特性是分支管理,这也是它取代svn的重要原因.
-- 每个版本独立保存(方便了分支管理).
-- 维护`working directory`,`stage `,`repository`(工作区,暂存区,仓库).
-  - 直接操作working dir,此时是隔离其他版本与分支的.
-  - 将改动(插入,删除,修改,移动...)的文件加入stage.
-  - 将stage中的文件,提交到repo.存放所有版本.
-- 文件状态
-  - modified
-  - staged
-  - committed
-
-### git常规操作.
-在一切使用之前,要做基本的配置.
-```bash
-#使用--global flag则会修改`~/.gitconfig`,否则修改当前repo的`.git/.config`
-git config --global user.name $USER_NAME
-git config --global user.email $USER_EMAIL
-
-git config --list #查看已有配置
-```
-- git clone:把远程repo下载到本地,可以用https或者git协议(一般而言这笔直接用http传输文件快很多).
-- git init:在当前目录创建`.git/`初始化git repo
-- git add:把working dir的修改加入stage中,可以指定要加入的文件,也可以`git add -A`
-- git checkout:用stage替代working dir(**危险**操作,谨慎使用)
-- git reset:撤销commit.使用`git reset HEAD`(**危险**操作,谨慎使用),如果是`--hard`则会影响working dir.
-- git commit:把stage提交到repo,使用`git commmit -m "message"`可以附带一个提交说明.(会给出这个commit的全局唯一id,由于是多人协作的,所以需要搞一个全局唯一id标识提交)一个commit就是一个版本.
-- git status:它会返回 当前所在brach,working dir中尚未加入stage的修改(untracked),stage中未提交的修改.
-- git log:查看提交记录
-- git diff:版本比较.
-
-
-
-## stared repositories
-
-[github stars:hehelego](https://github.com/hehelego?tab=stars)
