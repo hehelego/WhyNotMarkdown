@@ -28,13 +28,13 @@
 
 ## plugins
 
-- 插件管理器推荐`vim-plug`在github可以找到它.
-- `nerdtree`,当然有了`fzf.vim`就可扔掉它了
-- `nerdcommenter`
-- `vim-airline`
-- `vim-startify`
+- `vim-plug` 插件管理器
+- `nerdtree` 文件树浏览.当然有了`fzf+ranger`就可扔掉它了
+- `nerdcommenter` 快速注释/反注释
+- `vim-airline` 状态栏
 - `tabular`
 - `fzf.vim`
+- `ranger.vim`
 - `coc.nvim`
 - `markdown-preview`
 - `vim-latex`
@@ -49,7 +49,13 @@ sudo pacman -S nodejs npm
 sudo pacman -S python-pynvim
 sudo npm install -g neovim
 ```
+
 启动neovim,运行`:checkhealth`确认环境正常,可以安装coc.
 
 在`~/.config/nvim/init.vim`的`plugin`中加入`coc.nvim`
+
+参考官方文档即可,先要安装一些基础组建`coc-vimlsp`,`coc-syntax`,'coc-highligt',再来安装各种language server的client.  
+使用`coc-marketplace`来快速查找插件.
+
+
 
