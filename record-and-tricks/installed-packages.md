@@ -32,6 +32,7 @@
 * vim/neovim(with vim-plug,**coc.nvim**)
 * ranger
 * fzf
+* ripgrep
 * `the_silver_search/ag`(a code-searching tool)
 * tmux
 
