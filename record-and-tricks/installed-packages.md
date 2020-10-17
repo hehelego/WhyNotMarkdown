@@ -27,11 +27,12 @@
 
 * v2ray(gui frontend `qv2ray`) + proxychains-ng
 
-* GNU toolchain(gcc,g++,gdb,make...) (package group `base-devel` and package `gdb`)
+* GNU toolchain(compilers,linkers,debuger,build system...) (package group `base-devel` and package `gdb`)
 * git
 * vim/neovim(with vim-plug,**coc.nvim**)
 * ranger
 * fzf
+* `the_silver_search/ag`(a code-searching tool)
 * tmux
 
 * texlive
@@ -39,14 +40,15 @@
 * typora(opensource alternatives: vnote,marktext)
 * SageMath+Octave+Scipy(numpy,pandas,matplotlib,sympy)+Tensorflow/PyTorch/sciket-learn
 
-* python(package `python`,`python-pip`,~~virtualenv~~`pipenv`. **for global installation,use pacman instead of pip**)
+**for global(system-wide) installation,use pacman.** (in order to get packages updated when newer release is available)  
+
+* python(package `python`,`python-pip`,`python-pipenv`)
 * jupyter/ipython/bpython
 * MISC
   * rust(rustup,cargo)
-  * haskell(ghc,stack)
-  * racket(racket,DRracket)
+  * haskell(ghcup,stack,cabal-install)
+  * racket(racket,DrRacket)
   * coq,agda,idris
-  * `the_silver_search/ag`(a code-searching tool)
 
 
 ### MISC
@@ -56,8 +58,7 @@
 * scrcpy
 * qemu
 * virtualbox
-* curl
-* aria2
+* curl,wget,aria2
 * qBittorrent
 * syncthing
 * **timeshift**
@@ -69,13 +70,12 @@
 * tlp(tlp,tlp-rdw) (use tlpui for GUI frontend) (manjaro用户不必手动配置这些东西)
 * cpu-x(for hardware infomation and benchmark)
 
-* you-get (pypi)
-* coursera-dli (pypi)
-* BILIdrive+CDNdrive (pypi)
-* rich (pypi)
-* md2pdf\_helper.py (自己写的非常小的脚本,在`github/hehelego/whynotmarkdown/script`中,把它放到`~/.local/bin`里面就可以随处使用了)
+* you-get (pypi | community/you-get)
+* coursera-dli (pypi | community/coursera-dl)
+* BILIdrive+CDNdrive (pypi. 把公共cdn当成云盘,数据安全警告)
 
 ### extensions/plugins for browser
+
 * tampermonkey
 * oneTab
 * auto discard tab
