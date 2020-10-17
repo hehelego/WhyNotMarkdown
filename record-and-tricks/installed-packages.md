@@ -45,6 +45,7 @@
 * python(package `python`,`python-pip`,`python-pipenv`)
 * jupyter/ipython/bpython
 * MISC
+  * nodejs(nodejs,npm)
   * rust(rustup,cargo)
   * haskell(ghcup,stack,cabal-install)
   * racket(racket,DrRacket)
