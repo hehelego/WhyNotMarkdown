@@ -31,6 +31,7 @@
 * git
 * vim/neovim(with vim-plug,**coc.nvim**)
 * ranger
+* top/htop/bashtop
 * fzf
 * ripgrep
 * `the_silver_search/ag`(a code-searching tool)
@@ -73,7 +74,7 @@
 * cpu-x(for hardware infomation and benchmark)
 
 * you-get (pypi | community/you-get)
-* coursera-dli (pypi | community/coursera-dl)
+* coursera-dl (pypi | community/coursera-dl)
 * BILIdrive+CDNdrive (pypi. 把公共cdn当成云盘,数据安全警告)
 
 ### extensions/plugins for browser
