@@ -1,6 +1,17 @@
 # using LaTeX
 
+## reference/resources
+
+> - [lshort: A short introduction to LaTeX](https://www.ctan.org/tex-archive/info/lshort/),也可以用`texdoc lshort`来获取.
+> - google/bing/baidu
+> - stack overflow/zhihu/quaro
+
+
+
+
 ## LaTeX FAQ
+
+- 使用了中文,为什么编译挂了? 因为需要`xelatex`.
 - 如何换行:直接使用`\\`是无法换行的,需要一个aligned环境才可以用(在aligned环境中需要注意使用`&`来标识对齐位置以及对齐起点),当然,你也可以用equation环境(默认居中对齐,不允许自定义对齐),如果不想要equation环境的自动编号,则用`\begin{equation*} \end{equation*}`代替.
 - 如何使用多行下标:使用`\begin{subarray}{l/r/c} \end{subarray}`创建多行下标的环境,参数标识左/右对齐或者居中(在这个环境中,不可以使用`&`来自定义对齐规则).
 - 为啥我用`p \and q`不行啊? 现在用的是`\land`不少参考资料已经过时了,建议查较近时间段的文档.

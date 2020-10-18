@@ -23,7 +23,8 @@
 - register: (q{a-z},q,@{a-z},N@q{a-z})
 - multi tabs tabnew/tabedit/tabclose/tabnext/tabprevious; vim -p
 - split windows: (split/vertical split : sp/vsp, close/only); (resize/vertical resize : res/vert); Ctrl+W+hjkl;
-- terminal:
+- terminal: 在vim/neovim中有所不同.在neovim中有`terminal mode`使用`(ctrl+\)+(ctrl+N)`来返回`normal mode`
+- ctrl+o: jump back to the previous file
 
 
 ## plugins
