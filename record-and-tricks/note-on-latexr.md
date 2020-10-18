@@ -2,7 +2,7 @@
 
 ## reference/resources
 
-> - [lshort: A short introduction to LaTeX](https://www.ctan.org/tex-archive/info/lshort/),也可以用`texdoc lshort`来获取.
+> - [lshort: A short introduction to LaTeX](https://www.ctan.org/tex-archive/info/lshort/),也可以用`texdoc lshort`来获取.(中文翻译叫`lshort-zh-cn`)
 > - google/bing/baidu
 > - stack overflow/zhihu/quaro
 
@@ -11,6 +11,7 @@
 
 ## LaTeX FAQ
 
+- 推荐使用texlive这个tex发行版,安装参考lshort,lshort-zh-cn.配置tex工作环境还是有些麻烦的.
 - 使用了中文,为什么编译挂了? 因为需要`xelatex`.
 - 如何换行:直接使用`\\`是无法换行的,需要一个aligned环境才可以用(在aligned环境中需要注意使用`&`来标识对齐位置以及对齐起点),当然,你也可以用equation环境(默认居中对齐,不允许自定义对齐),如果不想要equation环境的自动编号,则用`\begin{equation*} \end{equation*}`代替.
 - 如何使用多行下标:使用`\begin{subarray}{l/r/c} \end{subarray}`创建多行下标的环境,参数标识左/右对齐或者居中(在这个环境中,不可以使用`&`来自定义对齐规则).
