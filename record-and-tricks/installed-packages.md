@@ -115,6 +115,7 @@
 - ==(DE/WM字体配置看这里)==需要调整fontconfig,locale,参考arch wiki.也可以在DE的`system settings`中直接设置.  
   **对于manjaro-kde用户而言,可以不用任何配置直接使用;CJK fonts fallback需要手动设置一下,让SC优先级高于JP即可(参考arch wiki)**  
 - 字体配置推荐,无脑`Noto Sans CJK Sc`即可,个人体验来讲`Noto Sans`比`Source Sans`好一些,`Serif`字体不太习惯.对于等宽的编程字体,推荐`Source Code Pro`和`Liberation Mono`.具体而言`noto-fonts,noto-fonts-{cjk,emoji,extra,compat}`
+<<<<<<< HEAD
 - 中文字体(CJK-SC)fallback到日文字体,解决方法参考[menci在zhihu上面的这个回答](https://www.zhihu.com/question/47141667).  
   > `sudo vim /etc/fonts/conf.d/64-language-selector-prefer.conf `  
   > ```xml
@@ -139,6 +140,8 @@
   >	</fontconfig>
   > ```
 
+=======
+>>>>>>> refs/remotes/origin/master
 - KDE中`display>scaling`缩放,如果不是整数倍则会有bug.屏幕上可能会无端出现一根白线,并且icon及font的渲染都会有问题.
 - 选择困难症?不妨看看[arch wiki:general recommendation](),[arch wiki:List of applications/Utilities]()
 - 关于fish shell的一些事情
