@@ -33,7 +33,7 @@
 - `nerdtree` 文件树浏览.当然有了`fzf+ranger`就可扔掉它了
 - `nerdcommenter` 快速注释/反注释
 - `vim-airline` 状态栏
-- `tabular`
+- `vim-easy-align`
 - `fzf.vim`
 - `ranger.vim`
 - `coc.nvim`
