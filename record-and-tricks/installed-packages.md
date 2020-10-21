@@ -70,7 +70,6 @@
 * nmtui(network manager TUI)
 * screenkey+simplescreenrecorder+kdenlive
 * wine(**wine这种兼容层和原生应用的体验没法比**)
-* tlp(tlp,tlp-rdw) (use tlpui for GUI frontend) (manjaro用户不必手动配置这些东西)
 * cpu-x(for hardware infomation and benchmark)
 
 * you-get (pypi | community/you-get)
