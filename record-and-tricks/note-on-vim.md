@@ -34,6 +34,7 @@
 - `nerdcommenter` 快速注释/反注释
 - `vim-airline` 状态栏
 - `vim-easy-align`
+- 'vim-tabular'
 - `fzf.vim`
 - `ranger.vim`
 - `coc.nvim`
