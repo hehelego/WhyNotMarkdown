@@ -31,6 +31,7 @@
 * git
 * vim/neovim(with vim-plug,**coc.nvim**)
 * ranger
+* broot
 * top/htop/bashtop
 * fzf
 * ripgrep
