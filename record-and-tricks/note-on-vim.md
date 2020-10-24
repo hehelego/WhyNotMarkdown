@@ -33,13 +33,12 @@
 - `nerdtree` 文件树浏览.当然有了`fzf+ranger`就可扔掉它了
 - `nerdcommenter` 快速注释/反注释
 - `vim-airline` 状态栏
-- `vim-easy-align`
-- 'vim-tabular'
-- `fzf.vim`
-- `ranger.vim`
-- `coc.nvim`
-- `markdown-preview`
-- `vim-latex`
+- `vim-easy-align` 快速对齐
+- 'vim-tabular' 快速对齐
+- `fzf.vim` 把fzf集成入vim
+- `ranger.vim` 把ranger集成入vim
+- `coc.nvim` COC插件体系,用于LSP支持.
+- `markdown-preview.nvim` full-featured real-time markdown preview plugin
 
 
 ## COC.nvim
