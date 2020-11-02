@@ -39,6 +39,7 @@
 - `ranger.vim` 把ranger集成入vim
 - `coc.nvim` COC插件体系,用于LSP支持.
 - `markdown-preview.nvim` full-featured real-time markdown preview plugin
+- `undotree` 可视化文件内容变动记录
 
 
 ## COC.nvim
