@@ -379,15 +379,11 @@ $$
 $$
 \begin{aligned}
 &A=\begin{bmatrix}a_1&a_2\dots &a_n\end{bmatrix}\quad B=\begin{bmatrix}b_1&b_2\dots &b_n\end{bmatrix}\\
-&\mathrm{col}(A)\cap \mathrm{col}(B)\\
+&\mathrm{col}(A)\cap \mathrm{col}(B)=\mathrm{null}(\begin{bmatrix}a_1&a_2\dots a_n&-b_1&-b_2\dots -b_n\end{bmatrix})\\
 \newline\\
-&x\in \mathrm{col}(A)\cap \mathrm{col}(B)\iff \exist y_1,y_2\text{ s.t. }x=Ay_1=By_2\\
-&Ay_1-By_2=0\quad \begin{bmatrix}A\mid -B\end{bmatrix}\begin{bmatrix}y_1\\y_2\end{bmatrix}\\
+&x\in \mathrm{col}(A)\cap \mathrm{col}(B)\iff \exist y_1,y_2\text{ s.t. }x=Ay_1=By_2,Ay_1-By_2=0
 \end{aligned}
 $$
-
-我们求出$\begin{bmatrix}A\mid -B\end{bmatrix}$的null space的basis,  
-是一些$\mathbb{R}^{2n}$的vector,每个vector取前一半,再左乘上$A$,就是$\mathbb{col}(A)\cap \mathbb{col}(B)$的basis了.  
 
 
 
