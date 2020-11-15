@@ -37,6 +37,7 @@
 * ripgrep
 * `the_silver_search/ag`(a code-searching tool)
 * tmux
+* tldr
 
 * texlive
 * pandoc
@@ -69,6 +70,7 @@
 
 * filelight+ncdu
 * nmtui(network manager TUI)
+* iwd+iwctl
 * screenkey+simplescreenrecorder+kdenlive
 * wine(**wine这种兼容层和原生应用的体验没法比**)
 * cpu-x(for hardware infomation and benchmark)
