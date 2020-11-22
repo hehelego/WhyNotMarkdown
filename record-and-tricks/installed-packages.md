@@ -3,7 +3,7 @@
 ### base
 
 > distro: manjaro/arch  
-> de: kde  
+> de: kde / wm: i3
 > shell: fish  
 > terminal-emulator: alacritty/konsole  
 > font-family: (Noto Sans CJK SC,Source Code Pro,Liberation Mono)

@@ -83,3 +83,6 @@ with --upgrade.
 > - ctrl+D: `EOF`(send EOF to stdin)
 > - ctrl+Z: suspend(send `SIGTSTP`)
 > - jobs/bg/fg: show current jobs;resume one suspended job in the backgroud;resume one suspended job in the foreground (for fish shell,try `fg nvim+<TAB>` to resume neovim)
+
+
+
