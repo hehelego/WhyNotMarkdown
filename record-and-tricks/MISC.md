@@ -86,3 +86,18 @@ with --upgrade.
 
 
 
+- 关于i3(或者sway)  
+	- 目前(2020年11月)wayland还不是完全可用,并且生态也没有完全构建起来,与X的兼容方案Xwayland也有不少严重bug. 所以可以等等,但是发展趋势还是不错的.
+	- 平铺窗口管理器中,i3/sway是我最喜欢的. 文档清晰,配置简洁.  
+	- 推荐使用一个display manager来管理desktop session而不是直接startx/xinit启动.来自KDE的SDDM非常棒,我目前使用的是它.
+	- i3是没有compositor,需要自己搞一个,推荐compton(现在是picom). sway则不需要这些.  
+	- 需要其他软件来显示桌面壁纸,目前i3可以选择feh,而sway有swaybg.
+	- 需要另外搞一个application launcher,可以选krunner,albert,rofi等.
+	- 默认的status bar可能不太够用,可以试试polybar,swaybar
+	- 高分辨率需要调节DPI,scaling等参数. 查arch wiki,i3 user manual以及各种forum即可.
+	- i3lock直接用效果不好,也没有自动休眠之类的东西...可以自己写脚本来解决,但是比较困难. 
+	- i3的`$mod+h,$mod+v`用来控制分屏方式,所以移动`hjkl`缺了一个键,推荐不用`jkl;`,直接使用方向键即可(如果是67键的键盘就比较困难了... )
+	- 慎用`exec_always`...
+
+
+
