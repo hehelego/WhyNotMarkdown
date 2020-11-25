@@ -22,9 +22,10 @@
 
 - register: (q{a-z},q,@{a-z},N@q{a-z})
 - multi tabs tabnew/tabedit/tabclose/tabnext/tabprevious; vim -p
-- split windows: (split/vertical split : sp/vsp, close/only); (resize/vertical resize : res/vert); Ctrl+W+hjkl;
+- split windows: (split/vertical split : sp/vsp, close/only); (resize/vertical resize : res/vert); Ctrl+w+hjkl;
 - terminal: 在vim/neovim中有所不同.在neovim中有`terminal mode`使用`(ctrl+\)+(ctrl+N)`来返回`normal mode`
 - ctrl+o: jump back to the previous file
+- ctrl+d/ctrl+u: page down/page up
 
 
 ## plugins
@@ -32,15 +33,16 @@
 - `vim-plug` 插件管理器
 - `nerdtree` 文件树浏览.当然有了`fzf+ranger`就可扔掉它了
 - `nerdcommenter` 快速注释/反注释
+- `vim-startify` 更好的启动界面
 - `vim-airline` 状态栏
 - `vim-easy-align` 快速对齐
-- 'vim-tabular' 快速对齐
-- `fzf.vim` 把fzf集成入vim
+- `vim-tabular` 快速对齐
+- `fzf.vim` 把fzf集成入vim,提供了`:Files,:Ag,:Rg`分别对应fzf,the silver search,ripgrep还有一大堆工具的集成.  
 - `ranger.vim` 把ranger集成入vim
-- `coc.nvim` COC插件体系,用于LSP支持.
-- `markdown-preview.nvim` full-featured real-time markdown preview plugin
+- `markdown-preview.nvim` full-featured real-time markdown preview plugin,命令是`:MarkdownPreview,:MarkdownPreviewStop`
 - `undotree` 可视化文件内容变动记录
-
+- `suda.vim` 不必再使用sudo启动vim,把sudo集成到vim中.
+- `coc.nvim` COC插件体系,用于LSP支持.
 
 ## COC.nvim
 
