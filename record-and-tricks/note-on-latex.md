@@ -27,4 +27,5 @@
 - 使用`\pagebreak,\newpage`命令来换页,不让页面过于臃肿.
 - mathjax的渲染效果和pdflatex,xelatex是有很大不同的...对语法的严格程度也有天壤之别.
 - 编译为pdf的时候可能有`[WARNING] missing font for unicode character XXX`可以试试换其他代替符号,比如`\setminus <-> \backslash`当然这并不靠谱.**本人目前没有找到解决方案**
+- $\hat{x},\underline{test},\overline{XY}$
 
