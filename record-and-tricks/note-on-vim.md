@@ -26,6 +26,7 @@
 - terminal: 在vim/neovim中有所不同.在neovim中有`terminal mode`使用`(ctrl+\)+(ctrl+N)`来返回`normal mode`
 - ctrl+o: jump back to the previous file
 - ctrl+d/ctrl+u: page down/page up
+- search: `/regex`,`?regex` for forward/backward search,  `/regex\C,/regex\c` for case sensitive/insensitive. `*,#` to search forward/backward the word under cursor.
 
 
 ## plugins
