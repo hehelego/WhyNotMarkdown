@@ -27,6 +27,7 @@
 - ctrl+o: jump back to the previous file
 - ctrl+d/ctrl+u: page down/page up
 - search: `/regex`,`?regex` for forward/backward search,  `/regex\C,/regex\c` for case sensitive/insensitive. `*,#` to search forward/backward the word under cursor.
+- ctrl+a/ctrl+x: increase/decrease the number under the cursor.
 
 
 ## plugins
