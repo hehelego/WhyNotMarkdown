@@ -23,7 +23,7 @@
 - register: (q{a-z},q,@{a-z},N@q{a-z})
 - multi tabs tabnew/tabedit/tabclose/tabnext/tabprevious; vim -p
 - split windows: (split/vertical split : sp/vsp, close/only); (resize/vertical resize : res/vert); Ctrl+w+hjkl;
-- terminal: 在vim/neovim中有所不同.在neovim中有`terminal mode`使用`(ctrl+\)+(ctrl+N)`来返回`normal mode`
+- terminal: 在vim/neovim中有所不同.在neovim中有`terminal mode`使用`(ctrl+\)+(ctrl+n)`来返回`normal mode`
 - ctrl+o: jump back to the previous file
 - ctrl+d/ctrl+u: page down/page up
 - search: `/regex`,`?regex` for forward/backward search,  `/regex\C,/regex\c` for case sensitive/insensitive. `*,#` to search forward/backward the word under cursor.
