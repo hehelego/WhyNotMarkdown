@@ -12,7 +12,6 @@
 - github: awesome vim
 - [neovim user manual](https://neovim.io/doc/user/)
 - a byte of vim
-- vimium(vim-mode browser)
 
 ## config
 
@@ -28,6 +27,9 @@
 - ctrl+d/ctrl+u: page down/page up
 - search: `/regex`,`?regex` for forward/backward search,  `/regex\C,/regex\c` for case sensitive/insensitive. `*,#` to search forward/backward the word under cursor.
 - ctrl+a/ctrl+x: increase/decrease the number under the cursor.
+
+> - use `vimnium` extension/plugin to enable vim-mode in a browser.  
+> - use `ctrl+shift+space/i` to enter/escape vim-mode in alacritty(a fancy terminal emulator)
 
 
 ## plugins
