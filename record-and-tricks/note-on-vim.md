@@ -27,6 +27,7 @@
 - ctrl+d/ctrl+u: page down/page up
 - search: `/regex`,`?regex` for forward/backward search,  `/regex\C,/regex\c` for case sensitive/insensitive. `*,#` to search forward/backward the word under cursor.
 - ctrl+a/ctrl+x: increase/decrease the number under the cursor.
+- when cursor on `{([`, press `%` to jump to the matched bracket.
 
 > - use `vimnium` extension/plugin to enable vim-mode in a browser.  
 > - use `ctrl+shift+space/i` to enter/escape vim-mode in alacritty(a fancy terminal emulator)
