@@ -78,7 +78,8 @@ journalctl中包含`USBC`相关的错误信息.
 
 ## CJK font selection error
 
-> 字体配置是个有些麻烦的事情`hiting,aliasing,bitmap,dpi`会有不少问题.也许交给DE是个更好的选择.  
+> 字体配置是个有些麻烦的事情`hiting,aliasing,bitmap,dpi`会有不少问题.也许交给DE是个更好的选择.   
+> 有些应用不认fontconfig,需要专门配置,比如firefox/alacritty.
 
 ### 问题描述
 
