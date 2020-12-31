@@ -6,9 +6,10 @@
 > - DE: KDE plasma / i3wm
 
 > 一些redminder  
-> - 学会使用搜索引擎. arch wiki,arch forum,StackOverflow,UnixStackExchange,github,网友blog...到处都是资料  
+> - 学会使用搜索引擎. arch wiki,arch forum,StackOverflow,UnixStackExchange,github,网友blog...到处都是资料.
 > - arch是rolling release, 记得每天`sudo pacman -Syu`,记得即使更换掉过时软件包.
-> - re-boot/re-login/restart xorg都有可能游泳
+> - 任何更新都可能影响之前的解决方案,尽量查阅第一手资料,确保时效性.
+> - re-boot/re-login/restart xorg都有可能有用.
 
 
 [TOC]
@@ -77,25 +78,62 @@ journalctl中包含`USBC`相关的错误信息.
 
 ## CJK font selection error
 
+> 字体配置是个有些麻烦的事情`hiting,aliasing,bitmap,dpi`会有不少问题.也许交给DE是个更好的选择.  
 
 ### 问题描述
 
-使用Noto Sans/Serif CJK时,一些字型不正常.   
-比如`门`上出现了奇怪的一竖  
+使用Noto Sans/Serif CJK时,一些字型不正常.  
+比如`门 关 复`
 
 ### 参考信息
 
+CJK字符一般会区分SC,TC,JP,KR(简中,繁中,日文,韩文),而选择使用那种由fontconfig控制  
+fontconfig中对于CJK字型选取的默认设置不符合预期,需要手写一个fontconfig配置文件.  
+
 - [zhihu: 如何正确为NotoSansCJK配置fontconfig使中文不会被显示为日文字型](https://www.zhihu.com/question/47141667)
-- [arch wiki: font configuartion (中文翻译)](https://wiki.archlinux.org/index.php/Font_configuration_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
-- [arhch wiki: fonts (中文翻译)](https://wiki.archlinux.org/index.php/Fonts_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
 - [arch wiki: font configuartion](https://wiki.archlinux.org/index.php/Font_configuration)
 - [arch wiki: fonts](https://wiki.archlinux.org/index.php/Fonts)
+- [arch wiki: example for FCfile](https://wiki.archlinux.org/index.php/Font_configuration/Examples)
+- [arch wiki: localization/simplified chinese](https://wiki.archlinux.org/index.php/Localization/Simplified_Chinese)
 
 
 ### 解决方案
 
-***试探中todo***
+可以在`~/.config/fontconfig/fonts.conf`或者`/etc/fonts/local.conf`中写入配置.  
 
+```xml
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+<fontconfig>
+        <alias>
+                <family>sans-serif</family>
+                <prefer>
+                        <family>Noto Sans CJK SC</family>
+                        <family>Noto Sans CJK TC</family>
+                        <family>Noto Sans CJK JP</family>
+                        <family>Noto Sans CJK KR</family>
+                </prefer>
+        </alias>
+        <alias>
+                <family>serif</family>
+                <prefer>
+                        <family>Noto Serif CJK SC</family>
+                        <family>Noto Serif CJK TC</family>
+                        <family>Noto Serif CJK JP</family>
+                        <family>Noto Serif CJK KR</family>
+                </prefer>
+        </alias>
+        <alias>
+                <family>monospace</family>
+                <prefer>
+                        <family>Noto Sans Mono CJK SC</family>
+                        <family>Noto Sans Mono CJK TC</family>
+                        <family>Noto Sans Mono CJK JP</family>
+                        <family>Noto Sans Mono CJK KR</family>
+                </prefer>
+        </alias>
+</fontconfig>
+```
 
 
 ------------------------------------

@@ -15,13 +15,15 @@
 * fcitx5(with rime,rime-luna-pinyin)
 * 7zip(gui frontend:ark,gnome archive manager)
 * firefox
-* Okular
+* dolphin
+* okular
 * LibreOffice
 * ffmpeg
 * VLC
 * telegram
 * kmail
 * kolourpaint + GIMP + inkspace
+* aspell
 
 ### working
 
