@@ -42,9 +42,9 @@
 * texlive
 * pandoc
 * typora(opensource alternatives: vnote,marktext)
-* SageMath+Octave+Scipy(numpy,pandas,matplotlib,sympy)+Tensorflow/PyTorch/sciket-learn
+* SageMath+Octave+Scipy(numpy,pandas,matplotlib,sympy) ~~and Tensorflow/PyTorch/sciket-learn~~
 
-**for global(system-wide) installation,use pacman.** (in order to get packages updated when newer release is available)  
+**for global(system-wide) installation,use pacman. instead of pip/cargo/npm** (so that `pacman -Syu` will update them, otherwise manually update is required)  
 
 * python(package `python`,`python-pip`,`python-pipenv`)
 * jupyter/ipython/bpython
@@ -68,12 +68,13 @@
 * syncthing
 * **timeshift**
 
-* filelight+ncdu
+* ncdu
 * nmtui(network manager TUI)
 * iwd+iwctl
 * screenkey+simplescreenrecorder+kdenlive
-* wine(**wine这种兼容层和原生应用的体验没法比**)
 * cpu-x(for hardware infomation and benchmark)
+* s-tui(cpu monitoring&stress cpu)
+* radeontop(monitoring AMD GPU)
 
 * you-get (pypi | community/you-get)
 * coursera-dl (pypi | community/coursera-dl)

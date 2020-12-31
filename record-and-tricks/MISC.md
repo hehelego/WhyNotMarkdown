@@ -1,32 +1,8 @@
-> ~~这是我作为一名长者,给你们的人生经验~~
-
-
-- 多看arch wiki/manjaro wiki,多去forum找找解决方案. 网速不够可以试试tuna/sjtug/ustc/aliyun/huawei mirror,以及github/gitlab难以访问时尝试gitee(码云).
-- 虽然linux distro和windows不一样,不用经常reboot,但是reboot还是一个能解决不少问题的方法...当然有时候logout一下再回来,重启一下DE/WM就好了..
-- manjaro是滚动发行版,可能出现新问题,旧问题可能被消除,解决方案可能会失效,尽量自己找第一手信息.
-- manjaro特色之一: mhwd,有`mhwd-tui,mhwd`分别对应TUI和CLI,可以轻松配置driver,kernel.
-- 换中国境内的软件源`sudo pacman-mirrors -i -c China -m rank`,也可以和arch一样直接编辑`/etc/pacman.conf /etc/pacman.d/mirrorlist`全球镜像列表自行去manjaro/arch官网找.
-- [ban掉烦人的beep](https://wiki.archlinux.org/index.php/PC_speaker):在`/etc/modprobe.d/nobeep.conf`写入`blacklist pcspkr`之后reboot即可.
-- ==(输入法看这里)==推荐使用fcitx5框架,rime输入法,luna-pinyin. 参考[archwiki:fcitx5](https://wiki.archlinux.org/index.php/Fcitx5)进行安装,配置即可.  
+- 字体配置推荐,无脑`Noto Sans CJK SC`即可,个人体验来讲`Noto Sans`比`Source Sans`好一些,`Serif`字体不太习惯.对于等宽的编程字体,推荐`Source Code Pro`和`Liberation Mono`.具体而言`noto-fonts,noto-fonts-{cjk,emoji,extra,compat}`
+- 输入法input method:推荐使用fcitx5框架,rime输入法,luna-pinyin. 参考[archwiki:fcitx5](https://wiki.archlinux.org/index.php/Fcitx5)进行安装,配置即可.  
   使用rime时可以按`<F4>`快速进行配置(简体繁体转化,全角半角转换等).
-- 使用wine,参考[arch wiki:wine](https://wiki.archlinux.org/index.php/Wine)
-	- 安装`wine wine-mono wine-gecko winetricks`.
-	- 使用`WINEPREFIX=${path-to-container} WINEARCH={win32,win64} command`指定容器位置和wine运行时架构,默认是`WINEPREFIX~/.wine WINEARCH=win64`.
-	- 使用`wine a-program-built-for-windows.exe`来运行windows应用.
-	- 使用`winecfg`和`wine regedit`(如上配合环境变量设置)对wine进行设置,以及调整注册表.
-	- 需要先做个字体替换才能正常玩
-	- 出现 框框字 问号字 古文字 等等...是字体读取的问题,在命令前面加入`env LC_ALL=zh_CN.gbk / env LC_ALL=zh_CN.UTF-8`即可.
-- 关于wine qq/wechat/tim不能查看图片(2020.7.16)
-  - ipv6有一点问题,导致连不上腾讯的图片cdn,需要做一个本机的http proxy.
-  - 安装`privoxy`,之后`systemctl enable,start`启动服务(manjaro的init是systemd,不是用systemd的话略有区别).
-  - qq/wechat/tim登陆的时候配置http代理.默认是`http://127.0.0.1:8118`
-  - 有其他问题,自行查阅`man privoxy`查找对应的配置文件进行修改...
-  - 请自行找`/etc/privoxy/config`里面的内容过滤,搜素`toggle`把它们都关掉.
-  - 还不行的话只能暂时禁用ipv6...或者virtualbox装个windows虚拟机跑了.
-- ==(DE/WM字体配置看这里)==需要调整fontconfig,locale,参考arch wiki.也可以在DE的`system settings`中直接设置.  
-  **对于manjaro-kde用户而言,可以不用任何配置直接使用;CJK fonts fallback需要手动设置一下,让SC优先级高于JP即可(参考arch wiki)**  
-- 字体配置推荐,无脑`Noto Sans CJK Sc`即可,个人体验来讲`Noto Sans`比`Source Sans`好一些,`Serif`字体不太习惯.对于等宽的编程字体,推荐`Source Code Pro`和`Liberation Mono`.具体而言`noto-fonts,noto-fonts-{cjk,emoji,extra,compat}`
-<<<<<<< HEAD
+- DE/WM font config:需要调整fontconfig,locale,参考arch wiki.也可以在DE的`system settings`中直接设置.  
+  **CJK fonts fallback需要手动设置一下,让SC优先级高于JP即可(参考arch wiki)**  
 - 中文字体(CJK-SC)fallback到日文字体,解决方法参考[menci在zhihu上面的这个回答](https://www.zhihu.com/question/47141667).  
   > `sudo vim /etc/fonts/conf.d/64-language-selector-prefer.conf `  
   > ```xml
@@ -72,8 +48,6 @@ with --upgrade.
 - [v2ray proxy配置](https://qv2ray.net/),[github:qv2ray](https://github.com/Qv2ray/Qv2ray),[github:qv2ray-docs](https://github.com/Qv2ray/qv2ray.github.io)几乎是无脑配置. 代理路线推荐`JustMySocks`,国内有人做镜像/反响代理站可以正常访问,而且支持`Alipay(支付宝)`付款.
 - ipython crash on tab completion:[refer to this issue](https://github.com/ipython/ipython/issues/12522) 更新到`ipython>=7.18.1`即可.
   如果一个pypi的包是用`pacman`装的,`sudo pacman -Syyu`可以更新,但是用`pip`安装的并不会,需要自己时常手动更新,以及尽量不要全局安装,避免依赖版本冲突(推荐pipenv).`pip list --outdated`来查询可以更新的包.
-- 关于cpu turbo boost失效: 向`/sys/devices/system/cpu/cpufreq/boost`中写入1开启boost.
-- 关于backlight调节: 修改`/sys/class/backlight/{amdgpu_bl0}/brightness`
 
 
 
