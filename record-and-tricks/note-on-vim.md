@@ -32,6 +32,8 @@
 > - use `vimnium` extension/plugin to enable vim-mode in a browser.  
 > - use `ctrl+shift+space/i` to enter/escape vim-mode in alacritty(a fancy terminal emulator)
 
+- run `nvim -L` or `vim -L` to show the `.swp` swapfiles. 
+
 
 ## plugins
 
