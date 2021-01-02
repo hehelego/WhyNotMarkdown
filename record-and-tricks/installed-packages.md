@@ -40,6 +40,7 @@
 * `the_silver_search/ag`(a code-searching tool)
 * tmux
 * tldr
+* rsync
 
 * texlive
 * pandoc
@@ -71,7 +72,7 @@
 * **timeshift**
 
 * ncdu
-* nmtui(network manager TUI)
+* NetworkManager+nmtui/nmcli
 * iwd+iwctl
 * screenkey+simplescreenrecorder+kdenlive
 * cpu-x(for hardware infomation and benchmark)
