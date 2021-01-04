@@ -8,7 +8,7 @@
 > terminal-emulator: alacritty/konsole  
 > font-family: (Noto Sans CJK SC,Source Code Pro,Liberation Mono)
 >
-> package-manager: pacman + yay(AUR manager) ; pip(python) ; cargo(rust) ; stack(haskell) ; tlmgr(texlive) ; npm(nodejs)
+> package-manager: pacman(+pacman-contrib,pacutils),pac + yay(AUR manager) ; pip(python) ; cargo(rust) ; stack(haskell) ; tlmgr(texlive) ; npm(nodejs)
 
 ### daily use
 
