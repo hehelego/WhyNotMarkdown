@@ -61,7 +61,8 @@
 
 ### MISC
 
-* etcher
+
+* keynav
 * graphviz
 * scrcpy
 * qemu
