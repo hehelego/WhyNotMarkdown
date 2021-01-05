@@ -6,7 +6,7 @@
 > - DE: KDE plasma / i3wm
 
 > 一些redminder  
-> - 学会使用搜索引擎. arch wiki,arch forum,StackOverflow,UnixStackExchange,github,网友blog...到处都是资料.
+> - 学会使用搜索引擎. arch wiki,arch forum,StackOverflow,UnixStackExchange,github,网友blog...到处都是资料(别忘了还有gentoo wiki).
 > - arch是rolling release, 记得每天`sudo pacman -Syu`,记得即使更换掉过时软件包.
 > - 任何更新都可能影响之前的解决方案,尽量查阅第一手资料,确保时效性.
 > - re-boot/re-login/restart xorg都有可能有用.
@@ -60,6 +60,8 @@ journalctl中包含`USBC`相关的错误信息.
 
 ## disabling PC speaker; prevent beep
 
+2021.1.05
+
 ### 问题描述
 
 进行一些操作,比如搜索/补全时,如果没有候选项,蜂鸣器会发出beep.  
@@ -77,6 +79,8 @@ journalctl中包含`USBC`相关的错误信息.
 --------------------------
 
 ## CJK font selection error
+
+2021.1.05
 
 > 字体配置是个有些麻烦的事情`hiting,aliasing,bitmap,dpi`会有不少问题.也许交给DE是个更好的选择.   
 > 有些应用不认fontconfig,需要专门配置,比如firefox/alacritty.
@@ -161,7 +165,12 @@ CPU turbo boost被禁用,频率被锁定.
 
 ## can't change backlight in i3wm session
 
+
+2021.1.05
+
 ### 问题描述
+
+在i3wm环境下,使用fn media keys中的backlight control无法正常调节屏幕亮度.
 
 ### 参考信息
 
@@ -179,6 +188,8 @@ CPU turbo boost被禁用,频率被锁定.
 -------------------------------------
 
 ## video hardware decoding in firefox
+
+2021.1.05
 
 ### 问题描述
 
@@ -201,6 +212,9 @@ CPU turbo boost被禁用,频率被锁定.
 
 ## okular failed to render CJK font
 
+2021.1.05
+
+
 ### 问题描述
 
 okular打开包含中文的pdf,发现未嵌入的字体渲染异常.  
@@ -222,3 +236,41 @@ okular打开包含中文的pdf,发现未嵌入的字体渲染异常.
 或者换个PDF viewer
 
 
+## i3wm下touchpad配置
+
+2021.1.05
+
+### 问题描述
+
+在i3wm下,笔记本触控板无法使用单指触摸左键,双指触摸右键的功能.  
+
+### 参考信息
+
+目前touchpad的驱动配置由libinput提供.  
+i3wm后端是Xorg,需要对应的`xf86-input-libinput`包.  
+
+
+- [arch wiki: libinput](https://wiki.archlinux.org/index.php/Libinput)
+- [gentoo wiki: libinput](https://wiki.gentoo.org/wiki/Libinput)
+- [Cody Craven's blog post: Enable tap to clik in i3WM](https://cravencode.com/post/essentials/enable-tap-to-click-in-i3wm/)
+
+### 解决方案
+
+我们需要修改`xf86-input-libinput`的配置文件,重启Xorg.(显然这个只对Xorg有效...后端是wayland的话,比如sway环境需要另外的方案)  
+
+根据gentoo wiki的指示,在`/etc/X11/xorg.conf.d/40-libinput.conf`中写入tap/scrolling的配置即可.
+
+```plaintext
+Section "InputClass"
+     Identifier "libinput touchpad catchall"
+     MatchIsTouchpad "on"
+     MatchDevicePath "/dev/input/event*"
+     Driver "libinput"
+     Option "Tapping" "True"
+     Option "TappingDrag" "True"
+     Option "TappingButtonMap" "lrm"
+     Option "NaturalScrolling" "True"
+     Option "ScrollMethod" "twofinger"
+     Option "accelSpeed" "0.3"
+EndSection
+```
