@@ -65,8 +65,7 @@
 * keynav
 * graphviz
 * scrcpy
-* qemu
-* virtualbox
+* qemu,virtualbox
 * curl,wget,aria2
 * qBittorrent
 * syncthing
@@ -76,9 +75,12 @@
 * NetworkManager+nmtui/nmcli
 * iwd+iwctl
 * screenkey+simplescreenrecorder+kdenlive
+
+* neofetch/screenfetch
 * cpu-x(for hardware infomation and benchmark)
 * s-tui(cpu monitoring&stress cpu)
 * radeontop(monitoring AMD GPU)
+* lspci,lshw,lsusb三件套.
 
 * you-get (pypi | community/you-get)
 * coursera-dl (pypi | community/coursera-dl)
