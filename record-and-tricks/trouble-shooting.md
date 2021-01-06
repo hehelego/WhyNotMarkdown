@@ -21,15 +21,16 @@
 ### 问题描述
 
 > lshw输出如下
+> ```
 > description: Notebook
-> product: 82DM (LENOVO_MT_82DM_BU_idea_FM_XiaoXinPro-13ARE 2020)
+> product: 82DM (LENOVO_MT_82DM_BU_idea_FM_XiaoXinPro-13ARE 2020)`
 > vendor: LENOVO
 > version: Lenovo XiaoXinPro-13ARE 2020
 > serial: PF2DR2KS
 > width: 64 bits
-
-> 相关信息
-> BIOS: 27ww
+> ```
+> 相关信息  
+> BIOS version: 27ww  
 > kernel: x86_64 Linux 5.9.8-arch1-1
 
 USB type C 接口失效. PD,DP,USB协议全部无法使用,对外供电也失效.  
@@ -37,12 +38,12 @@ journalctl中包含`USBC`相关的错误信息.
 
 ### 参考信息
 
-联想小新系列笔记本是中国国内专有产品线而非全球产品系列.  
-使用`journalctl -r --this-boot`找黄色/红色的warning,error,在google/bing上检索错误信息;在arch,ubuntu的用户论坛上查找相关thread.  
+~~联想小新系列笔记本是中国国内专有产品线而非全球产品系列.~~ update: 这个笔记本在中国叫`Xiaoxin Pro 13 2020`,国际市场称`Ideapad S540-13ARE`.
+使用`journalctl -r --this-boot`找黄色/红色的warning,error,在google/bing上检索错误信息;在arch,ubuntu的用户论坛上查找相关thread,但是并不能解决这个问题.  
 最后在联想中国论坛上找到了解决方案.  
 
-[link](https://club.lenovo.com.cn/thread-5850476-1-1.html)
-
+- [link:联想中国论坛,关于小新系列笔记本的常见问题](https://club.lenovo.com.cn/thread-5850476-1-1.html)
+- [arch wiki: Lenovo IdeaPad S540-13ARE](https://wiki.archlinux.org/index.php/Lenovo_IdeaPad_S540_13ARE) 发现arch wiki上面有这个笔记本的entry,我果断edit,把这个问题的解决方案加了上去. 此外.在这里发现了使用acpi call切换电池模式,开启快充的方案.
 
 ### 解决方案
 
@@ -158,6 +159,14 @@ CPU turbo boost被禁用,频率被锁定.
 ### 解决方案
 
 向`/sys/devices/system/cpu/cpufreq/boost`中写入1开启boost.
+
+```bash
+# disable cpu turbo boost
+echo 0 | sudo tee /sys/devices/system/cpu/cpufreq/boost
+# enable cpu turbo boost
+echo 1 | sudo tee /sys/devices/system/cpu/cpufreq/boost
+```
+
 
 
 
