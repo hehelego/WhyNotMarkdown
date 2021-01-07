@@ -41,6 +41,7 @@
 * tmux
 * tldr
 * rsync
+* rofi
 
 * texlive
 * pandoc
