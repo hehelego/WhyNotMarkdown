@@ -179,18 +179,56 @@ echo 1 | sudo tee /sys/devices/system/cpu/cpufreq/boost
 
 ### 问题描述
 
-在i3wm环境下,使用fn media keys中的backlight control无法正常调节屏幕亮度.
+在i3wm环境下,使用fn media keys中的backlight control无法正常调节屏幕亮度.  
+经过一番尝试,在KDE session之外的任何地方都没法正常调节,比如i3 session/sway session/tty都不行.  
+使用`xorg-xbacklight`也不行.
 
 ### 参考信息
 
-根据arch wiki的信息,我这里是amdgpu的问题,需要特殊方式来调节backlight.
+- [arch wiki: backlight](https://wiki.archlinux.org/index.php/Backlight)
+- [arch wiki: xbindkeys](https://wiki.archlinux.org/index.php/Xbindkeys)
 
 ### 解决方案
 
-直接向`/sys/class/backlight/amdgpu_bl0/brightness`写入亮度...    
+可以直接向`/sys/class/backlight/amdgpu_bl0/brightness`写入亮度...   
 这里的`amdgpu_bl0`可能需要换成其他GPU名称.  
 
+```bash
+echo {brightness} | sudo tee /sys/class/backlight/amdgpu_bl0/brightness
+```
 
+按照arch wiki关于backlight的词条, 我这台机子属于使用ACPI调节.  
+删掉xorg-xbacklight,安装acpilight. 发现可以正常调节亮度了,但是仅限root.
+
+将日常使用的用户加入video group;添加udev rule,允许video组用户修改backlight.  
+之后向i3-config中添加backlight control的media key的bindsym.
+
+```plaintext
+#PATH /etc/udev/rules.d/backlight.rules
+ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="acpi_video0", GROUP="video", MODE="0664"
+```
+
+```plaintext
+#PATH ~/.config/i3/config
+
+# mediakey:: adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# mediakey:: media player   (need playerctl)
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl play-pause
+bindsym XF86AudioStop exec playerctl stop
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+# mediakey:: backlight control   (need xorgs-xbacklight or acpilight)
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+```
 
 
 
