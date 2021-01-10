@@ -66,7 +66,7 @@
 * keynav
 * graphviz
 * scrcpy
-* qemu,virtualbox
+* qemu,virtualbox(请参考[octetz写的一篇关于qemu的博客](https://octetz.com/docs/2020/2020-05-06-linux-hypervisor-setup/),以及arch wiki进行操作)
 * curl,wget,aria2
 * qBittorrent
 * syncthing
@@ -81,7 +81,7 @@
 * cpu-x(for hardware infomation and benchmark)
 * s-tui(cpu monitoring&stress cpu)
 * radeontop(monitoring AMD GPU)
-* lspci,lshw,lsusb三件套.
+* lscpu,lspci,lshw,lsusb 更相信的硬件信息
 
 * you-get (pypi | community/you-get)
 * coursera-dl (pypi | community/coursera-dl)
