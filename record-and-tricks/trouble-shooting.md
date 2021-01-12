@@ -321,3 +321,92 @@ Section "InputClass"
      Option "accelSpeed" "0.3"
 EndSection
 ```
+
+## 修改rime InputMethod的config pannel的trigger keybinding
+
+### 问题描述
+
+我在使用fcitx5+rime, 它默认有`<F4>`弹出设置面板的快捷键,非常容易冲突.
+
+### 参考信息
+
+- [github/rime/home: rime user guide: 定制呼出选项单的快捷键](https://github.com/rime/home/wiki/CustomizationGuide#%E4%B8%80%E4%BE%8B%E5%AE%9A%E8%A3%BD%E5%96%9A%E5%87%BA%E6%96%B9%E6%A1%88%E9%81%B8%E5%96%AE%E7%9A%84%E5%BF%AB%E6%8D%B7%E9%8D%B5)
+
+fcitx+rime的情况,rime会认一些在用户家目录中的配置文件.
+
+### 解决方案
+
+编辑`~/.local/share/fcitx5/rime/build/default.yaml`,之后synchronize+deploy一下rime.  
+
+具体而言.找到这样一段内容,删掉F4.  
+至于我们如何在不好好读doc的情况下找到这个文件...  
+那当然是`rg -l ~ --files --hidden | rg rime | rg default | rg yaml`,  
+也可以简单一点`rg -l ~ --files --hidden | fzf`之后搜`default.yaml`
+
+```yaml
+switcher:
+  abbreviate_options: true
+  caption: "〔方案選單〕"
+  fold_options: true
+  hotkeys:
+    - F4
+    - "Control+grave"
+    - "Control+Shift+grave"
+  option_list_separator: "／"
+  save_options:
+    - full_shape
+    - ascii_punct
+    - simplification
+    - extended_charset
+    - zh_hant
+    - zh_hans
+    - zh_hant_tw
+```
+
+
+## HiDPI display scaling and font scaling
+
+### 问题描述
+
+我在使用i3wm,有两个monitor,一个`2560x1600 13.3inch`,另一个`3840x2160 27inch`,  
+由于屏幕DPI太高而Xorg输出的DPI没有跟着改变, 默认情况下UI,font都太小了.  
+
+
+### 参考信息
+
+- ArchWiki/HiDPI
+- ArchWiki/Xorg
+
+需要做以下修改
+
+- 让Xorg输出时DPI正确
+- 设置一些gtk/qt相关environment variables,使得基于gtk/qt的gui app能够进行ui,font scaling.
+- 对于一些特殊应用,进行更多设置...
+
+### 解决方案
+
+需要用到一些`xorg-apps` group中的一些packages, 主要是xdpyinfo,xrandr.  
+
+使用`xdpyinfo | grep -B 2 resolution`查看X当前输出的DPI.  
+使用xrandr调整X输出的DPI,比如我这里用`xrandr --output eDP --mode 2560x1600 --rate 60 --scale 1 --dpi 192`,
+把它写入i3-config中使得i3 session启动时调整DPI.  
+
+
+参考按照wiki,配置Xresoureces  
+```
+!PATH=~/.Xresoureces
+Xft.dpi: 192
+
+! These might also be useful depending on your monitor and personal preference:
+Xft.autohint: 0
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintfull
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgba
+```
+
+
+写入一些qt/gtk相关的环境变量我没有做,  
+首先我还在使用KDE,它能够较好的管理缩放,
+其次是我发现进行了上面的配置之后,我常用的GUI apps已经正常缩放了.
