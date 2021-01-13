@@ -424,10 +424,18 @@ set/unset proxy environment variables in fish shell, and share them between sess
 - fish shell official tutorial
 - fish shell official documentation
 
-1. fish will load functions in `~/.config/fish/functions/`  
-2. scoping rules in fish shell: local/global/universal;shadowing
+1. `set --show VARIABLE_NAME`; `-x` for export; '-e' to erase; `-l,-g,-U;--local,--global,--universal` to specify scope;
+2. universal: sort of permanent for the current user; shared between all the fish-shell sessions and preserved even after reboot.
+3. global: can shadow universal ones; not visible between sessions or after reboot;
+4. local: can shadow global ones;
+5. `set -e VAR` will delete the variable in the nearest scope where `VAR` is set.
+0. fish will automatically load functions in `~/.config/fish/functions/`  
+
+**fish shell have special ways to deal with PATH**, try `set --help` for more information.
+
 
 ### 解决方案
+
 
 ```fish
 #PATH=~/.config/fish/functions/proxy_on.fish
@@ -461,7 +469,6 @@ function proxy_dump
 end
 ```
 
-
-The environment will be set for every fish-shell session,  
-and be preserved even after reboot.  
+As mentioned in the 5th tip, `set -e` can erase the variable in local/global/universal.  
+So we might have to run `proxy_off` for a few times to thoroughly remove proxy environment.
 
