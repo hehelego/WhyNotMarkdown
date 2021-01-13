@@ -410,3 +410,58 @@ Xft.rgba: rgba
 写入一些qt/gtk相关的环境变量我没有做,  
 首先我还在使用KDE,它能够较好的管理缩放,
 其次是我发现进行了上面的配置之后,我常用的GUI apps已经正常缩放了.
+
+
+## fish shell, proxy settings
+
+### 问题描述
+
+set/unset proxy environment variables in fish shell, and share them between sessions.
+
+### 参考信息
+
+- `fish -c help`
+- fish shell official tutorial
+- fish shell official documentation
+
+1. fish will load functions in `~/.config/fish/functions/`  
+2. scoping rules in fish shell: local/global/universal;shadowing
+
+### 解决方案
+
+```fish
+#PATH=~/.config/fish/functions/proxy_on.fish
+function proxy_on
+	set -Ux all_proxy socks5://127.0.0.1:1089
+	set -Ux http_proxy http://127.0.0.1:8889
+	set -Ux https_proxy $http_proxy
+	set -Ux ftp_proxy $http_proxy
+	set -Ux rsync_proxy $http_proxy
+	set -Ux no_proxy "localhost,127.0.0.1,localaddress,.localdomain.com"
+end
+
+#PATH=~/.config/fish/functions/proxy_off.fish
+function proxy_off
+	set -e all_proxy
+	set -e http_proxy
+	set -e https_proxy
+	set -e ftp_proxy
+	set -e rsync_proxy
+	set -e no_proxy
+end
+
+#PATH=~/.config/fish/functions/proxy_dump.fish
+function proxy_dump
+	echo "all_proxy   = $all_proxy"
+	echo "http_proxy  = $http_proxy"
+	echo "https_proxy = $https_proxy"
+	echo "ftp_proxy   = $ftp_proxy"
+	echo "rsync_proxy = $rsync_proxy"
+	echo "no_proxy    = $no_proxy"
+end
+```
+
+
+The environment will be set for every fish-shell session,  
+and be preserved even after reboot.  
+
