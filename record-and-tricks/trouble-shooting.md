@@ -479,3 +479,30 @@ end
 As mentioned in the 5th tip, `set -e` can erase the variable in local/global/universal.  
 So we might have to run `proxy_off` for a few times to thoroughly remove proxy environment.
 
+
+## pulseaudio can't resume sink/source after recovery from hibernation/suspend.
+
+> date: 2020.1.15
+
+### 问题描述
+
+audio output failed. the sinks/sources are suspended and can't be resumed by pactl.
+
+### 参考信息
+
+- pactl: tldr pages,man pages.
+- `pactl list sinks short`,`pactl list sources short`
+- [arch wiki: pulseaudio](https://wiki.archlinux.org/index.php/PulseAudio#Running)
+- `journalctl`
+
+
+### 解决方案
+
+restart pulseaudio.
+
+```
+systemctl --user restart pulseaudio.service
+systemctl --user restart pulseaudio.socket
+```
+
+
