@@ -1,0 +1,103 @@
+\documentclass{article}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xeCJK}
+\setCJKmainfont{Noto Serif CJK SC}
+
+\begin{document}
+
+\section{problem statement}
+
+给定正整数$a,b,c,n$,
+计算$\sum_{x=0}^n \left\lfloor\frac{ax+b}{c}\right\rfloor$,
+即第一象限内在$y=ax+b$下方的整点计数.
+
+\section{``类欧几里得算法''}
+
+\subsection*{case 1: $a\geq c \texttt{ or } b\geq c$}
+
+\[
+	\begin{aligned}
+		f(a,b,c,n)
+			&=\sum_{x=0}^n \left\lfloor\frac{ax+b}{c}\right\rfloor
+			 =\sum_{x=0}^n \sum_{i=1}^{\left\lfloor\frac{an+b}{c}\right\rfloor}
+			 	\left[ i \leq \left\lfloor\frac{ax+b}{c}\right\rfloor \right]\\
+			&=\sum_{x=0}^n
+				\left\lfloor
+					\left\lfloor\frac{a}{c}\right\rfloor x + \left\lfloor\frac{b}{c}\right\rfloor +
+					\frac{(a\bmod c)c+(b\bmod c)}{c}
+				\right\rfloor\\
+			&=\left\lfloor\frac{a}{c}\right\rfloor\frac{n(n+1)}{2} + \left\lfloor\frac{b}{c}\right\rfloor(n+1) +
+				\sum_{x=0}^n
+					\left\lfloor
+						\frac{(a\bmod c)c+(b\bmod c)}{c}
+					\right\rfloor\\
+			&=\left\lfloor\frac{a}{c}\right\rfloor\frac{n(n+1)}{2} + \left\lfloor\frac{b}{c}\right\rfloor(n+1)
+				+ f(a\bmod c,b\bmod c,c,n)
+	\end{aligned}
+\]
+
+
+\subsection*{cans 2: $a,b < c$}
+
+\[
+	\begin{aligned}
+		f(a,b,c,n)
+			&=\sum_{x=0}^n \left\lfloor\frac{ax+b}{c}\right\rfloor
+			 =\sum_{x=0}^n \sum_{i=1}^{\left\lfloor\frac{an+b}{c}\right\rfloor}
+			 	\left[ i \leq \left\lfloor\frac{ax+b}{c}\right\rfloor \right]
+			 =\sum_{x=0}^n \sum_{i=1}^{\left\lfloor\frac{an+b}{c}\right\rfloor}
+			 	\left[ i \leq \frac{ax+b}{c} \right]\\
+			&=\sum_{i=1}^{\left\lfloor\frac{an+b}{c}\right\rfloor}
+					\sum_{x=0}^n \left[ x\geq \frac{ic-b}{a} \right]
+			=\sum_{i=1}^{\left\lfloor\frac{an+b}{c}\right\rfloor}
+					(n+1)-\sum_{x=0}^n \left[ x < \frac{ic-b}{a}\right]\\
+	(*) &=\sum_{i=1}^{\left\lfloor\frac{an+b}{c}\right\rfloor}
+					(n+1)-\sum_{x=0}^n \left[ x \leq \frac{ic-b-1}{a}\right]
+			 =\sum_{i=1}^{\left\lfloor\frac{an+b}{c}\right\rfloor}
+					(n+1)-\sum_{x=0}^n \left[ x \leq \left\lfloor\frac{ic-b-1}{a}\right\rfloor\right]\\
+			&={\left\lfloor\frac{an+b}{c}\right\rfloor}(n+1)
+				-\sum_{i=0}^{{\left\lfloor\frac{an+b}{c}\right\rfloor}- 1}
+				\sum_{x=0}^n \left[ x \leq \left\lfloor\frac{ic+c-b-1}{a}\right\rfloor\right]\\
+			&={\left\lfloor\frac{an+b}{c}\right\rfloor}n
+				-\sum_{i=0}^{{\left\lfloor\frac{an+b}{c}\right\rfloor}- 1}
+				\sum_{x=1}^n \left[ x \leq \left\lfloor\frac{ic+c-b-1}{a}\right\rfloor\right]\\
+			&={\left\lfloor\frac{an+b}{c}\right\rfloor}n-f\left(c,c-b-1,a,\left\lfloor\frac{an+b}{c}\right\rfloor -1\right)
+	\end{aligned}
+\]
+
+其中$(\ast)$,的处理比较特殊,主要的困难在$a\mid ic-b$时如何避免算入$\frac{ic-b}{a}$,\\
+设$r=ic-b\bmod a$,如果$r=0$,这个减1会帮助我们卡掉$x=\frac{ic-b}{a}$这个不该有贡献的值, 而$r>0$时,则没有影响.\\
+也可以这么考虑$ax < ic-b\iff ax \leq ic-b-1$.
+
+
+\section{complexity}
+
+\subsection*{Lemma 0}
+
+\[ a\geq b \implies (a\bmod b) \leq \frac{a}{2} \]
+
+\[
+\begin{array}{c|l}
+	b\leq a\leq 2b & a\bmod b=a-b\quad a\leq 2b\implies \frac{a}{2}\leq b\implies \frac{a}{2}\geq a-b\\
+	a > 2b & a\bmod b < b \leq \frac{a}{2}
+\end{array}
+\]
+
+\noindent 按照上面的操作,每两次操作,就可以让$f(a,b,c,n)$中的第一个参数减半.\par
+\noindent 于是复杂度为$O(\log n)$, 其中$a,b,c,n$同阶.
+
+
+\appendix
+
+\section{reference}
+
+\begin{itemize}
+	\item \href{https://oi-wiki.org/math/euclidean/}{OI-wiki: 类欧几里得算法}
+\end{itemize}
+
+\end{document}
+
+
+
