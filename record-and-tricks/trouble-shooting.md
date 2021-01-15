@@ -16,7 +16,7 @@
 
 ## 联想小新系列笔记本USB-C接口失效的问题
 
-> 2020.11.15修锅
+> date:2020.11.15
 
 ### 问题描述
 
@@ -61,7 +61,7 @@ journalctl中包含`USBC`相关的错误信息.
 
 ## disabling PC speaker; prevent beep
 
-2021.1.05
+> date:2020.12.31
 
 ### 问题描述
 
@@ -81,7 +81,7 @@ journalctl中包含`USBC`相关的错误信息.
 
 ## CJK font selection error
 
-2021.1.05
+> date:2021.12-31
 
 > 字体配置是个有些麻烦的事情`hiting,aliasing,bitmap,dpi`会有不少问题.也许交给DE是个更好的选择.   
 > 有些应用不认fontconfig,需要专门配置,比如firefox/alacritty.
@@ -147,6 +147,8 @@ fontconfig中对于CJK字型选取的默认设置不符合预期,需要手写一
 
 ## cpu turbo boost was disabled
 
+> date: 2021.1.6
+
 ### 问题描述
 
 在一些未知条件下,节能模式被莫名其妙地开启  
@@ -174,8 +176,7 @@ echo 1 | sudo tee /sys/devices/system/cpu/cpufreq/boost
 
 ## can't change backlight in i3wm session
 
-
-2021.1.05
+> date: 2021.12.31
 
 ### 问题描述
 
@@ -236,7 +237,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 
 ## video hardware decoding in firefox
 
-2021.1.05
+> date: 2020.12.31
 
 ### 问题描述
 
@@ -259,7 +260,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 
 ## okular failed to render CJK font
 
-2021.1.05
+> date: 2021.1.1
 
 
 ### 问题描述
@@ -285,7 +286,7 @@ okular打开包含中文的pdf,发现未嵌入的字体渲染异常.
 
 ## i3wm下touchpad配置
 
-2021.1.05
+> date: 2021.1.05
 
 ### 问题描述
 
@@ -326,6 +327,8 @@ EndSection
 
 ### 问题描述
 
+> date: 2021.1.12
+
 我在使用fcitx5+rime, 它默认有`<F4>`弹出设置面板的快捷键,非常容易冲突.
 
 ### 参考信息
@@ -365,6 +368,8 @@ switcher:
 
 
 ## HiDPI display scaling and font scaling
+
+> date: 2021.1.12
 
 ### 问题描述
 
@@ -413,6 +418,8 @@ Xft.rgba: rgba
 
 
 ## fish shell, proxy settings
+
+> date: 2021.1.13
 
 ### 问题描述
 
