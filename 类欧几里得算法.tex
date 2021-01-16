@@ -7,10 +7,12 @@
 
 \begin{document}
 
+\newcommand{\FLR}[1]{{ \left\lfloor #1 \right\rfloor }}
+
 \section{problem statement}
 
 \noindent 给定正整数$a,b,c,n$,
-计算$\displaystyle f(a,b,c,n)=\sum_{x=0}^n \left\lfloor\frac{ax+b}{c}\right\rfloor$\\
+计算$\displaystyle f(a,b,c,n)=\sum_{x=0}^n \FLR{\frac{ax+b}{c}}$\\
 即第一象限内在$y=ax+b$下方的整点计数.
 
 \section{``类欧几里得算法''}
@@ -20,19 +22,16 @@
 \[
 	\begin{aligned}
 		f(a,b,c,n)
-			&=\sum_{x=0}^n \left\lfloor\frac{ax+b}{c}\right\rfloor\\
+			&=\sum_{x=0}^n \FLR{\frac{ax+b}{c}}\\
 			&=\sum_{x=0}^n
-				\left\lfloor
-					\left\lfloor\frac{a}{c}\right\rfloor x + \left\lfloor\frac{b}{c}\right\rfloor +
+				\FLR{
+					\FLR{\frac{a}{c}} x + \FLR{\frac{b}{c}}+
 					\frac{(a\bmod c)c+(b\bmod c)}{c}
-				\right\rfloor\\
-			&=\left\lfloor\frac{a}{c}\right\rfloor\frac{n(n+1)}{2} + \left\lfloor\frac{b}{c}\right\rfloor(n+1) +
-				\sum_{x=0}^n
-					\left\lfloor
-						\frac{(a\bmod c)c+(b\bmod c)}{c}
-					\right\rfloor\\
-			&=\left\lfloor\frac{a}{c}\right\rfloor\frac{n(n+1)}{2} + \left\lfloor\frac{b}{c}\right\rfloor(n+1)
-				+ f(a\bmod c,b\bmod c,c,n)
+				}\\
+			&=\FLR{\frac{a}{c}}\frac{n(n+1)}{2} + \FLR{\frac{b}{c}}(n+1) +
+				\sum_{x=0}^n \FLR{\frac{(a\bmod c)c+(b\bmod c)}{c}}\\
+			&=\FLR{\frac{a}{c}}\frac{n(n+1)}{2} + \FLR{\frac{b}{c}}(n+1)
+				+ f(a\bmod c,b\bmod c,c,n)\\
 	\end{aligned}
 \]
 
@@ -42,26 +41,26 @@
 \[
 	\begin{aligned}
 		f(a,b,c,n)
-			&=\sum_{x=0}^n \left\lfloor\frac{ax+b}{c}\right\rfloor
-			 =\sum_{x=0}^n \sum_{i=1}^{\left\lfloor\frac{an+b}{c}\right\rfloor}
-			 	\left[ i \leq \left\lfloor\frac{ax+b}{c}\right\rfloor \right]
+			&=\sum_{x=0}^n \FLR{\frac{ax+b}{c}}
+			 =\sum_{x=0}^n \sum_{i=1}^\FLR{\frac{an+b}{c}}
+				\left[ i \leq \FLR{\frac{ax+b}{c}} \right]
 			 =\sum_{x=0}^n \sum_{i=1}^{\left\lfloor\frac{an+b}{c}\right\rfloor}
 			 	\left[ i \leq \frac{ax+b}{c} \right]\\
-			&=\sum_{i=1}^{\left\lfloor\frac{an+b}{c}\right\rfloor}
+			&=\sum_{i=1}^\FLR{\frac{an+b}{c}}
 					\sum_{x=0}^n \left[ x\geq \frac{ic-b}{a} \right]
-			=\sum_{i=1}^{\left\lfloor\frac{an+b}{c}\right\rfloor}
+			=\sum_{i=1}^\FLR{\frac{an+b}{c}}
 					(n+1)-\sum_{x=0}^n \left[ x < \frac{ic-b}{a}\right]\\
-	(*) &=\sum_{i=1}^{\left\lfloor\frac{an+b}{c}\right\rfloor}
-					(n+1)-\sum_{x=0}^n \left[ x \leq \frac{ic-b-1}{a}\right]
-			 =\sum_{i=1}^{\left\lfloor\frac{an+b}{c}\right\rfloor}
-					(n+1)-\sum_{x=0}^n \left[ x \leq \left\lfloor\frac{ic-b-1}{a}\right\rfloor\right]\\
-			&={\left\lfloor\frac{an+b}{c}\right\rfloor}(n+1)
-				-\sum_{i=0}^{{\left\lfloor\frac{an+b}{c}\right\rfloor}- 1}
-				\sum_{x=0}^n \left[ x \leq \left\lfloor\frac{ic+c-b-1}{a}\right\rfloor\right]\\
-			&={\left\lfloor\frac{an+b}{c}\right\rfloor}n
-				-\sum_{i=0}^{{\left\lfloor\frac{an+b}{c}\right\rfloor}- 1}
-				\sum_{x=1}^n \left[ x \leq \left\lfloor\frac{ic+c-b-1}{a}\right\rfloor\right]\\
-			&={\left\lfloor\frac{an+b}{c}\right\rfloor}n-f\left(c,c-b-1,a,\left\lfloor\frac{an+b}{c}\right\rfloor -1\right)
+	(*) &=\sum_{i=1}^\FLR{\frac{an+b}{c}}
+					(n+1)-\sum_{x=0}^n \left[ x \leq \frac{ic-b-1}{a}\right]\\
+			&=\sum_{i=1}^\FLR{\frac{an+b}{c}}
+					(n+1)-\sum_{x=0}^n \left[ x \leq \FLR{\frac{ic-b-1}{a}}\right]\\
+			&=\FLR{\frac{an+b}{c}}(n+1)
+				-\sum_{i=0}^{\FLR{\frac{an+b}{c}} -1}
+				\sum_{x=0}^n \left[ x \leq \FLR{\frac{ic+c-b-1}{a}}\right]\\
+			&=\FLR{\frac{an+b}{c}} n
+				-\sum_{i=0}^{\FLR{\frac{an+b}{c}}- 1}
+				\sum_{x=1}^n \left[ x \leq \FLR{\frac{ic+c-b-1}{a}}\right]\\
+			&=\FLR{\frac{an+b}{c}}n-f\left(c,c-b-1,a,\FLR{\frac{an+b}{c}} -1\right)
 	\end{aligned}
 \]
 
@@ -95,12 +94,34 @@
 \section{generalized algorithm}
 
 \noindent 给定$a,b,c,n,p,q$求解$\displaystyle \sum_{x=0}^n
-{\left\lfloor\frac{ax+b}{c}\right\rfloor}^{p}
+{\FLR{\frac{ax+b}{c}}}^{p}
 x^q$.\\
 其中$p,q$是与$n$无关的小常数\footnote{比如LOJ上面有$p+q\leq 10,\ a,b,c,n\leq 10^9$}
 
-\noindent 
 
+\underline{TODO: 目前不会这个题,尽快找到可行的做法}
+
+\subsection*{case 1: $a\geq c\texttt{ or }b\geq c$}
+
+\[
+	\begin{aligned}
+		S
+		&=\sum_{x=0}^n \FLR{\FLR{\frac{a}{c}} x+\FLR{\frac{b}{c}}+\frac{(a\bmod c)x+(b\bmod c)}{c}}^p x^q\\
+		&=\sum_{x=0}^n
+			{\left(
+				\FLR{\frac{a}{c}}x + \FLR{\frac{b}{c}} + \FLR{\frac{(a\bmod c)x+(b\bmod c)}{c}}
+			\right)}^p x^q\\
+		&=\sum_{x=0}^n
+				\sum_{\begin{subarray}{c}0\leq k_1,k_2,k_3\leq p\\ k_1+k_2+k_3=p\end{subarray}}
+					\frac{p!}{k_1!k_2!k_3!}
+					\FLR{\frac{a}{c}}^{k_1}
+					\FLR{\frac{b}{c}}^{k_2}
+					\FLR{\frac{(a\bmod c)x+(b\bmod c)}{c}}^{k_3}
+					\ x^{k_1 + q}
+	\end{aligned}
+\]
+
+\subsection*{case 2: $a,b < c$}
 
 \newpage
 \appendix
