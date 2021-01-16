@@ -9,8 +9,8 @@
 
 \section{problem statement}
 
-给定正整数$a,b,c,n$,
-计算$\sum_{x=0}^n \left\lfloor\frac{ax+b}{c}\right\rfloor$,
+\noindent 给定正整数$a,b,c,n$,
+计算$\displaystyle f(a,b,c,n)=\sum_{x=0}^n \left\lfloor\frac{ax+b}{c}\right\rfloor$\\
 即第一象限内在$y=ax+b$下方的整点计数.
 
 \section{``类欧几里得算法''}
@@ -65,12 +65,14 @@
 	\end{aligned}
 \]
 
-其中$(\ast)$,的处理比较特殊,主要的困难在$a\mid ic-b$时如何避免算入$\frac{ic-b}{a}$,\\
+其中$(\ast)$,的处理比较特殊,主要的困难在$a\mid ic-b$时如何避免算入$\frac{ic-b}{a}$.\\
 设$r=ic-b\bmod a$,如果$r=0$,这个减1会帮助我们卡掉$x=\frac{ic-b}{a}$这个不该有贡献的值, 而$r>0$时,则没有影响.\\
-也可以这么考虑$ax < ic-b\iff ax \leq ic-b-1$.
+也可以这样考虑: $ax < ic-b\iff ax \leq ic-b-1$.
 
 
 \section{complexity}
+
+设$a,b,c=O(n)$,分析上述算法的时间复杂度.
 
 \subsection*{Lemma 0}
 
@@ -83,16 +85,33 @@
 \end{array}
 \]
 
-\noindent 按照上面的操作,每两次操作,就可以让$f(a,b,c,n)$中的第一个参数减半.\par
-\noindent 于是复杂度为$O(\log n)$, 其中$a,b,c,n$同阶.
+
+观察$f(a,b,c,n)$的$a,c$两个参数.\\
+如果$a\geq c$,那么递归求解一个$a'=a\bmod c,c'=c$的和; 有$a' < c'$ .\\
+如果$a<    c$,那么递归求解一个$a'=c,c'=a$的和; 有$a' \geq c'$ .\par
+所以,每进行两次递归求解,参数$a$减半. 故$O(\log n)$时间化规到$a=0$的退化形式,这时可以$O(1)$求解.\par
+于是,算法的时间复杂度是$O(\log n)$.
+
+\section{generalized algorithm}
+
+\noindent 给定$a,b,c,n,p,q$求解$\displaystyle \sum_{x=0}^n
+{\left\lfloor\frac{ax+b}{c}\right\rfloor}^{p}
+x^q$.\\
+其中$p,q$是与$n$无关的小常数\footnote{比如LOJ上面有$p+q\leq 10,\ a,b,c,n\leq 10^9$}
+
+\noindent 
 
 
+\newpage
 \appendix
+
+\section{code}
 
 \section{reference}
 
 \begin{itemize}
 	\item \href{https://oi-wiki.org/math/euclidean/}{OI-wiki: 类欧几里得算法}
+	\item \href{https://loj.ac/p/138}{LOJ138 类欧几里得算法}
 \end{itemize}
 
 \end{document}
