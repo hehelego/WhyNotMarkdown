@@ -99,8 +99,6 @@ x^q$.\\
 其中$p,q$是与$n$无关的小常数\footnote{比如LOJ上面有$p+q\leq 10,\ a,b,c,n\leq 10^9$}
 
 
-\underline{TODO: 目前不会这个题,尽快找到可行的做法}
-
 \subsection*{case 1: $a\geq c\texttt{ or }b\geq c$}
 
 \[
@@ -117,11 +115,25 @@ x^q$.\\
 					\FLR{\frac{a}{c}}^{k_1}
 					\FLR{\frac{b}{c}}^{k_2}
 					\FLR{\frac{(a\bmod c)x+(b\bmod c)}{c}}^{k_3}
-					\ x^{k_1 + q}
+					\ x^{k_1 + q}\\
+		&=\sum_{\begin{subarray}{c}0\leq k_1,k_2,k_3\leq p\\ k_1+k_2+k_3=p\end{subarray}}
+				\frac{p!}{k_1!k_2!k_3!}
+				\FLR{\frac{a}{c}}^{k_1}
+				\FLR{\frac{b}{c}}^{k_2}
+				\sum_{x=0}^n
+					\FLR{\frac{(a\bmod c)x+(b\bmod c)}{c}}^{k_3}
+					\ x^{k_1 + q}\\
 	\end{aligned}
 \]
 
 \subsection*{case 2: $a,b < c$}
+
+\[
+	\begin{aligned}
+		S
+		&=\sum_{x=0}^n \FLR{\frac{ax+b}{c}}^p x^q\\
+	\end{aligned}
+\]
 
 \newpage
 \appendix
@@ -132,6 +144,7 @@ x^q$.\\
 
 \begin{itemize}
 	\item \href{https://oi-wiki.org/math/euclidean/}{OI-wiki: 类欧几里得算法}
+	\item \href{https://blog.csdn.net/qq_39972971/article/details/94618394}{XuYiXuan blog: LOJ138}
 	\item \href{https://loj.ac/p/138}{LOJ138 类欧几里得算法}
 \end{itemize}
 
