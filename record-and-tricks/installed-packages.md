@@ -9,17 +9,17 @@
 > font-family: (Noto Sans CJK SC,Source Code Pro,Liberation Mono)
 >
 > package-manager: pacman(+pacman-contrib,pacutils),pac + yay(AUR manager) ; pip(python) ; cargo(rust) ; stack(haskell) ; tlmgr(texlive) ; npm(nodejs)
+> - xorg,xorg-apps,xf86-video-amdgpu,sddm
 
 ### daily use
 
 * fcitx5(with rime,rime-luna-pinyin)
 * 7zip(gui frontend:ark,gnome archive manager)
-* firefox
 * dolphin
+* firefox
 * okular
 * LibreOffice
-* ffmpeg
-* VLC
+* ffmpeg,VLC,feh
 * telegram
 * kmail
 * kolourpaint + GIMP + inkspace
@@ -27,36 +27,31 @@
 
 ### working
 
-* v2ray(gui frontend `qv2ray`) + proxychains-ng
+* v2ray(gui frontend `qv2ray`; or `v2raya` for web fontend) + proxychains-ng
 
+* tldr
+* rofi
 * GNU toolchain(compilers,linkers,debuger,build system...) (package group `base-devel` and package `gdb`)
 * git
-* vim/neovim(with vim-plug,**coc.nvim**)
-* ranger
-* broot
+* vim/neovim/SpaceVim
+* ranger,broot
 * top/htop/bashtop
-* fzf
-* ripgrep
-* `the_silver_search/ag`(a code-searching tool)
+* fzf,rg,ag (FuzzyFileFinder, rip grep, the silver searcher)
 * tmux
-* tldr
 * rsync
-* rofi
 
 * texlive
 * pandoc
-* typora(opensource alternatives: vnote,marktext)
 * SageMath+Octave+Scipy(numpy,pandas,matplotlib,sympy) ~~and Tensorflow/PyTorch/sciket-learn~~
 
 **for global(system-wide) installation,use pacman. instead of pip/cargo/npm** (so that `pacman -Syu` will update them, otherwise manually update is required)  
 
-* python(package `python`,`python-pip`,`python-pipenv`)
-* jupyter/ipython/bpython
+* python(package `python`,`python-pip`,`python-pipenv`) + `python-ipython`
 * MISC
-  * nodejs(nodejs,npm)
-  * rust(rustup,cargo)
-  * haskell(ghcup,stack,cabal-install)
-  * racket(racket,DrRacket)
+  * nodejs (package `nodejs,npm`)
+  * rust (package `rust`)
+  * haskell (package :`ghc`)
+  * racket (racket,DrRacket)
   * coq,agda,idris
 
 
@@ -71,21 +66,19 @@
 * qBittorrent
 * syncthing
 * **timeshift**
+* tox(qtox or utox for gui frontend)
+* screenkey+simplescreenrecorder
 
 * ncdu
 * NetworkManager+nmtui/nmcli
-* iwd+iwctl
-* screenkey+simplescreenrecorder+kdenlive
+* iwd+iw/iwctl
+* pactl (cli for pulseaudio)
 
 * neofetch/screenfetch
-* cpu-x(for hardware infomation and benchmark)
-* s-tui(cpu monitoring&stress cpu)
-* radeontop(monitoring AMD GPU)
+* cpu-x (for hardware infomation and benchmark)
+* s-tui (cpu monitoring&stress cpu)
+* radeontop (monitoring AMD GPU)
 * lscpu,lspci,lshw,lsusb 更相信的硬件信息
-
-* you-get (pypi | community/you-get)
-* coursera-dl (pypi | community/coursera-dl)
-* BILIdrive+CDNdrive (pypi. 把公共cdn当成云盘,数据安全警告)
 
 ### extensions/plugins for browser
 
@@ -94,6 +87,5 @@
 * auto discard tab
 * cookie quick manager(on firefox)
 * vimium(vim-mode on firefox)
-
 
 
