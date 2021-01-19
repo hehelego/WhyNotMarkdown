@@ -23,6 +23,8 @@
 
 - terminal: 在vim/neovim中有所不同.在neovim中有`terminal mode`使用`(ctrl+\)+(ctrl+n)`来返回`normal mode`
 - run `nvim -L` or `vim -L` to show the `.swp` swapfiles. 
+- vim在文件末尾会现实很多行`~`,可以参考[stack overflow: disabling tildes](https://stackoverflow.com/questions/3813059/is-it-possible-to-not-display-a-for-blank-lines-in-vim-neovim)操作.  
+  在vimrc中加入`set fillchars=fold:\ ,vert:\│,eob:\ ,msgsep:‾`,改变最后填充的字符.
 
 
 ## plugins
