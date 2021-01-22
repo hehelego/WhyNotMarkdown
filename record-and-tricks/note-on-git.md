@@ -37,3 +37,17 @@ git config --list #查看已有配置
 - git log:查看提交记录
 - git diff:版本比较.
 
+
+### git有趣的使用技巧
+
+#### 使用neovim进行diff,merge
+
+reference: [mdlerch's blog: neovim as git.difftool](http://www.mdlerch.com/neovim-as-git-diff-and-merge-tool.html)
+
+```bash
+git config --global merge.tool vimdiff
+git config --global mergetool.path nvim
+```
+
+之后可以`cat ~/.gitconfig` 确认生效.
+
