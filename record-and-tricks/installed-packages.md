@@ -58,6 +58,7 @@
 ### MISC
 
 
+* xclip
 * dunst
 * smarttools
 * keynav
@@ -70,12 +71,14 @@
 * **timeshift**
 * tox(qtox or utox for gui frontend)
 * screenkey+simplescreenrecorder
+* screengrab
 
 * ncdu
 * NetworkManager+nmtui/nmcli
 * iwd+iw/iwctl
-* pactl (cli for pulseaudio)
+* pavucontrol+pactl (cli for pulseaudio)
 * playerctl
+* trash-cli
 
 * neofetch/screenfetch
 * cpu-x (for hardware infomation and benchmark)
