@@ -2,8 +2,8 @@
 
 ### base
 
-> distro: manjaro/arch  
-> de: kde / wm: i3
+> distro: arch  
+> env: kde/i3wm
 > shell: fish  
 > terminal-emulator: alacritty/konsole  
 > font-family: (Noto Sans CJK SC,Source Code Pro,Liberation Mono)
@@ -58,6 +58,8 @@
 ### MISC
 
 
+* dunst
+* smarttools
 * keynav
 * graphviz
 * scrcpy
@@ -73,6 +75,7 @@
 * NetworkManager+nmtui/nmcli
 * iwd+iw/iwctl
 * pactl (cli for pulseaudio)
+* playerctl
 
 * neofetch/screenfetch
 * cpu-x (for hardware infomation and benchmark)
