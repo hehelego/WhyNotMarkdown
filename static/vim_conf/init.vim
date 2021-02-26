@@ -18,6 +18,6 @@ set relativenumber
 
 set termguicolors
 colorscheme gruvbox
-hi Normal guibg=NONE ctermbg=NONE
+highlight Normal guibg=NONE ctermbg=NONE
 
 nmap <Leader>h :echo 'hello'<CR>

@@ -506,3 +506,37 @@ systemctl --user restart pulseaudio.socket
 ```
 
 
+## v2ray 系统时间未同步导致连接失败
+
+> date 2021.02.26
+
+### 问题描述
+
+v2ray vmess/tcp 连接失败, 出现类似下方的log
+
+```
+2021/02/26 23:01:37 [Warning] [1842356649] v2ray.com/core/app/proxyman/inbound: connection ends > v2ray.com/core/proxy/http: connection ends > v2ray.com/core/proxy/http: failed to write response > write tcp 127.0.0.1:8889->127.0.0.1:48022: write: broken pipe
+2021/02/26 23:01:38 [Warning] [977784748] v2ray.com/core/proxy/http: failed to read response from 149.154.167.91:80 > unexpected EOF
+```
+
+常在长时间hibernate后resume时出现.
+
+
+### 参考信息
+
+- v2ray vmess/tcp需要时间同步
+- [arch wiki: system time](https://wiki.archlinux.org/index.php/System_time)
+- [arch wiki: systemd-timesyncd](https://wiki.archlinux.org/index.php/Systemd-timesyncd)
+
+### 解决方案
+
+启用NTP时间同步,重启时间同步服务以强制进行同步.
+
+```bash
+timedatectl set-ntp true
+systemctl enable systemd-timesyncd.service
+systemctl restart systemd-timesyncd.service
+```
+
+如无法正确同步,可以尝试更换`timesyncd`使用的NTP server.
+
