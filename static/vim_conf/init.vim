@@ -13,7 +13,11 @@ set nowritebackup
 set cmdheight=1
 set shortmess+=c
 let mapleader=" "
+set number
+set relativenumber
 
+set termguicolors
 colorscheme gruvbox
+hi Normal guibg=NONE ctermbg=NONE
 
 nmap <Leader>h :echo 'hello'<CR>

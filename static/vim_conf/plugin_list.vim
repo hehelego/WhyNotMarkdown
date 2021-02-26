@@ -20,5 +20,7 @@ call plug#end()
 
 
 source $HOME/.config/nvim/plugin_config/coc.vim
-
 source $HOME/.config/nvim/plugin_config/nerdcommenter.vim
+source $HOME/.config/nvim/plugin_config/easymotion.vim
+source $HOME/.config/nvim/plugin_config/gruvbox.vim
+
