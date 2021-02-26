@@ -42,3 +42,7 @@
 - `suda.vim` 不必再使用sudo启动vim,把sudo集成到vim中.
 - `coc.nvim` COC插件体系,用于LSP支持.
 
+
+## backup
+
+`$(REPO_ROOT)/static/vim_conf`
