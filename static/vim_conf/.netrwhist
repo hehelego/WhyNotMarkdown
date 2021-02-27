@@ -1,3 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =1
+let g:netrw_dirhistcnt =3
+let g:netrw_dirhist_3='/sys/devices/pci0000:00/0000:00:08.1/0000:03:00.0/backlight/amdgpu_bl0/subsystem'
+let g:netrw_dirhist_2='/sys/devices/pci0000:00/0000:00:08.1/0000:03:00.0/backlight/amdgpu_bl0'
 let g:netrw_dirhist_1='/home/hehelego/.config'

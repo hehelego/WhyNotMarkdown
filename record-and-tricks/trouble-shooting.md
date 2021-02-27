@@ -283,8 +283,9 @@ okular打开包含中文的pdf,发现未嵌入的字体渲染异常.
 
 ### 解决方案
 
-安装`poppler,poppler-data`等poppler相关的软件包.  
-或者换个PDF viewer
+- 安装`poppler,poppler-data`等poppler相关的软件包.  
+- 安装更多字体.  
+  例如:MS windows中常见的`Courier,Times fonts` fallback到noto fonts的效果并不好,用liberation fonts替代效果更好.
 
 
 ## i3wm下touchpad配置
