@@ -174,7 +174,7 @@ echo 1 | sudo tee /sys/devices/system/cpu/cpufreq/boost
 
 -------------------------------------
 
-## can't change backlight in i3wm session
+## can't adjust backlight in i3wm session
 
 > date: 2021.12.31
 
@@ -198,16 +198,18 @@ echo 1 | sudo tee /sys/devices/system/cpu/cpufreq/boost
 echo {brightness} | sudo tee /sys/class/backlight/amdgpu_bl0/brightness
 ```
 
-按照arch wiki关于backlight的词条, 我这台机子属于使用ACPI调节.  
-删掉xorg-xbacklight,安装acpilight. 发现可以正常调节亮度了,但是仅限root.
+参考arch wiki关于backlight的词条,在`/sys/class/backlight/`中找到了可以调节背光的显卡驱动模块,  
+所以我这台机子属于 使用ACPI调节.  
 
-将日常使用的用户加入video group;添加udev rule,允许video组用户修改backlight.  
-之后向i3-config中添加backlight control的media key的bindsym.
+删掉xorg-xbacklight,安装acpilight. 发现可以正常调节亮度了,但是仅限root.
+将日常使用的用户加入video group; 添加udev rule,允许video组用户修改backlight.  
 
 ```plaintext
 #PATH /etc/udev/rules.d/backlight.rules
-ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="acpi_video0", GROUP="video", MODE="0664"
+ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="amdgpu_bl0", GROUP="video", MODE="0664"
 ```
+
+之后向i3-config中添加backlight control的media key的bindsym.
 
 ```plaintext
 #PATH ~/.config/i3/config
@@ -231,6 +233,7 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 ```
 
+如果失败,可以尝试添加`acpi_backlight=native`的kernel parameter.
 
 
 -------------------------------------
@@ -540,3 +543,51 @@ systemctl restart systemd-timesyncd.service
 
 如无法正确同步,可以尝试更换`timesyncd`使用的NTP server.
 
+
+## hibernate(suspend, save to disk) with swapfile
+
+> date 2021.02.27
+
+前段时间主力机(一台ideapad S540 ARE,或者叫 联想小新Pro13 2020 are)的主板挂了(板载内存或者EC的问题), 还好在保修期内. 维修失去了磁盘数据, 重新配置系统,记录一下比较麻烦的休眠配置.
+
+### 问题描述
+
+使用swap partition无法调整大小, 尝试使用swapfile.
+
+### 参考信息
+
+- [archwiki: suspend & hibernate](https://wiki.archlinux.org/index.php/Power_management/Suspend_and_hibernate)
+- [archwiki: swapfile](https://wiki.archlinux.org/index.php/Swap#Swap_file)
+
+
+### 解决方案
+
+1. 创建 swapfile
+```
+sudo su
+dd if=/dev/zero of=/swapfile bs=1G count=20 status=progress
+chmod 600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+echo "/swapfile none swap defaults 0 0" >> /etc/fstab
+exit
+```
+
+2. 配置 init ram fs
+
+编辑`/etc/mkinitcpio.conf`,在`HOOKS`中添加`resume`. 或者这添加`systemd`.  
+使用`sudo mkinitcpio -P`重新重新生成initramfs.
+
+3. 添加 kernel parameter
+
+这里我使用grub bootloader,它提供kernel parameters.  
+在`/etc/default/grub`中写入配置(`GRUB_CMDLINE_LINUX_DEFAULT`一项), 添加resume和resume offset参数.
+
+```bash
+resume=UUID={{findmnt -no UUID -T /swapfile}}
+swap_file_offset={{sudo filefrag -v /swapfile | awk '{ if($1=="0:"){print substr($4, 1, length($4)-2)} }'}}..
+```
+
+4. reboot,检验功能
+
+`cat /proc/cmdline`查看kernel parameter确定配置成功,并`systemctl hibernate`测试.
