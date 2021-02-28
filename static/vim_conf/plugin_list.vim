@@ -27,8 +27,11 @@ call plug#end()
 
 
 source $HOME/.config/nvim/plugin_config/coc.vim
-source $HOME/.config/nvim/plugin_config/nerdcommenter.vim
-source $HOME/.config/nvim/plugin_config/easymotion.vim
 source $HOME/.config/nvim/plugin_config/gruvbox.vim
+source $HOME/.config/nvim/plugin_config/markdown-preview.vim
 source $HOME/.config/nvim/plugin_config/rainbow_parentheses.vim
+source $HOME/.config/nvim/plugin_config/easymotion.vim
+source $HOME/.config/nvim/plugin_config/latex-live-preview.vim
+source $HOME/.config/nvim/plugin_config/nerdcommenter.vim
+
 

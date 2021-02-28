@@ -1,3 +1,6 @@
+" see https://github.com/preservim/nerdcommenter
+
+
 " Create default mappings
 let g:NERDCreateDefaultMappings = 1
 
