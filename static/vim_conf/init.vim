@@ -20,4 +20,5 @@ set termguicolors
 colorscheme gruvbox
 highlight Normal guibg=NONE ctermbg=NONE
 
-nmap <Leader>h :echo 'hello'<CR>
+map <Leader>h :<C-u>echo 'hello'<CR>
+map <C-S-l> :<C-u>nohlsearch<CR>
