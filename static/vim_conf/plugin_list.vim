@@ -26,12 +26,32 @@ call plug#end()
 
 
 
-source $HOME/.config/nvim/plugin_config/coc.vim
-source $HOME/.config/nvim/plugin_config/gruvbox.vim
-source $HOME/.config/nvim/plugin_config/markdown-preview.vim
-source $HOME/.config/nvim/plugin_config/rainbow_parentheses.vim
-source $HOME/.config/nvim/plugin_config/easymotion.vim
-source $HOME/.config/nvim/plugin_config/latex-live-preview.vim
-source $HOME/.config/nvim/plugin_config/nerdcommenter.vim
 
 
+" load plugin configuration files with python
+python3 << PY_END
+
+import vim
+import os
+
+def py_log(msg):
+	vim.command(r"echo '[hehelego] {}'".format(msg))
+
+def load_plugin_config():
+	py_log('loading plugin configurations')
+	conf_dir=os.path.expandvars(r'$HOME/.config/nvim/plugin_config')
+	try:
+		confs = os.listdir(conf_dir)
+		for i in confs:
+			py_log('loading {}'.format(i))
+			path = os.path.join(conf_dir,i)
+			vim.command('source {}'.format(path))
+	except Exception as e:
+		py_log('FAILED:: {}'.format(str(e)))
+	else:
+		py_log('SUCCESS:: all plugin config files loaded')
+
+
+load_plugin_config()
+
+PY_END

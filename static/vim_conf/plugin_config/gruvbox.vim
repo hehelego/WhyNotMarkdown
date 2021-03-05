@@ -7,3 +7,5 @@ let g:gruvbox_underline=1
 let g:gruvbox_undercurl=1
 let g:gruvbox_termcolors=256
 
+colorscheme gruvbox
+highlight Normal guibg=NONE ctermbg=NONE

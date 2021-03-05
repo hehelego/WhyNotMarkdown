@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =6
+let g:netrw_dirhist_6='/home/hehelego/.config/nvim/plugin_config'
+let g:netrw_dirhist_5='/home/hehelego/.texlive2020/texmf-var/texdoc'
+let g:netrw_dirhist_4='/home/hehelego/.local/share/virtualenv/wheel/3.9'
+let g:netrw_dirhist_3='/sys/devices/pci0000:00/0000:00:08.1/0000:03:00.0/backlight/amdgpu_bl0/subsystem'
+let g:netrw_dirhist_2='/sys/devices/pci0000:00/0000:00:08.1/0000:03:00.0/backlight/amdgpu_bl0'
+let g:netrw_dirhist_1='/home/hehelego/.config'
