@@ -2,17 +2,17 @@ call plug#begin('~/.local/share/nvim/plugins')
 
 ":: plugins for language support
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'liuchengxu/vista.vim'
 
 ":: plugins for user interface
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
+Plug 'morhetz/gruvbox'
+Plug 'ryanoasis/vim-devicons'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-startify'
-Plug 'ryanoasis/vim-devicons'
-Plug 'morhetz/gruvbox'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'liuchengxu/vista.vim'
+Plug 'skywind3000/vim-quickui'
 
 ":: uncategorized plugins
 Plug 'kien/rainbow_parentheses.vim'
@@ -41,10 +41,10 @@ def load_plugin_config():
 	py_log('loading plugin configurations')
 	conf_dir=os.path.expandvars(r'$HOME/.config/nvim/plugin_config')
 	try:
-		confs = os.listdir(conf_dir)
-		for i in confs:
-			py_log('loading {}'.format(i))
-			path = os.path.join(conf_dir,i)
+		confs = sorted(os.listdir(conf_dir))
+		for x in confs:
+			py_log('loading {}'.format(x))
+			path = os.path.join(conf_dir,x)
 			vim.command('source {}'.format(path))
 	except Exception as e:
 		py_log('FAILED:: {}'.format(str(e)))
