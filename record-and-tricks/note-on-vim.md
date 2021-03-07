@@ -1,10 +1,9 @@
 # note on vim
 
-> vim: I'd like to keep a zero-configuration minimal editor.
-> neovim: I'd like to have a fully-customized,user-friendly IDE
+> I'd like to keep a zero-configuration minimal editor, the `/usr/bin/vim`
+> I'd like to have a fully-customized,user-friendly IDE, the `/usr/bin/nvim`
 > vimpager: `PAGER=vimpager man vim`
 > spacevim: ALL IN ONE "a community driven vim distribution" (similar to SpaceEmacs)  ~~懒人必备~~
-
 
 ## resources
 
@@ -30,6 +29,7 @@
   在vimrc中加入`set fillchars=fold:\ ,vert:\│,eob:\ ,msgsep:‾`,改变最后填充的字符.
 - vimrc启用了`termguicolor`,colorscheme设置transparent background,terminal emulator支持并启用transparent.无法得到真正透明效果.  
   可以强制修改背景`highlight Normal guibg=NONE ctermbg=NONE`
+- want to visualize whitespace characters? read `:help listchars`
 
 ## plugins
 
