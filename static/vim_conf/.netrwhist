@@ -1,5 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =6
+let g:netrw_dirhistcnt =8
+let g:netrw_dirhist_8='/'
+let g:netrw_dirhist_7='/home/hehelego/.config/alacritty'
 let g:netrw_dirhist_6='/home/hehelego/.config/nvim/plugin_config'
 let g:netrw_dirhist_5='/home/hehelego/.texlive2020/texmf-var/texdoc'
 let g:netrw_dirhist_4='/home/hehelego/.local/share/virtualenv/wheel/3.9'

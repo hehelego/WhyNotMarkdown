@@ -7,5 +7,3 @@ source $HOME/.config/nvim/plugin_list.vim
 
 " more custom keymappings
 source $HOME/.config/nvim/keymapping.vim
-
-
