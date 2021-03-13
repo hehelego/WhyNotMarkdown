@@ -1,5 +1,6 @@
 " see https://github.com/iamcco/markdown-preview.nvim
 
+
 " don't start previewing automatically when entering a markdown buffer
 let g:mkdp_auto_start = 0
 

@@ -1,31 +1,42 @@
 call plug#begin('~/.local/share/nvim/plugins')
 
-":: plugins for language support
+" for LSP-client and CocList
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-":: plugins for user interface
+" for gruvbox colorscheme
 Plug 'morhetz/gruvbox'
+" for nerdfont file icon support
 Plug 'ryanoasis/vim-devicons'
+" for status-line and tab-line
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+" for a fancy start menu displaying recent accessed file
 Plug 'mhinz/vim-startify'
+" for FZF,ag,rg integration
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+" for viewing symbol/tag tree
 Plug 'liuchengxu/vista.vim'
+" for quickui: customizable menu
 Plug 'skywind3000/vim-quickui'
-
-":: uncategorized plugins
+" for running shell command asynchronously
+Plug 'skywind3000/asyncrun.vim'
+" for viewing change history and back tracing
+Plug 'mbbill/undotree'
+" for colorizing pair parentheses
 Plug 'kien/rainbow_parentheses.vim'
+" Plug 'luochen1990/rainbow'
+" for quick commenting/uncommenting
 Plug 'preservim/nerdcommenter'
+" text alignment
+Plug 'godlygeek/tabular'
+" for quick cursor navigating
 Plug 'easymotion/vim-easymotion'
+" for markdown/latex previwing
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'xuhdev/vim-latex-live-preview'
 
 
 call plug#end()
-
-
-
 
 
 "load plugin configuration files with python
