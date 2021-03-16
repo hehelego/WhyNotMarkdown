@@ -5,9 +5,9 @@ noremap <silent> <Right> :<C-u>vertical resize +3<CR>
 noremap <silent> <Down> :<C-u>resize -3<CR>
 noremap <silent> <Up> :<C-u>resize +3<CR>
 
-map <A-j> gT
-map <A-k> gt
-map <silent> <A-w> :<C-u>bd<CR>
+map <silent> <A-j> gT
+map <silent> <A-k> gt
+map <silent> <A-w> :<C-u>bdelete<CR>
 map <silent> <leader>qo :<C-u>copen<CR>
 map <silent> <leader>qc :<C-u>cclose<CR>
 

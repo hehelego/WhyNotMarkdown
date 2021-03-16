@@ -17,6 +17,7 @@ call quickui#menu#install("FindFiles(&f)", [
 			\ [ 'fzf'           , 'Files'],
 			\ [ 'history'       , 'History' ],
 			\ [ 'switch buffer' , 'Buffers'],
+			\ [ 'switch window' , 'Windows'],
 			\ [ 'silver-search' , 'Ag'],
 			\ [ 'rip-grep'      , 'Rg'],
 			\ [ '--' ]          ,
@@ -42,13 +43,16 @@ call quickui#menu#install("Command(&c)", [
 			\ ])
 
 call quickui#menu#install("Editor(&e)", [
-			\ [ 'undo-tree'        , 'UndoTreeToggle' ],
-			\ [ '--' ]             ,
-			\ [ 'quickfix on'      , 'copen'],
-			\ [ 'quickfix off'     , 'cclose'],
-			\ [ '--' ]             ,
-			\ [ 'transparent'      , 'highlight Normal guibg=NONE ctermbg=NONE'],
-			\ [ 'non transparent'  , 'highlight Normal guibg=#282828 ctermbg=235'],
+			\ [ 'undo-tree'       , 'UndoTreeToggle' ],
+			\ [ '--' ]            ,
+			\ [ 'quickfix on'     , 'copen'],
+			\ [ 'quickfix off'    , 'cclose'],
+			\ [ '--' ]            ,
+			\ [ 'transparent'     , 'highlight Normal guibg=NONE ctermbg=NONE'],
+			\ [ 'non transparent' , 'highlight Normal guibg=#282828 ctermbg=235'],
+			\ [ '--' ]            ,
+      \ [ 'ruler on'        , 'set cursorcolumn' ],
+      \ [ 'ruler off'       , 'set nocursorcolumn' ],
 			\ ])
 
 " TODO:
