@@ -5,8 +5,8 @@ noremap <silent> <Right> :<C-u>vertical resize +3<CR>
 noremap <silent> <Down> :<C-u>resize -3<CR>
 noremap <silent> <Up> :<C-u>resize +3<CR>
 
-map <silent> <A-j> gT
-map <silent> <A-k> gt
+map <silent> <A-j> gt
+map <silent> <A-k> gT
 map <silent> <A-w> :<C-u>bdelete<CR>
 map <silent> <leader>qo :<C-u>copen<CR>
 map <silent> <leader>qc :<C-u>cclose<CR>
@@ -36,7 +36,11 @@ let s:kmcs_MISC = [
 	\ [ '<leader>qo', 'quickfix on' ],
 	\ [ '<leader>qo', 'quickfix on' ],
   \]
-let s:kmcs_builtin = []
+let s:kmcs_builtin = [
+  \ [ '# / *', 'match the word under cursor forward/backward'],
+  \ [ '^ / $', 'jump to begin/end of current line'],
+  \ [ '%', 'jump to matched brace/bracket'],
+  \]
 
 let s:kmcs_coc = []
 let s:kmcs_fzf = []
