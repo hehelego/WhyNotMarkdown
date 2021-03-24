@@ -592,3 +592,21 @@ swap_file_offset={{sudo filefrag -v /swapfile | awk '{ if($1=="0:"){print substr
 4. reboot,检验功能
 
 `cat /proc/cmdline`查看kernel parameter确定配置成功,并`systemctl hibernate`测试.
+
+## git: displaying unicode path
+
+> 2021.03.24
+
+git status, git commit中,中文路径显示不正确.
+出现类似  
+`modified:   "\321\203\321\201\321\202\320\260\320\275\320\276\320\262"`  
+的显示效果.
+
+### 参考资料
+
+- [StackOverflow: how to make git properly display utf-8 encoded path](https://stackoverflow.com/questions/22827239/how-to-make-git-properly-display-utf-8-encoded-pathnames-in-the-console-window)
+
+```bash
+git config --global core.quotepath off
+```
+
