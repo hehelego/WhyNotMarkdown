@@ -53,6 +53,9 @@ call quickui#menu#install("Editor(&e)", [
 			\ [ '--' ]            ,
       \ [ 'ruler on'        , 'set cursorcolumn' ],
       \ [ 'ruler off'       , 'set nocursorcolumn' ],
+			\ [ '--' ]            ,
+      \ [ 'number on'       , 'call SetColumnDisplay(1)' ],
+      \ [ 'number off'      , 'call SetColumnDisplay(0)' ],
 			\ ])
 
 " TODO:
@@ -65,7 +68,7 @@ call quickui#menu#install("LSP(&l)", [
 			\ [ 'vista-coc'   , 'Vista coc'],
 			\ [ '--' ]        ,
 			\ [ 'CocAction'   , 'CocAction' ],
-			\ [ 'CocCommands' , 'CocCommands' ],
+			\ [ 'CocCommand'  , 'CocCommand' ],
 			\ [ 'CocList'     , 'CocList' ],
 			\ ])
 call quickui#menu#install("Build(&s)", [
@@ -89,6 +92,11 @@ call quickui#menu#install("MISC(&p)", [
 			\ [ '--' ]             ,
 			\ [ 'markdown preview' , 'MarkdownPreview'],
 			\ [ 'latex preview'    , 'LLPStartPreview'],
+			\ [ '--' ]             ,
+      \ [ 'plug.vim status'    , 'PlugStatus' ],
+      \ [ 'plug.vim update'    , 'PlugUpdate' ],
+      \ [ 'plug.vim clean'     , 'PlugClean' ],
+      \ [ 'plug.vim self-upd'  , 'PlugUpgrade' ],
 			\ ])
 
 
@@ -101,7 +109,6 @@ nnoremap <silent><leader><space> :call quickui#menu#open('system')<CR>
 ""
 " keymappings cheatsheet
 ""
-
 function g:KMCS()
 	call s:KMCS_get()
 	let l:opts = {'index':g:quickui#listbox#cursor, 'title': 'cheatsheet'}
@@ -141,3 +148,20 @@ function s:KMCS_get()
 	endif
 	return s:kmcs
 endfunction
+
+
+""
+" set number on/off
+""
+function g:SetColumnDisplay(s)
+  if a:s
+    let &number=1
+    let &relativenumber=1
+    let &signcolumn="auto"
+  else
+    let &number=0
+    let &relativenumber=0
+    let &signcolumn="no"
+  endif
+endfunction
+
