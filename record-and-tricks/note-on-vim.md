@@ -30,6 +30,7 @@
 - vimrc启用了`termguicolor`,colorscheme设置transparent background,terminal emulator支持并启用transparent.无法得到真正透明效果.  
   可以强制修改背景`highlight Normal guibg=NONE ctermbg=NONE`
 - want to visualize whitespace characters? read `:help listchars`
+- performing pattern searching with unicode in vim [StackOverflow: regex unicode character in vim](https://stackoverflow.com/questions/3016965/regex-unicode-character-in-vim). 使用形如`\%u200b`的搜索式.
 
 ## plugins
 
