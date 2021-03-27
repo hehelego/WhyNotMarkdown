@@ -43,7 +43,7 @@ call quickui#menu#install("Command(&c)", [
 			\ ])
 
 call quickui#menu#install("Editor(&e)", [
-			\ [ 'undo-tree'       , 'UndoTreeToggle' ],
+			\ [ 'undo-tree'       , 'UndotreeToggle' ],
 			\ [ '--' ]            ,
 			\ [ 'quickfix on'     , 'copen'],
 			\ [ 'quickfix off'    , 'cclose'],
