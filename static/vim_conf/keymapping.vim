@@ -18,68 +18,73 @@ map <silent> <leader>qc :<C-u>cclose<CR>
 
 
 let s:kmcs_MISC = [
-	\ [ '<leader><space>' , 'quickui-menu' ]         ,
-	\ [ '--' ]            ,
-	\ [ '<C-l>'           , 'nohlsearch' ]           ,
-	\ [ '--' ]            ,
-	\ [ '<leader>p'       , 'transparent backgroud'] ,
-	\ [ '<leader>P'       , 'colorized backgroud']   ,
-	\ [ '--' ]            ,
-	\ [ '<left>'          , 'vsize -3' ]             ,
-	\ [ '<right>'         , 'vsize +3' ]             ,
-	\ [ '<up>'            , 'hsize +3' ]             ,
-	\ [ '<down>'          , 'hsize -3' ]             ,
-	\ [ '--' ]            ,
-	\ [ '<A-j>'           , 'next tab' ]             ,
-	\ [ '<A-j>'           , 'previous tab' ]         ,
-	\ [ '<A-w>'           , 'close buffer' ]         ,
-	\ [ '<leader>qo'      , 'quickfix on' ]          ,
-	\ [ '<leader>qo'      , 'quickfix on' ]          ,
-  \]
+			\ [ '<leader>'        , '<space>' ]              ,
+			\ [ '<leader><space>' , 'quickui-menu' ]         ,
+			\ [ '--' ]            ,
+			\ [ '<C-l>'           , 'nohlsearch' ]           ,
+			\ [ '--' ]            ,
+			\ [ '<leader>p'       , 'transparent backgroud'] ,
+			\ [ '<leader>P'       , 'colorized backgroud']   ,
+			\ [ '--' ]            ,
+			\ [ '<left>'          , 'vsize -3' ]             ,
+			\ [ '<right>'         , 'vsize +3' ]             ,
+			\ [ '<up>'            , 'hsize +3' ]             ,
+			\ [ '<down>'          , 'hsize -3' ]             ,
+			\ [ '--' ]            ,
+			\ [ '<A-j>'           , 'next tab' ]             ,
+			\ [ '<A-j>'           , 'previous tab' ]         ,
+			\ [ '<A-w>'           , 'close buffer' ]         ,
+			\ [ '<leader>qo'      , 'quickfix on' ]          ,
+			\ [ '<leader>qo'      , 'quickfix on' ]          ,
+			\]
 let s:kmcs_builtin = [
-  \ [ '# / *'     , 'match the word under cursor forward/backward'] ,
-  \ [ '^ / $'     , 'jump to begin/end of current line']            ,
-  \ [ '%'         , 'jump to matched brace/bracket']                ,
-  \ [ '--' ]      ,
-  \ [ '<C-w>w'    , 'close window']                                 ,
-  \ [ '<C-w>s'    , 'vertical split']                               ,
-  \ [ '<C-w>h'    , 'horizontal split']                             ,
-  \ [ '<C-w>hjkl' , 'focus another windows']                        ,
-  \ [ '<C-w>HJKL' , 'move the focused window']                      ,
-  \ [ '<C-w>='    , 'equalize size']                                ,
-  \]
+			\ [ '# / *'     , 'match the word under cursor forward/backward'] ,
+			\ [ '^ / $'     , 'jump to begin/end of current line']            ,
+			\ [ '%'         , 'jump to matched brace/bracket']                ,
+			\ [ '--' ]      ,
+			\ [ '<C-w>w'    , 'close window']                                 ,
+			\ [ '<C-w>s'    , 'vertical split']                               ,
+			\ [ '<C-w>h'    , 'horizontal split']                             ,
+			\ [ '<C-w>hjkl' , 'focus another windows']                        ,
+			\ [ '<C-w>HJKL' , 'move the focused window']                      ,
+			\ [ '<C-w>='    , 'equalize size']                                ,
+			\ [ '--' ]      ,
+			\ [ '<C-a>'     , 'find a literals in this line and increase it' ],
+			\ [ '<C-a>'     , 'find a literals in this line and decrease it' ],
+			\]
+
 
 let s:kmcs_coc = []
 let s:kmcs_fzf = [
-  \ [ '<Tab>' , 'toggle select' ]   ,
-  \ [ '<C-n>' , 'move next' ]       ,
-  \ [ '<C-p>' , 'move previous' ]   ,
-  \ [ '--' ]  ,
-  \ [ '<C-t>' , 'open in new tab' ] ,
-  \ [ '<C-v>' , 'open in V-split' ] ,
-  \ [ '<C-h>' , 'open in H-split' ] ,
-  \]
+			\ [ '<Tab>' , 'toggle select' ]   ,
+			\ [ '<C-n>' , 'move next' ]       ,
+			\ [ '<C-p>' , 'move previous' ]   ,
+			\ [ '--' ]  ,
+			\ [ '<C-t>' , 'open in new tab' ] ,
+			\ [ '<C-v>' , 'open in V-split' ] ,
+			\ [ '<C-h>' , 'open in H-split' ] ,
+			\]
 let s:kmcs_vista = []
 let s:kmcs_asyncrun = []
 let s:kmcs_undotree = []
 let s:kmcs_rainbow = []
 let s:kmcs_tabular = []
 let s:kmcs_easymotion = [
-  \ [ '\'     , 'easymotion-mapleader' ]          ,
-  \ [ '--' ]  ,
-  \ [ 'f[x]'  , 'find a single character [x]' ]   ,
-  \ [ 'F[xy]' , 'find two characters [xy]' ]      ,
-  \ [ 'w/W'   , 'find ^(word)/(word)$']           ,
-  \ [ 'j/k'   , 'find ^(line) forward/backward' ] ,
-  \ [ 'J/K'   , 'find (line)$ forward/backward' ] ,
-  \]
+			\ [ '\'     , 'easymotion-mapleader' ]          ,
+			\ [ '--' ]  ,
+			\ [ 'f[x]'  , 'find a single character [x]' ]   ,
+			\ [ 'F[xy]' , 'find two characters [xy]' ]      ,
+			\ [ 'w/W'   , 'find ^(word)/(word)$']           ,
+			\ [ 'j/k'   , 'find ^(line) forward/backward' ] ,
+			\ [ 'J/K'   , 'find (line)$ forward/backward' ] ,
+			\]
 let s:kmcs_TEST = [
-	\ [ 'a0'   , 'b0' ] ,
-	\ [ 'a1'   , 'b1' ] ,
-	\ [ '--' ] ,
-	\ [ 'a2'   , 'b2' ] ,
-	\ [ 'a3'   , 'b3' ] ,
-  \]
+			\ [ 'a0'   , 'b0' ] ,
+			\ [ 'a1'   , 'b1' ] ,
+			\ [ '--' ] ,
+			\ [ 'a2'   , 'b2' ] ,
+			\ [ 'a3'   , 'b3' ] ,
+			\]
 
 
 

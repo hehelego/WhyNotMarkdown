@@ -9,12 +9,11 @@
 > font-family: (Noto Sans CJK SC,Source Code Pro,Liberation Mono)
 >
 > package-manager: pacman(+pacman-contrib,pacutils),pac + yay(AUR manager) ; pip(python) ; cargo(rust) ; stack(haskell) ; tlmgr(texlive) ; npm(nodejs)
-> - xorg,xorg-apps,xf86-video-amdgpu,sddm
 
 ### daily use
 
 * fcitx5(with rime,rime-luna-pinyin)
-* 7zip(gui frontend:ark,gnome archive manager)
+* ark,p7z (compressing/decompressing archives)
 * dolphin
 * firefox
 * okular
@@ -28,16 +27,18 @@
 ### working
 
 * v2ray(gui frontend `qv2ray`; or `v2raya` for web fontend) + proxychains-ng
+* curl,wget,aria2
+* keynav
+* xclip
 
-* tldr
+* tldr (see [github:tldr-pages](https://github.com/tldr-pages/tldr) and [tldr.sh](https://tldr.sh))
 * rofi
 * GNU toolchain(compilers,linkers,debuger,build system...) (package group `base-devel` and package `gdb`)
 * git
-* vim/neovim/SpaceVim
-* ranger,broot
+* vim/neovim
+* ranger,broot,exa
 * top/htop/bashtop
 * fzf,rg,ag (FuzzyFileFinder, rip grep, the silver searcher)
-* tmux
 * rsync
 
 * texlive
@@ -50,26 +51,25 @@
 * MISC
   * nodejs (package `nodejs,npm`)
   * rust (package `rust`)
-  * haskell (package :`ghc`)
-  * racket (racket,DrRacket)
-  * coq,agda,idris
+  * haskell (package `ghc`)
+  * racket,coq,agda,idris...
 
 
 ### MISC
 
 
-* xclip
+* noto fonts, liberation fonts, source code pro
+* xorg-apps (`pacman -Sg xorg-apps`)
+* tmux
 * dunst
 * smarttools
-* keynav
 * graphviz
 * scrcpy
-* qemu,virtualbox(请参考[octetz写的一篇关于qemu的博客](https://octetz.com/docs/2020/2020-05-06-linux-hypervisor-setup/),以及arch wiki进行操作)
-* curl,wget,aria2
+* qemu(请参考[octetz写的一篇关于qemu的博客](https://octetz.com/docs/2020/2020-05-06-linux-hypervisor-setup/),以及arch wiki进行操作)
 * qBittorrent
 * syncthing
 * **timeshift**
-* tox(qtox or utox for gui frontend)
+* tox(`qtox`/`utox` for gui frontend)
 * screenkey+simplescreenrecorder
 * screengrab
 
@@ -88,10 +88,8 @@
 
 ### extensions/plugins for browser
 
-* tampermonkey
-* oneTab
-* auto discard tab
-* cookie quick manager(on firefox)
-* vimium(vim-mode on firefox)
-
+* Cookie Quick Manager (cookies manipulation)
+* Vimium (enabling vim-mode for browser)
+* Dark Reader (for dark mode)
+* User-Agent Switcher and Manager (changing user-agent field in the http request header)
 

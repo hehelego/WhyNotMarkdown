@@ -2,7 +2,9 @@ call plug#begin('~/.local/share/nvim/plugins')
 
 " for LSP-client and CocList
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" for gruvbox colorscheme
+" for extra language settings
+Plug 'sheerun/vim-polyglot'
+" for extra colorschemes
 Plug 'morhetz/gruvbox'
 " for nerdfont file icon support
 Plug 'ryanoasis/vim-devicons'

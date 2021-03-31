@@ -43,19 +43,19 @@ call quickui#menu#install("Command(&c)", [
 			\ ])
 
 call quickui#menu#install("Editor(&e)", [
-			\ [ 'undo-tree'       , 'UndotreeToggle' ],
-			\ [ '--' ]            ,
-			\ [ 'quickfix on'     , 'copen'],
-			\ [ 'quickfix off'    , 'cclose'],
-			\ [ '--' ]            ,
-			\ [ 'transparent'     , 'highlight Normal guibg=NONE ctermbg=NONE'],
-			\ [ 'non transparent' , 'highlight Normal guibg=#282828 ctermbg=235'],
-			\ [ '--' ]            ,
-      \ [ 'ruler on'        , 'set cursorcolumn' ],
-      \ [ 'ruler off'       , 'set nocursorcolumn' ],
-			\ [ '--' ]            ,
-      \ [ 'number on'       , 'call SetColumnDisplay(1)' ],
-      \ [ 'number off'      , 'call SetColumnDisplay(0)' ],
+			\ [ 'undo-tree'        , 'UndotreeToggle' ]                          ,
+			\ [ '--' ]             ,
+			\ [ 'quickfix on'      , 'copen']                                    ,
+			\ [ 'quickfix off'     , 'cclose']                                   ,
+			\ [ '--' ]             ,
+			\ [ 'transparent bg'   , 'highlight Normal guibg=NONE ctermbg=NONE'] ,
+			\ [ 'select theme'     , 'Colors' ]                                  ,
+			\ [ '--' ]             ,
+      \ [ 'ruler on'         , 'set cursorcolumn' ]                        ,
+      \ [ 'ruler off'        , 'set nocursorcolumn' ]                      ,
+			\ [ '--' ]             ,
+      \ [ 'number on'        , 'call SetColumnDisplay(1)' ]                ,
+      \ [ 'number off'       , 'call SetColumnDisplay(0)' ]                ,
 			\ ])
 
 " TODO:

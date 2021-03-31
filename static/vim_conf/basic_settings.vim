@@ -19,3 +19,4 @@ set updatetime=500
 
 
 let mapleader=" "
+let maplocalleader="\\"
