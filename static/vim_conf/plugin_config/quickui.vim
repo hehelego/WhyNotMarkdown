@@ -14,90 +14,89 @@ call quickui#menu#switch('system')
 call quickui#menu#reset()
 
 call quickui#menu#install("FindFiles(&f)", [
-			\ [ 'fzf'           , 'Files'],
+			\ [ 'fzf'           , 'Files' ],
 			\ [ 'history'       , 'History' ],
-			\ [ 'switch buffer' , 'Buffers'],
-			\ [ 'switch window' , 'Windows'],
-			\ [ 'silver-search' , 'Ag'],
-			\ [ 'rip-grep'      , 'Rg'],
+			\ [ 'switch buffer' , 'Buffers' ],
+			\ [ 'silver-search' , 'Ag' ],
+			\ [ 'rip-grep'      , 'Rg' ],
 			\ [ '--' ]          ,
-			\ [ 'fzf home'      , 'Files ~'],
-			\ [ 'fzf config'    , 'Files ~/.config'],
-			\ [ 'fzf etc'       , 'Files /etc'],
-			\ ])
+			\ [ 'fzf home'      , 'Files ~' ],
+			\ [ 'fzf config'    , 'Files ~/.config' ],
+			\ [ 'fzf etc'       , 'Files /etc' ],
+			\])
 
 call quickui#menu#install("CurrentBuffer(&b)" , [
-			\ [ 'set filetype'   , 'Filetypes'],
+			\ [ 'set filetype'   , 'Filetypes' ],
 			\ [ '--' ]           ,
-			\ [ 'close window'   , 'close'],
-			\ [ 'close buffer'   , 'bdelete'],
+			\ [ 'close window'   , 'close' ],
+			\ [ 'close buffer'   , 'bdelete' ],
 			\ [ '--' ]           ,
-			\ [ 'jump to line'   , 'BLines'],
+			\ [ 'jump to line'   , 'BLines' ],
 			\ [ 'search history' , 'History/' ],
-			\ ])
+			\])
 
 call quickui#menu#install("Command(&c)", [
 			\ [ 'all-cmd'      , 'Commands' ],
 			\ [ 'key-mappings' , 'Maps' ],
 			\ [ 'history'      , 'History:' ],
-			\ ])
+			\])
 
 call quickui#menu#install("Editor(&e)", [
-			\ [ 'undo-tree'        , 'UndotreeToggle' ]                          ,
+			\ [ 'undo-tree'        , 'UndotreeToggle' ],
 			\ [ '--' ]             ,
-			\ [ 'quickfix on'      , 'copen']                                    ,
-			\ [ 'quickfix off'     , 'cclose']                                   ,
+			\ [ 'quickfix on'      , 'copen' ],
+			\ [ 'quickfix off'     , 'cclose' ],
 			\ [ '--' ]             ,
-			\ [ 'transparent bg'   , 'highlight Normal guibg=NONE ctermbg=NONE'] ,
-			\ [ 'select theme'     , 'Colors' ]                                  ,
+			\ [ 'transparent bg'   , 'highlight Normal guibg=NONE ctermbg=NONE'],
+			\ [ 'select theme'     , 'Colors' ],
 			\ [ '--' ]             ,
-      \ [ 'ruler on'         , 'set cursorcolumn' ]                        ,
-      \ [ 'ruler off'        , 'set nocursorcolumn' ]                      ,
+      \ [ 'ruler on'         , 'set cursorcolumn' ],
+      \ [ 'ruler off'        , 'set nocursorcolumn' ],
 			\ [ '--' ]             ,
-      \ [ 'number on'        , 'call SetColumnDisplay(1)' ]                ,
-      \ [ 'number off'       , 'call SetColumnDisplay(0)' ]                ,
-			\ ])
+      \ [ 'number on'        , 'call SetColumnDisplay(1)' ],
+      \ [ 'number off'       , 'call SetColumnDisplay(0)' ],
+			\])
 
 " TODO:
 " git integration
 " LSP shortcut menu
 " build system shortcut menu
 call quickui#menu#install("LSP(&l)", [
-			\ [ 'vista-ctags' , 'Vista ctags'],
-			\ [ 'vista-mdtoc' , 'Vista toc'],
-			\ [ 'vista-coc'   , 'Vista coc'],
+			\ [ 'vista-ctags' , 'Vista ctags' ],
+			\ [ 'vista-mdtoc' , 'Vista toc' ],
+			\ [ 'vista-coc'   , 'Vista coc' ],
 			\ [ '--' ]        ,
 			\ [ 'CocAction'   , 'CocAction' ],
 			\ [ 'CocCommand'  , 'CocCommand' ],
 			\ [ 'CocList'     , 'CocList' ],
-			\ ])
+			\])
 call quickui#menu#install("Build(&s)", [
 			\ [ 'SECTION:: GNU make'] ,
-			\ [ 'make'                , 'AsyncRun make'],
-			\ [ 'make clean'          , 'AsyncRun make clean'],
-			\ [ 'make purge'          , 'AsyncRun make purge'],
+			\ [ 'make'                , 'AsyncRun make' ],
+			\ [ 'make clean'          , 'AsyncRun make clean' ],
+			\ [ 'make purge'          , 'AsyncRun make purge' ],
 			\ [ '--' ]                ,
 			\ [ 'SECTION:: CMake']    ,
-			\ [ 'cmake'               , 'AsyncRun cmake'],
-			\ ])
+			\ [ 'cmake'               , 'AsyncRun cmake' ],
+			\])
 call quickui#menu#install("Git(&g)", [
 			\ [ '--' ] ,
 			\ [ '--' ] ,
-			\ ])
+			\])
 
 " TODO:
 " MISC menu
 call quickui#menu#install("MISC(&p)", [
-			\ [ 'cheatsheet'       , 'call KMCS()'],
+			\ [ 'cheatsheet'       , 'call KMCS()' ],
 			\ [ '--' ]             ,
-			\ [ 'markdown preview' , 'MarkdownPreview'],
-			\ [ 'latex preview'    , 'LLPStartPreview'],
+			\ [ 'markdown preview' , 'MarkdownPreview' ],
+			\ [ 'latex preview'    , 'LLPStartPreview' ],
 			\ [ '--' ]             ,
       \ [ 'plug.vim status'    , 'PlugStatus' ],
       \ [ 'plug.vim update'    , 'PlugUpdate' ],
       \ [ 'plug.vim clean'     , 'PlugClean' ],
       \ [ 'plug.vim self-upd'  , 'PlugUpgrade' ],
-			\ ])
+			\])
 
 
 ""
