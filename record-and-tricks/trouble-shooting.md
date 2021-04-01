@@ -606,7 +606,68 @@ git status, git commit中,中文路径显示不正确.
 
 - [StackOverflow: how to make git properly display utf-8 encoded path](https://stackoverflow.com/questions/22827239/how-to-make-git-properly-display-utf-8-encoded-pathnames-in-the-console-window)
 
+### 解决方案
+
 ```bash
 git config --global core.quotepath off
 ```
 
+## changing PowerButton event handler
+
+> 2021.04.01
+使用i3wm session,按下笔记本(型号:Lenovo_IdeaPad_S540_13ARE)的powerbutton会触发关机.  
+由于经常误触,我希望修改按下电源键的效果.  
+
+
+### 参考资料
+
+
+- [arch wiki: power management / ACPI event](https://wiki.archlinux.org/index.php/Power_management#ACPI_events)
+
+
+### 解决方案
+
+
+修改`/etc/systemd/logind.conf`或者在`/etc/systemd/logind.conf.d/{CONFIGNAME}.conf`中写入配置.  
+
+
+默认配置如下,
+
+```
+[Login]
+#NAutoVTs=6
+#ReserveVT=6
+#KillUserProcesses=no
+#KillOnlyUsers=
+#KillExcludeUsers=root
+#InhibitDelayMaxSec=5
+#UserStopDelaySec=10
+#HandlePowerKey=suspend
+#HandleSuspendKey=suspend
+#HandleHibernateKey=hibernate
+#HandleLidSwitch=suspend
+#HandleLidSwitchExternalPower=suspend
+#HandleLidSwitchDocked=ignore
+#HandleRebootKey=reboot
+#PowerKeyIgnoreInhibited=no
+#SuspendKeyIgnoreInhibited=no
+#HibernateKeyIgnoreInhibited=no
+#LidSwitchIgnoreInhibited=yes
+#RebootKeyIgnoreInhibited=no
+#HoldoffTimeoutSec=30s
+#IdleAction=ignore
+#IdleActionSec=30min
+#RuntimeDirectorySize=10%
+#RuntimeDirectoryInodes=400k
+#RemoveIPC=yes
+#InhibitorsMax=8192
+#SessionsMax=8192
+```
+
+
+我们需要修改的是`HandlePowerKey`的event handler,比如改成`systemd suspend`
+
+```
+[Login]
+HandlePowerKey=suspend
+```
