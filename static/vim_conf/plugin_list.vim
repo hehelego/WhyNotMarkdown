@@ -5,6 +5,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " for extra language settings
 Plug 'sheerun/vim-polyglot'
 " for extra colorschemes
+Plug 'chriskempson/base16-vim'
 Plug 'morhetz/gruvbox'
 " for nerdfont file icon support
 Plug 'ryanoasis/vim-devicons'
@@ -36,7 +37,6 @@ Plug 'easymotion/vim-easymotion'
 " for markdown/latex previwing
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'xuhdev/vim-latex-live-preview'
-
 
 call plug#end()
 

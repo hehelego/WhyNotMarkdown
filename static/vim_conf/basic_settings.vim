@@ -11,9 +11,6 @@ set nowritebackup
 set cmdheight=1
 set shortmess+=c
 
-set tabstop=2
-set shiftwidth=2
-
 set timeoutlen=500
 set updatetime=500
 

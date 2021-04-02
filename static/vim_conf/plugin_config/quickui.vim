@@ -7,6 +7,7 @@ let g:quickui_border_style = 2
 let g:quickui_show_tip = 1
 
 
+" TODO: complete the menu
 ""
 " menu
 ""
@@ -57,10 +58,6 @@ call quickui#menu#install("Editor(&e)", [
       \ [ 'number off'       , 'call SetColumnDisplay(0)' ],
 			\])
 
-" TODO:
-" git integration
-" LSP shortcut menu
-" build system shortcut menu
 call quickui#menu#install("LSP(&l)", [
 			\ [ 'vista-ctags' , 'Vista ctags' ],
 			\ [ 'vista-mdtoc' , 'Vista toc' ],
@@ -71,16 +68,17 @@ call quickui#menu#install("LSP(&l)", [
 			\ [ 'CocList'     , 'CocList' ],
 			\])
 call quickui#menu#install("Build(&s)", [
-			\ [ 'SECTION:: GNU make'] ,
 			\ [ 'make'                , 'AsyncRun make' ],
 			\ [ 'make clean'          , 'AsyncRun make clean' ],
 			\ [ 'make purge'          , 'AsyncRun make purge' ],
 			\ [ '--' ]                ,
-			\ [ 'SECTION:: CMake']    ,
 			\ [ 'cmake'               , 'AsyncRun cmake' ],
+			\ [ '--' ]                ,
 			\])
 call quickui#menu#install("Git(&g)", [
 			\ [ '--' ] ,
+			\ [ 'fzf git-files'   , 'GFiles' ],
+			\ [ 'fzf git-commits' , 'Commits' ],
 			\ [ '--' ] ,
 			\])
 
