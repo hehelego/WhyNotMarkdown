@@ -38,11 +38,11 @@
 	\begin{aligned}
 		\sum_{n=0}^\infty \binom{n}{k}x^n
 		 & =\sum_{n=k}^\infty \binom{n}{n-k}x^n                                                                             \\
-		 & =\sum_{n=k}^\infty \binom{n(n-1)(n-2)\ldots (n-(n-k)+1)}{(n-k)!} x^n                                             \\
-		 & =\sum_{n=k}^\infty \binom{(-n)(-n+1)(-n+2)\ldots (-k-1)}{(n-k)!} {(-1)}^{n-k}x^n                                 \\
+		 & =\sum_{n=k}^\infty \frac{n(n-1)(n-2)\ldots (n-(n-k)+1)}{(n-k)!} x^n                                             \\
+		 & =\sum_{n=k}^\infty \frac{(-n)(-n+1)(-n+2)\ldots (-k-1)}{(n-k)!} {(-1)}^{n-k}x^n                                 \\
 		 & =\sum_{n=k}^\infty \binom{-k-1}{n-k}{(-1)}^{n-k} x^n=x^k \sum_{n=k}^\infty \binom{-k-1}{n-k}{(-1)}^{n-k} x^{n-k} \\
 		 & =x^k \sum_{n=0}^\infty \binom{-k-1}{n}{(-x)}^n                                                                   \\
-		 & =x^k {(1+(-x))}^{-k-1}=\frac{x^k}{(1-x)}^{k+1}
+		 & =x^k {(1+(-x))}^{-k-1}=\frac{x^k}{{(1-x)}^{k+1}}
 	\end{aligned}
 \]
 
