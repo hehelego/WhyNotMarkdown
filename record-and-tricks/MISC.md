@@ -1,79 +1,365 @@
-- 字体配置推荐,无脑`Noto Sans CJK SC`即可,个人体验来讲`Noto Sans`比`Source Sans`好一些,`Serif`字体不太习惯.对于等宽的编程字体,推荐`Source Code Pro`和`Liberation Mono`.具体而言`noto-fonts,noto-fonts-{cjk,emoji,extra,compat}`
-- 输入法input method:推荐使用fcitx5框架,rime输入法,luna-pinyin. 参考[archwiki:fcitx5](https://wiki.archlinux.org/index.php/Fcitx5)进行安装,配置即可.  
-  使用rime时可以按`<F4>`快速进行配置(简体繁体转化,全角半角转换等).
-- DE/WM font config:需要调整fontconfig,locale,参考arch wiki.也可以在DE的`system settings`中直接设置.  
-  **CJK fonts fallback需要手动设置一下,让SC优先级高于JP即可(参考arch wiki)**  
-- 中文字体(CJK-SC)fallback到日文字体,解决方法参考[menci在zhihu上面的这个回答](https://www.zhihu.com/question/47141667).  
-  > `sudo vim /etc/fonts/conf.d/64-language-selector-prefer.conf `  
-  > ```xml
-  > 	<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
-  > 	<fontconfig>
-  > 		<alias>
-  > 			<family>sans-serif</family>
-  > 			<prefer>
-  > 				<family>Noto Sans CJK SC</family>
-  > 				<family>Noto Sans CJK TC</family>
-  > 				<family>Noto Sans CJK JP</family>
-  > 			</prefer>
-  > 		</alias>
-  > 		<alias>
-  > 			<family>monospace</family>
-  > 			<prefer>
-  > 				<family>Noto Sans Mono CJK SC</family>
-  > 				<family>Noto Sans Mono CJK TC</family>
-  > 				<family>Noto Sans Mono CJK JP</family>
-  > 			</prefer>
-  > 		</alias>
-  >	</fontconfig>
-  > ```
+# MISC: note, records, links
 
+> for "trouble shooting records" see `hehelego/WhyNotMarkdown/record-and-tricks/trouble-shooting.md`
 
-- KDE中`display>scaling`缩放,如果不是整数倍则会有bug.屏幕上可能会无端出现一根白线,并且icon及font的渲染都会有问题.
-- 选择困难症?不妨看看[arch wiki:general recommendation](),[arch wiki:List of applications/Utilities]()
-- 关于fish shell的一些事情
-  - fish shell有些配置是不兼容bash的,比如path,manpath之类的,他的配置文件是`~/.config/fish/config.fish`配置的语法也和bash不同...尽量不要用`set -U VAR, set -g VAR`这种会影响全局配置甚至其他shell的配置.
-  - bash中的`pacman -S $(cat softwarelist)`在fish中是`pacman -S (cat softwarelist)`.更常见的例子:`rm $(fzf -m)`应替换为`rm (fzf -m)`.
-  - 中fish中一些regex的语法和fish shell的语法有冲突,使用单引号来标识他们,比如查询以rc结尾的配置文件应该这么写`ls ~/.config/ | grep 'rc$'`.
-- 关于pandoc+xelatex下的`markdown+latex -> tex -> pdf`工作流.
-  - 需要修改pandoc的转换模板,使得`markdown->tex`时具有正常的文档结构和设定的常用包以及字体配置.
-  - 推荐使用[link:Eisvogel](https://github.com/Wandmalfarbe/pandoc-latex-template)这个LaTeX模板.参考他们的readme就可以正常使用了(参考命令`pandoc note.md -o book.pdf  --template eisvogel --listings --pdf-engine=xelatex`).我把我定制的eisvogel模板,以及编译脚本都放到了staic目录下面
-  - 这里因为`tex->pdf`是LaTeX提供的,所以比mathjax的语法要求要强一些,版本升级会产生语法不向后兼容的问题,请自行查找资料或询问网友.
-  - 我自己用的转换脚本,模板文件都装`github/hehelego/whynotmarkdown`里面有.
-- how to show installed AUR packages? `pacman -Qm / pacman -Q --foreign`,原理如下.  
+[TOC]
 
-> Restrict or filter output to packages that were not found in the sync database(s). Typically these are packages that were downloaded manually and installed
-with --upgrade.
+## helpful arch-wiki/gentoo-wiki entries
 
-- 比较新的gdb中加入了`layout src`,`highlighting`,`struct pretty print`等features,使用更加便捷了,此外还有cgdb这个前端,更加方便易用.
-- [v2ray proxy配置](https://qv2ray.net/),[github:qv2ray](https://github.com/Qv2ray/Qv2ray),[github:qv2ray-docs](https://github.com/Qv2ray/qv2ray.github.io)几乎是无脑配置. 代理路线推荐`JustMySocks`,国内有人做镜像/反响代理站可以正常访问,而且支持`Alipay(支付宝)`付款.
-- ipython crash on tab completion:[refer to this issue](https://github.com/ipython/ipython/issues/12522) 更新到`ipython>=7.18.1`即可.
-  如果一个pypi的包是用`pacman`装的,`sudo pacman -Syyu`可以更新,但是用`pip`安装的并不会,需要自己时常手动更新,以及尽量不要全局安装,避免依赖版本冲突(推荐pipenv).`pip list --outdated`来查询可以更新的包.
+- [arch wiki: installation guide](https://wiki.archlinux.org/index.php/Installation_Guide)
+- [arch wiki: general recommendation](https://wiki.archlinux.org/index.php/General_recommendations)
+- [arch wiki: list of applications](https://wiki.archlinux.org/index.php/List_of_applications)
+- [arch wiki: FAQ](https://wiki.archlinux.org/index.php/Frequently_asked_questions)
+- [arch wiki: pacman](https://wiki.archlinux.org/index.php/Pacman)
+- [arch wiki: systemd](https://wiki.archlinux.org/index.php/Systemd)
+- [arch wiki: arch boot process](https://wiki.archlinux.org/index.php/Arch_boot_process)
+- [arch wiki: Xorg](https://wiki.archlinux.org/index.php/Xorg)
 
 
 
-- jobs,fg,bg,ctrl+D,ctrl+Z,ctrl+C
 
-> - ctrl+P/N: select previous/next input history
-> - ctrl+L: clear the screen(just scroll the screen, won't clear previous output)
-> - ctrl+C: break(send `SIGINT` to the current foreground process)
-> - ctrl+D: `EOF`(send EOF to stdin)
-> - ctrl+Z: suspend(send `SIGTSTP`)
-> - jobs/bg/fg: show current jobs;resume one suspended job in the backgroud;resume one suspended job in the foreground (for fish shell,try `fg nvim+<TAB>` to resume neovim)
+## disabling PC speaker; preventing beep
 
+> date:2020.12.31
 
+### 描述
 
-- 关于i3(或者sway)  
-	- 目前(2020年11月)wayland还不是完全可用,并且生态也没有完全构建起来,与X的兼容方案Xwayland也有不少严重bug. 所以可以等等,但是发展趋势还是不错的.
-	- 平铺窗口管理器中,i3/sway是我最喜欢的. 文档清晰,配置简洁.  
-	- 推荐使用一个display manager来管理desktop session而不是直接startx/xinit启动.来自KDE的SDDM非常棒,我目前使用的是它.
-	- i3是没有compositor,需要自己搞一个,推荐compton(现在是picom). sway则不需要这些.  
-	- 需要其他软件来显示桌面壁纸,目前i3可以选择feh,而sway有swaybg.
-	- 需要另外搞一个application launcher,可以选krunner,albert,rofi等.
-	- 默认的status bar可能不太够用,可以试试polybar,swaybar
-	- 高分辨率需要调节DPI,scaling等参数. 查arch wiki,i3 user manual以及各种forum即可.
-	- i3lock直接用效果不好,也没有自动休眠之类的东西...可以自己写脚本来解决,但是比较困难. 
-	- i3的`$mod+h,$mod+v`用来控制分屏方式,所以移动`hjkl`缺了一个键,推荐不用`jkl;`,直接使用方向键即可(如果是67键的键盘就比较困难了... )
-	- 慎用`exec_always`...
+进行一些操作,比如搜索/补全时,如果没有候选项,蜂鸣器会发出beep.  
+日常工作中,我们用不到beeper.
+
+### 参考信息
+
+- [arch wiki: pc spearker](https://wiki.archlinux.org/index.php/PC_speaker)
+
+### 解决方案
+
+`echo "blacklist pcspkr" | sudo tee /etc/modprobe.d/nobeep.conf`
 
 
+## 修改rime InputMethod的config pannel的trigger keybinding
 
+### 描述
+
+> date: 2021.1.12
+
+我在使用fcitx5+rime, 它默认有`<F4>`弹出设置面板的快捷键,非常容易冲突.
+
+### 参考信息
+
+- [github/rime/home: rime user guide: 定制呼出选项单的快捷键](https://github.com/rime/home/wiki/CustomizationGuide#%E4%B8%80%E4%BE%8B%E5%AE%9A%E8%A3%BD%E5%96%9A%E5%87%BA%E6%96%B9%E6%A1%88%E9%81%B8%E5%96%AE%E7%9A%84%E5%BF%AB%E6%8D%B7%E9%8D%B5)
+
+    fcitx+rime的情况,rime会认一些在用户家目录中的配置文件.
+
+### 解决方案
+
+编辑`~/.local/share/fcitx5/rime/build/default.yaml`,之后synchronize+deploy一下rime.  
+
+具体而言.找到这样一段内容,删掉F4.  
+至于我们如何在不好好读doc的情况下找到这个文件...  
+那当然是`rg -l ~ --files --hidden | rg rime | rg default | rg yaml`,  
+也可以简单一点`rg -l ~ --files --hidden | fzf`之后搜`default.yaml`
+
+```yaml
+switcher:
+abbreviate_options: true
+caption: "〔方案選單〕"
+fold_options: true
+hotkeys:
+    - F4
+    - "Control+grave"
+    - "Control+Shift+grave"
+    option_list_separator: "／"
+    save_options:
+    - full_shape
+    - ascii_punct
+    - simplification
+    - extended_charset
+    - zh_hant
+    - zh_hans
+    - zh_hant_tw
+```
+
+## fish shell 常见操作
+
+- `fish`不兼容`bash`, 它更像是`csh`风格的
+- shift+tab: fuzzy search completion
+- `fish_config`
+- `fish_update_completions`
+- substitution `sudo pacman -Rns (pacman -Qdtq)`, `rm (fzf -m)`
+- template string `echo {$var}`
+- 用单引号包裹传递给程序的regex防止它被fish解析. `exa --all ~/.config | rg 'rc$'`
+
+
+## v2ray configuartion
+
+> 目前的状态
+> - 使用的客户端为`qv2ray`
+> - 代理线路`JustMySocks`. 支持`Alipay(支付宝)`付款, 官网可以国内直连且有网友做镜像站.
+
+- 参考 [qv2ray offical site](https://qv2ray.net/) 的user manual, quick start进行配置即可.
+
+## fish shell: proxy settings
+
+> date: 2021.1.13
+
+### 描述
+
+set/unset proxy environment variables in fish shell, and share them between sessions.
+
+### 参考信息
+
+- `fish -c help`
+- fish shell official tutorial
+- fish shell official documentation
+
+1. `set --show VARIABLE_NAME`; `-x` for export; '-e' to erase; `-l,-g,-U;--local,--global,--universal` to specify scope;
+2. universal: sort of permanent for the current user; shared between all the fish-shell sessions and preserved even after reboot.
+3. global: can shadow universal ones; not visible between sessions or after reboot;
+4. local: can shadow global ones;
+5. `set -e VAR` will delete the variable in the nearest scope where `VAR` is set.
+0. fish will automatically load functions in `~/.config/fish/functions/`  
+
+**fish shell have special ways to deal with PATH**, try `set --help` for more information.
+
+
+### 解决方案
+
+
+```fish
+#PATH=~/.config/fish/functions/proxy_on.fish
+function proxy_on
+	set -Ux all_proxy socks5://127.0.0.1:1089
+	set -Ux http_proxy http://127.0.0.1:8889
+	set -Ux https_proxy $http_proxy
+	set -Ux ftp_proxy $http_proxy
+	set -Ux rsync_proxy $http_proxy
+	set -Ux no_proxy "localhost,127.0.0.1,localaddress,.localdomain.com"
+end
+
+#PATH=~/.config/fish/functions/proxy_off.fish
+function proxy_off
+	set -e all_proxy
+	set -e http_proxy
+	set -e https_proxy
+	set -e ftp_proxy
+	set -e rsync_proxy
+	set -e no_proxy
+end
+
+#PATH=~/.config/fish/functions/proxy_dump.fish
+function proxy_dump
+	echo "all_proxy   = $all_proxy"
+	echo "http_proxy  = $http_proxy"
+	echo "https_proxy = $https_proxy"
+	echo "ftp_proxy   = $ftp_proxy"
+	echo "rsync_proxy = $rsync_proxy"
+	echo "no_proxy    = $no_proxy"
+end
+```
+
+As mentioned in the 5th tip, `set -e` can erase the variable in local/global/universal.  
+So we might have to run `proxy_off` for a few times to thoroughly remove proxy environment.
+
+
+
+## keyboard shortcuts: terminal emulator, fish shell 
+
+- ctrl+Z: suspend (send `SIGTSTP`); jobs,fg,bg
+- ctrl+P/N: select previous/next input history
+- ctrl+L: clear the screen(just scroll the screen, won't clear previous output)
+- ctrl+C: break (send `SIGINT` to the current foreground process)
+- ctrl+D: send `EOF`
+
+
+
+## i3wm下touchpad配置
+
+> date: 2021.1.05
+
+### 问题描述
+
+在i3wm下,笔记本触控板无法使用单指触摸左键,双指触摸右键的功能.  
+
+### 参考信息
+
+目前touchpad的驱动配置由libinput提供.  
+i3wm后端是Xorg,需要对应的`xf86-input-libinput`包.  
+
+
+- [arch wiki: libinput](https://wiki.archlinux.org/index.php/Libinput)
+- [gentoo wiki: libinput](https://wiki.gentoo.org/wiki/Libinput)
+- [Cody Craven's blog post: Enable tap to clik in i3WM](https://cravencode.com/post/essentials/enable-tap-to-click-in-i3wm/)
+
+### 解决方案
+
+我们需要修改`xf86-input-libinput`的配置文件,重启Xorg.(显然这个只对Xorg有效...后端是wayland的话,比如sway环境需要另外的方案)  
+
+根据gentoo wiki的指示,在`/etc/X11/xorg.conf.d/40-libinput.conf`中写入tap/scrolling的配置即可.
+
+```plaintext
+Section "InputClass"
+     Identifier "libinput touchpad catchall"
+     MatchIsTouchpad "on"
+     MatchDevicePath "/dev/input/event*"
+     Driver "libinput"
+     Option "Tapping" "True"
+     Option "TappingDrag" "True"
+     Option "TappingButtonMap" "lrm"
+     Option "NaturalScrolling" "True"
+     Option "ScrollMethod" "twofinger"
+     Option "accelSpeed" "0.3"
+EndSection
+```
+
+
+## HiDPI display scaling and font scaling
+
+> date: 2021.1.12
+
+### 问题描述
+
+我在使用i3wm,有两个monitor,一个`2560x1600 13.3inch`,另一个`3840x2160 27inch`,  
+由于屏幕DPI太高而Xorg输出的DPI没有跟着改变, 默认情况下UI,font都太小了.  
+
+
+### 参考信息
+
+- ArchWiki/HiDPI
+- ArchWiki/Xorg
+
+需要做以下修改
+
+- 让Xorg输出时DPI正确
+- 设置一些gtk/qt相关environment variables,使得基于gtk/qt的gui app能够进行ui,font scaling.
+- 对于一些特殊应用,进行更多设置...
+
+### 解决方案
+
+需要用到一些`xorg-apps` group中的一些packages, 主要是xdpyinfo,xrandr.  
+
+使用`xdpyinfo | grep -B 2 resolution`查看X当前输出的DPI.  
+使用xrandr调整X输出的DPI,比如我这里用`xrandr --output eDP --mode 2560x1600 --rate 60 --scale 1 --dpi 192`,
+把它写入i3-config中使得i3 session启动时调整DPI.  
+
+
+参考按照wiki,配置Xresoureces  
+```
+!PATH=~/.Xresoureces
+Xft.dpi: 192
+
+! These might also be useful depending on your monitor and personal preference:
+Xft.autohint: 0
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintfull
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgba
+```
+
+
+写入一些qt/gtk相关的环境变量我没有做,  
+首先我还在使用KDE,它能够较好的管理缩放,
+其次是我发现进行了上面的配置之后,我常用的GUI apps已经正常缩放了.
+
+
+## git: displaying unicode path
+
+> 2021.03.24
+
+git status, git commit中,中文路径显示不正确.
+出现类似  
+`modified:   "\321\203\321\201\321\202\320\260\320\275\320\276\320\262"`  
+的显示效果.
+
+### 参考资料
+
+- [StackOverflow: how to make git properly display utf-8 encoded path](https://stackoverflow.com/questions/22827239/how-to-make-git-properly-display-utf-8-encoded-pathnames-in-the-console-window)
+
+### 解决方案
+
+```bash
+git config --global core.quotepath off
+```
+
+
+## changing PowerButton event handler
+
+> 2021.04.01
+使用i3wm session,按下笔记本(型号:Lenovo_IdeaPad_S540_13ARE)的powerbutton会触发关机.  
+由于经常误触,我希望修改按下电源键的效果.  
+
+
+### 参考资料
+
+
+- [arch wiki: power management / ACPI event](https://wiki.archlinux.org/index.php/Power_management#ACPI_events)
+
+
+### 解决方案
+
+
+修改`/etc/systemd/logind.conf`或者在`/etc/systemd/logind.conf.d/{CONFIGNAME}.conf`中写入配置.  
+
+
+默认配置如下,
+
+```
+[Login]
+#NAutoVTs=6
+#ReserveVT=6
+#KillUserProcesses=no
+#KillOnlyUsers=
+#KillExcludeUsers=root
+#InhibitDelayMaxSec=5
+#UserStopDelaySec=10
+#HandlePowerKey=suspend
+#HandleSuspendKey=suspend
+#HandleHibernateKey=hibernate
+#HandleLidSwitch=suspend
+#HandleLidSwitchExternalPower=suspend
+#HandleLidSwitchDocked=ignore
+#HandleRebootKey=reboot
+#PowerKeyIgnoreInhibited=no
+#SuspendKeyIgnoreInhibited=no
+#HibernateKeyIgnoreInhibited=no
+#LidSwitchIgnoreInhibited=yes
+#RebootKeyIgnoreInhibited=no
+#HoldoffTimeoutSec=30s
+#IdleAction=ignore
+#IdleActionSec=30min
+#RuntimeDirectorySize=10%
+#RuntimeDirectoryInodes=400k
+#RemoveIPC=yes
+#InhibitorsMax=8192
+#SessionsMax=8192
+```
+
+
+我们需要修改的是`HandlePowerKey`的event handler,比如改成`systemd suspend`
+
+```
+[Login]
+HandlePowerKey=suspend
+```
+
+## fzf search for hidden files
+
+
+### 问题描述
+
+fzf不默认搜索dot files.  
+`rg -l . --files --hidden | fzf -m` 太麻烦.  
+并且使用`fzf.vim`集成插件时,也没法手动pipe.
+
+### 参考信息
+
+- [github fzf/issue : Including hidden files in search](https://github.com/junegunn/fzf/issues/337)
+- [github fzf/readme.md](https://github.com/junegunn/fzf)
+
+we can use the `FZF_DEFAULT_COMMAND` environment variable.
+
+### 解决方案
+
+```fish 
+set -Ux FZF_DEFAULT_COMMAND "rg -l . --files --hidden"
+```

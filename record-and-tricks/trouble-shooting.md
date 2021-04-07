@@ -2,7 +2,7 @@
 
 > 我的环境(更新时间 2020.12.31), 信息来源于lshw,neofetch,uname等等工具  
 > - 小新pro13 2020,amdcpu版本(xiaoxin pro 13-are 2020);可选配件是ryzen4800u+16gRAM+512gSSD
-> - OS: `ArchLinux on x86_64`
+> - fOS: `ArchLinux on x86_64`
 > - DE: KDE plasma / i3wm
 
 > 一些redminder  
@@ -56,28 +56,12 @@ journalctl中包含`USBC`相关的错误信息.
 如果USB type C接口仍然不能恢复正常,则可能是BIOS或者主板问题,建议返修.  
 
 
+### 追加信息
 
-------------------------
+- 2021/02/22, 2020/02/23 这台机器出现严重故障, 根据症状推测为内存错误或EC错误.  
+  还好在保修期内,送维修点检测后,更换了主板,目前已经不会在出现这个问题了.  
+  但是这个操作仍然有记录价值,笔记本拆机不方便,需要一个便捷地清空CMOS电池的方式以解决其他问题.
 
-## disabling PC speaker; prevent beep
-
-> date:2020.12.31
-
-### 问题描述
-
-进行一些操作,比如搜索/补全时,如果没有候选项,蜂鸣器会发出beep.  
-日常工作中,我们用不到beeper.
-
-### 参考信息
-
-- [arch wiki: pc spearker](https://wiki.archlinux.org/index.php/PC_speaker)
-
-### 解决方案
-
-`echo "blacklist pcspkr" | sudo tee /etc/modprobe.d/nobeep.conf`
-
-
---------------------------
 
 ## CJK font selection error
 
@@ -142,7 +126,6 @@ fontconfig中对于CJK字型选取的默认设置不符合预期,需要手写一
 ```
 
 
-------------------------------------
 
 
 ## cpu turbo boost was disabled
@@ -172,7 +155,6 @@ echo 1 | sudo tee /sys/devices/system/cpu/cpufreq/boost
 
 
 
--------------------------------------
 
 ## can't adjust backlight in i3wm session
 
@@ -236,7 +218,6 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 如果失败,可以尝试添加`acpi_backlight=native`的kernel parameter.
 
 
--------------------------------------
 
 ## video hardware decoding in firefox
 
@@ -259,7 +240,6 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 最后,reboot一下.  
 我这里是AMD ryzen 4800U内置的vege 8 GPU,可以使用radeontop来观测它是否有负载.
 
--------------------------------------
 
 ## okular failed to render CJK font
 
@@ -286,202 +266,6 @@ okular打开包含中文的pdf,发现未嵌入的字体渲染异常.
 - 安装`poppler,poppler-data`等poppler相关的软件包.  
 - 安装更多字体.  
   例如:MS windows中常见的`Courier,Times fonts` fallback到noto fonts的效果并不好,用liberation fonts替代效果更好.
-
-
-## i3wm下touchpad配置
-
-> date: 2021.1.05
-
-### 问题描述
-
-在i3wm下,笔记本触控板无法使用单指触摸左键,双指触摸右键的功能.  
-
-### 参考信息
-
-目前touchpad的驱动配置由libinput提供.  
-i3wm后端是Xorg,需要对应的`xf86-input-libinput`包.  
-
-
-- [arch wiki: libinput](https://wiki.archlinux.org/index.php/Libinput)
-- [gentoo wiki: libinput](https://wiki.gentoo.org/wiki/Libinput)
-- [Cody Craven's blog post: Enable tap to clik in i3WM](https://cravencode.com/post/essentials/enable-tap-to-click-in-i3wm/)
-
-### 解决方案
-
-我们需要修改`xf86-input-libinput`的配置文件,重启Xorg.(显然这个只对Xorg有效...后端是wayland的话,比如sway环境需要另外的方案)  
-
-根据gentoo wiki的指示,在`/etc/X11/xorg.conf.d/40-libinput.conf`中写入tap/scrolling的配置即可.
-
-```plaintext
-Section "InputClass"
-     Identifier "libinput touchpad catchall"
-     MatchIsTouchpad "on"
-     MatchDevicePath "/dev/input/event*"
-     Driver "libinput"
-     Option "Tapping" "True"
-     Option "TappingDrag" "True"
-     Option "TappingButtonMap" "lrm"
-     Option "NaturalScrolling" "True"
-     Option "ScrollMethod" "twofinger"
-     Option "accelSpeed" "0.3"
-EndSection
-```
-
-## 修改rime InputMethod的config pannel的trigger keybinding
-
-### 问题描述
-
-> date: 2021.1.12
-
-我在使用fcitx5+rime, 它默认有`<F4>`弹出设置面板的快捷键,非常容易冲突.
-
-### 参考信息
-
-- [github/rime/home: rime user guide: 定制呼出选项单的快捷键](https://github.com/rime/home/wiki/CustomizationGuide#%E4%B8%80%E4%BE%8B%E5%AE%9A%E8%A3%BD%E5%96%9A%E5%87%BA%E6%96%B9%E6%A1%88%E9%81%B8%E5%96%AE%E7%9A%84%E5%BF%AB%E6%8D%B7%E9%8D%B5)
-
-fcitx+rime的情况,rime会认一些在用户家目录中的配置文件.
-
-### 解决方案
-
-编辑`~/.local/share/fcitx5/rime/build/default.yaml`,之后synchronize+deploy一下rime.  
-
-具体而言.找到这样一段内容,删掉F4.  
-至于我们如何在不好好读doc的情况下找到这个文件...  
-那当然是`rg -l ~ --files --hidden | rg rime | rg default | rg yaml`,  
-也可以简单一点`rg -l ~ --files --hidden | fzf`之后搜`default.yaml`
-
-```yaml
-switcher:
-  abbreviate_options: true
-  caption: "〔方案選單〕"
-  fold_options: true
-  hotkeys:
-    - F4
-    - "Control+grave"
-    - "Control+Shift+grave"
-  option_list_separator: "／"
-  save_options:
-    - full_shape
-    - ascii_punct
-    - simplification
-    - extended_charset
-    - zh_hant
-    - zh_hans
-    - zh_hant_tw
-```
-
-
-## HiDPI display scaling and font scaling
-
-> date: 2021.1.12
-
-### 问题描述
-
-我在使用i3wm,有两个monitor,一个`2560x1600 13.3inch`,另一个`3840x2160 27inch`,  
-由于屏幕DPI太高而Xorg输出的DPI没有跟着改变, 默认情况下UI,font都太小了.  
-
-
-### 参考信息
-
-- ArchWiki/HiDPI
-- ArchWiki/Xorg
-
-需要做以下修改
-
-- 让Xorg输出时DPI正确
-- 设置一些gtk/qt相关environment variables,使得基于gtk/qt的gui app能够进行ui,font scaling.
-- 对于一些特殊应用,进行更多设置...
-
-### 解决方案
-
-需要用到一些`xorg-apps` group中的一些packages, 主要是xdpyinfo,xrandr.  
-
-使用`xdpyinfo | grep -B 2 resolution`查看X当前输出的DPI.  
-使用xrandr调整X输出的DPI,比如我这里用`xrandr --output eDP --mode 2560x1600 --rate 60 --scale 1 --dpi 192`,
-把它写入i3-config中使得i3 session启动时调整DPI.  
-
-
-参考按照wiki,配置Xresoureces  
-```
-!PATH=~/.Xresoureces
-Xft.dpi: 192
-
-! These might also be useful depending on your monitor and personal preference:
-Xft.autohint: 0
-Xft.lcdfilter:  lcddefault
-Xft.hintstyle:  hintfull
-Xft.hinting: 1
-Xft.antialias: 1
-Xft.rgba: rgba
-```
-
-
-写入一些qt/gtk相关的环境变量我没有做,  
-首先我还在使用KDE,它能够较好的管理缩放,
-其次是我发现进行了上面的配置之后,我常用的GUI apps已经正常缩放了.
-
-
-## fish shell, proxy settings
-
-> date: 2021.1.13
-
-### 问题描述
-
-set/unset proxy environment variables in fish shell, and share them between sessions.
-
-### 参考信息
-
-- `fish -c help`
-- fish shell official tutorial
-- fish shell official documentation
-
-1. `set --show VARIABLE_NAME`; `-x` for export; '-e' to erase; `-l,-g,-U;--local,--global,--universal` to specify scope;
-2. universal: sort of permanent for the current user; shared between all the fish-shell sessions and preserved even after reboot.
-3. global: can shadow universal ones; not visible between sessions or after reboot;
-4. local: can shadow global ones;
-5. `set -e VAR` will delete the variable in the nearest scope where `VAR` is set.
-0. fish will automatically load functions in `~/.config/fish/functions/`  
-
-**fish shell have special ways to deal with PATH**, try `set --help` for more information.
-
-
-### 解决方案
-
-
-```fish
-#PATH=~/.config/fish/functions/proxy_on.fish
-function proxy_on
-	set -Ux all_proxy socks5://127.0.0.1:1089
-	set -Ux http_proxy http://127.0.0.1:8889
-	set -Ux https_proxy $http_proxy
-	set -Ux ftp_proxy $http_proxy
-	set -Ux rsync_proxy $http_proxy
-	set -Ux no_proxy "localhost,127.0.0.1,localaddress,.localdomain.com"
-end
-
-#PATH=~/.config/fish/functions/proxy_off.fish
-function proxy_off
-	set -e all_proxy
-	set -e http_proxy
-	set -e https_proxy
-	set -e ftp_proxy
-	set -e rsync_proxy
-	set -e no_proxy
-end
-
-#PATH=~/.config/fish/functions/proxy_dump.fish
-function proxy_dump
-	echo "all_proxy   = $all_proxy"
-	echo "http_proxy  = $http_proxy"
-	echo "https_proxy = $https_proxy"
-	echo "ftp_proxy   = $ftp_proxy"
-	echo "rsync_proxy = $rsync_proxy"
-	echo "no_proxy    = $no_proxy"
-end
-```
-
-As mentioned in the 5th tip, `set -e` can erase the variable in local/global/universal.  
-So we might have to run `proxy_off` for a few times to thoroughly remove proxy environment.
 
 
 ## pulseaudio can't resume sink/source after recovery from hibernation/suspend.
@@ -532,6 +316,13 @@ v2ray vmess/tcp 连接失败, 出现类似下方的log
 - [arch wiki: system time](https://wiki.archlinux.org/index.php/System_time)
 - [arch wiki: systemd-timesyncd](https://wiki.archlinux.org/index.php/Systemd-timesyncd)
 
+此外,还有以下问题可能导致这种断连接.
+
+- 出口为校园网, 登录到期需要重新认证.  
+  此时需要临时关闭代理,用默认浏览器打开任意站点,弹出校园网认证重新登录即可.
+- 代理路线挂了, 请利用所有渠道获取更多信息并尝试解决.
+- 确实断网了...
+
 ### 解决方案
 
 启用NTP时间同步,重启时间同步服务以强制进行同步.
@@ -543,6 +334,8 @@ systemctl restart systemd-timesyncd.service
 ```
 
 如无法正确同步,可以尝试更换`timesyncd`使用的NTP server.
+
+
 
 
 ## hibernate(suspend, save to disk) with swapfile
@@ -593,81 +386,4 @@ swap_file_offset={{sudo filefrag -v /swapfile | awk '{ if($1=="0:"){print substr
 
 `cat /proc/cmdline`查看kernel parameter确定配置成功,并`systemctl hibernate`测试.
 
-## git: displaying unicode path
 
-> 2021.03.24
-
-git status, git commit中,中文路径显示不正确.
-出现类似  
-`modified:   "\321\203\321\201\321\202\320\260\320\275\320\276\320\262"`  
-的显示效果.
-
-### 参考资料
-
-- [StackOverflow: how to make git properly display utf-8 encoded path](https://stackoverflow.com/questions/22827239/how-to-make-git-properly-display-utf-8-encoded-pathnames-in-the-console-window)
-
-### 解决方案
-
-```bash
-git config --global core.quotepath off
-```
-
-## changing PowerButton event handler
-
-> 2021.04.01
-使用i3wm session,按下笔记本(型号:Lenovo_IdeaPad_S540_13ARE)的powerbutton会触发关机.  
-由于经常误触,我希望修改按下电源键的效果.  
-
-
-### 参考资料
-
-
-- [arch wiki: power management / ACPI event](https://wiki.archlinux.org/index.php/Power_management#ACPI_events)
-
-
-### 解决方案
-
-
-修改`/etc/systemd/logind.conf`或者在`/etc/systemd/logind.conf.d/{CONFIGNAME}.conf`中写入配置.  
-
-
-默认配置如下,
-
-```
-[Login]
-#NAutoVTs=6
-#ReserveVT=6
-#KillUserProcesses=no
-#KillOnlyUsers=
-#KillExcludeUsers=root
-#InhibitDelayMaxSec=5
-#UserStopDelaySec=10
-#HandlePowerKey=suspend
-#HandleSuspendKey=suspend
-#HandleHibernateKey=hibernate
-#HandleLidSwitch=suspend
-#HandleLidSwitchExternalPower=suspend
-#HandleLidSwitchDocked=ignore
-#HandleRebootKey=reboot
-#PowerKeyIgnoreInhibited=no
-#SuspendKeyIgnoreInhibited=no
-#HibernateKeyIgnoreInhibited=no
-#LidSwitchIgnoreInhibited=yes
-#RebootKeyIgnoreInhibited=no
-#HoldoffTimeoutSec=30s
-#IdleAction=ignore
-#IdleActionSec=30min
-#RuntimeDirectorySize=10%
-#RuntimeDirectoryInodes=400k
-#RemoveIPC=yes
-#InhibitorsMax=8192
-#SessionsMax=8192
-```
-
-
-我们需要修改的是`HandlePowerKey`的event handler,比如改成`systemd suspend`
-
-```
-[Login]
-HandlePowerKey=suspend
-```
