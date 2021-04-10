@@ -58,7 +58,7 @@
 ### MISC
 
 
-* noto fonts, liberation fonts, source code pro
+* noto fonts, liberation fonts(for compatibility with `Arial/Times New Roman/Courier New`), source code pro
 * xorg-apps (`pacman -Sg xorg-apps`)
 * tmux
 * dunst

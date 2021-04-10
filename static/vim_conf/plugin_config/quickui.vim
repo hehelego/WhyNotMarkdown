@@ -90,9 +90,10 @@ call quickui#menu#install("MISC(&p)", [
 			\ [ 'markdown preview' , 'MarkdownPreview' ],
 			\ [ 'latex preview'    , 'LLPStartPreview' ],
 			\ [ '--' ]             ,
-      \ [ 'plug.vim status'    , 'PlugStatus' ],
+      \ [ 'plug.vim install'   , 'PlugInstall' ],
       \ [ 'plug.vim update'    , 'PlugUpdate' ],
       \ [ 'plug.vim clean'     , 'PlugClean' ],
+      \ [ 'plug.vim status'    , 'PlugStatus' ],
       \ [ 'plug.vim self-upd'  , 'PlugUpgrade' ],
 			\])
 

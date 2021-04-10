@@ -363,3 +363,49 @@ we can use the `FZF_DEFAULT_COMMAND` environment variable.
 ```fish 
 set -Ux FZF_DEFAULT_COMMAND "rg -l . --files --hidden"
 ```
+
+## firefox usage: shortcuts
+
+> currently on
+> - `Linux x86_64`
+> - firefox 87
+
+
+- see [mozilla support: firefox shortcuts](https://support.mozilla.org/en-US/kb/keyboard-shortcuts-perform-firefox-tasks-quickly)
+- see [mozilla support: firefox addr bar auto complet](https://support.mozilla.org/en-US/kb/address-bar-autocomplete-firefox)
+
+### view
+
+- `Ctrl+h` toggle sidebar:history
+- `Ctrl+b` toggle sidebar:bookmarks
+- `Ctrl+Shift+b` toggle bookmarks toolbar
+- `Alt` toggle menu bar
+
+### browsering
+
+- `Ctrl +`,`Ctrl -` zoom in/zoom out
+- `Ctrl+0` clear zoom
+- `Alt+[1,2,3...8]` switching among tabs
+- `Ctrl+Shift+PgUp` move the focus tab up
+- `Ctrl+Shift+PgDn` move the focus tab down
+
+### search bar
+
+- `Ctrl+l` or `<F6>` focus the address bar(search bar, navigation bar)
+- `Ctrl+j` or `Ctrl+k` search with default search engine
+- `@{SE}` to search with specific search egine (`@bing osdi usenix`,`@wikipedia stokes theorem`)
+- `^` search for browsing history.
+- `*` search for bookmarks.
+- `%` search for currently opened tabs.
+
+### MISC
+
+- `<F12>` or `Ctrl+Shift+I` open developer's toolkit
+- `Ctrl+I` page info (media,permission,security)
+- open library window
+  - `Ctrl+Shift+h` history
+  - `Ctrl+Shift+o` bookmark
+  - `Ctrl+Shift+y` download
+- `Ctrl+Shift+r` override cache, reload page 
+
+
