@@ -14,6 +14,43 @@
 于是,我们枚举二叉树根的左右子树节点个数.有$C_0=C_1=1,C_n=\sum_{i=0}^{n-1}C_iC_{n-i-1}$
 这是个卷积,用生成函数卷积构造方程可以轻松求解$C_n$.
 
+$$
+\begin{aligned}
+F(x)
+&=\sum_{n=0}^\infty C_n x^n\\
+&=1+\sum_{n=1}^\infty x^n \sum_{i=0}^{n-1} C_i C_{n-i-1}\\
+&=1+x\sum_{n=1}^\infty x^{n-1} \sum_{i=0}^{n-1} C_i C_{n-i-1}\\
+&=1+x\sum_{n=0}^\infty x^n \sum_{i=0}^n C_i C_{n-i}\\
+&=1+x F^2(x)\\
+\implies F(x)&=\frac{1\pm \sqrt{1-4x}}{2x}
+\end{aligned}
+$$
+
+$\lim_{x\to 0}F(x)=F(0)=C_0=1\implies F(x)=\frac{1-\sqrt{1-4x}}{2x}$
+
+$$
+\begin{aligned}
+\sqrt{1-4x}
+&={(1-4x)}^{1/2}\\
+&=\sum_{n=0}^\infty \binom{\frac{1}{2}}{n}{(-4x)}^n\\
+&=\sum_{n=0}^\infty {(-4)}^n x^n \prod_{i=1}^n \frac{\left(\frac{1}{2}-i+1\right)}{i}\\
+&=\sum_{n=0}^\infty 2^n x^n \prod_{i=1}^n \frac{2i-3}{i}\\
+&=\sum_{n=0}^\infty 2^n x^n \prod_{i=1}^n \frac{(2i-3)2i}{i\cdot 2i}\\
+&=\sum_{n=0}^\infty x^n \prod_{i=1}^n \frac{(2i-3)2i}{i^2}\\
+&=\sum_{n=0}^\infty x^n \frac{2\cdot 1-3}{2n-1}\prod_{i=1}^n \frac{(2i-1)2i}{i^2}\\
+&=\sum_{n=0}^\infty x^n \frac{-1}{2n-1}\frac{(2n)!}{n!\, n!}\\
+&=\sum_{n=0}^\infty x^n \frac{-1}{2n-1}\binom{2n}{n}
+=1+\sum_{n=1}^\infty x^n \frac{-1}{2n-1}\binom{2n}{n}\\
+F(x)&=\frac{1}{2x}\sum_{n=1}^\infty x^n\frac{1}{2n-1}\binom{2n}{n}\\
+&=\sum_{n=0}^\infty x^n \frac{1}{2}\frac{1}{2n+1}\binom{2n+2}{n+1}\\
+&=\sum_{n=0}^\infty x^n \frac{1}{2}\frac{1}{2n+1}\cdot \frac{2n+2}{n+1}\binom{2n+1}{n}\\
+&=\sum_{n=0}^\infty x^n \frac{1}{2n+1}\binom{2n+1}{n}\\
+&=\sum_{n=0}^\infty x^n \frac{(2n)!}{(n+1)!\, n!}\\
+&=\sum_{n=0}^\infty x^n \frac{\binom{2n}{n}}{n+1}\\
+&=1x^0+\sum_{n=1}^\infty x^n \left(\binom{2n}{n}-\binom{2n}{n-1}\right)
+\end{aligned}
+$$
+
 ### 另一角度:折线计数
 
 我们考虑这样一个东西.
