@@ -11,6 +11,88 @@
 \usepackage{minted}
 \usepackage{hyperref}
 
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+
 \begin{document}
+
+\tableofcontents
+
+\newpage
+
+\section{Euler's totient function and Euler's theorem}
+
+Let $\ZZ_n=\{[k]\mid k\in \ZZ \}$ where $[k]=\{ x\mid x\equiv k\pmod n \}$.
+Consider $\ZZ_n^\ast = \{[k]\in \ZZ_n \mid k\perp n\}$, define $\varphi(n)=\left\vert|Z_n^\ast|\right\vert$.\\
+The Euler's theorem claims that $(a,n)=1\implies a^{\varphi(n)}\equiv 1\pmod n$
+
+\subsection{Evaluating Euler's totient function}
+
+Let $U=\{p_1,p_2\ldots p_m\}$ be the set of prime factors of $n$\\
+For every $S\in \rho(U)$, define
+\begin{itemize}
+	\item $f(S)=\left\vert
+		\left\{
+			k\in \ZZ_n
+			\mid
+			(p\in S \leftrightarrow p\mid k)
+			\right\}
+		\right\vert$
+	\item $g(S)=\left\vert
+		\left\{
+			k\in \ZZ_n
+			\mid
+			(p\in S \rightarrow p\mid k)
+			\right\}
+		\right\vert=n\prod_{p\in S} \frac{1}{p}$
+\end{itemize}
+
+We have $g(S)=\sum_{S\subseteq T\subseteq U} f(T)$.
+Applying the Mobius's inversion to get $f(S)=\sum_{S\subseteq T\subseteq U}{(-1)}^{|T|-|S|}g(T)$.\\
+
+$$
+\begin{aligned}
+\varphi(n)
+&=f(\varnothing)\\
+&=n\sum_{S\subseteq \{p_1,p_2\ldots p_m\}}{(-1)}^{|S|}\prod_{p \in S}\frac{1}{p}\\
+&=n\sum_{S\subseteq \{p_1,p_2\ldots p_m\}}\left(\prod_{p \in S}\frac{-1}{p} \prod_{j\not\in S} 1\right)\\
+&=n\prod_{p\in S}(1-\frac{1}{p})
+\end{aligned}
+$$
+
+
+\subsection{The Euler's theorem}
+
+$(\ZZ_n^\ast,\times)$ is a commutative group.
+Consider $a\ZZ_n^\ast=\{[ak]\mid [k]\in \ZZ_n^\ast\}$
+We claim that $a\ZZ_n^\ast = \ZZ_n^\ast$, otherwise\\
+
+$$
+\begin{aligned}
+	&\exists x,y\quad x,y\perp n\land x\not\equiv y\pmod n\\
+	&ax\equiv ay\pmod n\\
+	&(a,n)=1\implies \exists a^{-1}\text{ s.t. } a^{-1}a\equiv aa^{-1}\equiv 1\pmod n\\
+	&a^{-1}ax\equiv x\equiv a^{-1}ay\equiv y\pmod n
+\end{aligned}
+$$
+
+Therefore
+
+$$
+\begin{aligned}
+	\prod_{k\perp n} k &\equiv \prod_{k\perp n} ak &\pmod n\\
+	a^{\varphi(n)} \prod_{k\perp n} k&\equiv \prod_{k\perp n} k  &\pmod n\\
+	a^{\varphi(n)} &\equiv 1&\pmod n
+\end{aligned}
+$$
+
+For the second step: $\ZZ_n^\ast$ is closed under multiplication,
+so $\prod_{k\perp n} k$ is also in $\ZZ_n^\ast$, which means it is invertible.
+
+
+\newpage
 
 \end{document}
