@@ -387,3 +387,33 @@ swap_file_offset={{sudo filefrag -v /swapfile | awk '{ if($1=="0:"){print substr
 `cat /proc/cmdline`查看kernel parameter确定配置成功,并`systemctl hibernate`测试.
 
 
+## eliminating the vertical padding at the bottom in a terminal emulator 
+
+> 2021.04.16
+
+### 问题描述
+
+在i3wm环境下,打开一个`konsole`/`alacritty`,经常发现末尾有留空的一行/半行,  
+使用vim时,终端模拟器中vim的last line和桌面的menu bar之间有很大的间隙,非常难受.  
+
+修改窗口大小,比如开启另一个窗口与之并存尝试resize,或者进入floating mode进行resize.
+
+### 参考信息
+
+- `alacritty` 官方参考示例配置,在`/usr/share/doc/alacritty/example/alacritty.yml`
+- telegram arch-linux-user-group 群友解答
+
+### 解决方案
+
+这并非 `alacritty` 配置中的 `window/padding/y` 选项控制,
+而是因为字体大小不整除终端模拟器占有的纵向长度,导致末尾不足一行,只能留空.  
+
+
+需要手动调节字体大小(比如在我这里 `resolution=2560x1600, dpi=192`,有上下的titile bar, menu bar; 使用font size 11是恰好不会留白).  
+当然换显示器,调整DPI,甚至调整窗口大小都会改变可用的字体大小, 需要便捷调节的方式.  
+在常见的终端模拟器中,都支持`Ctrl +`,`Ctrl -`的快捷键调整字体大小.
+
+
+
+
+
