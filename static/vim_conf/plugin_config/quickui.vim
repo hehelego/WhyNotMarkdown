@@ -39,6 +39,7 @@ call quickui#menu#install("CurrentBuffer(&b)" , [
 call quickui#menu#install("Command(&c)", [
 			\ [ 'all-cmd'      , 'Commands' ],
 			\ [ 'key-mappings' , 'Maps' ],
+			\ [ 'functions'    , 'function' ],
 			\ [ 'history'      , 'History:' ],
 			\])
 
@@ -73,23 +74,22 @@ call quickui#menu#install("Build(&s)", [
 			\ [ 'make purge'          , 'AsyncRun make purge' ],
 			\ [ '--' ]                ,
 			\ [ 'cmake'               , 'AsyncRun cmake' ],
-			\ [ '--' ]                ,
 			\])
 call quickui#menu#install("Git(&g)", [
-			\ [ '--' ] ,
 			\ [ 'fzf git-files'   , 'GFiles' ],
 			\ [ 'fzf git-commits' , 'Commits' ],
-			\ [ '--' ] ,
 			\])
 
 " TODO:
 " MISC menu
 call quickui#menu#install("MISC(&p)", [
-			\ [ 'cheatsheet'       , 'call KMCS()' ],
-			\ [ '--' ]             ,
-			\ [ 'markdown preview' , 'MarkdownPreview' ],
-			\ [ 'latex preview'    , 'LLPStartPreview' ],
-			\ [ '--' ]             ,
+			\ [ 'cheatsheet'         , 'call KMCS()' ],
+			\ [ 'help tags'          , 'Helptags'],
+			\ [ '--' ]               ,
+			\ [ 'markdown preview'   , 'MarkdownPreview' ],
+			\ [ 'mdpv stop'          , 'MarkdownPreviewStop' ],
+			\ [ 'latex preview'      , 'LLPStartPreview' ],
+			\ [ '--' ]               ,
       \ [ 'plug.vim install'   , 'PlugInstall' ],
       \ [ 'plug.vim update'    , 'PlugUpdate' ],
       \ [ 'plug.vim clean'     , 'PlugClean' ],

@@ -33,14 +33,17 @@ let s:kmcs_MISC = [
 			\ [ '<C-l>'           , 'nohlsearch' ],
 			\ [ '--' ]            ,
 			\ [ '<leader>qo'      , 'quickfix on' ],
-			\ [ '<leader>qo'      , 'quickfix on' ],
+			\ [ '<leader>qc'      , 'quickfix off' ],
+			\ [ '--' ]       ,
+			\ [ '<C-f>'      , 'popup/float scroll down' ],
+			\ [ '<C-b>'      , 'popup/floag scroll up' ],
 			\]
 let s:kmcs_builtin = [
 			\ [ '# / *'     , 'match the word under cursor forward/backward' ],
 			\ [ '^ / $'     , 'jump to begin/end of current line' ],
 			\ [ '%'         , 'jump to matched brace/bracket' ],
 			\ [ '--' ]      ,
-			\ [ '<C-w>w'    , 'close window' ],
+			\ [ '<C-w>c'    , 'close window' ],
 			\ [ '<C-w>s'    , 'vertical split' ],
 			\ [ '<C-w>h'    , 'horizontal split' ],
 			\ [ '<C-w>hjkl' , 'focus another windows' ],
@@ -49,6 +52,11 @@ let s:kmcs_builtin = [
 			\ [ '--' ]      ,
 			\ [ '<C-a>'     , 'numerical literals inc' ],
 			\ [ '<C-a>'     , 'numerical literals dec' ],
+			\ [ '--' ]      ,
+			\ [ '<C-u>'     , 'scroll up' ],
+			\ [ '<C-d>'     , 'scroll down' ],
+			\ [ '<C-b>'     , 'page up' ],
+			\ [ '<C-f>'     , 'page down' ],
 			\]
 
 
@@ -96,14 +104,6 @@ let s:kmcs_easymotion = [
 			\ [ 'j/k'   , 'find ^(line) forward/backward' ],
 			\ [ 'J/K'   , 'find (line)$ forward/backward' ],
 			\]
-let s:kmcs_TEST = [
-			\ [ 'a0'   , 'b0' ],
-			\ [ 'a1'   , 'b1' ],
-			\ [ '--' ] ,
-			\ [ 'a2'   , 'b2' ],
-			\ [ 'a3'   , 'b3' ],
-			\]
-
 
 
 let g:keymapping_cheatsheet = {
@@ -118,6 +118,5 @@ let g:keymapping_cheatsheet = {
 			\ 'tabular'        : s:kmcs_tabular     ,
 			\ 'nerd-commenter' : s:kmcs_nerdcomment ,
 			\ 'easymotion'     : s:kmcs_easymotion  ,
-			\ 'TEST'           : s:kmcs_TEST        ,
 			\ }
 
