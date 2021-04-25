@@ -62,7 +62,7 @@
 * xorg-apps (`pacman -Sg xorg-apps`)
 * tmux
 * dunst
-* smarttools
+* smartmontools
 * graphviz
 * scrcpy
 * qemu(请参考[octetz写的一篇关于qemu的博客](https://octetz.com/docs/2020/2020-05-06-linux-hypervisor-setup/),以及arch wiki进行操作)
