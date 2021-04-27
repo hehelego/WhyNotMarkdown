@@ -84,7 +84,7 @@
 * cpu-x (for hardware infomation and benchmark)
 * s-tui (cpu monitoring&stress cpu)
 * radeontop (monitoring AMD GPU)
-* lscpu,lspci,lshw,lsusb 更相信的硬件信息
+* lscpu,lspci,lshw,hwinfo,lsusb 更相信的硬件信息
 
 ### extensions/plugins for browser
 
