@@ -4,6 +4,8 @@ call plug#begin('~/.local/share/nvim/plugins')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " for extra language settings
 Plug 'sheerun/vim-polyglot'
+" for rust-lang syntax enchancement
+Plug 'rust-lang/rust.vim'
 " for extra colorschemes
 Plug 'chriskempson/base16-vim'
 Plug 'morhetz/gruvbox'

@@ -1,0 +1,7 @@
+{
+	"clangd.fallbackFlags": [
+		"-std=c++17"
+	],
+	"rust-analyzer.updates.prompt": false,
+	"rust-analyzer.server.path": "/usr/bin/rust-analyzer"
+}
