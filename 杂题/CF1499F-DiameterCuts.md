@@ -27,7 +27,7 @@
 >
 > 我们设$f(u,d)$表示仅考虑$subtree(u)$内的点,满足所选点两辆距离不小于$k$,并且选中的点中离$u$最近的那个距离为$d$(这个点可以$u$本身,此时$d=0$)  
 > - 边界条件 $f(u,i)=[i=0]w(u)$ 是仅考虑$u$这个点
-> - 状态转移: 设$u$的直接相邻的子节点为$v_1,v_2\ldots v_m$  
+> - 状态转移: 设$u$的直接相邻的子节点为$son(u)=\{v_1,v_2\ldots v_m\}$  
 > 依次加入考虑$subtree(v_1),subtree(v_2)\ldots subtree(v_m)$  
 > 假设已经把$u,subtree(v_1)\ldots subtree(v_r)$纳入考虑,尝试加入$subtree(v_{r+1})$  
 > 对于已有状态$f(u,i)$和新加入子树中的状态$f(v,j)$  
@@ -75,7 +75,20 @@
 而将要合并的子树$v_{r+1}$中,使得$f(v_{r+1},j)$有效的$j$不超过$dep(v_{r+1})$  
 或者把$dep$放宽一点,用$size(u)=|subtree(u)|$也是可以的.
 
-这样操作之后, 可以算出最坏情况总复杂度是$O(n^2)$的.
+这样操作之后, 可以算出最坏情况总复杂度是$O(n^2)$的.  
+考虑计算$f(u,\ast)$的复杂度, 这部分的消耗为  
+$$
+\sum_{v\in son(u)}dep(u)dep(v)\leq size(u)\sum_{v\in son(u)}size(v)\leq {\left(size(u)\right)}^2
+$$
+
+于是我们有
+
+$$
+\sum_{u\in T} {\left(size(u)\right)}^2
+\leq
+{\left(\sum_{u\in T} size(u)\right)}^2
+=n^2
+$$
 
 
 ## implementation
