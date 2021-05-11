@@ -16,10 +16,38 @@
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\RR}{\mathbb{R}}
 \newcommand{\CC}{\mathbb{C}}
+\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
 
 \begin{document}
 
 \tableofcontents
+
+\newpage
+
+\section{初等数论内容概述}
+
+引入一些群论的想法有助于学习初等数论.
+
+\begin{itemize}
+	\item 带余除法,整除,同余,整系数线性不定方程 几种基础表达形式的互相转化.
+	\item 素数,互质,最大公约数, Beazout's theorem, Eculidean's algorithm.
+	\item 算数基本定理.
+	\item 数论函数, 数论函数求和问题.
+	\item 线性同余方程组,CRT
+	\item 模意义下的指数函数, 欧拉定理, 原根, 离散对数问题.
+	\item 模意义下的幂函数, 二次剩余.
+	\item MISC
+	      \begin{itemize}
+		      \item 费马大定理(Fermat's last theorem)
+		      \item Wilson's theorem, $p\text{ is a prime} \iff (p-1)!\equiv 1\pmod p$
+		      \item 素性判定和整数分解算法.
+		      \item 素数分布, 素数定理.
+		      \item 初等数论的密码学应用.
+		      \item 狄利克雷生成函数 Dirichlet generating function.
+		      \item 连分数.
+	      \end{itemize}
+\end{itemize}
 
 \newpage
 
@@ -35,32 +63,32 @@ Let $U=\{p_1,p_2\ldots p_m\}$ be the set of prime factors of $n$\\
 For every $S\in \rho(U)$, define
 \begin{itemize}
 	\item $f(S)=\left\vert
-		\left\{
-			k\in \ZZ_n
-			\mid
-			(p\in S \leftrightarrow p\mid k)
-			\right\}
-		\right\vert$
+		      \left\{
+		      k\in \ZZ_n
+		      \mid
+		      (p\in S \leftrightarrow p\mid k)
+		      \right\}
+		      \right\vert$
 	\item $g(S)=\left\vert
-		\left\{
-			k\in \ZZ_n
-			\mid
-			(p\in S \rightarrow p\mid k)
-			\right\}
-		\right\vert=n\prod_{p\in S} \frac{1}{p}$
+		      \left\{
+		      k\in \ZZ_n
+		      \mid
+		      (p\in S \rightarrow p\mid k)
+		      \right\}
+		      \right\vert=n\prod_{p\in S} \frac{1}{p}$
 \end{itemize}
 
 We have $g(S)=\sum_{S\subseteq T\subseteq U} f(T)$.
 Applying the Mobius's inversion to get $f(S)=\sum_{S\subseteq T\subseteq U}{(-1)}^{|T|-|S|}g(T)$.\\
 
 $$
-\begin{aligned}
-\varphi(n)
-&=f(\varnothing)\\
-&=n\sum_{S\subseteq \{p_1,p_2\ldots p_m\}}{(-1)}^{|S|}\prod_{p \in S}\frac{1}{p}\\
-&=n\sum_{S\subseteq \{p_1,p_2\ldots p_m\}}\left(\prod_{p \in S}\frac{-1}{p} \prod_{j\not\in S} 1\right)\\
-&=n\prod_{p\in S}(1-\frac{1}{p})
-\end{aligned}
+	\begin{aligned}
+		\varphi(n)
+		 & =f(\varnothing)                                                                                        \\
+		 & =n\sum_{S\subseteq \{p_1,p_2\ldots p_m\}}{(-1)}^{|S|}\prod_{p \in S}\frac{1}{p}                        \\
+		 & =n\sum_{S\subseteq \{p_1,p_2\ldots p_m\}}\left(\prod_{p \in S}\frac{-1}{p} \prod_{j\not\in S} 1\right) \\
+		 & =n\prod_{p\in S}(1-\frac{1}{p})
+	\end{aligned}
 $$
 
 
@@ -70,29 +98,107 @@ $(\ZZ_n^\ast,\times)$ is a commutative group.
 Consider $a\ZZ_n^\ast=\{[ak]\mid [k]\in \ZZ_n^\ast\}$
 We claim that $a\ZZ_n^\ast = \ZZ_n^\ast$, otherwise\\
 
-$$
-\begin{aligned}
-	&\exists x,y\quad x,y\perp n\land x\not\equiv y\pmod n\\
-	&ax\equiv ay\pmod n\\
-	&(a,n)=1\implies \exists a^{-1}\text{ s.t. } a^{-1}a\equiv aa^{-1}\equiv 1\pmod n\\
-	&a^{-1}ax\equiv x\equiv a^{-1}ay\equiv y\pmod n
-\end{aligned}
-$$
+\[
+	\begin{aligned}
+		 & \exists x,y\quad x,y\perp n\land x\not\equiv y\pmod n                            \\
+		 & ax\equiv ay\pmod n                                                               \\
+		 & (a,n)=1\implies \exists a^{-1}\text{ s.t. } a^{-1}a\equiv aa^{-1}\equiv 1\pmod n \\
+		 & a^{-1}ax\equiv x\equiv a^{-1}ay\equiv y\pmod n
+	\end{aligned}
+\]
 
 Therefore
 
-$$
-\begin{aligned}
-	\prod_{k\perp n} k &\equiv \prod_{k\perp n} ak &\pmod n\\
-	a^{\varphi(n)} \prod_{k\perp n} k&\equiv \prod_{k\perp n} k  &\pmod n\\
-	a^{\varphi(n)} &\equiv 1&\pmod n
-\end{aligned}
-$$
+\[
+	\begin{aligned}
+		\prod_{k\perp n} k                & \equiv \prod_{k\perp n} ak & \pmod n \\
+		a^{\varphi(n)} \prod_{k\perp n} k & \equiv \prod_{k\perp n} k  & \pmod n \\
+		a^{\varphi(n)}                    & \equiv 1                   & \pmod n
+	\end{aligned}
+\]
 
 For the second step: $\ZZ_n^\ast$ is closed under multiplication,
 so $\prod_{k\perp n} k$ is also in $\ZZ_n^\ast$, which means it is invertible.
 
 
 \newpage
+\section{primitive root (modulo a prime)}
+
+\newcommand{\ord}{\mathrm{ord}}
+\subsection{definition}
+
+\begin{itemize}
+	\item \textbf{multiplicative order}:
+	      $\forall x\in \ZZ_p^\ast\ \ord_p(x)=\min\{k\in \ZZ^+\mid x^k\equiv 1\pmod p\}$\\
+				key property: $\ord_p(x) \mid \varphi(p)=p-1$, otherwise:
+				\[
+					1
+					\equiv x^{\varphi(p)}
+					\equiv x^{p-1}
+					\equiv x^{\floor{\frac{p-1}{\ord(x)}\ord(x)}+(p-1)\bmod \ord(x)}
+					\equiv x^{(p-1)\bmod \ord(x)}
+					\not\equiv 1
+					\pmod p
+				\]
+	\item \textbf{primitive root}:
+	      The generators of the multiplicative group $\ZZ_p^\ast$ are called the primitive roots modulo $p$.\\
+	      For a prime number $p$, we say that $g$ is the primitive root modulo $p$ if $\ZZ_p^\ast = \{[1],[2]\ldots [p-1]\}=\{[g^0],[g^1]\ldots [g^{\varphi(p)-1}]=[g^{p-2}]\}$.\\
+				$g$ is a primitive root modulo $p$ iff $\ord_p(g)=\varphi(p)=p-1$
+\end{itemize}
+
+\subsection{existance of primitive root}
+
+\textbf{theorem: }For every odd prime number $p$, the primitive root modulo $p$ exists.\\
+Therefore, for any odd prime number number $p$, the multiplicative group $\ZZ_p^\ast$ is a cyclic group.
+
+\subsection{properties of primitive root}
+
+\subsubsection{count of distinct primitive roots modulo a prime}
+
+Let $g$ be a primitive root modulo $p$.
+Then $\forall x\in \ZZ_p^\ast\ \exists!k\in\{0,1,2\ldots p-2\}\ g^p\equiv x\pmod p$\\
+For $o=\ord_p(x)=\ord_p(g^k)$, we have
+$x^o\equiv g^{ko}\equiv g^{0}\equiv 1\pmod p$\\
+Let $ko=q(p-1)+r$ where $q\in \ZZ$ and $0\leq r<p-1$, 
+so $g^{ko}\equiv g^{q(p-1)}\cdot g^{r}\equiv g^r\equiv 1\pmod p$.\\
+Since the multiplicative order of $g$ is $p-1$, we must have $r=0$,
+which implies $(p-1)\mid ko\iff ko\equiv 0\pmod{p-1}$.\\
+
+When $k\perp (p-1)$, the multiplicative order of $x$ will be $p-1$, which means $x\equiv g^k$ is a primitive root modulo $p$.
+Moreover, only when $(k,p-1)=1$, the smallest positive integer solution $o$ of i.e. $\ord_p(x)$ $ko\equiv 0\pmod {p-1}$ is $p-1$\\
+Therefore, there are $\sum_{i=1}^{p-1}[\gcd(i,p-1)=1]=\varphi(p-1)$ distinct primitive roots modulo $p$.
+
+\subsubsection{roots of unity}
+
+solve the equation of $x$, $x^m \equiv 1\pmod p$.
+Suppose that $x=g^k\ (0\leq k<p-1)$ is the solution, then $g^{km}\equiv 1\pmod p$.\\
+Let $q=\floor{\frac{km}{p-1}}$ and $r=km\bmod {p-1}$, 
+$g^{km}\equiv g^{(p-1)k}\cdot g^r\equiv g^r\equiv 1\pmod p$.\\
+Therefore $r=0$ and $(p-1)\mid km\iff \frac{p-1}{\gcd(m,p-1)}\mid k$.
+
+So, there are $(p-1,m)$ distinct $m$-th roots of unity in $\ZZ_p$.
+
+\subsubsection{quadratic residule}
+
+\textbf{quadratic residule}: $a$ is a quadratic residule modulo $p$ iff $\exists x\ x^2\equiv a\pmod p$.\\
+
+Let $a\equiv g^k\pmod p$, where $p$ is a primitive root and $0\leq k< p-1$.
+
+\begin{itemize}
+	\item $2\mid k$. $x\equiv g^{k/2}\pmod p$ is the square root of $a$.\\
+		$a$ is a quadratic residule.\\
+	\item $2\nmid k$. Suppose that $x\equiv g^r\pmod p$ is the square of $a$ modulo $p$\\
+		$a\equiv x^2\equiv g^{2r}\equiv g^{k}\pmod p\implies g^{2r-k}\equiv 1\pmod p$.\\
+		Let $q=\floor{\frac{2r-k}{p-1}},r=(2r-k)\bmod {(p-1)}$, we can show that $r=0$ and $(p-1)\mid (2r-k)$.\\
+		However, $p-1$ is a even number while $2r-k$ is a odd number, this is impossible.\\
+		Thus, $a$ is not a quadratic nonresidue.
+\end{itemize}
+
+
+This tells us that among $\ZZ_p^\ast=\{[g^0],[g^1]\ldots [g^{p-2}]\}$ there are $\frac{p-1}{2}$ quadratic residule. 
+The property will be used when developing Cipolla's algorithm\footnote{An efficient algorithm for solving modular quadratic equation}.
+
+\textbf{Euler's criterion}: $a^{\frac{p-1}{2}}\bmod p=\begin{cases}1 & a \text{ is a quadratic residule}\\ -1& a\text{ is a quadratic nonresidue}\\ 0 & p\mid a\end{cases}$
+
 
 \end{document}
