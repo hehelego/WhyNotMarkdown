@@ -69,7 +69,6 @@
 * qBittorrent
 * syncthing
 * **timeshift**
-* tox(`qtox`/`utox` for gui frontend)
 * screenkey+simplescreenrecorder
 * screengrab
 
@@ -85,6 +84,7 @@
 * s-tui (cpu monitoring&stress cpu)
 * radeontop (monitoring AMD GPU)
 * lscpu,lspci,lshw,hwinfo,lsusb 更相信的硬件信息
+* wireshark, termshark, tcpdump
 
 ### extensions/plugins for browser
 
