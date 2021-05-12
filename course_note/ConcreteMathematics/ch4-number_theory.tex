@@ -19,6 +19,9 @@
 \newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
 \newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
 
+\newcommand{\ord}{\mathrm{ord}}
+\newcommand{\idx}{\mathrm{idx}}
+
 \begin{document}
 
 \tableofcontents
@@ -124,7 +127,6 @@ so $\prod_{k\perp n} k$ is also in $\ZZ_n^\ast$, which means it is invertible.
 \newpage
 \section{primitive root (modulo a prime)}
 
-\newcommand{\ord}{\mathrm{ord}}
 \subsection{definition}
 
 \begin{itemize}
@@ -140,6 +142,8 @@ so $\prod_{k\perp n} k$ is also in $\ZZ_n^\ast$, which means it is invertible.
 					\not\equiv 1
 					\pmod p
 				\]
+	\item \textbf{index}:
+		$\forall x\in \ZZ_p^\ast,g\in \ZZ_p^\ast\ \idx_g(x)=\min\{k\in \NN\mid g^k\equiv x\pmod p\}$
 	\item \textbf{primitive root}:
 	      The generators of the multiplicative group $\ZZ_p^\ast$ are called the primitive roots modulo $p$.\\
 	      For a prime number $p$, we say that $g$ is the primitive root modulo $p$ if $\ZZ_p^\ast = \{[1],[2]\ldots [p-1]\}=\{[g^0],[g^1]\ldots [g^{\varphi(p)-1}]=[g^{p-2}]\}$.\\
@@ -148,7 +152,7 @@ so $\prod_{k\perp n} k$ is also in $\ZZ_n^\ast$, which means it is invertible.
 
 \subsection{existance of primitive root}
 
-\textbf{theorem: }For every odd prime number $p$, the primitive root modulo $p$ exists.\\
+\noindent \textbf{theorem: }For every odd prime number $p$, the primitive root modulo $p$ exists.\\
 Therefore, for any odd prime number number $p$, the multiplicative group $\ZZ_p^\ast$ is a cyclic group.
 
 \subsection{properties of primitive root}
@@ -180,25 +184,57 @@ So, there are $(p-1,m)$ distinct $m$-th roots of unity in $\ZZ_p$.
 
 \subsubsection{quadratic residule}
 
-\textbf{quadratic residule}: $a$ is a quadratic residule modulo $p$ iff $\exists x\ x^2\equiv a\pmod p$.\\
 
-Let $a\equiv g^k\pmod p$, where $p$ is a primitive root and $0\leq k< p-1$.
+\noindent \textbf{definition}: $a$ is a quadratic residule modulo $p$ iff $\exists x\ x^2\equiv a\pmod p$.\\
 
+Let $k=\idx_g(a)$, where $g$ is a primitive root.
 \begin{itemize}
 	\item $2\mid k$. $x\equiv g^{k/2}\pmod p$ is the square root of $a$.\\
-		$a$ is a quadratic residule.\\
+		$a$ is a quadratic residule.
 	\item $2\nmid k$. Suppose that $x\equiv g^r\pmod p$ is the square of $a$ modulo $p$\\
-		$a\equiv x^2\equiv g^{2r}\equiv g^{k}\pmod p\implies g^{2r-k}\equiv 1\pmod p$.\\
+		$a\equiv x^2\equiv g^{2r}\equiv g^{k}\pmod p\iff g^{2r-k}\equiv 1\pmod p$.\\
 		Let $q=\floor{\frac{2r-k}{p-1}},r=(2r-k)\bmod {(p-1)}$, we can show that $r=0$ and $(p-1)\mid (2r-k)$.\\
 		However, $p-1$ is a even number while $2r-k$ is a odd number, this is impossible.\\
 		Thus, $a$ is not a quadratic nonresidue.
 \end{itemize}
 
+Similarly we can show that $2\mid k$ if $a$ is a quadratic residule.
+In conclusion, $a\text{ is a quadratic residule} \iff 2\mid \mathrm{idx}_g(a)$\\
 
 This tells us that among $\ZZ_p^\ast=\{[g^0],[g^1]\ldots [g^{p-2}]\}$ there are $\frac{p-1}{2}$ quadratic residule. 
 The property will be used when developing Cipolla's algorithm\footnote{An efficient algorithm for solving modular quadratic equation}.
 
-\textbf{Euler's criterion}: $a^{\frac{p-1}{2}}\bmod p=\begin{cases}1 & a \text{ is a quadratic residule}\\ -1& a\text{ is a quadratic nonresidue}\\ 0 & p\mid a\end{cases}$
 
+
+\noindent \textbf{Euler's criterion}: $a^{\frac{p-1}{2}}\bmod p=\begin{cases}1 & a \text{ is a quadratic residule}\\ -1& a\text{ is a quadratic nonresidue}\\ 0 & p\mid a\end{cases}$
+
+Let $k=\idx_g(a)$, where $g$ is a primitive root.
+\begin{itemize}
+	\item $a\text{ is a quadratic residule}\implies 2\mid k$\\
+		Let $i=\frac{k}{2}$, $a^{\frac{p-1}{2}}\equiv g^{(p-1)i}\equiv 1\pmod p$
+	\item $a\text{ is a quadratic nonresidule}\implies 2\nmid k$\\
+		Let $k=2i+1$, $a^{\frac{p-1}{2}}\equiv g^{(p-1)i}\cdot g^{\frac{p-1}{2}}\equiv g^{\frac{p-1}{2}}\pmod p$\\
+		Let $x\equiv g^{\frac{p-1}{2}}$, then $x^2\equiv 1\pmod p\iff (x+1)(x-1)\pmod p$\\
+		$p$ has no factor besides itself, so $\left(p\mid (x+1)\right)\lor \left(p\mid (x-1)\right)$\\
+		Since $g$ is a primitive root, $\ord_p(g)=p-1$ so $x\equiv g^{\frac{p-1}{2}}\equiv 1\pmod p$ can not be the case.\\
+		Hence, $x\equiv g^{\frac{p-1}{2}}\equiv -1$
+\end{itemize}
+
+The other direction.
+\begin{itemize}
+	\item Suppose that $a^{\frac{p-1}{2}}\equiv g^{k\frac{p-1}{2}}\equiv 1\pmod p$\\
+		Then, $p-1\mid k\frac{p-1}{2}\implies \left(2{(p-1)}^2\right)\mid k\implies 2\mid k$\\
+		So $a$ is a quadratic residule.
+	\item Suppose that $a^{\frac{p-1}{2}}\equiv g^{k\frac{p-1}{2}}\equiv -1\equiv g^{\frac{p-1}{2}}\pmod p$\\
+		Then $g^{k\frac{p-1}{2}}{\left(g^{-1}\right)}^{\frac{p-1}{2}}\equiv g^{(k-1)\frac{p-1}{2}}\equiv 1$,\\
+		which implies $2\mid (k-1)\implies 2\nmid k$\\
+		So $a$ is a quadratic nonresidule.
+\end{itemize}
+
+In conclusion.
+\begin{itemize}
+	\item $a^{\frac{p-1}{2}}\equiv 1\pmod p$ iff $a$ is a quadratic residule.
+	\item $a^{\frac{p-1}{2}}\equiv -1\pmod p$ iff $a$ is a quadratic nonresidule.
+\end{itemize}
 
 \end{document}
