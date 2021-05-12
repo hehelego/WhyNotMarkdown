@@ -13,4 +13,52 @@
 
 \begin{document}
 
+\tableofcontents
+
+\newpage
+
+\section{bipartite graph}
+
+\subsection{Hall's marriage theorem}
+Let $G=(V,E)=(X+Y,E)$ be a bipartite graph, $G$ has a complete matching from $X$ to $Y$ iff $\forall S\subseteq X\ |S|\leq |N(S)|$,\\
+where $N_G(S)=\{y\in Y\mid \exists x\in S\ (x,y)\in E\}$.
+
+\subsubsection{sufficiency}
+($\Rightarrow$)\quad
+Let $M=\{(x,f(x))\in E\mid x\in X\}\subseteq E$ be a complete matching.\\
+$N_G(S)=\{y\in Y\mid \exists x\in S\ (x,y)\in E\}\supseteq \{f(x)\mid x\in S\}$.
+
+\subsubsection{necessity}
+($\Leftarrow$)\quad
+Apply induction on $|X|$.
+\begin{enumerate}
+	\item When $|X|=1$, the necessity is hold.
+	\item Suppose that the necessity is hold, for $|X|\leq k$
+	\item For $|X|=k+1$, $\forall S\subseteq X\ |S|\leq |N_G(X)|$
+	      \begin{itemize}
+		      \item $\forall \varnothing\subsetneq S\subsetneq X\ |N_G(S)|>|S|$\\
+						Select any edge $e=(x,y)$ and let $G'=((X\setminus\{x\})+(Y\setminus\{y\}),E-\{e\})$.\\
+		            In graph $G'$, every subset of $X'=X\setminus \{x\}$ denoted as $S$, its neighbours $|N_{G'}(S)|\geq |N_{G}(S)|-1\geq |S|$.\\
+		            So we can find a complete matching  $M':X'\to Y'$ in $G'$.\\
+		            A complete matching $M:X\to Y$ can be obtained by adding the edge $e=(x,y)$ into $M'$.
+		      \item $\exists \varnothing\subsetneq S\subsetneq X\ |N_G(S)|=|S|$\\
+						Let $G_0=(V_0,E_0),G_1=(V_1,E_1)$ be two induced subgraph of $G$, where $V_0=S+N_G(S),V_1=(X\setminus S)+ (Y\setminus N_G(S))$.\\
+		            For $G_0$: $\forall P\subseteq S\ N_{G_0}(P)=N_{G}(P)$ so $\forall P\subseteq S\ |N_{G_0}(P)|=|N_{G}(P)|\geq |P|$.\\
+								For $G_1$: We claim that $\forall Q\subseteq (X\setminus S)\ |N_{G_1}(Q)|\geq |Q|$.
+								Otherwise, let $Q_0$ be one subset s.t. $|N_{G_1}(Q)|<|Q|$.\\
+								Then $N_{G}(S\cup Q_0)=N_{G}(S)\cup N_{G}(Q_0)$, where $N_{G}(S)=N_{G_0}(S),\ N_{G}(Q_0)\subseteq N_{G}(S)\cup N_{G_1}(Q)$,\\
+								which leads to $|N_{G}(S\cup Q_0)|=|\leq |N_G(S)|+|N_{G_0}(Q_0)| < |S|+|Q_0|$, however $|N_{G}(S\cup Q_0)|\geq |S\cup Q_0|=|S|+|Q_0|$.\\
+								Therefore in $G_1$, $\forall Q\subseteq (X\setminus S)\ |N_{G_1}(Q)|\geq |Q|$.\\
+								We can find a complete matching by merging the complete matching in $G_0$ and $G_1$.
+	      \end{itemize}
+\end{enumerate}
+
+\subsubsection{generalization}
+
+see \href{https://en.wikipedia.org/wiki/Deficiency\_(graph\_theory)}{wikipedia: deficiency(graph theorem)}.\\
+In a bipartite graph $G=(X+Y,E)$
+Let $\mathrm{def}_G(S)=|S|-|N_G(S)|$, then the size of maximum matching in $G$ is $|X|-\max_{\varnothing\subseteq S\subseteq X}\mathrm{def}_G(S)$
+
+\newpage
+
 \end{document}
