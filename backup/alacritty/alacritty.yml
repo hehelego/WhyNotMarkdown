@@ -1,0 +1,26 @@
+font:
+  # SauceCodePro=patch(NerdFonts, Source Code Pro)
+  # Literation=patch(NerdFonts,liberation)
+  # Noto Sans Mono
+  size: 9
+  normal:
+    family: SauceCodePro Nerd Font
+    # family: Literation Mono Nerd Font
+    style: Regular
+
+  bold:
+    family: SauceCodePro Nerd Font
+    # family: Literation Mono Nerd Font
+    style: Bold
+
+  italic:
+    family: SauceCodePro Nerd Font
+    # family: Literation Mono Nerd Font
+    style: Italic
+
+  bold_italic:
+    family: SauceCodePro Nerd Font
+    # family: Literation Mono Nerd Font
+    style: Bold Italic
+
+background_opacity: 0.7

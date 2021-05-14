@@ -1,0 +1,45 @@
+[theme]
+name = "plain"
+
+[icons]
+name = "awesome5"
+
+[[block]]
+block = "networkmanager"
+primary_only=true
+interface_name_exclude = ["br\\-[0-9a-f]{12}", "docker\\d+"]
+interface_name_include = []
+
+# [[block]]
+# block = "backlight"
+# device = "/sys/class/backlight/amdgpu_bl0"
+
+[[block]]
+block = "custom"
+shell = "fish"
+command = ''' python /home/hehelego/.config/i3status-rust/query-backlight.py '''
+on_click = ''' python /home/hehelego/.config/i3status-rust/controller-backlight.py '''
+json = false
+interval = 5
+
+[[block]]
+block = "sound"
+format = "{volume}"
+show_volume_when_muted=true
+on_click = "pavucontrol"
+
+[[block]]
+block = "time"
+format = "%Y/%m/%d %a %R"
+timezone = "Asia/Shanghai"
+interval = 30
+
+[[block]]
+block = "battery"
+driver = "upower"
+format = "{percentage}% {time}"
+good=70
+info=50
+warning=30
+critical=15
+

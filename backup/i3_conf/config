@@ -196,7 +196,7 @@ bindsym $mod+p mode $display_mode_promot
 
 bar {
 	status_command i3status-rs
-	font pango:SourceCodePro, FontAwesome5Free 9
+	font pango: NotoSansMono, FontAwesome5Free, FontAwesome5Brands 10
 }
 
 # window padding and margin

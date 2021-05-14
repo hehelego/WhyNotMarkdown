@@ -1,0 +1,5 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =3
+let g:netrw_dirhist_3='/home/hehelego/.config/i3status-rust'
+let g:netrw_dirhist_2='/home/hehelego/.config/i3'
+let g:netrw_dirhist_1='/home/hehelego/.workspace/git-repo/WhyNotMarkdown/course_note/ConcreteMathematics'
