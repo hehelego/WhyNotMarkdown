@@ -413,7 +413,62 @@ swap_file_offset={{sudo filefrag -v /swapfile | awk '{ if($1=="0:"){print substr
 当然换显示器,调整DPI,甚至调整窗口大小都会改变可用的字体大小, 需要便捷调节的方式.  
 在常见的终端模拟器中,都支持`Ctrl +`,`Ctrl -`的快捷键调整字体大小.
 
+## can not perform repeat when a key is pressed down and holden.
+
+> 2021.5.15
+> 这是很久之前遇到的问题,在telegram cn arch user group里面问到了解决方案. 
+> 当时忘了记录,现在想起来,写下来.
+
+### 问题描述
+
+使用fcitx5时,长按一个键,无法重复输出这个字符.
+
+### 参考信息
+
+- arch wiki: fcitx5
+
+### 解决方案
+
+一些qt/gtk应用没有加入`fcitx5`的识别,只有`fcitx`的支持,所以如下的环境变量产生了问题.
+
+```plaintext
+GTK_IM_MODULE=fcitx5
+QT_IM_MODULE=fcitx5
+SDL_IM_MODULE=fcitx5
+```
+
+但是`fcitx5`是基本兼容`fcitx`的,所以这里`fcitx5 -> fcitx`即可.
+
+```plaintext
+GTK_IM_MODULE=fcitx
+QT_IM_MODULE=fcitx
+SDL_IM_MODULE=fcitx
+XMODIFIERS=@im=fcitx
+```
+
+## vim highlight cleared after changing colorscheme
+
+> 2021.5.15
+
+### 问题描述
+
+启动时使用`colorscheme gruvbox`,
+使用中切换到其他配色,
+发现很多`highlight group`被清除了,
+比如`signcolumn`中的来自LSP的`warning,error`.
 
 
+### 参考信息
+
+- [github/vim issue: How to mitigate highlighting issues when switching colorschemes](https://github.com/vim/vim/issues/4405)
+- gruvbox,one的vim colorscheme源文件
+
+### 解决方案
+
+colorscheme的源文件中含有`hi clear; syntax clear`等初始化清空操作.  
+导致了颜色清空, 但是并没有正确地设置新的`highlight group`
+
+**TODO**
+暂时未解决 temporarily unable to fix it.
 
 
