@@ -49,4 +49,4 @@
 
 ## backup
 
-`$(REPO_ROOT)/static/vim_conf`
+`$(REPO_ROOT)/backup/nvim/`

@@ -7,7 +7,7 @@ Plug 'sheerun/vim-polyglot'
 " for rust-lang syntax enchancement
 Plug 'rust-lang/rust.vim'
 " for extra colorschemes
-Plug 'chriskempson/base16-vim'
+Plug 'joshdick/onedark.vim'
 Plug 'morhetz/gruvbox'
 " for nerdfont file icon support
 Plug 'ryanoasis/vim-devicons'

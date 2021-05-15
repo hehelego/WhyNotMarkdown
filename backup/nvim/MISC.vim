@@ -8,8 +8,3 @@ autocmd FileType vim set expandtab
 autocmd FileType vimscript set expandtab
 autocmd FileType markdown set expandtab
 
-
-" colorscheme gruvbox
-colorscheme gruvbox
-let g:airline_theme='gruvbox'
-
