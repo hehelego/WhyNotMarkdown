@@ -79,6 +79,28 @@ hotkeys:
     - zh_hant_tw
 ```
 
+## fzf search for hidden files
+
+
+### 问题描述
+
+fzf不默认搜索dot files.  
+`rg -l . --files --hidden | fzf -m` 太麻烦.  
+并且使用`fzf.vim`集成插件时,也没法手动pipe.
+
+### 参考信息
+
+- [github fzf/issue : Including hidden files in search](https://github.com/junegunn/fzf/issues/337)
+- [github fzf/readme.md](https://github.com/junegunn/fzf)
+
+we can use the `FZF_DEFAULT_COMMAND` environment variable.
+
+### 解决方案
+
+```fish 
+set -Ux FZF_DEFAULT_COMMAND "rg -l . --files --hidden"
+```
+
 ## fish shell 常见操作
 
 - `fish`不兼容`bash`, 它更像是`csh`风格的
@@ -89,20 +111,37 @@ hotkeys:
 - template string `echo {$var}`
 - 用单引号包裹传递给程序的regex防止它被fish解析. `exa --all ~/.config | rg 'rc$'`
 
+## combining fzf with cd
 
-## v2ray configuartion
+> 2021.5.16
 
-> 目前的状态
-> - 使用的客户端为`qv2ray`
-> - 代理线路`JustMySocks`. 支持`Alipay(支付宝)`付款, 官网可以国内直连且有网友做镜像站.
+### 问题描述
 
-- 参考 [qv2ray offical site](https://qv2ray.net/) 的user manual, quick start进行配置即可.
+Finding my working directories and cd into them waste a lot of time and cause distraction.  
+I want to have kind of fuzzy jump feature.
+
+`(command-that-find-directories-in-filetree) | fzf | cd`
+
+### 参考信息
+
+- [github ripgrep/issue: Feature request --directories](https://github.com/BurntSushi/ripgrep/issues/169)
+- [github ripgrep/issue: Provide a --directories option to list directories](https://github.com/BurntSushi/ripgrep/issues/388)
+
+### 解决方案
+
+```fish
+# file path: ~/.config/fish/functions/cdfzf.fish
+function cdfzf
+  cd (rg --hidden --sort-files --files --null 2> /dev/null | xargs -0 dirname | uniq | fzf)
+end
+```
+
 
 ## fish shell: proxy settings
 
 > date: 2021.1.13
 
-### 描述
+### 问题描述
 
 set/unset proxy environment variables in fish shell, and share them between sessions.
 
@@ -342,27 +381,6 @@ git config --global core.quotepath off
 HandlePowerKey=suspend
 ```
 
-## fzf search for hidden files
-
-
-### 问题描述
-
-fzf不默认搜索dot files.  
-`rg -l . --files --hidden | fzf -m` 太麻烦.  
-并且使用`fzf.vim`集成插件时,也没法手动pipe.
-
-### 参考信息
-
-- [github fzf/issue : Including hidden files in search](https://github.com/junegunn/fzf/issues/337)
-- [github fzf/readme.md](https://github.com/junegunn/fzf)
-
-we can use the `FZF_DEFAULT_COMMAND` environment variable.
-
-### 解决方案
-
-```fish 
-set -Ux FZF_DEFAULT_COMMAND "rg -l . --files --hidden"
-```
 
 ## firefox usage: shortcuts
 
