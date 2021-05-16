@@ -55,7 +55,9 @@ class FileTree:
         self.type = 'd' if os.path.isdir(path) else 'f'
         if self.type == 'd':
             self.path += '/'
-            self.son = [FileTree(i, os.path.join(path, i)) for i in os.listdir(path)]
+            self.son = sorted(
+                [FileTree(i, os.path.join(path, i)) for i in os.listdir(path)],
+                key=lambda x: (0 if x.type=='d' else 1,x.name))
     def dump(self):
         if self.type == 'f':
             return self.path
