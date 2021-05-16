@@ -130,6 +130,7 @@ class Converter:
             else:
                 print(f'[LOG] task {uuid} failed: out={msg["stdout"]} err={msg["stderr"]}')
             self.taskCnt -= 1
+        self.generateSiteMap()
 
 
     def traverse(self, prePath, treeNode:FileTree) -> None:
@@ -140,16 +141,53 @@ class Converter:
                 self.traverse(prePath, i)
         else:
             self.tasks.append(('convert', treeNode.path))
+    def generateSiteMap(self):
+        tree = FileTree(self.dest,self.dest)
+        siteMap = open('index.html','w')
+        stack = []
+        stack.append(tree)
+
+        print(
+'''<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>hehelego's github pages</title>
+    </head>
+<body>''',file=siteMap)
+        level = 2
+        while len(stack)>0:
+            top = stack.pop()
+            if type(top)==FileTree:
+                node:FileTree = top
+                if node.type=='d':
+                    print(rf'<h{level}>{node.name}</h{level}> <ul>',file=siteMap)
+                    stack.append(0)
+                    stack.extend([s for s in node.son])
+                    level += 1
+                else:
+                    print(rf'<li> <a href="{node.path}">{node.name}</a> </li>',file=siteMap)
+            elif type(top)==int:
+                print(r'</ul>',file=siteMap)
+                level -= 1
+            else:
+                raise TypeError('Unexpected element in stack')
+        print(
+'''
+</body>
+</html>''',file=siteMap)
+        siteMap.close()
+
 
 
 
 def test():
-    t = FileTree('WhyNotMarkdown', 'WhyNotMarkdown')
-    t.filter(pathRules)
-    pprint.pprint(t.dump())
+    source = FileTree('WhyNotMarkdown', 'WhyNotMarkdown')
+    source.filter(pathRules)
+    pprint.pprint(source.dump())
 
-    c = Converter(t, 'output')
-    c.convert()
+    convert = Converter(source, 'converted')
+    convert.convert()
 def main():
     pass
 
