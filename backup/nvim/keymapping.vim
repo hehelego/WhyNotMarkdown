@@ -8,8 +8,11 @@ noremap <silent> <Up> :<C-u>resize +3<CR>
 map <silent> <A-j> gt
 map <silent> <A-k> gT
 map <silent> <A-w> :<C-u>bdelete<CR>
+
 map <silent> <leader>qo :<C-u>copen<CR>
 map <silent> <leader>qc :<C-u>cclose<CR>
+map <silent> <leader>qn :<C-u>cnext<CR>
+map <silent> <leader>qp :<C-u>cprevious<CR>
 
 
 """"""""""""""""""

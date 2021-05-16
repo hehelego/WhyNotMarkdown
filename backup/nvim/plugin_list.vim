@@ -24,7 +24,10 @@ Plug 'liuchengxu/vista.vim'
 " for quickui: customizable menu
 Plug 'skywind3000/vim-quickui'
 " for running shell command asynchronously
+Plug 'skywind3000/asynctasks.vim'
 Plug 'skywind3000/asyncrun.vim'
+" for git integration
+Plug 'tpope/vim-fugitive'
 " for viewing change history and back tracing
 Plug 'mbbill/undotree'
 " for colorizing pair parentheses
