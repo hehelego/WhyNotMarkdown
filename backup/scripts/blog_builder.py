@@ -186,11 +186,12 @@ def test():
     source.filter(pathRules)
     pprint.pprint(source.dump())
 
+def main():
+    source = FileTree('WhyNotMarkdown', 'WhyNotMarkdown')
+    source.filter(pathRules)
     convert = Converter(source, 'converted')
     convert.convert()
-def main():
-    pass
 
 if __name__=='__main__':
-    test()
-    #  main()
+    #  test()
+    main()
