@@ -80,9 +80,12 @@ call quickui#menu#install("Git(&g)", [
 			\ [ '--' ]            ,
 			\ [ 'git status'      , 'Git status']     ,
 			\ [ 'git stage-all'   , 'Git add -A' ]    ,
+			\ [ 'git stage-this'  , 'Git add %' ]     ,
 			\ [ 'git commit'      , 'Git commit' ]    ,
 			\ [ 'git push'        , 'Git push' ]      ,
 			\ [ 'git pull'        , 'Git pull --ff' ] ,
+			\ [ 'git log'         , 'Git log' ]       ,
+			\ [ 'git blame'       , 'Git blame' ]     ,
 			\])
 
 " TODO:
