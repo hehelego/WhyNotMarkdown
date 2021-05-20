@@ -17,10 +17,7 @@
 \tableofcontents
 
 \newpage
-
-\section{bipartite graph}
-
-\subsection{Hall's marriage theorem}
+\section{Hall's marriage theorem}
 Let $G=(V,E)=(X+Y,E)$ be a bipartite graph, $G$ has a complete matching from $X$ to $Y$ iff $\forall S\subseteq X\ |S|\leq |N(S)|$,\\
 where $N_G(S)=\{y\in Y\mid \exists x\in S\ (x,y)\in E\}$.
 
@@ -71,8 +68,7 @@ Let $\mathrm{def}_G(S)=|S|-|N_G(S)|$,
 then the size of maximum matching in $G$ is $|X|-\max_{\varnothing\subseteq S\subseteq X}\mathrm{def}_G(S)$
 
 \newpage
-
-\subsection{Havel-Hakimi algorithm}
+\section{Havel-Hakimi algorithm}
 
 \subsubsection{references \& links}
 
@@ -104,5 +100,39 @@ def check(deg_seq: List[int]) -> bool:
 \subsubsection{proof}
 
 \textbf{TODO}
+
+
+
+\newpage
+\section{graph isomorphism invariant}
+
+\subsection{degree sequence}
+
+$G\cong H\implies f(G)=H(G)$, where $f(G)=\mathrm{multi-set}\{\deg_G(v)\mid v\in G\}$.\\
+This is a necessary but not sufficient condition, see the following example, where $H,G$ have the same degree sequence but are not isomorphic to each other.
+
+\begin{minted}{C}
+//!/usr/bin/dot
+// in graphviz dot
+\graph G{
+	1 -- 2
+	2 -- 3
+	3 -- 4
+	4 -- 5
+	2 -- x
+}
+\graph H{
+	1 -- 2
+	2 -- 3
+	3 -- 4
+	4 -- 5
+	3 -- x
+}
+\end{minted}
+
+
+
+
+
 
 \end{document}
