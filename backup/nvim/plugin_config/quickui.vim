@@ -68,11 +68,14 @@ call quickui#menu#install("LSP(&l)", [
 			\ [ 'CocList'     , 'CocList' ]     ,
 			\])
 call quickui#menu#install("Build(&s)", [
-			\ [ 'make'       , 'AsyncRun make' ]       ,
-			\ [ 'make clean' , 'AsyncRun make clean' ] ,
-			\ [ 'make purge' , 'AsyncRun make purge' ] ,
-			\ [ '--' ]       ,
-			\ [ 'cmake'      , 'AsyncRun cmake' ]      ,
+			\ [ 'make'          , 'AsyncRun make' ]       ,
+			\ [ 'make clean'    , 'AsyncRun make clean' ] ,
+			\ [ 'make purge'    , 'AsyncRun make purge' ] ,
+			\ [ '--' ]          ,
+			\ [ 'cmake'         , 'AsyncRun cmake .' ]    ,
+			\ [ '--' ]          ,
+			\ [ 'AsyncTastList' , 'AsyncTaskFzf' ]        ,
+			\ [ 'AsyncTaskEdit' , 'AsyncTaskEdit' ]       ,
 			\])
 call quickui#menu#install("Git(&g)", [
 			\ [ 'fzf git-files'   , 'GFiles' ]        ,
