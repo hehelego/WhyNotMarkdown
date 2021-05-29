@@ -9,6 +9,14 @@ let g:asyncrun_exit = "silent call system('notify-send -u low -t 1000 [VIM]Async
 
 
 
+function! g:XclipBufferToClipboard()
+	let l:opts = {
+				\ }
+	let l:cmd = "xclip -selection g:clipboard"
+	call asyncrun#run('',l:opts,l:cmd)
+endfunction
+
+
 
 function! s:fzf_sink(what)
 	let p1 = stridx(a:what, '<')

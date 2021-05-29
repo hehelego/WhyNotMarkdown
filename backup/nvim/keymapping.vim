@@ -14,11 +14,13 @@ map <silent> <leader>qc :<C-u>cclose<CR>
 map <silent> <leader>qn :<C-u>cnext<CR>
 map <silent> <leader>qp :<C-u>cprevious<CR>
 
+vmap gf :<C-u>call EditSelectedPath()<CR>
+vmap gx :<C-u>call XdgopenSelectedPath()<CR>
+
 
 """"""""""""""""""
 " keymapping_cheatsheet
 """"""""""""""""""
-
 
 let s:kmcs_MISC = [
 			\ [ '<leader>'        , '<space>' ],
@@ -60,7 +62,13 @@ let s:kmcs_builtin = [
 			\ [ '<C-d>'     , 'scroll down' ],
 			\ [ '<C-b>'     , 'page up' ],
 			\ [ '<C-f>'     , 'page down' ],
+			\ [ '--' ]      ,
+			\ [ 'gf'        , 'edit <cword>' ],
+			\ [ 'gx'        , 'xdg-open <cword>' ],
+			\ [ '--' ]      ,
 			\]
+
+
 
 
 let s:kmcs_coc = [
