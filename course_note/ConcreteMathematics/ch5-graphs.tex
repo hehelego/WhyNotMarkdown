@@ -1,6 +1,4 @@
 \documentclass{article}
-\usepackage{xeCJK}
-\setCJKmainfont{Noto Serif CJK SC}
 
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -24,7 +22,7 @@ where $N_G(S)=\{y\in Y\mid \exists x\in S\ (x,y)\in E\}$.
 \subsubsection{references \& links}
 
 \begin{itemize}
-	\item \href{https://en.wikipedia.org/wiki/Hall\%27s\_marriage\_theorem}{wikipedia: Hall's marriage theorem}
+	\item \href{https://en.wikipedia.org/wiki/Hall's_marriage_theorem}{wikipedia: Hall's marriage theorem}
 	\item \href{https://en.wikipedia.org/wiki/Deficiency_(graph_theory)}{wikipedia: deficiency}
 \end{itemize}
 
@@ -73,8 +71,8 @@ then the size of maximum matching in $G$ is $|X|-\max_{\varnothing\subseteq S\su
 \subsubsection{references \& links}
 
 \begin{itemize}
-	\item \href{https://en.wikipedia.org/wiki/Havel\%E2\%80\%93Hakimi\_algorithm}{wikipedia: Havel-Hakimi algorithm}
-	\item \href{https://en.wikipedia.org/wiki/Erd\%C5\%91s\%E2\%80\%93Gallai\_theorem}{}
+	\item \href{https://en.wikipedia.org/wiki/Havel-Hakimi_algorithm}{wikipedia: Havel-Hakimi algorithm}
+	\item \href{https://en.wikipedia.org/wiki/Erdős–Gallai theorem}{wikipedia: Erdős–Gallai theorem}
 \end{itemize}
 
 \subsubsection{the theorem}
@@ -131,7 +129,12 @@ This is a necessary but not sufficient condition, see the following example, whe
 \end{minted}
 
 
+\newpage
 \section{Lower bound of $\max(\omega(G),\alpha(G))$}
+
+\subsection{references \& links}
+\href{https://en.wikipedia.org/wiki/Ramsey_theory}{wikipedia: Ramsey theory}
+
 
 \subsection{statement}
 
@@ -141,6 +144,25 @@ $\alpha(G)$: the independence number.
 
 \subsection{proof}
 
+\begin{enumerate}
+	\item $n=1$, hold
+	\item $n=2$, hold
+	\item Suppose that $n=1,2,3\ldots k$, the statement is true\\
+		For $n=k+1$, select a arbitary vertex $u$. 
+		Let $A=\{v\mid \{u,v\}\in E,v\neq u\},\, B=\{v\mid \{u,v\}\not E,v\neq u\}$\\
+		\begin{itemize}
+			\item $A$, there exists a clique $C$ of at least $\frac{1}{2}\log_2 |A|$ vertices.
+				$C+\{u\}$ is still a clique.
+			\item $B$, there exists a independent set $I$ of at least $\frac{1}{2}\log_2 |B|$ vertices.
+				$I+\{u\}$ is still an independent set.
+		\end{itemize}
+		Therefore, we can find either a clique or an independent set consisting of at least $1+\frac{1}{2}\max\left(\log_2 |A|+\log_2 |B|\right)$\\
+		$|A+B|=|A|+|B|=n-1=k\implies \max(|A|,|B|)\geq \frac{1}{2}k\implies \max\left(\log_2 |A|,\log_2 |B|\right)\geq -1+\log_2 k$\\
+		Thus $\max(\omega(G),\alpha(G))\geq 1+\left(-1+\log_2 k\right)=\log_2 k\geq \frac{1}{2}\log_2 n$
+\end{enumerate}
+
+
+\newpage
 \section{Sufficient conditions for existence of a hamilton circuit }
 
 \begin{itemize}
@@ -151,5 +173,6 @@ $\alpha(G)$: the independence number.
 \end{itemize}
 
 \subsection{proof}
+
 
 \end{document}
