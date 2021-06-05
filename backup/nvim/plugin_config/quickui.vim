@@ -38,10 +38,15 @@ call quickui#menu#install("CurrentBuffer(&b)" , [
 			\])
 
 call quickui#menu#install("Command(&c)", [
-			\ [ 'commands'     , 'Commands' ] ,
-			\ [ 'key-mappings' , 'Maps' ]     ,
-			\ [ 'functions'    , 'function' ] ,
-			\ [ 'cmd-history'  , 'History:' ] ,
+			\ [ 'commands'      , 'Commands' ]      ,
+			\ [ 'key-mappings'  , 'Maps' ]          ,
+			\ [ 'functions'     , 'function' ]      ,
+			\ [ 'cmd-history'   , 'History:' ]      ,
+			\ [ '--' ]          ,
+			\ [ 'AsyncTastList' , 'AsyncTaskFzf' ]  ,
+			\ [ 'AsyncTaskEdit' , 'AsyncTaskEdit' ] ,
+			\ [ '--' ]          ,
+			\ [ 'show CWD/PWD'  , 'pwd']            ,
 			\])
 
 call quickui#menu#install("Editor(&e)", [
@@ -66,16 +71,6 @@ call quickui#menu#install("LSP(&l)", [
 			\ [ 'CocAction'   , 'CocAction' ]   ,
 			\ [ 'CocCommand'  , 'CocCommand' ]  ,
 			\ [ 'CocList'     , 'CocList' ]     ,
-			\])
-call quickui#menu#install("Build(&s)", [
-			\ [ 'make'          , 'AsyncRun make' ]       ,
-			\ [ 'make clean'    , 'AsyncRun make clean' ] ,
-			\ [ 'make purge'    , 'AsyncRun make purge' ] ,
-			\ [ '--' ]          ,
-			\ [ 'cmake'         , 'AsyncRun cmake .' ]    ,
-			\ [ '--' ]          ,
-			\ [ 'AsyncTastList' , 'AsyncTaskFzf' ]        ,
-			\ [ 'AsyncTaskEdit' , 'AsyncTaskEdit' ]       ,
 			\])
 call quickui#menu#install("Git(&g)", [
 			\ [ 'fzf git-files'   , 'GFiles' ]        ,

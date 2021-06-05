@@ -7,15 +7,9 @@ let g:asyncrun_open = 6
 
 let g:asyncrun_exit = "silent call system('notify-send -u low -t 1000 [VIM]AsyncRun finished')"
 
-
-
-function! g:XclipBufferToClipboard()
-	let l:opts = {
-				\ }
-	let l:cmd = "xclip -selection g:clipboard"
-	call asyncrun#run('',l:opts,l:cmd)
-endfunction
-
+  let g:asynctasks_extra_config = [
+      \ '~/.config/nvim/common_tasks.ini'
+      \ ]
 
 
 function! s:fzf_sink(what)
