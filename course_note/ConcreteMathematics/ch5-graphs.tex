@@ -225,15 +225,15 @@ Induction, find the vertex $u$ with the least degree (by previous lemma $\deg(u)
 	\item For $V=k+1$, find the vertex with the least degree denoted as $u$, find a $5$-coloring of $G-u$\\
 	      WLOG, let $\deg(u)=5$, and the five neighbors are colorized with $A,B,C,D,E$.\\
 	      Denote $v_1,v_2,v_2,v_4,v_5$ the neighbors of $v$ \emph{in clockwise order}\footnote{we would partition the plane with the edges $\{u,v_1\},\{u,v_2\},\{u,v_3\},\{u,v_4\},\{u,v_5\}$}\\
-		\begin{itemize}
-			\item If there is a path $P$ from $v_1$ to $v_3$ such that the vertices on the path have either color $A$ or color $C$.\\
-				Consider the circuit $u\to v_1\to P\to v_3\to u$, it split the plane into two region (namely, inner and outer part) where $v_2$ is inside and $v_4,v_5$ are outside.\\
-				Perform the re-coloring opertion $(A,B,C,D,E)\to (A,D,C,B,E)$ inside the circle.\\
-				This is still a valid $5$-coloring of $G-u$ and we can now assign color $B$ to $u$ obtaining a $5$-coloring of $G$.
-			\item $v_1,v_3$ are not connected only using the vertices of color $A$ or $C$.\\
-				Take the subgraph $H$ induced by all vertices of color $A$ and $C$, $v_1,v_3$ are in different connected component. Perform re-coloring opertion $(A,C)\to (C,A)$ in the connected component of $H$ that contains $v_1$\\
-				This is still a valid $5$-coloring of $G-u$ and we can now assign color $A$ to $u$ obtaining a $5$-coloring of $G$.
-		\end{itemize}
+	      \begin{itemize}
+		      \item If there is a path $P$ from $v_1$ to $v_3$ such that the vertices on the path have either color $A$ or color $C$.\\
+		            Consider the circuit $u\to v_1\to P\to v_3\to u$, it split the plane into two region (namely, inner and outer part) where $v_2$ is inside and $v_4,v_5$ are outside.\\
+		            Perform the re-coloring opertion $(A,B,C,D,E)\to (A,D,C,B,E)$ inside the circle.\\
+		            This is still a valid $5$-coloring of $G-u$ and we can now assign color $B$ to $u$ obtaining a $5$-coloring of $G$.
+		      \item $v_1,v_3$ are not connected only using the vertices of color $A$ or $C$.\\
+		            Take the subgraph $H$ induced by all vertices of color $A$ and $C$, $v_1,v_3$ are in different connected component. Perform re-coloring opertion $(A,C)\to (C,A)$ in the connected component of $H$ that contains $v_1$\\
+		            This is still a valid $5$-coloring of $G-u$ and we can now assign color $A$ to $u$ obtaining a $5$-coloring of $G$.
+	      \end{itemize}
 \end{enumerate}
 
 \newpage
@@ -242,5 +242,66 @@ Induction, find the vertex $u$ with the least degree (by previous lemma $\deg(u)
 \includegraphics{images/ch5-five-coloring-p2.png}
 
 \newpage
+\section{Number of centroid/center s in a (unrooted) tree}
+
+\newcommand{\ECC}{\mathrm{ECC}}
+\newcommand{\V}{\mathrm{Vertex}}
+\newcommand{\N}{\mathrm{Neighbor}}
+\newcommand{\dis}{\mathrm{dis}}
+\newcommand{\subtree}{\mathrm{subtree}}
+\newcommand{\height}{\mathrm{height}}
+
+\subsection{center of a tree}
+
+
+The eccentricity of a vertex in an unrooted tree is the length of the longest simple path beginning at this vertex.
+A vertex is called a center if no vertex in the tree has smaller eccentricity than this vertex.\\
+Let $\ECC{u}=\max_{v\in \V{T}}\dis{u}{v}$, the vertices with maximum ECC is called centers.
+
+\subsection{counting centers}
+only two cases
+\begin{itemize}
+	\item a unique center.
+	\item two adjacent centers.
+\end{itemize}
+
+Suppose that $c\in \V(T)$ is a center of $T$.
+Make $c$ the root of $T$ to obtain a rooted tree $T'$.\\
+Let $\N(c)=\{u_1,u_2\ldots u_k\}$
+s.t. $\height (u_1)=H_1\geq \height (u_2)=H_2\cdots \height (u_k)=H_k$,
+then $\ECC_T(u)=H_1+1$\\
+Denote the leaf with maximum level in $\subtree(u_i)$ using $L_i$.
+
+\begin{enumerate}
+	\item $H_1=H_2\geq H_3\geq H_4\cdots H_k$\\
+	      $c$ is the unique center of $T$
+	      \begin{itemize}
+		      \item Centers in $\subtree(u_1)$ or $\subtree(u_2)$ do not exist.\\
+		            Consider the path $c'\to c\to u_2\to L_2$,
+		            we have $\ECC(c')\geq 1+1+H_2=2+H_1>\ECC(u)$.
+		      \item Centers in $\subtree(u_3)\ldots \subtree(u_k)$  do not exist.\\
+		            The path $c'\to u_i\to c\to u_1\to L_1$,
+		            we have $\ECC(c')\geq 1+1+H_1> \ECC(u)$.
+	      \end{itemize}
+	\item $H_1-1=H_2\geq H_3\geq H_4\cdots H_k$\\
+	      $c,u_1$ are the two adjacent centers of $T$.
+				The longest simple path from $u_1$ is $u_1\to c\to u_2\to L_2$, $\ECC(u_1)=2+H_2=H_1+1=\ECC(c)$
+	      \begin{itemize}
+		      \item Centers in $\subtree(u_1)-\{u_1\}$ do not exist.\\
+		            path $c'\to u_1\to c\to u_2\to L_2$,
+								we have $\ECC(c')\geq 2+1+H_2=H_1+2>\ECC(c)$
+		      \item Centers in $\subtree(u_2)\ldots \subtree(u_k)$  do not exist.\\
+		            path $c'\to u_k\to c\to u_1\to L_1$,
+								we have $\ECC(c')\geq 2+1+H_1>\ECC(c)$
+	      \end{itemize}
+	\item $H_1-2=H_2\geq H_3\geq H_4\cdots H_k$\\
+	      This is impossible.
+	      Otherwise $\ECC(u_1)=\max(H_1,H_2+1)=H_1<H_1+1 =\ECC(c)$,
+	      $c$ can not be a center of $T$.
+	      Contradiction.
+
+\end{enumerate}
+
+
 
 \end{document}
