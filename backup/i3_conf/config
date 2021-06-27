@@ -12,7 +12,7 @@
 set $mod Mod4
 set $bg_img /usr/share/wallpapers/Opal/contents/images/3840x2160.png
 set $menu rofi -show drun -theme fancy
-set $locker i3lock --nofork -c 333333
+set $locker i3lock -c 333333
 set $screenshot screengrab -r
 set $terminal /usr/bin/alacritty
 

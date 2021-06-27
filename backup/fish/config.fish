@@ -1,0 +1,10 @@
+set -Ux FZF_DEFAULT_COMMAND "rg -l . --files --hidden"
+
+alias ls="exa"
+alias ll="exa --long"
+alias la="exa --long --all"
+alias tree="exa -T"
+alias tree_ex="exa --long --all -T"
+alias br0="br"
+alias br1="br --hidden"
+alias rm="trash"

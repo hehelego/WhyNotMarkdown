@@ -104,7 +104,9 @@ set -Ux FZF_DEFAULT_COMMAND "rg -l . --files --hidden"
 ## fish shell 常见操作
 
 - `fish`不兼容`bash`, 它更像是`csh`风格的
-- shift+tab: fuzzy search completion
+- `shift+tab`: fuzzy search completion
+- `alt+s`: `sudo + {$last_command}`
+- `alt+p`: `{$last_command} | {$env:pager}`
 - `fish_config`
 - `fish_update_completions`
 - substitution `sudo pacman -Rns (pacman -Qdtq)`, `rm (fzf -m)`
