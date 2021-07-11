@@ -34,6 +34,7 @@
 ### important ones
 
 - coreutils, rust-coreutils
+- tmux
 - rofi
 - v2ray(gui frontend `qv2ray`; or `v2raya` for web fontend) + proxychains
 - NetworkManager+nmtui/nmcli
@@ -51,10 +52,10 @@
 - SageMath+Octave+Scipy(numpy,pandas,matplotlib,sympy) ~~and Tensorflow/PyTorch/sciket-learn~~
 - GnuPG
 - openSSL
+- age
 
 ### other utilities
 
-- tmux
 - trash-cli
 - ncdu
 - xorg-apps (`pacman -Sg xorg-apps`)
@@ -63,6 +64,7 @@
 - xclip
 - klipper
 - keynav
+- lazygit
 - dunst
 - scrcpy
 - kde connect
