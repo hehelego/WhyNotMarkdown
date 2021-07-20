@@ -1,21 +1,28 @@
+" turn off highlight for matched patterns (after a search)
 map <C-l> :<C-u>nohlsearch<CR>
 
+" manipulate window size
 noremap <silent> <Left> :<C-u>vertical resize -3<CR>
 noremap <silent> <Right> :<C-u>vertical resize +3<CR>
 noremap <silent> <Down> :<C-u>resize -3<CR>
 noremap <silent> <Up> :<C-u>resize +3<CR>
 
+" switching between tabs
 map <silent> <A-j> gt
 map <silent> <A-k> gT
+" delete(close) a buffer
 map <silent> <A-w> :<C-u>bdelete<CR>
 
+" quickfix: open/close/jump-to-next-fix/jump-to-previous-fix
 map <silent> <leader>qo :<C-u>copen<CR>
 map <silent> <leader>qc :<C-u>cclose<CR>
 map <silent> <leader>qn :<C-u>cnext<CR>
 map <silent> <leader>qp :<C-u>cprevious<CR>
 
-vmap gf :<C-u>call EditSelectedPath()<CR>
-vmap gx :<C-u>call XdgopenSelectedPath()<CR>
+" selected text <-> system clipboard
+map <silent> <leader>xc "+y
+map <silent> <leader>xp "+p
+
 
 
 """"""""""""""""""
@@ -39,6 +46,11 @@ let s:kmcs_MISC = [
 			\ [ '--' ]            ,
 			\ [ '<leader>qo'      , 'quickfix on' ],
 			\ [ '<leader>qc'      , 'quickfix off' ],
+			\ [ '<leader>qn'      , 'quickfix next' ],
+			\ [ '<leader>qp'      , 'quickfix prev' ],
+			\ [ '--' ]       ,
+			\ [ '<leader>xc'      , 'xclip copy' ],
+			\ [ '<leader>xp'      , 'xclip paste' ],
 			\ [ '--' ]       ,
 			\ [ '<C-f>'      , 'popup/float scroll down' ],
 			\ [ '<C-b>'      , 'popup/floag scroll up' ],
@@ -56,7 +68,7 @@ let s:kmcs_builtin = [
 			\ [ '<C-w>='    , 'equalize size' ],
 			\ [ '--' ]      ,
 			\ [ '<C-a>'     , 'numerical literals inc' ],
-			\ [ '<C-a>'     , 'numerical literals dec' ],
+			\ [ '<C-x>'     , 'numerical literals dec' ],
 			\ [ '--' ]      ,
 			\ [ '<C-u>'     , 'scroll up' ],
 			\ [ '<C-d>'     , 'scroll down' ],

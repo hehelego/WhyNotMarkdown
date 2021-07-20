@@ -9,3 +9,8 @@ autocmd FileType vim set expandtab
 autocmd FileType vimscript set expandtab
 autocmd FileType markdown set expandtab
 
+
+
+" only display relative line number in terminal buffer
+autocmd TermOpen * set nonumber
+autocmd TermOpen * set relativenumber
