@@ -23,24 +23,20 @@
   一些文档会链接的静态文件(如图片).  
 - `WhyNotMarkdown/backup/`
   工作环境配置文件备份(dotfiles).  
-  一些有用的资源.
-- `WhyNotMarkdown/record_and_tricks`  
+- `WhyNotMarkdown/record_and_tricks/`  
   使用各种工具时遇到的问题的解决过程记录,和常用技巧整理.  
-- `WhyNotMarkdown/course_note`  
+- `WhyNotMarkdown/course_note/`  
   我在张江理工修读的课程时的笔记.  
   在coursera/edx/MITOCW等平台上学习时的课程记录.
-- `WhyNotMarkdown/杂题`  
+- `WhyNotMarkdown/superset_of_OI/`  
   我的算法竞赛训练记录和解题报告.
-- `WhyNotMarkdown/杂谈`  
-  没有明确内容范围限制.  
-  聊一些想法,一些期望,一些不满.  
-  当然主要还是聊技术相关的...
 
 ## 关于我 about me
 
 ~~个人信息泄漏警告~~  
 
-- 曾经是BHSF OIer,目前在ShanghaiTech读CS
+- 曾经是BHSF OIer
+- 目前在ShanghaiTech读CS, undergraduate
 - 常用id: hehelego/spinach/54spinach
 - 在telegram,github,zhihu,stackexchange;LOJ/UOJ/luogu/codefoces可以找到我
 
@@ -54,6 +50,8 @@ do the right thing.
 meaningful or interesting.  
 stay focused,be motivated.  
 
-可观测宇宙足够大,去找你认可的趣味和意义吧.  
-
+可观测宇宙足够大,  
+去找你认可的意义和价值,
+去探索吸引你的乐趣,
+去体验你真实的感受.
 
