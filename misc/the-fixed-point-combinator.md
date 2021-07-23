@@ -71,6 +71,26 @@ f = fix fact'
 What would happen if $F$ has more than one fixed-point?
 
 
+### the general approach
+
+a recursive function 
+
+$$
+\begin{aligned}
+f(n) &= g(f(i_1(n)),f(i_2(n)),f(i_3(n))\ldots f(i_k(n)))\\
+F(f) &= n\to g(f(i_1(n)),f(i_2(n)),f(i_3(n))\ldots f(i_k(n)))\\
+     &= f\\
+f    &= Y(f)
+\end{aligned}
+$$
+
+- how to determin whether fixed-point of $F$ is unique?
+  - if $F$ has unique fixed-point, will $Y(F)$ converge to that function?
+  - if not, what would be $Y(F)$?
+- $f(n)$ might be unevaluable/uncomputable/undefined for some input $n$, do $Y(F)$ have the same properties?
+
+> taking a "theory of computing: language, automata, computability" might be solve the above questions.
+
 
 ## reference
 
