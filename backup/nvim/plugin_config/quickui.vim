@@ -24,6 +24,10 @@ call quickui#menu#install("FindFiles(&f)", [
 			\ [ 'fzf ~'         , 'Files ~' ]         ,
 			\ [ 'fzf ~/.config' , 'Files ~/.config' ] ,
 			\ [ 'fzf /etc'      , 'Files /etc' ]      ,
+			\ [ '--' ]          ,
+			\ [ 'term hsplit'   , 'vsplit +terminal'],
+			\ [ 'term vsplit'   , 'split +terminal'],
+			\ [ 'term newtab'   , 'tabnew +terminal'],
 			\])
 
 call quickui#menu#install("CurrentBuffer(&b)" , [
