@@ -12,7 +12,8 @@
   pacman (+pacman-contrib,pacutils),  
   yay (AUR helper)  
   pip(python), npm(node.js), cargo(rust), stack(haskell), tlmgr(texlive)  
-  **notice:** (If it is possible) prefer packages in arch linux offical repositories to packages from pip/cargo/npm.
+  **notice:** (If it is possible) prefer packages in arch linux offical
+  repositories to packages from pip/cargo/npm.
 - GNU toolchain(compilers,linkers,debuger,build system...): `base-devel`,`gdb`
 
 ## my working enviornment
@@ -76,7 +77,6 @@
 
 ## MISC
 
-
 ### uncategorized
 
 - qBittorrent
@@ -91,6 +91,8 @@
 - playerctl
 - ffmpeg,VLC,feh
 - kolourpaint + GIMP + inkspace
+- exiv2
+- mediainfo
 
 ### font family
 
@@ -112,8 +114,7 @@
 
 ### extensions/plugins for browser
 
-- Cookie Quick Manager (cookies manipulation)
-- Vimium (enabling vim-mode for browser)
-- Dark Reader (for dark mode)
-- User-Agent Switcher and Manager (changing user-agent field in the http request header)
-
+- Cookie Quick Manager
+- Vimium
+- Dark Reader
+- User-Agent Switcher and Manager
