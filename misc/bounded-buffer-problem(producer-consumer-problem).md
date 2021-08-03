@@ -70,13 +70,30 @@ def Consumer():
       sleep(pop_delay)
 ```
 
+the crucial part
+
+```python
+lock.acquire()
+while not condition():
+  lock.release()
+  # temporarily giveup exclusive access,
+  # so that other thread/process can access the resources,
+  # which probably change the condition.
+  sleep(delay)
+  lock.acquire()
+# some operation that need
+#   1. exculsive access to the resources
+#   2. condition to be satisfied
+lock.release()
+```
+
 ## condition variables
 
 A condition variable `cv` is a wait queue `q` and a associated mutex lock `m`.
 Three operations on a condition variable
 
 - `wait`:  
-  0. the associated mutex lock `m` should be acquire before calling `wait`.
+  the associated mutex lock `m` should be acquired before calling `wait`.  
   1. release lock `m`
   2. put the current thread into `q` and sleep it.
   3. when the thread is notifed/signaled and wake up, re-acquire `m`
