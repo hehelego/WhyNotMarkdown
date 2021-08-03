@@ -22,5 +22,9 @@
 				"lhaskell"
 			]
 		}
+	},
+	"explorer.icon.enableNerdfont": true,
+	"markdownlint.config": {
+		"line_length": false
 	}
 }

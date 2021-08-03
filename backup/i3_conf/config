@@ -27,7 +27,7 @@ exec --no-startup-id fcitx5 # input method
 exec --no-startup-id keynav # navigate mouse with keyboard
 exec --no-startup-id dunst --config # notification server
 exec --no-startup-id redshift -x # reset xrandr-gamma
-exec --no-startup-id redshift -l 40:120 -t 5700:3600 # night-color
+exec --no-startup-id redshift -l 40:120 -t 5500:3300 # night-color
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status-rs
@@ -131,6 +131,14 @@ bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
 
+# switch to the window that generates a notification
+bindsym $mod+grave [urgent="latest"] focus
+
+# close the latest notification
+bindsym $mod+n exec --no-startup-id dunstctl close
+# close all notification
+bindsym $mod+shift+n exec --no-startup-id dunstctl close-all
+
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
 bindsym $mod+Shift+2 move container to workspace number $ws2
@@ -150,21 +158,19 @@ bindsym $mod+Shift+r restart
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-		bindsym Left resize shrink width 3 px or 3 ppt
-		bindsym Down resize grow height 3 px or 3 ppt
-		bindsym Up resize shrink height 3 px or 3 ppt
-		bindsym Right resize grow width 3 px or 3 ppt
+		bindsym Left   resize shrink width 3 px or 3 ppt
+		bindsym Down   resize grow height 3 px or 3 ppt
+		bindsym Up     resize shrink height 3 px or 3 ppt
+		bindsym Right  resize grow width 3 px or 3 ppt
 
 		# back to normal mode
 		bindsym Return mode "default"
 		bindsym Escape mode "default"
-		bindsym $mod+Escape mode "default"
-		bindsym $mod+Return mode "default"
 		bindsym $mod+r mode "default"
 }
 bindsym $mod+r mode "resize"
 
-set $session_mode_prompt "system::( e-exit, l-lock, s-sleep[RAM], h-hibernate[DISK] )"
+set $session_mode_prompt "session::([e exit], [l lock], [s|h suspend-to-RAM/DISK] )"
 mode $session_mode_prompt {
 		bindsym e exec --no-startup-id i3-msg exit, mode "default"
 		bindsym l exec --no-startup-id $locker, mode "default"
@@ -172,14 +178,13 @@ mode $session_mode_prompt {
 		bindsym h exec --no-startup-id systemctl hibernate, mode "default"
 
 		# back to normal mode
-		bindsym Return mode "default"
-		bindsym Escape mode "default"
+		bindsym Return      mode "default"
+		bindsym Escape      mode "default"
 		bindsym $mod+Escape mode "default"
-		bindsym $mod+Return mode "default"
 }
 bindsym $mod+Escape mode $session_mode_prompt
 
-set $display_mode_promot "display::( [1 eDP], [2 USB-C_DP], [3 all] )"
+set $display_mode_promot "display::([1 eDP], [2 USB-C_DP], [3 all])"
 mode $display_mode_promot {
 		bindsym 1 exec --no-startup-id fish -c display_default, mode "default"
 		bindsym 2 exec --no-startup-id fish -c display_extend, mode "default"
@@ -188,11 +193,36 @@ mode $display_mode_promot {
 		# back to normal mode
 		bindsym Return mode "default"
 		bindsym Escape mode "default"
-		bindsym $mod+Escape mode "default"
-		bindsym $mod+Return mode "default"
 		bindsym $mod+p mode "default"
 }
 bindsym $mod+p mode $display_mode_promot
+
+set $backlight_mode_promot "backlight::([0..9 brightness], [d|n temperature])"
+mode $backlight_mode_promot {
+		# change backlight brightness
+		bindsym grave exec --no-startup-id xbacklight -set 0
+		bindsym 1     exec --no-startup-id xbacklight -set 10
+		bindsym 2     exec --no-startup-id xbacklight -set 20
+		bindsym 3     exec --no-startup-id xbacklight -set 30
+		bindsym 4     exec --no-startup-id xbacklight -set 40
+		bindsym 5     exec --no-startup-id xbacklight -set 50
+		bindsym 6     exec --no-startup-id xbacklight -set 60
+		bindsym 7     exec --no-startup-id xbacklight -set 70
+		bindsym 8     exec --no-startup-id xbacklight -set 80
+		bindsym 9     exec --no-startup-id xbacklight -set 90
+		bindsym 0     exec --no-startup-id xbacklight -set 100
+
+		# tweak color temperature
+		bindsym d     exec --no-startup-id redshift -PO 5500
+		bindsym n     exec --no-startup-id redshift -PO 3300
+
+		# back to normal mode
+		bindsym Return mode "default"
+		bindsym Escape mode "default"
+		bindsym $mod+b mode "default"
+}
+bindsym $mod+b mode $backlight_mode_promot
+
 
 bar {
 	status_command i3status-rs

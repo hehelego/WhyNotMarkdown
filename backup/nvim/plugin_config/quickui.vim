@@ -68,13 +68,14 @@ call quickui#menu#install("Editor(&e)", [
 			\])
 
 call quickui#menu#install("LSP(&l)", [
-			\ [ 'vista-ctags' , 'Vista ctags' ] ,
-			\ [ 'vista-mdtoc' , 'Vista toc' ]   ,
-			\ [ 'vista-coc'   , 'Vista coc' ]   ,
+			\ [ 'vista-ctags' , 'Vista ctags' ]   ,
+			\ [ 'vista-mdtoc' , 'Vista toc' ]     ,
+			\ [ 'vista-coc'   , 'Vista coc' ]     ,
 			\ [ '--' ]        ,
-			\ [ 'CocAction'   , 'CocAction' ]   ,
-			\ [ 'CocCommand'  , 'CocCommand' ]  ,
-			\ [ 'CocList'     , 'CocList' ]     ,
+			\ [ 'CocAction'   , 'CocAction' ]     ,
+			\ [ 'CocCommand'  , 'CocCommand' ]    ,
+			\ [ 'CocList(0)'  , 'CocList' ]       ,
+			\ [ 'CocList(1)'  , 'CocListResume' ] ,
 			\])
 call quickui#menu#install("Git(&g)", [
 			\ [ 'fzf git-files'   , 'GFiles' ]        ,
