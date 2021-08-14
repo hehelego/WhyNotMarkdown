@@ -20,10 +20,21 @@ map <silent> <leader>qn :<C-u>cnext<CR>
 map <silent> <leader>qp :<C-u>cprevious<CR>
 
 " selected text <-> system clipboard
-map <silent> <leader>xc "+y
+map <silent> <leader>xy "+y
 map <silent> <leader>xp "+p
 
-
+" put path of current file into clipboard
+function! YankPath(choice)
+  let l:path      = expand('%:p')
+  let l:directory = expand('%:p:h')
+  let l:file      = expand('%:p:t')
+  let l:paths = [l:path, l:directory, l:file]
+  let @+=l:paths[a:choice]
+  let @"=l:paths[a:choice]
+endfunction
+map <silent> <leader>pyp :call YankPath(0)<CR>
+map <silent> <leader>pyd :call YankPath(1)<CR>
+map <silent> <leader>pyf :call YankPath(2)<CR>
 
 """"""""""""""""""
 " keymapping_cheatsheet

@@ -74,6 +74,9 @@
 - screenkey
 - SimpleScreenRecorder
 - graphviz
+- lnav
+- z3
+- bat
 
 ## MISC
 
