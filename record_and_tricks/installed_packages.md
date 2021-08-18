@@ -26,7 +26,7 @@
 - terminal emulator: alacritty/konsole
 - input method: fcitx5(with rime,rime-luna-pinyin)
 - editor: vim/neovim
-- file manager: ranger,broot,exa
+- file manager: ranger,broot
 - document viewer: okular
 - browser: firefox
 - mail client: thunderbird, kmail
@@ -36,7 +36,6 @@
 
 - coreutils, rust-coreutils
 - tmux
-- rofi
 - v2ray(gui frontend `qv2ray`; or `v2raya` for web fontend) + proxychains
 - NetworkManager+nmtui/nmcli
 - iwd+iw/iwctl
@@ -44,7 +43,8 @@
 - git
 - make,cmake
 - rsync
-- fzf,rg,ag (FuzzyFileFinder, rip grep, the silver searcher)
+- fzf(FuzzyFileFinder)
+- rg,ag(rip grep, the silver searcher)
 - top/htop/bashtop
 - tar,zip,gzip,bzip (GUI frontend: `ark` from KDE project)
 - tldr (see [github:tldr-pages](https://github.com/tldr-pages/tldr) and [tldr.sh](https://tldr.sh))
@@ -54,6 +54,7 @@
 - GnuPG
 - openSSL
 - age
+- rofi
 
 ### other utilities
 
@@ -77,6 +78,9 @@
 - lnav
 - z3
 - bat
+- exa(alternative to ls)
+- fd(alternative to find)
+- zoxide
 
 ## MISC
 
