@@ -1,0 +1,1 @@
+/home/hehelego/shell/key-bindings.fish

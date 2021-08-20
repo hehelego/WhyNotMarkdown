@@ -1,7 +1,7 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR --export EDITOR:nvim
-SETUVAR --export FZF_DEFAULT_COMMAND:rg\x20\x2dl\x20\x2e\x20\x2d\x2dfiles\x20\x2d\x2dhidden
+SETUVAR --export FZF_DEFAULT_COMMAND:fd\x20\x2dH\x20\x2d\x2dtype\x20file
 SETUVAR --export PAGER:vimpager
 SETUVAR --export TERM:xterm\x2dcolor
 SETUVAR --export VISUAL:nvim
@@ -36,6 +36,7 @@ SETUVAR fish_pager_color_completion:\x1d
 SETUVAR fish_pager_color_description:B3A06D\x1eyellow
 SETUVAR fish_pager_color_prefix:white\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
+SETUVAR fish_user_paths:/home/hehelego/bin
 SETUVAR --export ftp_proxy:http\x3a//127\x2e0\x2e0\x2e1\x3a8889
 SETUVAR --export http_proxy:http\x3a//127\x2e0\x2e0\x2e1\x3a8889
 SETUVAR --export https_proxy:http\x3a//127\x2e0\x2e0\x2e1\x3a8889

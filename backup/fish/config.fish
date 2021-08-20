@@ -1,4 +1,4 @@
-set -Ux FZF_DEFAULT_COMMAND "rg -l . --files --hidden"
+set -Ux FZF_DEFAULT_COMMAND "fd -H --type file"
 
 alias ls="exa"
 alias ll="exa --long"
@@ -8,3 +8,5 @@ alias tree_ex="exa --long --all -T"
 alias br0="br"
 alias br1="br --hidden"
 alias rm="trash"
+alias fzff="fd -H --type file | fzf -m"
+alias fzfd="fd -H --type directory | fzf -m"
