@@ -1,16 +1,17 @@
 # record on trouble shooting
 
 > 我的环境(更新时间 2020.12.31), 信息来源于lshw,neofetch,uname等等工具  
+>
 > - 小新pro13 2020,amdcpu版本(xiaoxin pro 13-are 2020);可选配件是ryzen4800u+16gRAM+512gSSD
 > - fOS: `ArchLinux on x86_64`
 > - DE: KDE plasma / i3wm
-
-> 一些redminder  
+>
+> 一些redminder
+>
 > - 学会使用搜索引擎. arch wiki,arch forum,StackOverflow,UnixStackExchange,github,网友blog...到处都是资料(别忘了还有gentoo wiki).
 > - arch是rolling release, 记得每天`sudo pacman -Syu`,记得即使更换掉过时软件包.
 > - 任何更新都可能影响之前的解决方案,尽量查阅第一手资料,确保时效性.
 > - re-boot/re-login/restart xorg都有可能有用.
-
 
 [TOC]
 
@@ -21,7 +22,8 @@
 ### 问题描述
 
 > lshw输出如下
-> ```
+>
+> ```plaintext
 > description: Notebook
 > product: 82DM (LENOVO_MT_82DM_BU_idea_FM_XiaoXinPro-13ARE 2020)`
 > vendor: LENOVO
@@ -29,6 +31,7 @@
 > serial: PF2DR2KS
 > width: 64 bits
 > ```
+>
 > 相关信息  
 > BIOS version: 27ww  
 > kernel: x86_64 Linux 5.9.8-arch1-1
@@ -52,9 +55,7 @@ journalctl中包含`USBC`相关的错误信息.
 3. 按住`Fn+S+V`进入电池运输模式,使得机器彻底掉电. 并按下电源键,确定无法开机,已经进入电池运输模式.
 4. 连接到电源适配器进行供电的条件下,开机.  
 
-
 如果USB type C接口仍然不能恢复正常,则可能是BIOS或者主板问题,建议返修.  
-
 
 ### 追加信息
 
@@ -62,12 +63,10 @@ journalctl中包含`USBC`相关的错误信息.
   还好在保修期内,送维修点检测后,更换了主板,目前已经不会在出现这个问题了.  
   但是这个操作仍然有记录价值,笔记本拆机不方便,需要一个便捷地清空CMOS电池的方式以解决其他问题.
 
-
 ## CJK font selection error
 
 > date:2021.12-31
-
-> 字体配置是个有些麻烦的事情`hiting,aliasing,bitmap,dpi`会有不少问题.也许交给DE是个更好的选择.   
+> 字体配置是个有些麻烦的事情`hiting,aliasing,bitmap,dpi`会有不少问题.也许交给DE是个更好的选择.
 > 有些应用不认fontconfig,需要专门配置,比如firefox/alacritty.
 
 ### 问题描述
@@ -85,7 +84,6 @@ fontconfig中对于CJK字型选取的默认设置不符合预期,需要手写一
 - [arch wiki: fonts](https://wiki.archlinux.org/index.php/Fonts)
 - [arch wiki: example for FCfile](https://wiki.archlinux.org/index.php/Font_configuration/Examples)
 - [arch wiki: localization/simplified chinese](https://wiki.archlinux.org/index.php/Localization/Simplified_Chinese)
-
 
 ### 解决方案
 
@@ -125,9 +123,6 @@ fontconfig中对于CJK字型选取的默认设置不符合预期,需要手写一
 </fontconfig>
 ```
 
-
-
-
 ## cpu turbo boost was disabled
 
 > date: 2021.1.6
@@ -152,10 +147,6 @@ echo 0 | sudo tee /sys/devices/system/cpu/cpufreq/boost
 echo 1 | sudo tee /sys/devices/system/cpu/cpufreq/boost
 ```
 
-
-
-
-
 ## can't adjust backlight in i3wm session
 
 > date: 2021.12.31
@@ -173,7 +164,7 @@ echo 1 | sudo tee /sys/devices/system/cpu/cpufreq/boost
 
 ### 解决方案
 
-可以直接向`/sys/class/backlight/amdgpu_bl0/brightness`写入亮度...   
+可以直接向`/sys/class/backlight/amdgpu_bl0/brightness`写入亮度...  
 这里的`amdgpu_bl0`可能需要换成其他GPU名称.  
 
 ```bash
@@ -217,8 +208,6 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 
 如果失败,可以尝试添加`acpi_backlight=native`的kernel parameter.
 
-
-
 ## video hardware decoding in firefox
 
 > date: 2020.12.31
@@ -240,16 +229,13 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 最后,reboot一下.  
 我这里是AMD ryzen 4800U内置的vege 8 GPU,可以使用radeontop来观测它是否有负载.
 
-
 ## okular failed to render CJK font
 
 > date: 2021.1.1
 
-
 ### 问题描述
 
 okular打开包含中文的pdf,发现未嵌入的字体渲染异常.  
-
 
 ### 参考信息
 
@@ -260,15 +246,13 @@ okular打开包含中文的pdf,发现未嵌入的字体渲染异常.
 这些PDF没有将使用的字体内嵌,此时okular的后端`poppler`会寻找合适的已安装字体,  
 而poppler的中文字体相关数据在`poppler-data`中,这个东西没有正确被安装,所以中文字体渲染出现了问题.
 
-
 ### 解决方案
 
 - 安装`poppler,poppler-data`等poppler相关的软件包.  
 - 安装更多字体.  
   例如:MS windows中常见的`Courier,Times fonts` fallback到noto fonts的效果并不好,用liberation fonts替代效果更好.
 
-
-## pulseaudio can't resume sink/source after recovery from hibernation/suspend.
+## pulseaudio can't resume sink/source after recovery from hibernation/suspend
 
 > date: 2020.1.15
 
@@ -283,16 +267,14 @@ audio output failed. the sinks/sources are suspended and can't be resumed by pac
 - [arch wiki: pulseaudio](https://wiki.archlinux.org/index.php/PulseAudio#Running)
 - `journalctl`
 
-
 ### 解决方案
 
 restart pulseaudio.
 
-```
+```bash
 systemctl --user restart pulseaudio.service
 systemctl --user restart pulseaudio.socket
 ```
-
 
 ## v2ray 系统时间未同步导致连接失败
 
@@ -302,13 +284,12 @@ systemctl --user restart pulseaudio.socket
 
 v2ray vmess/tcp 连接失败, 出现类似下方的log
 
-```
+```plaintext
 2021/02/26 23:01:37 [Warning] [1842356649] v2ray.com/core/app/proxyman/inbound: connection ends > v2ray.com/core/proxy/http: connection ends > v2ray.com/core/proxy/http: failed to write response > write tcp 127.0.0.1:8889->127.0.0.1:48022: write: broken pipe
 2021/02/26 23:01:38 [Warning] [977784748] v2ray.com/core/proxy/http: failed to read response from 149.154.167.91:80 > unexpected EOF
 ```
 
 常在长时间hibernate后resume时出现.
-
 
 ### 参考信息
 
@@ -335,9 +316,6 @@ systemctl restart systemd-timesyncd.service
 
 如无法正确同步,可以尝试更换`timesyncd`使用的NTP server.
 
-
-
-
 ## hibernate(suspend, save to disk) with swapfile
 
 > date 2021.02.27
@@ -353,41 +331,38 @@ systemctl restart systemd-timesyncd.service
 - [archwiki: suspend & hibernate](https://wiki.archlinux.org/index.php/Power_management/Suspend_and_hibernate)
 - [archwiki: swapfile](https://wiki.archlinux.org/index.php/Swap#Swap_file)
 
-
 ### 解决方案
 
 1. 创建 swapfile
-```
-sudo su
-dd if=/dev/zero of=/swapfile bs=1G count=20 status=progress
-chmod 600 /swapfile
-mkswap /swapfile
-swapon /swapfile
-echo "/swapfile none swap defaults 0 0" >> /etc/fstab
-exit
-```
 
+  ```bash
+  sudo su
+  dd if=/dev/zero of=/swapfile bs=1G count=20 status=progress
+  chmod 600 /swapfile
+  mkswap /swapfile
+  swapon /swapfile
+  echo "/swapfile none swap defaults 0 0" >> /etc/fstab
+  exit
+  ```
+
+  a
 2. 配置 init ram fs
-
-编辑`/etc/mkinitcpio.conf`,在`HOOKS`中添加`resume`. 或者这添加`systemd`.  
-使用`sudo mkinitcpio -P`重新重新生成initramfs.
-
+  编辑`/etc/mkinitcpio.conf`,在`HOOKS`中添加`resume`. 或者这添加`systemd`.  
+  使用`sudo mkinitcpio -P`重新重新生成initramfs.
 3. 添加 kernel parameter
+  这里我使用grub bootloader,它提供kernel parameters.  
+  在`/etc/default/grub`中写入配置(`GRUB_CMDLINE_LINUX_DEFAULT`一项), 添加resume和resume offset参数.
 
-这里我使用grub bootloader,它提供kernel parameters.  
-在`/etc/default/grub`中写入配置(`GRUB_CMDLINE_LINUX_DEFAULT`一项), 添加resume和resume offset参数.
+  ```bash
+  resume=UUID={{findmnt -no UUID -T /swapfile}}
+  swap_file_offset={{sudo filefrag -v /swapfile | awk '{ if($1=="0:"){print substr($4, 1, length($4)-2)} }'}}..
+  ```
 
-```bash
-resume=UUID={{findmnt -no UUID -T /swapfile}}
-swap_file_offset={{sudo filefrag -v /swapfile | awk '{ if($1=="0:"){print substr($4, 1, length($4)-2)} }'}}..
-```
-
+  b
 4. reboot,检验功能
+  `cat /proc/cmdline`查看kernel parameter确定配置成功,并`systemctl hibernate`测试.
 
-`cat /proc/cmdline`查看kernel parameter确定配置成功,并`systemctl hibernate`测试.
-
-
-## eliminating the vertical padding at the bottom in a terminal emulator 
+## eliminating the vertical padding at the bottom in a terminal emulator
 
 > 2021.04.16
 
@@ -408,15 +383,14 @@ swap_file_offset={{sudo filefrag -v /swapfile | awk '{ if($1=="0:"){print substr
 这并非 `alacritty` 配置中的 `window/padding/y` 选项控制,
 而是因为字体大小不整除终端模拟器占有的纵向长度,导致末尾不足一行,只能留空.  
 
-
 需要手动调节字体大小(比如在我这里 `resolution=2560x1600, dpi=192`,有上下的titile bar, menu bar; 使用font size 11是恰好不会留白).  
 当然换显示器,调整DPI,甚至调整窗口大小都会改变可用的字体大小, 需要便捷调节的方式.  
 在常见的终端模拟器中,都支持`Ctrl +`,`Ctrl -`的快捷键调整字体大小.
 
-## can not perform repeat when a key is pressed down and holden.
+## can not perform repeat when a key is pressed down and holden
 
 > 2021.5.15
-> 这是很久之前遇到的问题,在telegram cn arch user group里面问到了解决方案. 
+> 这是很久之前遇到的问题,在telegram cn arch user group里面问到了解决方案.
 > 当时忘了记录,现在想起来,写下来.
 
 ### 问题描述
@@ -457,7 +431,6 @@ XMODIFIERS=@im=fcitx
 发现很多`highlight group`被清除了,
 比如`signcolumn`中的来自LSP的`warning,error`.
 
-
 ### 参考信息
 
 - [stackoverflow: gvim remove syntax highlighting after switching colorschemes](https://stackoverflow.com/questions/12915797/gvim-remove-syntax-highlighting-groups)
@@ -478,6 +451,3 @@ XMODIFIERS=@im=fcitx
 This problem have been disturbing vim users for over 10 years and haven't yet been fixed.  
 There is a plugin for workaround [xolox's vim-colorscheme-switcher](https://github.com/xolox/vim-colorscheme-switcher).  
 However, as far as I am concerned, I personally suggest never change the colorscheme after startup.
-
-
-

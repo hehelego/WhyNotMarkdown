@@ -1,12 +1,9 @@
 # Why Not Markdown
 
-**warning:please don’t use github repository as a NetDisk**
-
 ## 一些声明 declaration
 
 这里是[spinach/hehelego](https://github.com/hehelego),  
 这个repository将会发布我的一些 学习笔记/解题报告.
-
 
 - 所有内容以**CC0**协议发布.
 - 如果您发现此git repo中的内容的任何问题(包括但不限于错误/语义不清/引用不明/非规范引用)  

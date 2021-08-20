@@ -8,7 +8,6 @@
 - z-lib
 - archive of the Internet
 
-
 ## textbook
 
 - Concrete Mathematics
@@ -17,7 +16,6 @@
 - CLRS(Introduction to algorithm)
 - [aim:open textbook](https://aimath.org/textbooks/)
 
-
 ## academic researching
 
 - sci-hub
@@ -25,7 +23,6 @@
 - IEEE xplore
 - ACM digital library
 - web of science
-
 
 ## competitive programming(OI/ICPC)
 
@@ -45,7 +42,6 @@
 - [黄学长 OI资料分享](https://github.com/hzwer/shareOI)
 - [nju tcs wiki](http://tcs.nju.edu.cn/wiki/index.php/Main_Page)
 - [vfk:一个关于反演的slides](http://vfleaking.blog.uoj.ac/slide/87/)
-
 
 -------------------------
 

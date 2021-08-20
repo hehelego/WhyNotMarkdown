@@ -15,9 +15,6 @@
 - [arch wiki: arch boot process](https://wiki.archlinux.org/index.php/Arch_boot_process)
 - [arch wiki: Xorg](https://wiki.archlinux.org/index.php/Xorg)
 
-
-
-
 ## disabling PC speaker; preventing beep
 
 > date:2020.12.31
@@ -34,7 +31,6 @@
 ### 解决方案
 
 `echo "blacklist pcspkr" | sudo tee /etc/modprobe.d/nobeep.conf`
-
 
 ## 修改rime InputMethod的config pannel的trigger keybinding
 
@@ -81,7 +77,6 @@ hotkeys:
 
 ## fzf search for hidden files
 
-
 ### 问题描述
 
 fzf不默认搜索dot files.  
@@ -97,8 +92,54 @@ we can use the `FZF_DEFAULT_COMMAND` environment variable.
 
 ### 解决方案
 
-```fish 
-set -Ux FZF_DEFAULT_COMMAND "rg -l . --files --hidden"
+```fish
+set -Ux FZF_DEFAULT_COMMAND "fd -H --type file"
+```
+
+## fzf: enable keyboard-shortcuts and autocompletion
+
+### 问题描述
+
+在arch linux使用pacman安装fzf后, 没有获得`ctrl-t, ctrl-r`的shell快捷键.
+
+### 参考信息
+
+- [github fzf/readme.md: installation](https://github.com/junegunn/fzf#installation)
+
+```plaintext
+warning Key bindings (CTRL-T / CTRL-R / ALT-C) and fuzzy auto-completion may not be enabled by default.
+```
+
+### 解决方案
+
+在fzf的git repository中有添加快捷键的脚本, 需要手动执行它.
+
+```fish
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
+```
+
+## combining fzf with cd
+
+> 2021.5.16
+
+### 问题描述
+
+Finding my working directories and cd into them waste a lot of time and cause distraction.  
+I want to have kind of fuzzy jump feature.
+
+### 参考信息
+
+- [github ripgrep/issue: Feature request --directories](https://github.com/BurntSushi/ripgrep/issues/169)
+- [github ripgrep/issue: Provide a --directories option to list directories](https://github.com/BurntSushi/ripgrep/issues/388)
+
+### 解决方案
+
+```fish
+# file path: ~/.config/fish/functions/cdfzf.fish
+function cdfzf
+  cd (fd -H --type directory | fzf)
+end
 ```
 
 ## fish shell 常见操作
@@ -112,32 +153,6 @@ set -Ux FZF_DEFAULT_COMMAND "rg -l . --files --hidden"
 - substitution `sudo pacman -Rns (pacman -Qdtq)`, `rm (fzf -m)`
 - template string `echo {$var}`
 - 用单引号包裹传递给程序的regex防止它被fish解析. `exa --all ~/.config | rg 'rc$'`
-
-## combining fzf with cd
-
-> 2021.5.16
-
-### 问题描述
-
-Finding my working directories and cd into them waste a lot of time and cause distraction.  
-I want to have kind of fuzzy jump feature.
-
-`(command-that-find-directories-in-filetree) | fzf | cd`
-
-### 参考信息
-
-- [github ripgrep/issue: Feature request --directories](https://github.com/BurntSushi/ripgrep/issues/169)
-- [github ripgrep/issue: Provide a --directories option to list directories](https://github.com/BurntSushi/ripgrep/issues/388)
-
-### 解决方案
-
-```fish
-# file path: ~/.config/fish/functions/cdfzf.fish
-function cdfzf
-  cd (rg --hidden --sort-files --files --null 2> /dev/null | xargs -0 dirname | uniq | fzf)
-end
-```
-
 
 ## fish shell: proxy settings
 
@@ -158,60 +173,55 @@ set/unset proxy environment variables in fish shell, and share them between sess
 3. global: can shadow universal ones; not visible between sessions or after reboot;
 4. local: can shadow global ones;
 5. `set -e VAR` will delete the variable in the nearest scope where `VAR` is set.
-0. fish will automatically load functions in `~/.config/fish/functions/`  
+
+**note**: fish will automatically load functions in `~/.config/fish/functions/`  
 
 **fish shell have special ways to deal with PATH**, try `set --help` for more information.
 
-
 ### 解决方案
-
 
 ```fish
 #PATH=~/.config/fish/functions/proxy_on.fish
 function proxy_on
-	set -Ux all_proxy socks5://127.0.0.1:1089
-	set -Ux http_proxy http://127.0.0.1:8889
-	set -Ux https_proxy $http_proxy
-	set -Ux ftp_proxy $http_proxy
-	set -Ux rsync_proxy $http_proxy
-	set -Ux no_proxy "localhost,127.0.0.1,localaddress,.localdomain.com"
+  set -Ux all_proxy socks5://127.0.0.1:1089
+  set -Ux http_proxy http://127.0.0.1:8889
+  set -Ux https_proxy $http_proxy
+  set -Ux ftp_proxy $http_proxy
+  set -Ux rsync_proxy $http_proxy
+  set -Ux no_proxy "localhost,127.0.0.1,localaddress,.localdomain.com"
 end
 
 #PATH=~/.config/fish/functions/proxy_off.fish
 function proxy_off
-	set -e all_proxy
-	set -e http_proxy
-	set -e https_proxy
-	set -e ftp_proxy
-	set -e rsync_proxy
-	set -e no_proxy
+  set -e all_proxy
+  set -e http_proxy
+  set -e https_proxy
+  set -e ftp_proxy
+  set -e rsync_proxy
+  set -e no_proxy
 end
 
 #PATH=~/.config/fish/functions/proxy_dump.fish
 function proxy_dump
-	echo "all_proxy   = $all_proxy"
-	echo "http_proxy  = $http_proxy"
-	echo "https_proxy = $https_proxy"
-	echo "ftp_proxy   = $ftp_proxy"
-	echo "rsync_proxy = $rsync_proxy"
-	echo "no_proxy    = $no_proxy"
+  echo "all_proxy   = $all_proxy"
+  echo "http_proxy  = $http_proxy"
+  echo "https_proxy = $https_proxy"
+  echo "ftp_proxy   = $ftp_proxy"
+  echo "rsync_proxy = $rsync_proxy"
+  echo "no_proxy    = $no_proxy"
 end
 ```
 
 As mentioned in the 5th tip, `set -e` can erase the variable in local/global/universal.  
 So we might have to run `proxy_off` for a few times to thoroughly remove proxy environment.
 
-
-
-## keyboard shortcuts: terminal emulator, fish shell 
+## keyboard shortcuts: terminal emulator, fish shell
 
 - ctrl+Z: suspend (send `SIGTSTP`); jobs,fg,bg
 - ctrl+P/N: select previous/next input history
 - ctrl+L: clear the screen(just scroll the screen, won't clear previous output)
 - ctrl+C: break (send `SIGINT` to the current foreground process)
 - ctrl+D: send `EOF`
-
-
 
 ## i3wm下touchpad配置
 
@@ -225,7 +235,6 @@ So we might have to run `proxy_off` for a few times to thoroughly remove proxy e
 
 目前touchpad的驱动配置由libinput提供.  
 i3wm后端是Xorg,需要对应的`xf86-input-libinput`包.  
-
 
 - [arch wiki: libinput](https://wiki.archlinux.org/index.php/Libinput)
 - [gentoo wiki: libinput](https://wiki.gentoo.org/wiki/Libinput)
@@ -252,7 +261,6 @@ Section "InputClass"
 EndSection
 ```
 
-
 ## HiDPI display scaling and font scaling
 
 > date: 2021.1.12
@@ -261,7 +269,6 @@ EndSection
 
 我在使用i3wm,有两个monitor,一个`2560x1600 13.3inch`,另一个`3840x2160 27inch`,  
 由于屏幕DPI太高而Xorg输出的DPI没有跟着改变, 默认情况下UI,font都太小了.  
-
 
 ### 参考信息
 
@@ -282,9 +289,9 @@ EndSection
 使用xrandr调整X输出的DPI,比如我这里用`xrandr --output eDP --mode 2560x1600 --rate 60 --scale 1 --dpi 192`,
 把它写入i3-config中使得i3 session启动时调整DPI.  
 
-
 参考按照wiki,配置Xresoureces  
-```
+
+```plaintext
 !PATH=~/.Xresoureces
 Xft.dpi: 192
 
@@ -297,20 +304,15 @@ Xft.antialias: 1
 Xft.rgba: rgba
 ```
 
-
-写入一些qt/gtk相关的环境变量我没有做,  
-首先我还在使用KDE,它能够较好的管理缩放,
+写入一些qt/gtk相关的环境变量我没有做,  首先我还在使用KDE,它能够较好的管理缩放,
 其次是我发现进行了上面的配置之后,我常用的GUI apps已经正常缩放了.
-
 
 ## git: displaying unicode path
 
 > 2021.03.24
 
 git status, git commit中,中文路径显示不正确.
-出现类似  
-`modified:   "\321\203\321\201\321\202\320\260\320\275\320\276\320\262"`  
-的显示效果.
+出现类似 `modified:   "\321\203\321\201\321\202\320\260\320\275\320\276\320\262"` 的提示信息.
 
 ### 参考资料
 
@@ -322,29 +324,23 @@ git status, git commit中,中文路径显示不正确.
 git config --global core.quotepath off
 ```
 
-
 ## changing PowerButton event handler
 
 > 2021.04.01
 使用i3wm session,按下笔记本(型号:Lenovo_IdeaPad_S540_13ARE)的powerbutton会触发关机.  
-由于经常误触,我希望修改按下电源键的效果.  
-
+由于经常误触,我希望修改按下电源键的效果.
 
 ### 参考资料
 
-
 - [arch wiki: power management / ACPI event](https://wiki.archlinux.org/index.php/Power_management#ACPI_events)
-
 
 ### 解决方案
 
-
 修改`/etc/systemd/logind.conf`或者在`/etc/systemd/logind.conf.d/{CONFIGNAME}.conf`中写入配置.  
-
 
 默认配置如下,
 
-```
+```plaintext
 [Login]
 #NAutoVTs=6
 #ReserveVT=6
@@ -375,21 +371,19 @@ git config --global core.quotepath off
 #SessionsMax=8192
 ```
 
-
 我们需要修改的是`HandlePowerKey`的event handler,比如改成`systemd suspend`
 
-```
+```plaintext
 [Login]
 HandlePowerKey=suspend
 ```
 
-
 ## firefox usage: shortcuts
 
 > currently on
+>
 > - `Linux x86_64`
 > - firefox 87
-
 
 - see [mozilla support: firefox shortcuts](https://support.mozilla.org/en-US/kb/keyboard-shortcuts-perform-firefox-tasks-quickly)
 - see [mozilla support: firefox addr bar auto complet](https://support.mozilla.org/en-US/kb/address-bar-autocomplete-firefox)
@@ -426,6 +420,4 @@ HandlePowerKey=suspend
   - `Ctrl+Shift+h` history
   - `Ctrl+Shift+o` bookmark
   - `Ctrl+Shift+y` download
-- `Ctrl+Shift+r` override cache, reload page 
-
-
+- `Ctrl+Shift+r` override cache, reload page
