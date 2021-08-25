@@ -451,3 +451,37 @@ XMODIFIERS=@im=fcitx
 This problem have been disturbing vim users for over 10 years and haven't yet been fixed.  
 There is a plugin for workaround [xolox's vim-colorscheme-switcher](https://github.com/xolox/vim-colorscheme-switcher).  
 However, as far as I am concerned, I personally suggest never change the colorscheme after startup.
+
+## proxy settings for ssh
+
+### 问题描述
+
+`openssh`的`ssh client`不认`http_proxy,https_proxy,all_proxy`环境变量.  
+连接服务器,尤其是github时,需要走`socks5 proxy`
+
+### 参考信息
+
+- [github gits: ozbillwang/Git_Behind_Proxy.md](https://gist.github.com/ozbillwang/005bd1dfc597a2f3a00148834ad3e551)
+- [github gist: coin8086/using-proxy-for-git-or-github.md](https://gist.github.com/coin8086/7228b177221f6db913933021ac33bb92)
+- [CMSSW: Tutorial: how to use git through a proxy](https://cms-sw.github.io/tutorial-proxy.html)
+- [simplified guide: ssh connection via socks proxy](https://www.simplified.guide/ssh/connect-via-socks-proxy)
+- [stackoverflow: connect with ssh through a proxy](https://stackoverflow.com/questions/19161960/connect-with-ssh-through-a-proxy)
+- `man pages: ssh`,`man pages: ssh_confg`: option `ProxyCommand`
+
+### 解决方案
+
+在`~/.ssh/ssh_config`中添加
+
+```plaintext
+Host github github.com
+    Hostname github.com
+    User git
+    ProxyCommand $HOME/bin/proxy-wrapper '%h %p'
+```
+
+```fish
+ssh {$user}@{$host}
+        -p {$port}
+        -i {$private_key_file}
+        -o "ProxyCommand=nc -X connect -x {$PROXYHOST}:{$PROXYPORT} %h %p"
+```

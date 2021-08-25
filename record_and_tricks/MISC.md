@@ -421,3 +421,17 @@ HandlePowerKey=suspend
   - `Ctrl+Shift+o` bookmark
   - `Ctrl+Shift+y` download
 - `Ctrl+Shift+r` override cache, reload page
+
+## i3wm focus到产生notification的windo
+
+[i3wm faq: how to jump to urgent workspace](https://faq.i3wm.org/question/853/how-to-jump-to-urgent-workspace/index.html)
+
+```plaintext
+bindsym $mod+grave [urgent="latest"] focus
+```
+
+## xev: 查看 key-code和key-name
+
+```fish
+xev -event keyboard
+```
