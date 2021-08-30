@@ -461,29 +461,27 @@ However, as far as I am concerned, I personally suggest never change the colorsc
 
 ### 参考信息
 
-- [github gits: ozbillwang/Git_Behind_Proxy.md](https://gist.github.com/ozbillwang/005bd1dfc597a2f3a00148834ad3e551)
-- [github gist: coin8086/using-proxy-for-git-or-github.md](https://gist.github.com/coin8086/7228b177221f6db913933021ac33bb92)
-- [CMSSW: Tutorial: how to use git through a proxy](https://cms-sw.github.io/tutorial-proxy.html)
-- [simplified guide: ssh connection via socks proxy](https://www.simplified.guide/ssh/connect-via-socks-proxy)
-- [stackoverflow: connect with ssh through a proxy](https://stackoverflow.com/questions/19161960/connect-with-ssh-through-a-proxy)
+- `ncat(from nmap packages)`, `nc(from gnu-netcat)`, `nc(from bsd-netcat)`
 - `man pages: ssh`,`man pages: ssh_confg`: option `ProxyCommand`
 
 ### 解决方案
 
-在`~/.ssh/ssh_config`中添加
+网友们普遍会用经典的`netcat`解决问题, 但netcat有`gnu-netcat`和`bsd-netcat`,它们的CLI flags不一致.  
+我们这里使用`nmap`提供的`ncat`来解决问题.
 
 ```plaintext
-Host github github.com
-    Hostname github.com
+# PATH = ~/.ssh/config
+# see (man ssh_config)
+Host github.com
     User git
-    ProxyCommand nc -v -x localhost:1089 '%h %p'
+    ProxyCommand ncat --proxy-type socks5 --proxy 127.0.0.1:1089 %h %p
 ```
 
 ```fish
 ssh {$user}@{$host}
         -p {$port}
         -i {$private_key_file}
-        -o "ProxyCommand=nc -v -x {$PROXYHOST}:{$PROXYPORT} %h %p"
+        -o ProxyCommand="ncat --proxy-type socks5 --proxy {$PROXY_HOST}:{$PROXY_PORT} %h %p"
 ```
 
 ## a systemd-unit service for restart telegram after crash
