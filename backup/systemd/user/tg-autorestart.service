@@ -1,0 +1,6 @@
+[Unit]
+Description=restart telegram-desktop after crash
+
+[Service]
+ExecStart=/usr/bin/telegram-desktop
+Restart=always

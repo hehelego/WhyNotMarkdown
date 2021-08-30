@@ -476,12 +476,42 @@ However, as far as I am concerned, I personally suggest never change the colorsc
 Host github github.com
     Hostname github.com
     User git
-    ProxyCommand $HOME/bin/proxy-wrapper '%h %p'
+    ProxyCommand nc -v -x localhost:1089 '%h %p'
 ```
 
 ```fish
 ssh {$user}@{$host}
         -p {$port}
         -i {$private_key_file}
-        -o "ProxyCommand=nc -X connect -x {$PROXYHOST}:{$PROXYPORT} %h %p"
+        -o "ProxyCommand=nc -v -x {$PROXYHOST}:{$PROXYPORT} %h %p"
+```
+
+## a systemd-unit service for restart telegram after crash
+
+### 问题描述
+
+`telegram-desktop qt client` sometimes crahes for unknown reasons, which is quite annoying.
+
+### 参考资料
+
+- [arch wiki: systemd](https://wiki.archlinux.org/title/Systemd#Writing_unit_files)
+
+### 解决方案
+
+```fish
+systemctl --user edit --full --force tg-autorestart.service
+```
+
+```plaintext
+[Unit]
+Description=restart telegram-desktop after crash
+
+[Service]
+ExecStart=/usr/bin/telegram-desktop
+Restart=always
+```
+
+```fish
+systemctl --user start tg-autorestart
+systemctl --user stop tg-autorestart
 ```

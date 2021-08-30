@@ -435,3 +435,14 @@ bindsym $mod+grave [urgent="latest"] focus
 ```fish
 xev -event keyboard
 ```
+
+## environment variable 环境变量
+
+[arch wiki: env variables](https://wiki.archlinux.org/title/Environment_variables)
+
+- shell configuration: `/etc/profile` and `$HOME/.bashrc, $HOME/.config/fish/config.fish`
+- bash `export`, fish `set -x`
+- PAM-env: `/etc/environment` and `$HOME/.config/environment.d/{$name}.conf` per user
+- `~/.xinitrc`
+
+run `/usr/bin/env` to show all environment variables
