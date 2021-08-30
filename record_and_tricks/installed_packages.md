@@ -6,81 +6,100 @@
 
 - distro: arch
 - kernel: linux (the stable version)
+- bootloader: grub
 - init: systemd (the only offically supported init on arch linux)
 - shell: fish
-- package-manager:  
-  pacman (+pacman-contrib,pacutils),  
-  yay (AUR helper)  
-  pip(python), npm(node.js), cargo(rust), stack(haskell), tlmgr(texlive)  
-  **notice:** (If it is possible) prefer packages in arch linux offical
-  repositories to packages from pip/cargo/npm.
-- GNU toolchain(compilers,linkers,debuger,build system...): `base-devel`,`gdb`
-
-## my working enviornment
-
+- package-manager: pacman (+ `pacman-contrib,pacutils`),  yay (AUR helper)
+- GNU toolchain(compilers,linkers,debuger,build system...): `base-devel`
 - DE/WM(backend: Xorg): i3wm(+compton compositor `picom`)/kde plasma
-- DM: SDDM
-- font-family:
-  - sans serif, serif: google-noto-fonts/adobe-source-fonts
-  - monospace: adobe-source-code-pro
-- terminal emulator: alacritty/konsole
-- input method: fcitx5(with rime,rime-luna-pinyin)
-- editor: vim/neovim
-- file manager: ranger,broot
-- document viewer: okular
-- browser: firefox
-- mail client: thunderbird, kmail
-- im: telegram
+- DM: sddm
+- fonts:
+  - sans serif, serif: `noto-fonts,noto-fonts-{cjk,emoji,extra}`
+  - monospace: `adobe-source-code-pro`,`ttf-liberation`,`ttf-hack`
 
-### important ones
+## daily enviornment
+
+- terminal emulator: alacritty
+- input method: fcitx5(with `fcitx5-rime`,`fcitx5-configtool`)
+- editor: vim,neovim,kate
+- file manager: ranger,broot
+- document viewer: okular (+ `poppler,poppler-data`)
+- browser: firefox
+- mail client: thunderbird,kmail
+- IM: telegram
+- password manager: keepassxc
+
+### networking
+
+- networkmanager,nmtui,nmcli
+- iwd,iw,iwctl
+- nettools(for arp)
+- ufw
+- nmap(for nmap,ncat)
+- v2ray(gui frontend `qv2ray`; or `v2raya` for web fontend)
+- proxychains-ng
+- curl,httpie
+- wget,aria2
+- openssh, sshfs
+
+### CLI utilities
 
 - coreutils, rust-coreutils
 - tmux
-- v2ray(gui frontend `qv2ray`; or `v2raya` for web fontend) + proxychains
-- NetworkManager+nmtui/nmcli
-- iwd+iw/iwctl
-- curl,wget,aria2
-- git
-- make,cmake
+- git(TUI `lazygit`)
 - rsync
-- fzf(FuzzyFileFinder)
-- rg,ag(rip grep, the silver searcher)
-- top/htop/bashtop
-- tar,zip,gzip,bzip (GUI frontend: `ark` from KDE project)
-- tldr (see [github:tldr-pages](https://github.com/tldr-pages/tldr) and [tldr.sh](https://tldr.sh))
-- texlive
+- fzf,rg,ag(fuzzy file finder, rip grep, the silver searcher)
+- top,htop,bashtop
+- tar,7zip,zip,gzip,bzip (GUI frontend: `ark` from KDE project)
+- man pages(`man-db,man-pages`)
+- `tldr` (see [github:tldr-pages](https://github.com/tldr-pages/tldr) and [tldr.sh](https://tldr.sh))
 - pandoc
-- SageMath+Octave+Scipy(numpy,pandas,matplotlib,sympy) ~~and Tensorflow/PyTorch/sciket-learn~~
 - GnuPG
 - openSSL
 - age
-- rofi
+- trash-cli
+- ncdu
+- lnav
+- bat
+- exa(alternative to ls)
+- fd(alternative to find)
+- zoxide
+
+### working
+
+- python: pip,pipenv(pypi)
+- node.js: npm(npmjs)
+- rust: cargo(crates.io)
+- haskell: stack(stackages,hackages)
+- LaTeX: tlmgr(ctan)
+- perl: cpan(cpan)
+
+**notice:** (If it is possible) prefer packages in arch linux offical
+
+- texlive
+- make,cmake,clang
+- sagemath+octave+scipy(`python-numpy`,`python-pandas`,`python-matplotlib`,`python-sympy`) ~~Tensorflow/PyTorch/sciket-learn~~
+- hyperfine,perf,gprof,strace,valgrind
 
 ### other utilities
 
-- trash-cli
-- ncdu
+- rofi
 - xorg-apps (`pacman -Sg xorg-apps`)
 - redshift
-- screengrab
 - xclip
 - klipper
 - keynav
-- lazygit
 - dunst
 - scrcpy
 - kde connect
 - dolphin
 - syncthing, timeshift, btrfs snapshot
-- screenkey
 - SimpleScreenRecorder
 - graphviz
-- lnav
 - z3
-- bat
-- exa(alternative to ls)
-- fd(alternative to find)
-- zoxide
+- screengrab,spectacle
+- simplescreenrecorder
+- screenkey
 
 ## MISC
 
@@ -96,10 +115,14 @@
 
 - pavucontrol+pactl (cli for pulseaudio)
 - playerctl
-- ffmpeg,VLC,feh
+- ffmpeg
+- VLC
+- feh
+- mpv (+ `mpv-mpris` for playerctl integration)
 - kolourpaint + GIMP + inkspace
 - exiv2
 - mediainfo
+- you-get
 
 ### font family
 
