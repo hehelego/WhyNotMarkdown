@@ -132,10 +132,9 @@ $$
 >
 > 空间允许的情况下, 我们可以把这个做法扩展,使得它支持在线查询.
 
-## 正经做法
+## 正经做法(分治)
 
-分治  
-`solve(l,r,{q})` 表示处理物品$[l,r]$,询问集合为$\{q\}$.  
+设 `solve(l,r,{q})` 表示处理物品$[l,r]$,询问集合为$\{q\}$的函数.  
 区间中点为$p=\frac{l+r}{2}$, 将询问分为三类.
 
 - 询问区间完全落在左侧,即$[l,p]$中的,为`{qL}`, 递归调用`solve(l,p,{qL})`
@@ -166,10 +165,18 @@ $$
 > 时间限制 2s, 空间限制 428MiB
 
 两边对等, 算出单次操作平局概率为 $p$ , 则胜利/失败概率均为 $q=\frac{1-p}{2}$  
-于是答案为 $\sum_{i=1}^r p^{i-1} q=q\frac{p^r-1}{p-1}$  
+于是答案为 $\sum_{i=1}^r p^{i-1} q=q\frac{p^r-1}{p-1}$ (恰好在第$i$轮获胜,则前$i-1$轮都是平局并且第$i$轮是胜利)  
 所以, 只要快速求出 $p$ 即可.
 
 设 $P(i,j)$ 表示扔了 $i$ 个骰子, 目前的和是 $j$ 的概率, 那么有 $p=\sum_{i} {P^2(n,i)}$  
+
+### 计算 $P(n,i)$
+
+#### 利用OGF的直接做法
+
+> 值得一提的是, 生成函数并不是只有这种 straight-forward 的玩法,
+> 最近几年出现了很多有趣的东西, 比如 微分方程,函数复合求逆 之类的.
+
 这里 $P(n,i)$ 对应的生成函数为.
 
 $$
@@ -210,7 +217,78 @@ $$
 \end{aligned}
 $$
 
-### 找规律
+#### 容斥原理
+
+注意到这里 $k^n P(n,m)$ 实际上是 (其中$[k]=\{1,2,3\ldots k\}$)
+
+$$
+\left\vert
+\left\{
+(x_1,x_2\ldots x_n)\in {[k]}^n
+\mid \sum_{i=1}^n x_i = m
+\right\}
+\right\vert
+$$
+
+这个可以容斥计算.
+对于$S\subseteq [n]$,设
+
+$$
+\begin{aligned}
+R(i)&=[x_i > k]\\
+f(S)&=
+\left\vert
+\left\{
+  (x_1,x_2\ldots x_n)
+  :\quad
+  \left( \sum_{i=1}^n x_i = m \right )
+  \land
+  \left( \forall i \left(i\!\in\! S\leftrightarrow R(i)\right)\right)
+\right\}
+\right\vert\\
+g(S)&=
+\left\vert
+\left\{
+  (x_1,x_2\ldots x_n)
+  :\quad
+  \left( \sum_{i=1}^n x_i = m \right )
+  \land
+  \left( \forall i \left(i\!\in\! S\rightarrow R(i)\right)\right)
+\right\}
+\right\vert\\
+\end{aligned}
+$$
+
+我们有以下的子集反演,和对于$g$的快速计算方法(可以用那个隔板法的组合意义或者OGF来推导)
+
+$$
+\begin{aligned}
+g(S)&=\sum_{S\subseteq T}f(T)\\
+f(S)&=\sum_{S\subseteq T}{(-1)}^{|T|-|S|}g(T)\\
+g(S)&=
+\left\vert
+\left\{
+  (x_1,x_2\ldots x_n)
+  :\quad
+  \left( \sum_{i=1}^n x_i = m-|S|k \right )
+\right\}
+\right\vert
+=\binom{m-|S|k-1}{n-1}\\
+\end{aligned}
+$$
+
+于是可以计算出$P(n,m)$, 以及其平方和即$p$.
+
+$$
+\begin{aligned}
+k^n P(n,m) = f(\varnothing)
+&=\sum_{i=0}^n \binom{n}{i}{(-1)}^i \binom{m-ik-1}{n-1}\\
+\end{aligned}
+$$
+
+### 计算$p$
+
+#### 找规律 OEIS
 
 我们固定 $k$ 打表看看情况, 然后丢进OEIS.
 
@@ -309,31 +387,82 @@ the coefficient of x^(2*n) in (1+x+x^2)^(2*n)
 313095240079600
 4829571309488760
 
-Central coefficients in triangle A008287 ((1 + x + x^2 + x^3)^n), see link. - Zagros Lalo, Sep 25 2018
+Central coefficients in triangle A008287 ((1 + x + x^2 + x^3)^n)
 [x^3n] (1+x+x^2+x^3)^(2n)
 ```
 
-### 快速计算答案
+#### 利用$P(n,i)$的对称性
 
-我们发现, 这个系数平方和是以下东西
-
-$$
-\left[x^{(k-1)n}\right] {\left(\sum_{i=0}^{k-1} x^i\right)}^{2n}
-=\left[x^{(k-1)n}\right] {\left(\frac{1-x^k}{1-x}\right)}^{2n}
-$$
-
-这个生成函数可以这样计算
+对于$k=2$的情况, 我们有$P(n,i)=\frac{1}{2^n}\binom{n}{i-n}$  
+于是$p=\sum_{i} P^2(n,i)=4^{-n}\sum_{i=0}^n {\binom{n}{i}}^2=4^{-n}\sum_{i=0}^n \binom{n}{i}\binom{n}{n-i}=4^{-n}\binom{2n}{n}$  
+对于一般的情况,我们也寻找这种对称性,以便把对位相乘后求和的点积转化为错位相乘求和的卷积.
 
 $$
 \begin{aligned}
-&\left( \sum_{i=0}^{2n} \binom{2n}{i}{(-1)}^i x^{ik} \right)
+k^n P(n,m)
+&=\left\vert
+  \left\{
+  (x_1,x_2\ldots x_n)\in {[k]}^n
+  \mid \sum_{i=1}^n x_i = m
+  \right\}
+\right\vert\\
+&=\left\vert
+  \left\{
+  (y_1,y_2\ldots y_n)\in {[k]}^n
+  \mid \sum_{i=1}^n y_i = kn-m+n
+  \right\}
+\right\vert\\
+&=k^n P(n,kn-m+n)
+\end{aligned}
+$$
+
+(我们做变换$y_i=k-x_i+1$,这是一个bijection,所以集合大小是相等的)
+
+设$f_i=k^n P(n,i+n)$其中$0\leq i\leq n(k-1)$, 有$f_i=f_{n(k-1)-i}$, 于是  
+( **note:** 直接观察之前的生成函数的形式,而不借助组合的变换, 也可以发现此性质. 具体而言$\sum_{i=0}^{k-1} x^i$的系数就有高位和低位相等的对称性,所以其幂仍然有此性质)
+
+$$
+\begin{aligned}
+{\left(
+\frac{1-x^k}{1-x}
+\right)}^{n}
+&
+=\sum_{i=0}^{n(k-1)} f_i x^i
+=\sum_{i=0}^{n(k-1)} f_{n(k-1)-i} x^i\\
+{\left(
+\frac{1-x^k}{1-x}
+\right)}^{2n}
+&
+={\left( \sum_{i=0}^{n(k-1)} f_i x^i \right)}^2
+= {\left( \sum_{i=0}^{n(k-1)} f_i x^i \right)} {\left( \sum_{i=0}^{n(k-1)} f_{n(k-1)-i} x^i \right)}\\
+\left[ x^{k(n-1)} \right]
+{\left(
+\frac{1-x^k}{1-x}
+\right)}^{2n}
+&
+=\sum_{i=0}^{n(k-1)} f_i f_{n(k-1)-i}
+=\sum_{i=0}^{n(k-1)} f_i f_i
+=k^{2n}\sum_{i=n}^{nk}P^2(n,i)
+=k^{2n}p
+\end{aligned}
+$$
+
+### 快速计算答案
+
+$$
+$$
+
+$$
+\begin{aligned}
+{\left(\frac{1-x^k}{1-x}\right)}^{2n}
+=&\left( \sum_{i=0}^{2n} \binom{2n}{i}{(-1)}^i x^{ik} \right)
 \left( \sum_{j=0}^{\infty} \binom{-2n}{j}{(-1)}^j x^j \right)\\
 =&\left( \sum_{i=0}^{2n} \binom{2n}{i}{(-1)}^i x^{ik} \right)
 \left( \sum_{j=0}^{\infty} \binom{2n+j-1}{j} x^j \right)\\
 \end{aligned}
 $$
 
-对于分母, 我们用一个常见技巧来找递推式, 以便做到线性.
+对于分母,即上式中的$\sum_{j=0}^\infty \binom{2n+j-1}{j}$, 我们用一个常见技巧来找递推式,以便做到线性的时/空复杂度.
 
 $$
 \begin{aligned}
@@ -352,77 +481,6 @@ $$
 最后,按照之前的公式 $q\frac{p^k-1}{p-1}$ 计算答案即可.
 
 这样的做法复杂度是 $o(nk)$ 的, 可以拿到 `100/100` 的分数.
-
-### 另一个推导
-
-注意到这里 $k^n P(n,m)$ 实际上是 (其中$[k]=\{1,2,3\ldots k\}$)
-
-$$
-\left\vert
-\left\{
-(x_1,x_2\ldots x_n)\in {[k]}^n
-\mid \sum_{i=1}^n x_i = m
-\right\}
-\right\vert
-$$
-
-这个可以容斥计算.
-对于$S\subseteq [n]$,设
-
-$$
-\begin{aligned}
-R(i)&=[x_i > k]\\
-f(S)&=
-\left\vert
-\left\{
-  (x_1,x_2\ldots x_n)
-  :\quad
-  \left( \sum_{i=1}^n x_i = m \right )
-  \land
-  \left( \forall i \left(i\!\in\! S\leftrightarrow R(i)\right)\right)
-\right\}
-\right\vert\\
-g(S)&=
-\left\vert
-\left\{
-  (x_1,x_2\ldots x_n)
-  :\quad
-  \left( \sum_{i=1}^n x_i = m \right )
-  \land
-  \left( \forall i \left(i\!\in\! S\rightarrow R(i)\right)\right)
-\right\}
-\right\vert\\
-\end{aligned}
-$$
-
-我们有以下的子集反演,和对于$g$的快速计算方法(可以用那个隔板法的组合意义或者OGF来推导)
-
-$$
-\begin{aligned}
-g(S)&=\sum_{S\subseteq T}f(T)\\
-f(S)&=\sum_{S\subseteq T}{(-1)}^{|T|-|S|}g(T)\\
-g(S)&=
-\left\vert
-\left\{
-  (x_1,x_2\ldots x_n)
-  :\quad
-  \left( \sum_{i=1}^n x_i = m-|S|k \right )
-\right\}
-\right\vert
-=\binom{m-|S|k-1}{n-1}\\
-\end{aligned}
-$$
-
-于是可以计算出$P(n,m)$, 以及其平方和即$p$.
-
-$$
-\begin{aligned}
-k^n P(n,m) = f(\varnothing)
-&=\sum_{i=0}^n \binom{n}{i}{(-1)}^i \binom{m-ik-1}{n-1}\\
-\end{aligned}
-$$
-
-**TODO** 推出来这个式子
 
 ## C题
 
