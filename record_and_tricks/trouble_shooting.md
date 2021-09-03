@@ -513,3 +513,26 @@ Restart=always
 systemctl --user start tg-autorestart
 systemctl --user stop tg-autorestart
 ```
+
+## using neovim inside tmux
+
+### 问题描述
+
+无任何配置时,在tmux中使用neovim,
+会发现按`<Esc>`响应很慢,并且`TrueColor`不正常渲染.
+需要一些对tmux的配置来得到正常使用体验
+
+### 参考信息
+
+- 在tmux中启动nvim,使用`:checkhealth`跟随其中的指示进行操作即可.
+- `man tmux`
+
+### 解决方案
+
+- 按下`<Esc>`响应慢的问题,对应的选项是`escape-time`  
+  `set-option -sg escape-time 10`
+- checkhealth中,neovim提示我们开启`focus-events`  
+  `set-option -g focus-events on`
+- turecolor设置,首先设定在tmux中使用的终端类型,然后进行选项覆盖,我这里在tmux之外使用的`$TERM`为`alacritty`,于是配置如下.
+  `set -g default-terminal "tmux-256color"`  
+  `set-option -sa terminal-overrides ',alacritty:RGB'`
