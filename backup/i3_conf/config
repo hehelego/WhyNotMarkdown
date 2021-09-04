@@ -11,12 +11,15 @@
 
 set $mod Mod4
 set $bg_img /usr/share/wallpapers/Opal/contents/images/3840x2160.png
-set $menu rofi -show drun -theme fancy
+set $menu_app rofi -show drun -theme fancy
+set $menu_win rofi -show window -theme fancy
 set $locker i3lock -c 333333
 set $screenshot screengrab -r
 set $terminal /usr/bin/alacritty
 
 font pango:SourceCodePro 10
+
+
 
 
 exec --no-startup-id xss-lock --transfer-sleep-lock -- $locker # lock screen before session being suspended
@@ -37,24 +40,19 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # mediakey:: media player   (need playerctl)
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioPause exec playerctl play-pause
-bindsym XF86AudioStop exec playerctl stop
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioPlay exec playerctl play-pause && $refresh_i3status
+bindsym XF86AudioPause exec playerctl play-pause && $refresh_i3status
+bindsym XF86AudioStop exec playerctl stop && $refresh_i3status
+bindsym XF86AudioNext exec playerctl next && $refresh_i3status
+bindsym XF86AudioPrev exec playerctl previous && $refresh_i3status
 
 # mediakey:: backlight control   (need xorgs-xbacklight or acpilight)
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10 && $refresh_i3status
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10 && $refresh_i3status
 
 # mediakey:: ScreenSaver(lock screen)
 bindsym XF86ScreenSaver exec --no-startup-id $locker
 bindsym $mod+l exec --no-startup-id $locker
-
-
-
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec $terminal
@@ -63,11 +61,29 @@ bindsym $mod+Shift+Return exec $terminal --option background_opacity=1.0
 # select a region and take a screenshot
 bindsym Print exec --no-startup-id $screenshot
 
+# start rofi (a program launcher)
+bindsym $mod+d exec --no-startup-id $menu_app
+bindsym $mod+shift+d exec --no-startup-id $menu_win
+
+# close the latest notification
+bindsym $mod+n exec --no-startup-id dunstctl close
+# close all notification
+bindsym $mod+shift+n exec --no-startup-id dunstctl close-all
+
+
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# start rofi (a program launcher)
-bindsym $mod+d exec --no-startup-id $menu
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
 
 # focus another container
 bindsym $mod+Left focus left
@@ -95,7 +111,6 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+h split h
 # split in vertical orientation
 bindsym $mod+v split v
-
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -134,11 +149,6 @@ bindsym $mod+0 workspace number $ws10
 # switch to the window that generates a notification
 bindsym $mod+grave [urgent="latest"] focus
 
-# close the latest notification
-bindsym $mod+n exec --no-startup-id dunstctl close
-# close all notification
-bindsym $mod+shift+n exec --no-startup-id dunstctl close-all
-
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
 bindsym $mod+Shift+2 move container to workspace number $ws2
@@ -151,17 +161,16 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
-# reload the configuration file
-bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
+
+
+
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-		bindsym Left   resize shrink width 3 px or 3 ppt
-		bindsym Down   resize grow height 3 px or 3 ppt
-		bindsym Up     resize shrink height 3 px or 3 ppt
-		bindsym Right  resize grow width 3 px or 3 ppt
+		bindsym Left   resize shrink width 10 px or 10 ppt
+		bindsym Down   resize grow height 10 px or 10 ppt
+		bindsym Up     resize shrink height 10 px or 10 ppt
+		bindsym Right  resize grow width 10 px or 10 ppt
 
 		# back to normal mode
 		bindsym Return mode "default"
@@ -224,13 +233,15 @@ mode $backlight_mode_promot {
 bindsym $mod+b mode $backlight_mode_promot
 
 
+
+# status bar (i3status-rs)
 bar {
 	status_command i3status-rs
 	font pango: SourceCodePro, FontAwesome5Free, FontAwesome5Brands 10
 }
 
+
+
 # window padding and margin
 smart_gaps on
 gaps inner 5
-
-

@@ -1,4 +1,5 @@
 set -Ux FZF_DEFAULT_COMMAND "fd -H --type file"
+set -x PATH $PATH "/home/hehelego/.cargo/bin"
 
 alias ls="exa"
 alias ll="exa --long"

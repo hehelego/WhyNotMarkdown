@@ -440,9 +440,10 @@ xev -event keyboard
 
 [arch wiki: env variables](https://wiki.archlinux.org/title/Environment_variables)
 
-- shell configuration: `/etc/profile` and `$HOME/.bashrc, $HOME/.config/fish/config.fish`
+- shell configuration: `/etc/profile` global and `$HOME/.bashrc, $HOME/.config/fish/config.fish` per-user
 - bash `export`, fish `set -x`
-- PAM-env: `/etc/environment` and `$HOME/.config/environment.d/{$name}.conf` per user
+- PAM-env: `/etc/environment` global
+- systemd.environment: `$HOME/.config/environment.d/{$name}.conf` per-user
 - `~/.xinitrc`
 
 run `/usr/bin/env` to show all environment variables

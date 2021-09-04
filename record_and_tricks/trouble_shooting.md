@@ -536,3 +536,23 @@ systemctl --user stop tg-autorestart
 - turecolor设置,首先设定在tmux中使用的终端类型,然后进行选项覆盖,我这里在tmux之外使用的`$TERM`为`alacritty`,于是配置如下.
   `set -g default-terminal "tmux-256color"`  
   `set-option -sa terminal-overrides ',alacritty:RGB'`
+
+## customizing QT application themes under i3wm session
+
+### 问题描述
+
+在i3wm环境下,常用的QT应用(主要是来自于KDE project的okular,dolphin)的体验不佳,
+colors, dialog layout, icons 都不太对劲.
+
+### 参考信息
+
+- kvantum
+- qt5ct, qt6ct
+- [archwiki: gtk theme](https://wiki.archlinux.org/title/GTK#Themes), [archwiki: qt theme](https://wiki.archlinux.org/title/Qt#Appearance)
+
+### 解决方案
+
+安装`qt5ct`,`kvantum`,在`qt5ct`中选择`kvantum` theme,之后进入`kvantum`选择合适的theme.  
+添加`QT_QPA_PLATFORMTHEME=qt5ct`环境变量
+
+可以在KDE store中搜索kvantum获取更多theme
