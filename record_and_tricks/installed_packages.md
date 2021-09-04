@@ -142,9 +142,12 @@
 - wireshark, tcpdump
 - smartmontools
 
-### extensions/plugins for browser
+### extensions/plugins for browser(firefox)
 
 - Cookie Quick Manager
 - Vimium
 - Dark Reader
 - User-Agent Switcher and Manager
+- uBlock origin
+- privacy badger
+- sidebery
