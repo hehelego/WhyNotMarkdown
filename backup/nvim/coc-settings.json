@@ -22,6 +22,7 @@
 	},
 	"explorer.icon.enableNerdfont": true,
 	"markdownlint.config": {
-		"line_length": false
+		"line_length": false,
+		"ol-prefix": false
 	}
 }

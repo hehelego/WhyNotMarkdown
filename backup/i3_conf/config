@@ -14,7 +14,7 @@ set $bg_img /usr/share/wallpapers/Opal/contents/images/3840x2160.png
 set $menu_app rofi -show drun -theme fancy
 set $menu_win rofi -show window -theme fancy
 set $locker i3lock -c 333333
-set $screenshot spectacle -r
+set $screenshot screengrab -r
 set $terminal /usr/bin/alacritty
 
 font pango:SourceCodePro 10
@@ -26,11 +26,10 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- $locker # lock screen bef
 exec --no-startup-id feh --bg-fill $bg_img # set background wall paper
 exec --no-startup-id picom -CGb -m 1.0 # provide a "X compositor"
 exec --no-startup-id fish -c display_default # set resolution,dpi,gamma
-exec --no-startup-id fcitx5 # input method
+exec --no-startup-id fish -c restart_im # input method
 exec --no-startup-id keynav # navigate mouse with keyboard
-exec --no-startup-id dunst --config # notification server
+exec --no-startup-id dunst --config ~/.config/dunst/dunstrc # notification server
 exec --no-startup-id redshift -x # reset xrandr-gamma
-exec --no-startup-id redshift -l 40:120 -t 5500:3300 # night-color
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status-rs
@@ -65,10 +64,15 @@ bindsym Print exec --no-startup-id $screenshot
 bindsym $mod+d exec --no-startup-id $menu_app
 bindsym $mod+shift+d exec --no-startup-id $menu_win
 
+# restart the fcitx5 input method
+bindsym $mod+shift+i exec --no-startup-id fish -c restart_im
+
 # close the latest notification
 bindsym $mod+n exec --no-startup-id dunstctl close
 # close all notification
 bindsym $mod+shift+n exec --no-startup-id dunstctl close-all
+# pop one history notification
+bindsym $mod+m exec --no-startup-id dunstctl history-pop
 
 
 
@@ -116,10 +120,10 @@ bindsym $mod+v split v
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+# bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+# bindsym $mod+d focus child
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
