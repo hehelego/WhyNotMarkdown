@@ -84,6 +84,23 @@ for(int i=1;i<=n;i++){
 }
 ```
 
+## the essence of KMP algorithm
+
+Focus on the value of $j$ when $i$ increases.  
+The algorithm computes $f_i=\max \{0\leq j\leq n\mid S[1,j]=T[i-j+1,i]\}$  
+
+- $f_{i+1}\leq f_i + 1$
+
+$$
+\begin{aligned}
+  S[f_i+1]                              =T[i+1]    & \to f_{i+1}  = f_{i}+1\\
+  S[\text{next}[f_i]+1]                 =T[i+1]    & \to f_{i+1}  = f_{\text{next}[i]}+1\\
+  S[\text{next}[\text{next}[f_i]]+1]    =T[i+1]    & \to f_{i+1}  = f_{\text{next}[\text{next}[i]]}+1\\
+  S[\text{next}^k + 1]                  =T[i+1]    & \to f_{i+1}  = f_{\text{next}^k[i]}+1\\
+                                                   & \to f_{i+1}  = 0
+\end{aligned}
+$$
+
 ## complexity analysis
 
 ### matching stage
@@ -91,7 +108,7 @@ for(int i=1;i<=n;i++){
 Apply amortized analysis, let $\phi(\text{state}(S,T,i,j))=j$.  
 
 In every iteration of the outer for loop,  
-every iteration of the inner loop, $j$ get decresed by $1$,  
+every iteration of the inner loop, $j$ get decresed at least by $1$,  
 the last if statement: $j$ get increased at most by $1$.  
 
 - increment: at most $|T|$, takes $O(|T|)$ operations.
@@ -99,7 +116,9 @@ the last if statement: $j$ get increased at most by $1$.
 
 ### preprocessing stage
 
-similar to the matching stage, takes $O(|S|)$ operations.
+Similar to the matching stage, takes $O(|S|)$ operations.
+
+### total runtime
 
 Summing up, KMP algorithm, runs in linear time and uses linear space.
 
