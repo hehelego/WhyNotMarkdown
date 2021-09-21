@@ -64,6 +64,7 @@
 - exa(alternative to ls)
 - fd(alternative to find)
 - zoxide
+- jq,hq,yq (parse+prettyprint for json/html/xml/yaml)
 
 ### working
 
