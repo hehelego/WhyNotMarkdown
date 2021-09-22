@@ -76,6 +76,8 @@ bindsym $mod+shift+n exec --no-startup-id dunstctl close-all
 bindsym $mod+m exec --no-startup-id dunstctl history-pop
 
 
+# open the emoji selector
+bindsym $mod+i exec --no-startup-id ibus-ui-emojier-plasma
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
