@@ -24,7 +24,7 @@
 - editor: vim,neovim,kate
 - file manager: ranger,broot
 - document viewer: okular (+ `poppler,poppler-data`)
-- browser: firefox
+- browser: firefox,qutebrowser
 - mail client: thunderbird,kmail
 - IM: telegram
 - password manager: keepassxc
@@ -61,6 +61,7 @@
 - ncdu
 - lnav
 - bat
+- delta
 - exa(alternative to ls)
 - fd(alternative to find)
 - zoxide
@@ -146,7 +147,7 @@
 ### extensions/plugins for browser(firefox)
 
 - Cookie Quick Manager
-- Vimium
+- vimium, surfingkeys, vixen
 - Dark Reader
 - User-Agent Switcher and Manager
 - uBlock origin
