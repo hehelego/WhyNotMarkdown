@@ -1,0 +1,6 @@
+[Unit]
+Description=v2raya
+
+[Service]
+ExecStart=/usr/bin/v2raya --lite
+Restart=always
