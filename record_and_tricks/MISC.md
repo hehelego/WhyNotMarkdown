@@ -447,3 +447,40 @@ xev -event keyboard
 - `~/.xinitrc`
 
 run `/usr/bin/env` to show all environment variables
+
+## qutebrowser setup
+
+### resources
+
+- `:help` [qutebrowser help page](https://qutebrowser.org/doc/help/)
+- `:open qute://settings`
+- `$HOME/.config/qutebrowser`, `$HOME/.config/qutebrowser/config.py`
+- [github/qutebrowser: user scripts](https://github.com/qutebrowser/qutebrowser/tree/master/misc/userscripts)
+
+### keepassxc integration
+
+[github/qutebrowser: qute-keepassxc](https://github.com/qutebrowser/qutebrowser/blob/master/misc/userscripts/qute-keepassxc)
+
+1. enable browser extension in KeePassXC
+2. install `python-pynacl` package
+3. generate a GPG key pair `gpg --full-generate-key`
+4. add key bindings in configuration
+
+```python
+config.bind('<Alt-u>', 'spawn --userscript qute-keepassxc --key qutebrowser-keepassxc-connection-233', mode='insert')
+config.bind('<Space>pw', 'spawn --userscript qute-keepassxc --key qutebrowser-keepassxc-connection-233', mode='normal')
+```
+
+### gpu acceleration
+
+[set qt flags for qutebrowser in config.py](https://github.com/qutebrowser/qutebrowser/discussions/6573)
+
+```python
+config.set(
+    'qt.args',
+    ['ignore-gpu-blacklist',
+    'enable-gpu-rasterization',
+    'enable-native-gpu-memory-buffers',
+    'num-raster-threads=4',
+    'enable-accelerated-video-decode'])
+```
