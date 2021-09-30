@@ -484,3 +484,14 @@ config.set(
     'num-raster-threads=4',
     'enable-accelerated-video-decode'])
 ```
+
+## tmux plugins
+
+- [jdhao's blog: tmux plugin management](https://jdhao.github.io/2019/01/17/tmux_plugin_management/)
+- [github/tpm](https://github.com/tmux-plugins/tpm)
+
+reload tmux conf `tmux source ~/.tmux.conf`  
+
+- `<prefix>+I` install plugins
+- `<prefix>+u` update plugins
+- `<prefix>+alt+u` uninstall plugins
