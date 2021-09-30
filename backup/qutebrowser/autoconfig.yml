@@ -5,13 +5,4 @@
 # Instead, create a config.py - see :help for details.
 
 config_version: 2
-settings:
-  colors.completion.category.border.top:
-    global: black
-  colors.completion.fg:
-    global:
-    - white
-    - white
-    - white
-  content.autoplay:
-    global: true
+settings: {}
