@@ -52,7 +52,6 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 10 && $refresh_i3status
 
 # mediakey:: ScreenSaver(lock screen)
 bindsym XF86ScreenSaver exec --no-startup-id $locker
-bindsym $mod+l exec --no-startup-id $locker
 
 # start a terminal
 bindsym $mod+Return exec $terminal

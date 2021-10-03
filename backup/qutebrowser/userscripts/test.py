@@ -1,73 +1,164 @@
 #!/usr/bin/python
+
 import subprocess
 import os
 import sys
 import tempfile
 import typing
+import yaml
 import argparse
 
 
-def qute_available() -> bool:
-    return 'QUTE_FIFO' in os.environ
+class Helper:
+    @staticmethod
+    def log(*args, **kwargs):
+        print(*args, **kwargs, file=sys.stderr)
+
+    @staticmethod
+    def readfile(path: str) -> str:
+        content = None
+        with open(path) as f:
+            content = f.read()
+        return content
 
 
-def qute_exec(cmd: str) -> None:
-    print(f'qute_exec {cmd}', file=sys.stderr)
-    if not qute_available():
-        return None
-    with open(os.environ['QUTE_FIFO'], 'w') as f:
-        print(cmd, file=f)
+class Bookmark:
+    '''
+    entires:
+        - url
+        - name
+        - tags
+    '''
+    # issue with 'type hinting for static method' (until python 3.10)
+    # see https://stackoverflow.com/questions/67522076/python-how-to-type-hint-a-class-argument-in-a-static-method-python
+    # see https://stackoverflow.com/questions/61544854/from-future-import-annotations
+    # see https://www.python.org/dev/peps/pep-0563/
+    @staticmethod
+    def load(raw: str):
+        obj = yaml.safe_load(raw)
+        return Bookmark(
+            url=obj['url'],
+            name=obj['name'],
+            tags=obj['tags'],
+        )
+
+    def dump(self) -> str:
+        return yaml.dump(self, default_flow_style=False)
+
+    def __str__(self) -> str:
+        return f'Bookmark(url={self.url}, name={self.name}, tags={self.tags})'
+
+    def __repr__(self) -> str:
+        return str(self)
+
+    def __init__(self, url: str, name: str, tags: typing.List[str]) -> None:
+        self.url = url
+        self.name = name
+        self.tags = tags
+
+    def match_any(self, tags: typing.List[str]) -> bool:
+        for t in tags:
+            if t in self.tags:
+                return True
+        return False
+
+    def match_every(self, tags: typing.List[str]) -> bool:
+        for t in tags:
+            if t not in self.tags:
+                return False
+        return True
 
 
-def chain(funcs) -> typing.Callable[[], None]:
-    def wrapper():
-        head, tail = funcs[0], funcs[1:]
-        v = head()
-        if v == None:
-            return None
-        for f in tail:
-            v = f(v)
-            if v == None:
-                break
-    return wrapper
+def get_bookmarks_paths_all(bookmarks_directory: str) -> typing.List[str]:
+    os.chdir(bookmarks_directory)
+    return [
+        path
+        for path
+        in subprocess.check_output(['fd', '--type', 'file', '--extension', 'yaml', '--extension', 'yml']).decode().split('\n')
+        if os.path.isfile(path)
+    ]
 
 
-def parse_bookmark_item(raw: str) -> str:
-    return raw
+def get_tags_all(bookmarks_directory: str) -> typing.List[str]:
+    return list({
+        j
+        for i
+        in get_bookmarks_paths_all(bookmarks_directory)
+        for j in Bookmark.load(Helper.readfile(i)).tags
+    })
 
 
-def select_bookmark_item() -> typing.Union[str, None]:
-    bookmarks_directory = os.path.join(
-        os.environ['HOME'], '.config', 'qutebrowser', 'spinach-bookmarks')
+def filter_by_tags_any(bookmark_file_paths: typing.List[str], tags: typing.List[str]) -> typing.List[str]:
+    return [
+        i
+        for i in bookmark_file_paths
+        if Bookmark.load(Helper.readfile(i)).match_any(tags)
+    ]
 
-    tmpfile = tempfile.NamedTemporaryFile(
+
+def filter_by_tags_every(bookmark_file_paths: typing.List[str], tags: typing.List[str]) -> typing.List[str]:
+    return [
+        i
+        for i in bookmark_file_paths
+        if Bookmark.load(Helper.readfile(i)).match_every(tags)
+    ]
+
+
+def select_tags(all_tags: typing.List[str]) -> typing.List[str]:
+    tmpf = tempfile.NamedTemporaryFile(
         prefix='/tmp/spinach-bookmarks_selector', mode='w+')
-    subprocess.run(args=['alacritty', '-e', 'ranger',
-                   bookmarks_directory, '--choosefile', tmpfile.name])
-    tmpfile.seek(0)
-    selected_item = tmpfile.read()
-    tmpfile.close()
+    tags_stream = '\\n'.join(all_tags)
+    cmd = rf'''
+        echo -n -e {tags_stream} \
+        | fzf --multi \
+        > {tmpf.name}
+        '''
+    subprocess.run(['alacritty', '-e', 'fish', '-c', cmd])
+    tmpf.seek(0)
+    selected = [
+        i
+        for i
+        in tmpf.read().split('\n')
+        if i in all_tags
+    ]
+    tmpf.close()
 
-    if os.path.isfile(selected_item):
-        with open(selected_item, 'r') as f:
-            return parse_bookmark_item(f.read().strip())
-    return None
+    Helper.log('selected-tags:', selected)
+    return selected
 
 
-def open_url(url: str, new_window: bool = False, new_tab: bool = False) -> None:
-    option = ''
-    if new_window:
-        option += '-w'
-    if new_tab:
-        option += '-t'
-    qute_exec(f'open {option} {url}')
+def select_bookmark(bookmark_file_paths: typing.List[str]) -> typing.Union[Bookmark, None]:
+    tmpf = tempfile.NamedTemporaryFile(
+        prefix='/tmp/spinach-bookmarks_selector', mode='w+')
+    bm_files_stream = '\\n'.join(bookmark_file_paths)
+    cmd = rf'''
+        echo -n -e {bm_files_stream} \
+        | fzf \
+            --preview \
+                'bat {{}} \
+                    --language yaml \
+                    --color always \
+                    --paging never \
+                ' \
+        > {tmpf.name}
+        '''
+    subprocess.run(['alacritty', '-e', 'fish', '-c', cmd])
+    tmpf.seek(0)
+    bmfile = tmpf.read().strip()
+    tmpf.close()
+
+    selected = None
+    if os.path.isfile(bmfile):
+        selected = Bookmark.load(Helper.readfile(bmfile))
+    Helper.log('selected-bookmark:', selected)
+    return selected
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='spinach bookmarks manager for qutebrowser')
-    parser.add_argument('-t',action='store_const',const=True)
-    parser.add_argument('-w',action='store_const',const=True)
-    res = parser.parse_args(sys.argv[1:])
-
-    handler = chain([select_bookmark_item, lambda u: open_url(u, new_window=res.w, new_tab=res.t)])
-    handler()
+    bmdir = os.path.join(
+        os.environ['HOME'], '.config', 'qutebrowser', 'spinach-bookmarks')
+    bms = get_bookmarks_paths_all(bmdir)
+    tags = get_tags_all(bmdir)
+    Helper.log('bookmarks_directory:', bmdir)
+    Helper.log('bookmarks:', bms)
+    Helper.log('tags:', tags)

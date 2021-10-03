@@ -10,6 +10,9 @@ noremap <silent> <Up> :<C-u>resize +3<CR>
 " switching between tabs
 map <silent> <A-j> gt
 map <silent> <A-k> gT
+" moving tabs around 
+map <silent> <A-J> :<C-u>tabmove +1<CR>
+map <silent> <A-K> :<C-u>tabmove -1<CR>
 " delete(close) a buffer
 map <silent> <A-w> :<C-u>bdelete<CR>
 

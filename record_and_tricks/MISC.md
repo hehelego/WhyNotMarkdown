@@ -30,7 +30,25 @@
 
 ### 解决方案
 
-`echo "blacklist pcspkr" | sudo tee /etc/modprobe.d/nobeep.conf`
+`echo "blacklist pcspkr" | sudo tee /etc/modprobe.d/no-pcspkr.conf`
+
+## disabling integrated webcam
+
+### description
+
+For privacy and security reason, I 'd like to disable the integrated webcam on my laptop.  
+The webcam is a UVC(USB video class) device.
+
+### reference
+
+- [arch wiki: webcam](https://wiki.archlinux.org/title/Webcam_setup)
+- [arch wiki: kernel module](https://wiki.archlinux.org/title/Kernel_module)
+
+### solution
+
+disable the `uvcvideo` kernel module.
+
+`echo "blacklist uvcvideo" | sudo tee /etc/modprobe.d/no-webcam.conf`
 
 ## 修改rime InputMethod的config pannel的trigger keybinding
 
@@ -453,7 +471,7 @@ run `/usr/bin/env` to show all environment variables
 ### resources
 
 - `:help` [qutebrowser help page](https://qutebrowser.org/doc/help/)
-- `:open qute://settings`
+- `:open qute://settings` or `:set`
 - `$HOME/.config/qutebrowser`, `$HOME/.config/qutebrowser/config.py`
 - [github/qutebrowser: user scripts](https://github.com/qutebrowser/qutebrowser/tree/master/misc/userscripts)
 
