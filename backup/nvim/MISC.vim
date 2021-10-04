@@ -1,4 +1,4 @@
-" expand tab for programming languages
+"/home/hehelego/.config/nvim/plugin_list.vim expand tab for programming languages
 " that use indentation to determine scope
 set noexpandtab
 autocmd FileType haskell set expandtab

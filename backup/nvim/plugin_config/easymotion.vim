@@ -21,4 +21,3 @@ map <Plug>(easymotion-prefix)K <Plug>(easymotion-eol-k)
 
 map <Plug>(easymotion-prefix)w <Plug>(easymotion-bd-w)
 map <Plug>(easymotion-prefix)W <Plug>(easymotion-bd-e)
-

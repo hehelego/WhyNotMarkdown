@@ -21,8 +21,22 @@
 		}
 	},
 	"explorer.icon.enableNerdfont": true,
+	"texlab.chktex.onOpenAndSave": true,
 	"markdownlint.config": {
 		"line_length": false,
 		"ol-prefix": false
-	}
+	},
+	"texlab.path": "/usr/bin/texlab",
+	"texlab.build.args": [
+		"-pdf",
+		"-synctex=1",
+		"-interaction=nonstopmode",
+		"%f"
+	],
+	"texlab.forwardSearch.executable": "okular",
+	"texlab.build.forwardSearchAfter": true,
+	"texlab.forwardSearch.args": [
+		"--unique",
+		"%p#src:%l%f"
+	]
 }

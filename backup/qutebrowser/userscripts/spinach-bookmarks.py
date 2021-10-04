@@ -222,6 +222,7 @@ if __name__ == '__main__':
     Helper.log('args:',args)
 
     bmdir = os.path.join(qute.config_dir, 'spinach-bookmarks')
+    os.chdir(bmdir)
     bms = get_bookmarks_paths_all(bmdir)
     tags = get_tags_all(bmdir)
     Helper.log('bookmarks_directory:',bmdir)

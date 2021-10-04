@@ -71,8 +71,8 @@ augroup end
 
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+xmap <leader>as  <Plug>(coc-codeaction-selected)
+nmap <leader>as  <Plug>(coc-codeaction-selected)
 
 " Remap keys for applying codeAction to the current buffer.
 nmap <leader>ac  <Plug>(coc-codeaction)
@@ -135,4 +135,6 @@ let g:coc_global_extensions = [
   \ 'coc-vimlsp',
   \ ]
 
-nnoremap <silent> <space>e :CocCommand explorer<CR>
+nnoremap <silent> <leader>e :CocCommand explorer<CR>
+nnoremap <silent> <leader>lt :<C-u>CocList tasks<CR>
+nnoremap <silent> <leader>ld :<C-u>CocList diagnostics<CR>

@@ -12,3 +12,5 @@ alias rm="trash"
 alias fzff="fd -H --type file | fzf -m"
 alias fzfd="fd -H --type directory | fzf -m"
 alias bat="bat --pager=less"
+
+zoxide init fish | source

@@ -34,7 +34,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'mbbill/undotree'
 " for colorizing pair parentheses
 Plug 'kien/rainbow_parentheses.vim'
-" Plug 'luochen1990/rainbow'
 " for quick commenting/uncommenting
 Plug 'preservim/nerdcommenter'
 " text alignment
@@ -42,12 +41,12 @@ Plug 'junegunn/vim-easy-align'
 Plug 'godlygeek/tabular'
 " for quick cursor navigating
 Plug 'easymotion/vim-easymotion'
-" for markdown/latex previwing
+" for markdown/latex previewing 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'xuhdev/vim-latex-live-preview'
-
+" for whichkey keybindings map
+Plug 'folke/which-key.nvim'
 call plug#end()
-
 
 "load plugin configuration files with python
 python3 << PY_END
