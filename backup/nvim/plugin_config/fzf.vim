@@ -15,6 +15,7 @@ let g:fzf_action = {
       \ 'ctrl-t': 'tab split',
       \ 'ctrl-v': 'vsplit',
       \ 'ctrl-h': 'split',
+      \ 'ctrl-s': 'split',
       \}
 
 

@@ -28,13 +28,15 @@ config.set('qt.args', [
                'enable-accelerated-video-decode'])
 
 # command for external editor
-#  config.set('editor.command', ["codium", "--goto", "{file}:{line}:{column0}"])
-config.set('editor.command', ["alacritty", "-e", "nvim", "-c", "normal {line}G{column0}|", "--", "{file}"])
+#  config.set('editor.command', ['codium', '--goto', '{file}:{line}:{column0}'])
+#  config.set('editor.command', ['alacritty', '-e', 'nvim', '-c', 'normal {line}G{column0}|', '--', '{file}'])
+#  config.set('editor.command', ['kate', '--startanon', '--line', '{line}', '--column', '{column}', '{file}'])
+config.set('editor.command', ['gedit','--new-window', '{file}','+{line}:{column}'])
 
 # command for external file selector
-config.set('fileselect.folder.command', ["alacritty", "-e", "ranger", "--choosedir={}"])
-config.set('fileselect.single_file.command', ["alacritty", "-e", "ranger", "--choosefile={}"])
-config.set('fileselect.multiple_files.command', ["alacritty", "-e", "ranger", "--choosefiles={}"])
+config.set('fileselect.folder.command', ['alacritty', '-e', 'ranger', '--choosedir={}'])
+config.set('fileselect.single_file.command', ['alacritty', '-e', 'ranger', '--choosefile={}'])
+config.set('fileselect.multiple_files.command', ['alacritty', '-e', 'ranger', '--choosefiles={}'])
 
 
 
@@ -66,9 +68,9 @@ config.bind('<Alt-p>', 'spawn --userscript qute-keepassxc --key qutebrowser-keep
 config.bind('<Space>pw', 'spawn --userscript qute-keepassxc --key qutebrowser-keepassxc-connection-233', mode='normal')
 
 # reload config.py
-config.bind('<Space>c', 'config-source', mode='normal')
+config.bind('<Space>C', 'config-source', mode='normal')
 # restart qutebrowser
-config.bind('<Space>r', 'restart', mode='normal')
+config.bind('<Space>R', 'restart', mode='normal')
 
 # run the developing userscript
 config.bind('<Space>tt', 'spawn --userscript test.py', mode='normal')
@@ -85,6 +87,9 @@ config.bind('<Space>bte', 'spawn --userscript spinach-bookmarks.py --tab --tags-
 config.bind('<Space>bww', 'spawn --userscript spinach-bookmarks.py --window', mode='normal')
 config.bind('<Space>bwa', 'spawn --userscript spinach-bookmarks.py --window --tags-match-any', mode='normal')
 config.bind('<Space>bwe', 'spawn --userscript spinach-bookmarks.py --window --tags-match-every', mode='normal')
+# override the default key bindings
+config.bind('b', 'spawn --userscript spinach-bookmarks.py', mode='normal')
+config.bind('B', 'spawn --userscript spinach-bookmarks.py --tab', mode='normal')
 
 # switch user stylesheets
 # see https://github.com/alphapapa/solarized-everything-css
@@ -94,13 +99,3 @@ config.bind('<Space>s', 'spawn --userscript spinach-themes.py',mode='normal')
 
 # ZEN mode (hidding the tab-bar and status-bar)
 config.bind('<Space>z', 'config-cycle -tp statusbar.show never always ;; config-cycle -tp tabs.show never always ;; clear-messages')
-
-
-
-#  # Bindings for cycling through CSS stylesheets from Solarized Everything CSS:
-#  # https://github.com/alphapapa/solarized-everything-css
-#  config.bind(',ap', 'config-cycle -tp content.user_stylesheets ~/solarized-everything-css/css/apprentice/apprentice-all-sites.css ""')
-#  config.bind(',dr', 'config-cycle -tp content.user_stylesheets ~/solarized-everything-css/css/darculized/darculized-all-sites.css ""')
-#  config.bind(',gr', 'config-cycle -tp content.user_stylesheets ~/solarized-everything-css/css/gruvbox/gruvbox-all-sites.css ""')
-#  config.bind(',sd', 'config-cycle -tp content.user_stylesheets ~/solarized-everything-css/css/solarized-dark/solarized-dark-all-sites.css ""')
-#  config.bind(',sl', 'config-cycle -tp content.user_stylesheets ~/solarized-everything-css/css/solarized-light/solarized-light-all-sites.css ""')

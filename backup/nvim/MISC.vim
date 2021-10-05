@@ -1,5 +1,3 @@
-"/home/hehelego/.config/nvim/plugin_list.vim expand tab for programming languages
-" that use indentation to determine scope
 set noexpandtab
 autocmd FileType haskell set expandtab
 autocmd FileType python set expandtab
@@ -8,7 +6,6 @@ autocmd FileType lua set expandtab
 autocmd FileType vim set expandtab
 autocmd FileType vimscript set expandtab
 autocmd FileType markdown set expandtab
-
 
 
 " only display relative line number in terminal buffer

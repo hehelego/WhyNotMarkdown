@@ -6,13 +6,14 @@ import sys
 import tempfile
 import typing
 import yaml
-import argparse
+import pprint
 
 
 class Helper:
     @staticmethod
-    def log(*args, **kwargs):
-        print(*args, **kwargs, file=sys.stderr)
+    def log(pre: str, obj: typing.Any):
+        print(pre,end=': ',file=sys.stdout); pprint.pprint(obj, stream=sys.stdout)
+        print(f'{pre}: {obj}',file=sys.stderr)
 
     @staticmethod
     def readfile(path: str) -> str:
@@ -106,7 +107,7 @@ def filter_by_tags_every(bookmark_file_paths: typing.List[str], tags: typing.Lis
 
 def select_tags(all_tags: typing.List[str]) -> typing.List[str]:
     tmpf = tempfile.NamedTemporaryFile(
-        prefix='/tmp/spinach-bookmarks_selector', mode='w+')
+        prefix='/tmp/spinach-bookmarks-selector', mode='w+')
     tags_stream = '\\n'.join(all_tags)
     cmd = rf'''
         echo -n -e {tags_stream} \
@@ -123,13 +124,13 @@ def select_tags(all_tags: typing.List[str]) -> typing.List[str]:
     ]
     tmpf.close()
 
-    Helper.log('selected-tags:', selected)
+    Helper.log('selected-tags', selected)
     return selected
 
 
 def select_bookmark(bookmark_file_paths: typing.List[str]) -> typing.Union[Bookmark, None]:
     tmpf = tempfile.NamedTemporaryFile(
-        prefix='/tmp/spinach-bookmarks_selector', mode='w+')
+        prefix='/tmp/spinach-bookmarks-selector', mode='w+')
     bm_files_stream = '\\n'.join(bookmark_file_paths)
     cmd = rf'''
         echo -n -e {bm_files_stream} \
@@ -150,7 +151,7 @@ def select_bookmark(bookmark_file_paths: typing.List[str]) -> typing.Union[Bookm
     selected = None
     if os.path.isfile(bmfile):
         selected = Bookmark.load(Helper.readfile(bmfile))
-    Helper.log('selected-bookmark:', selected)
+    Helper.log('selected-bookmark', selected)
     return selected
 
 
@@ -159,6 +160,6 @@ if __name__ == '__main__':
         os.environ['HOME'], '.config', 'qutebrowser', 'spinach-bookmarks')
     bms = get_bookmarks_paths_all(bmdir)
     tags = get_tags_all(bmdir)
-    Helper.log('bookmarks_directory:', bmdir)
-    Helper.log('bookmarks:', bms)
-    Helper.log('tags:', tags)
+    Helper.log('bookmarks-directory', bmdir)
+    Helper.log('bookmarks', bms)
+    Helper.log('tags', tags)

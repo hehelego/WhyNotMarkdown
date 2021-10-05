@@ -27,17 +27,26 @@ map <silent> <leader>xy "+y
 map <silent> <leader>xp "+p
 
 " put path of current file into clipboard
-function! YankPath(choice)
+function! GetPath(choice)
   let l:path      = expand('%:p')
   let l:directory = expand('%:p:h')
   let l:file      = expand('%:p:t')
   let l:paths = [l:path, l:directory, l:file]
-  let @+=l:paths[a:choice]
-  let @"=l:paths[a:choice]
+	return l:paths[a:choice]
+endfunction
+function! YankPath(choice)
+	let l:p = GetPath(a:choice)
+  let @+=l:p
+  let @"=l:p
 endfunction
 map <silent> <leader>pyp :call YankPath(0)<CR>
 map <silent> <leader>pyd :call YankPath(1)<CR>
 map <silent> <leader>pyf :call YankPath(2)<CR>
+
+" insert filename
+imap <silent><expr> <A-f> GetPath(2)
+imap <silent><expr> <A-F> GetPath(0)
+
 
 """"""""""""""""""
 " keymapping_cheatsheet

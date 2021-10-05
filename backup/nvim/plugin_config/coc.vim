@@ -58,8 +58,9 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+vmap <silent> <leader>f <Plug>(coc-format-selected)
+" Formatting the whole document file
+nmap <silent> <leader>f :<C-u>call CocAction('format')<CR>
 
 augroup mygroup
   autocmd!
@@ -71,9 +72,7 @@ augroup end
 
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
-xmap <leader>as  <Plug>(coc-codeaction-selected)
-nmap <leader>as  <Plug>(coc-codeaction-selected)
-
+vmap <leader>ac  <Plug>(coc-codeaction-selected)
 " Remap keys for applying codeAction to the current buffer.
 nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
@@ -115,9 +114,11 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
 
+nnoremap <silent> <leader>e :CocCommand explorer<CR>
+nnoremap <silent> <leader>lt :<C-u>CocList tasks<CR>
+nnoremap <silent> <leader>ld :<C-u>CocList diagnostics<CR>
 
 "" coc extensions
-
 let g:coc_global_extensions = [
   \ 'coc-clangd',
   \ 'coc-cmake',
@@ -125,16 +126,16 @@ let g:coc_global_extensions = [
   \ 'coc-fish',
   \ 'coc-format-json',
   \ 'coc-go',
+  \ 'coc-html',
   \ 'coc-json',
+  \ 'coc-lua',
   \ 'coc-markdownlint',
   \ 'coc-marketplace',
   \ 'coc-pyright',
   \ 'coc-rust-analyzer',
   \ 'coc-tasks',
   \ 'coc-texlab',
+  \ 'coc-toml',
   \ 'coc-vimlsp',
+  \ 'coc-yaml',
   \ ]
-
-nnoremap <silent> <leader>e :CocCommand explorer<CR>
-nnoremap <silent> <leader>lt :<C-u>CocList tasks<CR>
-nnoremap <silent> <leader>ld :<C-u>CocList diagnostics<CR>
