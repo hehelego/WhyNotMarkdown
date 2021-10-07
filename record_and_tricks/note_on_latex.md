@@ -11,6 +11,16 @@
 
 ## LaTeX tips
 
+### specific tips
+
+### [put text at the bottom of the page](https://tex.stackexchange.com/questions/245247/putting-text-at-the-bottom-of-the-page)
+
+```latex
+Some random text in the page
+\vspace*{\fill}
+Text that will now be at the bottom of the page
+```
+
 ### general tips
 
 - my workflow
