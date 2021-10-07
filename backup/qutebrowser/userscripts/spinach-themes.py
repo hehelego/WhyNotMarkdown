@@ -79,6 +79,7 @@ def select_theme(all_themes: typing.List[str]) -> typing.Union[str, None]:
                     --language css \
                     --color always \
                     --paging never \
+                    --line-range :500 \
                 ' \
         > {tmpf.name}
         '''

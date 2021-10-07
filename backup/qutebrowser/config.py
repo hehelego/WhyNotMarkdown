@@ -62,6 +62,11 @@ config.bind('<Alt-w>', 'tab-close', mode='normal')
 config.bind('<Alt-p>', 'tab-pin', mode='normal')
 config.bind('<Alt-m>', 'tab-mute', mode='normal')
 
+# open developer tool
+config.bind('<Space>td', 'devtools', mode='normal')
+config.bind('<F12>', 'devtools', mode='normal')
+config.bind('<F12>', 'devtools', mode='insert')
+
 # toggle proxy
 config.bind('<Space>tp', 'config-cycle -tp content.proxy socks://127.0.0.1:1089 none')
 
@@ -71,7 +76,7 @@ config.bind('<Space>eu', 'edit-url', mode='normal')
 config.bind('<Space>ec', 'edit-command', mode='normal')
 
 # keepassxc integration
-config.bind('<Alt-p>', 'spawn --userscript qute-keepassxc --key qutebrowser-keepassxc-connection-233', mode='insert')
+config.bind('<Alt-u>', 'spawn --userscript qute-keepassxc --key qutebrowser-keepassxc-connection-233', mode='insert')
 config.bind('<Space>pw', 'spawn --userscript qute-keepassxc --key qutebrowser-keepassxc-connection-233', mode='normal')
 
 # reload config.py

@@ -186,6 +186,7 @@ def select_bookmark(bookmark_file_paths: typing.List[str]) -> typing.Union[Bookm
                     --language yaml \
                     --color always \
                     --paging never \
+                    --line-range :500 \
                 ' \
         > {tmpf.name}
         '''
