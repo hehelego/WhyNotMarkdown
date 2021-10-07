@@ -52,6 +52,22 @@ config.set('fileselect.multiple_files.command', ['alacritty', '-e', 'ranger', '-
 
 ##################################### PART B: key bindings #####################################
 
+# remove the default key bindings: forward | back | tab-next | tab-prev | tab-pin | tab-move | tab-move - | tab-move + 
+config.unbind('H', mode='normal')
+config.unbind('J', mode='normal')
+config.unbind('K', mode='normal')
+config.unbind('L', mode='normal')
+config.unbind('<Ctrl-p>', mode='normal')
+config.unbind('gm', mode='normal')
+config.unbind('gK', mode='normal')
+config.unbind('gJ', mode='normal')
+# remove the default key bindings: bookmark-add,quickmark-add,bookmark-load
+config.unbind('M', mode='normal')
+config.unbind('m', mode='normal')
+config.unbind('gb', mode='normal')
+# remove the default key bindings: bookmark-add,quickmark-add,bookmark-load
+config.unbind('<Ctrl-e>', mode='insert')
+
 
 # tab-manipulation
 config.bind('<Alt-j>', 'tab-next', mode='normal')
@@ -61,6 +77,10 @@ config.bind('<Alt-Shift-j>', 'tab-move +', mode='normal')
 config.bind('<Alt-w>', 'tab-close', mode='normal')
 config.bind('<Alt-p>', 'tab-pin', mode='normal')
 config.bind('<Alt-m>', 'tab-mute', mode='normal')
+
+# navigating through history
+config.bind('<Alt-h>', 'back', mode='normal')
+config.bind('<Alt-l>', 'forward', mode='normal')
 
 # open developer tool
 config.bind('<Space>td', 'devtools', mode='normal')
@@ -74,6 +94,8 @@ config.bind('<Space>tp', 'config-cycle -tp content.proxy socks://127.0.0.1:1089 
 config.bind('<Space>eu', 'edit-url', mode='normal')
 # edit command in external editor
 config.bind('<Space>ec', 'edit-command', mode='normal')
+# edit text-field in external editor
+config.bind('<Alt-e>', 'edit-text', mode='insert')
 
 # keepassxc integration
 config.bind('<Alt-u>', 'spawn --userscript qute-keepassxc --key qutebrowser-keepassxc-connection-233', mode='insert')
