@@ -503,6 +503,12 @@ config.set(
     'enable-accelerated-video-decode'])
 ```
 
+### basic operations
+
+- `Ctrl+v` passthrough mode, all the key press are sent to the web page. (`shift+esc` go back to normal mode)
+- `Escape` back to normal mode
+- `v`,`Shift+v` caret (visual) mode, for selection and yanking. (`y`: copy and back to normal mode)
+
 ## tmux plugins
 
 - [jdhao's blog: tmux plugin management](https://jdhao.github.io/2019/01/17/tmux_plugin_management/)
