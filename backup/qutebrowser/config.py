@@ -21,11 +21,11 @@ config.set('qt.highdpi', True)
 # see https://github.com/qutebrowser/qutebrowser/discussions/6573
 # see https://github.com/qutebrowser/qutebrowser/issues/5378]
 config.set('qt.args', [
-               'ignore-gpu-blacklist',
-               'enable-gpu-rasterization',
-               'enable-native-gpu-memory-buffers',
-               'num-raster-threads=4',
-               'enable-accelerated-video-decode'])
+    'ignore-gpu-blacklist',
+    'enable-gpu-rasterization',
+    'enable-native-gpu-memory-buffers',
+    'num-raster-threads=4',
+    'enable-accelerated-video-decode'])
 
 # command for external editor
 # see https://github.com/qutebrowser/qutebrowser/issues/5340
@@ -33,26 +33,22 @@ config.set('qt.args', [
 #  config.set('editor.command', ['alacritty', '-e', 'nvim', '-c', 'normal {line}G{column0}|', '--', '{file}'])
 #  config.set('editor.command', ['kate', '--startanon', '--line', '{line}', '--column', '{column}', '{file}'])
 #  config.set('editor.command', ['gedit','--new-window', '{file}','+{line}:{column}'])
-config.set('editor.command', ["nvim-qt", "--nofork", "{file}", "--", "-c", "normal {line}G{column0}l"])
-
+config.set('editor.command', ["nvim-qt", "--nofork",
+           "{file}", "--", "-c", "normal {line}G{column0}l"])
 
 
 # command for external file selector
-config.set('fileselect.folder.command', ['alacritty', '-e', 'ranger', '--choosedir={}'])
-config.set('fileselect.single_file.command', ['alacritty', '-e', 'ranger', '--choosefile={}'])
-config.set('fileselect.multiple_files.command', ['alacritty', '-e', 'ranger', '--choosefiles={}'])
-
-
-
-
-
-
-
+config.set('fileselect.folder.command', [
+           'alacritty', '-e', 'ranger', '--choosedir={}'])
+config.set('fileselect.single_file.command', [
+           'alacritty', '-e', 'ranger', '--choosefile={}'])
+config.set('fileselect.multiple_files.command', [
+           'alacritty', '-e', 'ranger', '--choosefiles={}'])
 
 
 ##################################### PART B: key bindings #####################################
 
-# remove the default key bindings: forward | back | tab-next | tab-prev | tab-pin | tab-move | tab-move - | tab-move + 
+# remove the default key bindings: forward | back | tab-next | tab-prev | tab-pin | tab-move | tab-move - | tab-move +
 config.unbind('H', mode='normal')
 config.unbind('J', mode='normal')
 config.unbind('K', mode='normal')
@@ -87,8 +83,13 @@ config.bind('<Space>td', 'devtools', mode='normal')
 config.bind('<F12>', 'devtools', mode='normal')
 config.bind('<F12>', 'devtools', mode='insert')
 
+# print page
+config.bind('<Ctrl-Alt-p>', 'print', mode='normal')
+config.bind('<Ctrl-Shift-p>', 'print', mode='normal')
+
 # toggle proxy
-config.bind('<Space>tp', 'config-cycle -tp content.proxy socks://127.0.0.1:1089 none')
+config.bind(
+    '<Space>tp', 'config-cycle -tp content.proxy socks://127.0.0.1:1089 none')
 
 # edit url in external editor
 config.bind('<Space>eu', 'edit-url', mode='normal')
@@ -106,30 +107,39 @@ config.bind('<Space>C', 'config-source', mode='normal')
 # restart qutebrowser
 config.bind('<Space>R', 'restart', mode='normal')
 
-# run the developing userscript
-config.bind('<Space>tt', 'spawn --userscript test.py', mode='normal')
+# ZEN mode (hidding the tab-bar and status-bar)
+config.bind('<Space>z', 'config-cycle -tp statusbar.show never always ;; config-cycle -tp tabs.show never always ;; clear-messages')
 
-# spinach's bookmarks selector
-## [o, t, w] for open in current-tab, new-tab, new-window
-## [a, e] for match-any-selected-tag, match-all-selected-tag
-config.bind('<Space>boo', 'spawn --userscript spinach-bookmarks.py', mode='normal')
-config.bind('<Space>boa', 'spawn --userscript spinach-bookmarks.py --tags-match-any', mode='normal')
-config.bind('<Space>boe', 'spawn --userscript spinach-bookmarks.py --tags-match-every', mode='normal')
-config.bind('<Space>btt', 'spawn --userscript spinach-bookmarks.py --tab', mode='normal')
-config.bind('<Space>bta', 'spawn --userscript spinach-bookmarks.py --tab --tags-match-any', mode='normal')
-config.bind('<Space>bte', 'spawn --userscript spinach-bookmarks.py --tab --tags-match-every', mode='normal')
-config.bind('<Space>bww', 'spawn --userscript spinach-bookmarks.py --window', mode='normal')
-config.bind('<Space>bwa', 'spawn --userscript spinach-bookmarks.py --window --tags-match-any', mode='normal')
-config.bind('<Space>bwe', 'spawn --userscript spinach-bookmarks.py --window --tags-match-every', mode='normal')
+
+##################################### PART C: userscripts #####################################
+
+# run the developing userscript
+config.bind('<Space>T', 'spawn --userscript test.py', mode='normal')
+
+# spinach's bookmarks selector: open bookmark
+# [o, t, w] for open in current-tab, new-tab, new-window
+# [a, e] for match-any-selected-tag, match-all-selected-tag
+config.bind(
+    '<Space>boo', 'spawn --userscript spinach-bookmarks.py', mode='normal')
+config.bind('<Space>boa',
+            'spawn --userscript spinach-bookmarks.py --tags-match-any', mode='normal')
+config.bind('<Space>boe',
+            'spawn --userscript spinach-bookmarks.py --tags-match-every', mode='normal')
+config.bind(
+    '<Space>btt', 'spawn --userscript spinach-bookmarks.py --tab', mode='normal')
+config.bind('<Space>bta',
+            'spawn --userscript spinach-bookmarks.py --tab --tags-match-any', mode='normal')
+config.bind('<Space>bte',
+            'spawn --userscript spinach-bookmarks.py --tab --tags-match-every', mode='normal')
+config.bind('<Space>bww',
+            'spawn --userscript spinach-bookmarks.py --window', mode='normal')
+config.bind('<Space>bwa',
+            'spawn --userscript spinach-bookmarks.py --window --tags-match-any', mode='normal')
+config.bind('<Space>bwe',
+            'spawn --userscript spinach-bookmarks.py --window --tags-match-every', mode='normal')
 # override the default key bindings
 config.bind('b', 'spawn --userscript spinach-bookmarks.py', mode='normal')
 config.bind('B', 'spawn --userscript spinach-bookmarks.py --tab', mode='normal')
 
-# switch user stylesheets
-# see https://github.com/alphapapa/solarized-everything-css
-# see https://gitlab.com/dwt1/dotfiles/-/blob/master/.config/qutebrowser/config.py
-# see qute://help/settings.html#content.user_stylesheets
-config.bind('<Space>s', 'spawn --userscript spinach-themes.py',mode='normal')
-
-# ZEN mode (hidding the tab-bar and status-bar)
-config.bind('<Space>z', 'config-cycle -tp statusbar.show never always ;; config-cycle -tp tabs.show never always ;; clear-messages')
+# spinach's theme selector: switch user stylesheets
+config.bind('<Space>t', 'spawn --userscript spinach-themes.py', mode='normal')

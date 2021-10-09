@@ -1,69 +1,31 @@
 #!/usr/bin/python
 
+# see https://github.com/alphapapa/solarized-everything-css
+# see https://gitlab.com/dwt1/dotfiles/-/blob/master/.config/qutebrowser/config.py
+# see qute://help/settings.html#content.user_stylesheets
+
+from spinach_qute_userscript_base import Qute, Helper
+
 import subprocess
 import os
-import sys
 import tempfile
 import typing
-import pprint
 
-
-class Qute:
-    def __init__(self) -> None:
-        self.env = {k: v for k, v in os.environ.items()
-                    if k.startswith('QUTE')}
-        self.fifo = open(self.env['QUTE_FIFO'], 'w')
-        self.config_dir = self.env['QUTE_CONFIG_DIR']
-        self.data_dir = self.env['QUTE_DATA_DIR']
-        pass
-
-    def __del__(self) -> None:
-        if self.fifo and not self.fifo.closed:
-            self.fifo.close()
-
-    def exec(self, cmd: str) -> bool:
-        Helper.log('run command', cmd)
-        print(cmd, file=self.fifo)
-        return True
-
-
-class Helper:
-    @staticmethod
-    def log(pre: str, obj: typing.Any):
-        print(pre,end=': ',file=sys.stdout); pprint.pprint(obj, stream=sys.stdout)
-        print(f'{pre}: {obj}',file=sys.stderr)
-
-    @staticmethod
-    def chain(funcs: typing.List[typing.Callable[[typing.Any], typing.Any]], start: typing.Any) -> typing.Callable[[], typing.Any]:
-        def wrapper() -> typing.Any:
-            v = start
-            if v is None:
-                return v
-            for f in funcs:
-                v = f(v)
-                if v is None:
-                    break
-            return v
-        return wrapper
-
-    @staticmethod
-    def readfile(path: str) -> str:
-        content = None
-        with open(path) as f:
-            content = f.read()
-        return content
-
-
-def get_themes_all(themes_dir: str) -> typing.List[str]:
+def get_themes(themes_dir: str, search: str) -> typing.List[str]:
     os.chdir(themes_dir)
     themes = [
         path
         for path
-        in subprocess.check_output(['fd', '--type', 'file', '--extension', 'css', '--', 'all-sites']).decode().split('\n')
+        in subprocess.check_output(['fd', '--type', 'file', '--extension', 'css', search]).decode().split('\n')
         if os.path.isfile(path)
     ]
     Helper.log('all available themes', themes)
     return themes
+
+def get_themes_all(themes_dir: str) -> typing.List[str]:
+    return get_themes(themes_dir,'all-sites')
+def get_themes_full(themes_dir: str) -> typing.List[str]:
+    return get_themes(themes_dir,'')
 
 
 def select_theme(all_themes: typing.List[str]) -> typing.Union[str, None]:
@@ -101,5 +63,6 @@ if __name__ == '__main__':
     os.chdir(themes_dir)
     themes = get_themes_all(themes_dir)
     selected = select_theme(themes)
-    selected = os.path.join(themes_dir,selected) if selected is not None else '\'\''
+    selected = os.path.join(
+        themes_dir, selected) if selected is not None else '\'\''
     qute.exec(f':set -tp content.user_stylesheets {selected}')

@@ -1,26 +1,12 @@
 #!/usr/bin/python
 
+from spinach_qute_userscript_base import Qute, Helper
+
 import subprocess
 import os
-import sys
 import tempfile
 import typing
 import yaml
-import pprint
-
-
-class Helper:
-    @staticmethod
-    def log(pre: str, obj: typing.Any):
-        print(pre,end=': ',file=sys.stdout); pprint.pprint(obj, stream=sys.stdout)
-        print(f'{pre}: {obj}',file=sys.stderr)
-
-    @staticmethod
-    def readfile(path: str) -> str:
-        content = None
-        with open(path) as f:
-            content = f.read()
-        return content
 
 
 class Bookmark:
@@ -157,6 +143,10 @@ def select_bookmark(bookmark_file_paths: typing.List[str]) -> typing.Union[Bookm
 
 
 if __name__ == '__main__':
+    qute = Qute()
+    selected_text = qute.get_env('selected_text')
+    qute.exec(f'jseval alert("{selected_text}")')
+
     bmdir = os.path.join(
         os.environ['HOME'], '.config', 'qutebrowser', 'spinach-bookmarks')
     bms = get_bookmarks_paths_all(bmdir)
