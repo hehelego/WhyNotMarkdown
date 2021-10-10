@@ -21,7 +21,7 @@ config.set('qt.highdpi', True)
 # see https://github.com/qutebrowser/qutebrowser/discussions/6573
 # see https://github.com/qutebrowser/qutebrowser/issues/5378]
 config.set('qt.args', [
-    'ignore-gpu-blacklist',
+    'ignore-gpu-blocklist',
     'enable-gpu-rasterization',
     'enable-native-gpu-memory-buffers',
     'num-raster-threads=4',
@@ -38,7 +38,7 @@ config.set('editor.command', ["nvim-qt", "--nofork",
 
 
 # use default rather than external file selector for HTML file upload form.
-config.set('fileselect.handler', 'default')
+config.set('fileselect.handler', 'external')
 # command for external file selector
 config.set('fileselect.folder.command', [
            'alacritty', '-e', 'ranger', '--choosedir={}'])
@@ -60,10 +60,14 @@ config.unbind('gm', mode='normal')
 config.unbind('gK', mode='normal')
 config.unbind('gJ', mode='normal')
 config.unbind('co', mode='normal')
-# remove the default key bindings: bookmark-add,quickmark-add,bookmark-load
+# remove the default key bindings: bookmark-add | quickmark-add | bookmark-load
 config.unbind('M', mode='normal')
 config.unbind('m', mode='normal')
 config.unbind('gb', mode='normal')
+# remove the default key bindings: download | download-cancel | download-clear
+config.unbind('gd', mode='normal')
+config.unbind('ad', mode='normal')
+config.unbind('cd', mode='normal')
 # remove the default key bindings: bookmark-add,quickmark-add,bookmark-load
 config.unbind('<Ctrl-e>', mode='insert')
 

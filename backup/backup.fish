@@ -32,6 +32,7 @@ backup ~/.config/fish/                               ~/.workspace/git-repo/WhyNo
 backup ~/.config/nvim/                               ~/.workspace/git-repo/WhyNotMarkdown/backup/nvim/
 backup ~/.config/alacritty/                          ~/.workspace/git-repo/WhyNotMarkdown/backup/alacritty/
 backup ~/.config/dunst/                              ~/.workspace/git-repo/WhyNotMarkdown/backup/i3_conf/dunst/
+backup ~/.config/rofi/                               ~/.workspace/git-repo/WhyNotMarkdown/backup/rofi/
 backup ~/.config/keynav/                             ~/.workspace/git-repo/WhyNotMarkdown/backup/keynav/
 backup ~/.config/qutebrowser/                        ~/.workspace/git-repo/WhyNotMarkdown/backup/qutebrowser/
 backup ~/.config/fontconfig/fonts.conf               ~/.workspace/git-repo/WhyNotMarkdown/backup/font.conf

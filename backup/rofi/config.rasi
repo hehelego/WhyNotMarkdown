@@ -1,0 +1,6 @@
+configuration {
+  modi: [drun, window, emoji, keys];
+  theme: "fancy";
+  font: "SourceCodePro 14";
+  show-icons: true;
+}

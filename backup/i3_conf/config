@@ -11,8 +11,8 @@
 
 set $mod Mod4
 set $bg_img /usr/share/wallpapers/Opal/contents/images/3840x2160.png
-set $menu_app rofi -show drun -theme fancy -show-icons
-set $menu_win rofi -show window -theme fancy -show-icons
+set $menu_app rofi -show drun
+set $menu_win rofi -show window
 set $locker i3lock -c 333333
 # set $screenshot screengrab -r
 set $screenshot spectacle -r
