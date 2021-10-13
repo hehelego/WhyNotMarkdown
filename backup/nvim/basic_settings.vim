@@ -17,5 +17,7 @@ set shortmess+=c
 set timeoutlen=500
 set updatetime=500
 
+set mouse=a
+
 let mapleader=" "
 let maplocalleader="\\"

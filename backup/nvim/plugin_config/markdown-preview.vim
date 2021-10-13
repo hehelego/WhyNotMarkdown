@@ -24,7 +24,8 @@ let g:mkdp_port = ''
 let g:mkdp_page_title = '${name}'
 
 " use firefox to open the preview page
-let g:mkdp_browser = 'firefox'
+" let g:mkdp_browser = 'firefox'
+let g:mkdp_browser = 'qutebrowser'
 
 " print out the preview page url when start preview server
 let g:mkdp_echo_preview_url = 1

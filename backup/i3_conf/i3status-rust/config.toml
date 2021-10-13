@@ -17,8 +17,7 @@ interface_name_include = []
 [[block]]
 block = "custom"
 shell = "fish"
-command = ''' python /home/hehelego/.config/i3status-rust/query-backlight.py '''
-on_click = ''' python /home/hehelego/.config/i3status-rust/controller-backlight.py '''
+command = ''' python ~/.config/i3status-rust/query-backlight.py '''
 json = false
 interval = 5
 

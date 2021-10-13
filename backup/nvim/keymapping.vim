@@ -2,10 +2,10 @@
 map <C-l> :<C-u>nohlsearch<CR>
 
 " manipulate window size
-noremap <silent> <Left> :<C-u>vertical resize -3<CR>
-noremap <silent> <Right> :<C-u>vertical resize +3<CR>
-noremap <silent> <Down> :<C-u>resize -3<CR>
-noremap <silent> <Up> :<C-u>resize +3<CR>
+noremap <silent> <A-Left> :<C-u>vertical resize -3<CR>
+noremap <silent> <A-Right> :<C-u>vertical resize +3<CR>
+noremap <silent> <A-Down> :<C-u>resize -3<CR>
+noremap <silent> <A-Up> :<C-u>resize +3<CR>
 
 " switching between tabs
 map <silent> <A-j> gt
