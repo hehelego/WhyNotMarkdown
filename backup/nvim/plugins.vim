@@ -23,8 +23,6 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 " for viewing symbol/tag tree
 Plug 'liuchengxu/vista.vim'
-" for quickui: customizable menu
-Plug 'skywind3000/vim-quickui'
 " for running shell command asynchronously
 Plug 'skywind3000/asynctasks.vim'
 Plug 'skywind3000/asyncrun.vim'
@@ -46,7 +44,5 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 Plug 'xuhdev/vim-latex-live-preview'
 " for whichkey keybindings map
 Plug 'folke/which-key.nvim'
-call plug#end()
 
-"load plugin configuration files with python
-py3file $HOME/.config/nvim/load_plugin_conf.py
+call plug#end()

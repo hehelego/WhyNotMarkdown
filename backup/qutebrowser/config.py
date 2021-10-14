@@ -50,7 +50,7 @@ config.set('fileselect.multiple_files.command', [
 
 ##################################### PART B: key bindings #####################################
 
-# remove the default key bindings: forward | back | tab-next | tab-prev | tab-pin | tab-move | tab-move - | tab-move + | tab-only
+# remove the default key bindings: forward | back | tab-next | tab-prev | tab-pin | tab-move | tab-move - | tab-move + | tab-only | tab-give | tab-clone | tab-take
 config.unbind('H', mode='normal')
 config.unbind('J', mode='normal')
 config.unbind('K', mode='normal')
@@ -60,6 +60,9 @@ config.unbind('gm', mode='normal')
 config.unbind('gK', mode='normal')
 config.unbind('gJ', mode='normal')
 config.unbind('co', mode='normal')
+config.unbind('gD', mode='normal')
+config.unbind('gC', mode='normal')
+config.unbind('gt', mode='normal')
 # remove the default key bindings: bookmark-add | quickmark-add | bookmark-load
 config.unbind('M', mode='normal')
 config.unbind('m', mode='normal')

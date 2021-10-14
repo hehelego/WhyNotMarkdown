@@ -11,8 +11,3 @@ autocmd FileType markdown set expandtab
 " only display relative line number in terminal buffer
 autocmd TermOpen * set nonumber
 autocmd TermOpen * set relativenumber
-
-
-" prevent lossing visual selection when performing shift s
-xnoremap < <gv
-xnoremap > >gv

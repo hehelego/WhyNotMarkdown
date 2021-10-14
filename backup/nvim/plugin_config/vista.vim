@@ -20,3 +20,5 @@ let g:vista#renderer#icons = {
 \   "variable": "\uf71b",
 \  }
 
+
+let g:vista_lsp_client = 'coc'

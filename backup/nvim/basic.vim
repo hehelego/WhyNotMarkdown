@@ -19,5 +19,4 @@ set updatetime=500
 
 set mouse=a
 
-let mapleader=" "
-let maplocalleader="\\"
+let mapleader=' '

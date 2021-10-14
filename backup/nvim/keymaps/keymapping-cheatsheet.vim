@@ -1,57 +1,3 @@
-" turn off highlight for matched patterns (after a search)
-map <C-l> :<C-u>nohlsearch<CR>
-
-" manipulate window size
-noremap <silent> <A-Left> :<C-u>vertical resize -3<CR>
-noremap <silent> <A-Right> :<C-u>vertical resize +3<CR>
-noremap <silent> <A-Down> :<C-u>resize -3<CR>
-noremap <silent> <A-Up> :<C-u>resize +3<CR>
-
-" switching between tabs
-map <silent> <A-j> gt
-map <silent> <A-k> gT
-" moving tabs around 
-map <silent> <A-J> :<C-u>tabmove +1<CR>
-map <silent> <A-K> :<C-u>tabmove -1<CR>
-" delete(close) a buffer
-map <silent> <A-w> :<C-u>bdelete<CR>
-
-" quickfix: open/close/jump-to-next-fix/jump-to-previous-fix
-map <silent> <leader>qo :<C-u>copen<CR>
-map <silent> <leader>qc :<C-u>cclose<CR>
-map <silent> <leader>qn :<C-u>cnext<CR>
-map <silent> <leader>qp :<C-u>cprevious<CR>
-
-" selected text <-> system clipboard
-map <silent> <leader>xy "+y
-map <silent> <leader>xp "+p
-
-" put path of current file into clipboard
-function! GetPath(choice)
-  let l:path      = expand('%:p')
-  let l:directory = expand('%:p:h')
-  let l:file      = expand('%:p:t')
-  let l:paths = [l:path, l:directory, l:file]
-	return l:paths[a:choice]
-endfunction
-function! YankPath(choice)
-	let l:p = GetPath(a:choice)
-  let @+=l:p
-  let @"=l:p
-endfunction
-map <silent> <leader>pyp :call YankPath(0)<CR>
-map <silent> <leader>pyd :call YankPath(1)<CR>
-map <silent> <leader>pyf :call YankPath(2)<CR>
-
-" insert filename
-imap <silent><expr> <A-f> GetPath(2)
-imap <silent><expr> <A-F> GetPath(0)
-
-
-""""""""""""""""""
-" keymapping_cheatsheet
-""""""""""""""""""
-
 let s:kmcs_MISC = [
 			\ [ '<leader>'        , '<space>' ],
 			\ [ '<leader><space>' , 'quickui-menu' ],
@@ -104,8 +50,6 @@ let s:kmcs_builtin = [
 			\]
 
 
-
-
 let s:kmcs_coc = [
 	\ [ '<C-Space>'  , 'autocomplete refresh' ],
 	\ [ '<S-k>/K'    , 'popup documentation' ],
@@ -118,8 +62,8 @@ let s:kmcs_coc = [
 	\ [ 'gi'         , 'goto implementation' ],
 	\ [ 'gr'         , 'goto refrences' ],
 	\ [ '--' ]       ,
-	\ [ '<Leader>rn' , 'rename the variable under cursor' ],
-	\ [ '<Leader>f'  , 'format selected code' ],
+	\ [ '<leader>rn' , 'rename the variable under cursor' ],
+	\ [ '<leader>f'  , 'format selected code' ],
 	\ [ '--' ]       ,
 	\ [ '<C-s>'      , 'range selection' ],
   \]
@@ -135,8 +79,6 @@ let s:kmcs_fzf = [
 let s:kmcs_vista = []
 let s:kmcs_asyncrun = []
 let s:kmcs_undotree = []
-let s:kmcs_rainbow = []
-let s:kmcs_tabular = []
 let s:kmcs_nerdcomment = [
 	\ [ '<leader>cc' , 'add comment current line/selected text' ],
 	\ [ '<leader>cu' , 'uncomment   current line/selected text' ],
@@ -160,9 +102,6 @@ let g:keymapping_cheatsheet = {
 			\ 'vista'          : s:kmcs_vista       ,
 			\ 'asyncrun'       : s:kmcs_asyncrun    ,
 			\ 'undotree'       : s:kmcs_undotree    ,
-			\ 'rainbow'        : s:kmcs_rainbow     ,
-			\ 'tabular'        : s:kmcs_tabular     ,
 			\ 'nerd-commenter' : s:kmcs_nerdcomment ,
 			\ 'easymotion'     : s:kmcs_easymotion  ,
 			\ }
-
