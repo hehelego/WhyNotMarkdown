@@ -122,8 +122,9 @@ xmap <silent> <C-s> <plug>(coc-range-select)
 " SECTION: coc-list
 """"""""""""""""""""
 
-nmap <silent> <localleader>lt :<C-u>CocList tasks<CR>
+nmap <silent> <localleader>lc :<C-u>CocList commands<CR>
 nmap <silent> <localleader>ld :<C-u>CocList diagnostics<CR>
+nmap <silent> <localleader>lt :<C-u>CocList tasks<CR>
 nmap <silent> <localleader>ll :<C-u>CocList<CR>
 
 

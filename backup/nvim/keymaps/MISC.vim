@@ -6,14 +6,14 @@
 " SECITON: buffer
 """"""""""""""""""
 
-nnoremap <silent> <leader>bs :<C-u>Buffers<CR>
-xnoremap <silent> <leader>bs :<C-u>Buffers<CR>
 nnoremap <silent> <leader>bt :<C-u>Filetypes<CR>
 xnoremap <silent> <leader>bt :<C-u>Filetypes<CR>
 nnoremap <silent> <leader>bw :<C-u>write<CR>
 xnoremap <silent> <leader>bw :<C-u>write<CR>
 nnoremap <silent> <leader>be :edit<CR>
 xnoremap <silent> <leader>be :edit<CR>
+nnoremap <silent> <leader>bf :BLines<CR>
+xnoremap <silent> <leader>bf :BLines<CR>
 
 """""""""""""""""
 " SECITON: MISC
@@ -24,8 +24,8 @@ xnoremap < <gv
 xnoremap > >gv
 
 " re-edit, reload current buffer
-nnoremap <silent> <leader>e :edit<CR>
-xnoremap <silent> <leader>e :edit<CR>
+nnoremap <silent> <leader>r :edit<CR>
+xnoremap <silent> <leader>r :edit<CR>
 
 " (temporarily) turn off highlight search result
 inoremap <silent><expr> <C-l> execute('nohlsearch')

@@ -36,7 +36,6 @@ Plug 'kien/rainbow_parentheses.vim'
 Plug 'preservim/nerdcommenter'
 " text alignment
 Plug 'junegunn/vim-easy-align'
-Plug 'godlygeek/tabular'
 " for quick cursor navigating
 Plug 'easymotion/vim-easymotion'
 " for markdown/latex previewing 

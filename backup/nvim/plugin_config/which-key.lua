@@ -85,17 +85,17 @@ local vista_keymap = {
 local buffer_keymap = {
   name = 'buffer',
 
-  s = 'switch',
   t = 'cur-filetype',
   w = 'cur-write',
   e = 'cur-edit',
+  f = 'cur-find',
 }
 local leader_keymap = {
   name = '<leader>',
 
   b = buffer_keymap,
   c = comment_keymap,
-  e = 'reload-current-file',
+  r = 'reload-current-file',
   f = fzf_keymap,
   g = git_keymap,
   p = path_keymap,
@@ -131,11 +131,27 @@ leader_keymap['<space>'] = {
     name = 'editor',
     c = {
       name = 'cursor',
-      r = {'<CMD>set cursorline!<CR>', 'show-line'},
-      c = {'<CMD>set cursorcolumn!<CR>', 'show-column'},
+      r = {'<CMD>set cursorline!<CR>', 'cursor-line'},
+      c = {'<CMD>set cursorcolumn!<CR>', 'cursor-column'},
     },
+    n = {
+      name = 'line-number',
+      a = {'<CMD>set number!<CR>' ,'absolute'},
+      r = {'<CMD>set relativenumber!<CR>' ,'relative'},
+    }
   },
   p = {
+    name = 'plugins',
+
+    c     = {'<CMD>PlugClean<CR>',  'vimplug-clean'},
+    d     = {'<CMD>PlugDiff<CR>',  'vimplug-diff'},
+    i     = {'<CMD>PlugInstall<CR>', 'vimplug-install'},
+    s     = {'<CMD>PlugStatus<CR>', 'vimplug-status'},
+    u     = {'<CMD>PlugUpdate<CR>', 'vimplug-update'},
+    U     = {'<CMD>PlugUpgrade<CR>', 'vimplug-upgrade'},
+    [';'] = {'<CMD>CocUpdate<CR>', 'coc-update'},
+  },
+  v = {
     name = 'document-preview',
 
     m = {
@@ -165,9 +181,10 @@ local coc_keymap = {
   l = {
     name = 'coc-list',
 
+    c = 'commands',
+    d = 'diagnostics',
     l = 'lists',
     t = 'async-tasks',
-    d = 'diagnostics'
   },
 }
 wk.register(coc_keymap, { prefix = ';' })
