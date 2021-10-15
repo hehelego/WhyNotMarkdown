@@ -42,4 +42,4 @@ function! s:fzf_task()
 endfunction
 
 
-command! -nargs=0 AsyncTaskFzf call s:fzf_task()
+command! -nargs=0 FzfAsyncTask call s:fzf_task()

@@ -119,13 +119,14 @@ leader_keymap['<space>'] = {
     c = {'<CMD>Colors<CR>', 'select-color-theme'},
   },
   f = {
-    name = 'fuzzy-find',
+    name = 'fzf-ui',
     c = {'<CMD>Commands<CR>', 'commands'},
     r = {'<CMD>FzfRegister<CR>', 'registers'},
     f = {'<CMD>FzfFunctions<CR>', 'functions'},
     m = {'<CMD>Marks<CR>', 'marks'},
     k = {'<CMD>Maps<CR>', 'keymaps'},
     h = {'<CMD>Helptags<CR>', 'help'},
+    t = {'<CMD>FzfAsyncTask<CR>' ,'tasks'},
   },
   e = {
     name = 'editor',

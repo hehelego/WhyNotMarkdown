@@ -118,7 +118,7 @@ config.bind('<Space>C', 'config-source', mode='normal')
 config.bind('<Space>R', 'restart', mode='normal')
 
 # ZEN mode (hidding the tab-bar and status-bar)
-config.bind('<Space>z', 'config-cycle -tp statusbar.show never always ;; config-cycle -tp tabs.show never always ;; clear-messages')
+config.bind('<Space>z', 'config-cycle -tp statusbar.show never always ;; config-cycle -tp tabs.show never always ;; clear-messages ;; download-clear')
 
 
 ##################################### PART C: userscripts #####################################

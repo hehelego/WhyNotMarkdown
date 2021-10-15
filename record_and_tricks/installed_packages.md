@@ -137,7 +137,6 @@
 ### hardware status monitoring/diagnosing tool
 
 - neofetch/screenfetch
-- cpu-x (for hardware infomation and benchmark, resembles cpu-z on windows)
 - s-tui (for cpu monitoring&stress cpu)
 - radeontop (monitoring AMD GPU)
 - lscpu,lspci,lshw,hwinfo,lsusb...
