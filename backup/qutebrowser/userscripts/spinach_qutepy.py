@@ -4,6 +4,8 @@ import os
 import sys
 import typing
 import pprint
+import tempfile
+import subprocess
 
 
 class Qute:
@@ -50,21 +52,42 @@ class Helper:
         print(f'{pre}: {obj}', file=sys.stderr)
 
     @staticmethod
-    def chain(funcs: typing.List[typing.Callable[[typing.Any], typing.Any]], start: typing.Any) -> typing.Callable[[], typing.Any]:
-        def wrapper() -> typing.Any:
-            v = start
-            if v is None:
-                return v
-            for f in funcs:
-                v = f(v)
-                if v is None:
-                    break
-            return v
-        return wrapper
-
-    @staticmethod
     def readfile(path: str) -> str:
         content = None
         with open(path) as f:
             content = f.read()
         return content
+
+    bat_preview = r'''--preview \
+            'bat {} \
+                --language css \
+                --color always \
+                --paging never \
+                --line-range :500 \
+            ' \
+    '''
+    T = typing.TypeVar('T')
+
+    @staticmethod
+    def fzf_select(src: typing.List[T], multi: bool = False, preview: typing.Union[str, None] = bat_preview) -> typing.List[T]:
+        tmpf = tempfile.NamedTemporaryFile(prefix='/tmp/sp-qb-sel', mode='w+')
+        srcmap = {str(i): i for i in src}
+        stream = '\\n'.join(srcmap.keys())
+        cmd = rf'''
+            echo -n -e {stream} \
+            | fzf \
+                {'--multi' if multi else ''} \
+                {preview if preview else ''}\
+            > {tmpf.name}
+            '''
+        subprocess.run(['alacritty', '-e', 'fish', '-c', cmd])
+        tmpf.seek(0)
+        selected = [
+            srcmap[i]
+            for i in tmpf.read().split('\n')
+            if i in srcmap
+        ]
+        tmpf.close()
+
+        Helper.log('selected:', selected)
+        return selected

@@ -1,11 +1,10 @@
 #!/usr/bin/python
 
-from spinach_qute_userscript_base import Qute, Helper
+from spinach_qutepy import Qute, Helper
 
 import subprocess
 import os
 import sys
-import tempfile
 import typing
 import yaml
 import argparse
@@ -31,11 +30,11 @@ class Bookmark:
     @staticmethod
     def load(raw: str):
         obj = yaml.safe_load(raw)
-        return Bookmark(
-            url=obj['url'],
-            name=obj['name'],
-            tags=obj['tags'],
-        )
+        url, name, tags = obj['url'], obj['name'], obj['tags']
+        assert(type(url)==str)
+        assert(type(name)==str)
+        assert(type(tags)==list)
+        return Bookmark(url, name, tags)
 
     def dump(self) -> str:
         return yaml.dump(self, default_flow_style=False)
@@ -95,54 +94,20 @@ def filter_by_tags_every(bookmark_file_paths: typing.List[str], tags: typing.Lis
 
 
 def select_tags(all_tags: typing.List[str]) -> typing.List[str]:
-    tmpf = tempfile.NamedTemporaryFile(
-        prefix='/tmp/spinach-bookmarks-selector', mode='w+')
-    tags_stream = '\\n'.join(all_tags)
-    cmd = rf'''
-        echo -n -e {tags_stream} \
-        | fzf --multi \
-        > {tmpf.name}
-        '''
-    subprocess.run(['alacritty', '-e', 'fish', '-c', cmd])
-    tmpf.seek(0)
-    selected = [
-        i
-        for i
-        in tmpf.read().split('\n')
-        if i in all_tags
-    ]
-    tmpf.close()
-
+    selected = Helper.fzf_select(all_tags, multi=True, preview=None)
     Helper.log('selected-tags', selected)
     return selected
 
 
 def select_bookmark(bookmark_file_paths: typing.List[str]) -> typing.Union[Bookmark, None]:
-    tmpf = tempfile.NamedTemporaryFile(
-        prefix='/tmp/spinach-bookmarks-selector', mode='w+')
-    bm_files_stream = '\\n'.join(bookmark_file_paths)
-    cmd = rf'''
-        echo -n -e {bm_files_stream} \
-        | fzf \
-            --preview \
-                'bat {{}} \
-                    --language yaml \
-                    --color always \
-                    --paging never \
-                    --line-range :500 \
-                ' \
-        > {tmpf.name}
-        '''
-    subprocess.run(['alacritty', '-e', 'fish', '-c', cmd])
-    tmpf.seek(0)
-    bmfile = tmpf.read().strip()
-    tmpf.close()
-
-    selected = None
+    selected = Helper.fzf_select(bookmark_file_paths)
+    Helper.log('selected-bookmark-file', selected)
+    bmfile = selected[0] if len(selected) > 0 else ''
     if os.path.isfile(bmfile):
-        selected = Bookmark.load(Helper.readfile(bmfile))
-    Helper.log('selected-bookmark', selected)
-    return selected
+        bm = Bookmark.load(Helper.readfile(bmfile))
+        Helper.log('selected-bookmark-entry', bm)
+        return bm
+    return None
 
 
 if __name__ == '__main__':
@@ -167,15 +132,10 @@ if __name__ == '__main__':
     Helper.log('bookmarks', bms)
     Helper.log('tags', tags)
 
-    Helper.chain(
-        funcs=[
-            lambda bms: filter_by_tags_any(
-                bms, select_tags(tags)) if args.tag_any else bms,
-            lambda bms: filter_by_tags_every(
-                bms, select_tags(tags)) if args.tag_every else bms,
-            select_bookmark,
-            lambda bm: qute.open_url(
-                bm.url, new_window=args.win, new_tab=args.tab)
-        ],
-        start=bms
-    )()
+    if args.tag_any:
+        bms = filter_by_tags_any(bms, select_tags(tags))
+    if args.tag_every:
+        bms = filter_by_tags_every(bms, select_tags(tags))
+    bm = select_bookmark(bms)
+    if bm is not None:
+        qute.open_url(bm.url, new_window=args.win, new_tab=args.tab)
