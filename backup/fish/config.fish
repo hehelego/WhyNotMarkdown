@@ -10,5 +10,8 @@ alias rm="trash"
 alias fzff="fd -H --type file | fzf -m"
 alias fzfd="fd -H --type directory | fzf -m"
 alias bat="bat --pager=less"
+alias back="cd_back_parent"
+
+abbr --add -- - 'cd -'
 
 zoxide init fish | source

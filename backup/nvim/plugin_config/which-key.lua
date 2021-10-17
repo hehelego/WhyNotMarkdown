@@ -139,7 +139,12 @@ leader_keymap['<space>'] = {
       name = 'line-number',
       a = {'<CMD>set number!<CR>' ,'absolute'},
       r = {'<CMD>set relativenumber!<CR>' ,'relative'},
-    }
+    },
+    m = {
+      name = 'mouse',
+      m = {'<CMD>set mouse=a<CR>', 'on'},
+      o = {'<CMD>set mouse-=a<CR>', 'off'},
+    },
   },
   p = {
     name = 'plugins',
@@ -152,6 +157,7 @@ leader_keymap['<space>'] = {
     U     = {'<CMD>PlugUpgrade<CR>', 'vimplug-upgrade'},
     [';'] = {'<CMD>CocUpdate<CR>', 'coc-update'},
   },
+  t = {'<CMD>FzfAsyncTask<CR>' ,'asynctasks'},
   v = {
     name = 'document-preview',
 

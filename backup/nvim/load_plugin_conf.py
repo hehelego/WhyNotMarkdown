@@ -1,21 +1,29 @@
-from typing import List
+from typing import List, Any
 import vim
 import os
 import sys
 import traceback
 
-def py_log(*args,**kwargs) -> None:
-    print('[spinach plugin-config loader: INFO]', *args, **kwargs, file=sys.stdout)
-def py_err(*args,**kwargs) -> None:
-    print('[spinach plugin-config loader: ERR]', *args, **kwargs, file=sys.stderr)
 
-def load_plugin_configs(black_list: List[str]=[]) -> None:
+def notify_send(msg: Any, level: str, expire_time: int) -> None:
+    import subprocess
+    subprocess.run(['notify-send',
+                    '-u', level,
+                    '-t', str(expire_time),
+                    f'[vim: spinach] {msg}'])
+
+
+def py_log(msg): return notify_send(msg, 'low', 1000)
+def py_err(msg): return notify_send(msg, 'critical', 5000)
+
+
+def load_plugin_configs(black_list: List[str] = []) -> None:
     py_log('start loading plugin configurations')
     conf_dir = os.path.expandvars(r'$HOME/.config/nvim/plugin_config')
     loading = ''
     try:
         confs = sorted(os.listdir(conf_dir))
-        for x in filter(lambda x:x not in black_list, confs):
+        for x in filter(lambda x: x not in black_list, confs):
             loading = path = os.path.join(conf_dir, x)
             if path.endswith('.vim'):
                 vim.command(f'source {path}')

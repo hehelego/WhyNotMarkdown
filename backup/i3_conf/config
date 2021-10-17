@@ -20,7 +20,6 @@ font pango:SourceCodePro 10
 
 
 
-
 exec --no-startup-id xss-lock --transfer-sleep-lock -- $locker # lock screen before session being suspended
 exec --no-startup-id feh --bg-fill $bg_img # set background wall paper
 exec --no-startup-id picom -CGb -m 1.0 # provide a "X compositor"
@@ -209,6 +208,31 @@ mode $mode_display_output {
 }
 
 set $mode_backlight "backlight::[{0..9: light(i)}, {d: color-day}, {n: color-night}]"
+mode $mode_backlight {
+# change backlight brightness
+	bindsym grave exec --no-startup-id xbacklight -set 0
+	bindsym 1     exec --no-startup-id xbacklight -set 10
+	bindsym 2     exec --no-startup-id xbacklight -set 20
+	bindsym 3     exec --no-startup-id xbacklight -set 30
+	bindsym 4     exec --no-startup-id xbacklight -set 40
+	bindsym 5     exec --no-startup-id xbacklight -set 50
+	bindsym 6     exec --no-startup-id xbacklight -set 60
+	bindsym 7     exec --no-startup-id xbacklight -set 70
+	bindsym 8     exec --no-startup-id xbacklight -set 80
+	bindsym 9     exec --no-startup-id xbacklight -set 90
+	bindsym 0     exec --no-startup-id xbacklight -set 100
+
+# tweak color temperature
+	bindsym d     exec --no-startup-id redshift -PO 5500
+	bindsym n     exec --no-startup-id redshift -PO 3300
+
+	bindsym Return      mode $mode_default
+	bindsym Escape      mode $mode_default
+	bindsym $mod+Escape mode $mode_default
+	bindsym $mod+Return mode $mode_default
+}
+
+set $mode_playerctl "backlight::[{0..9: light(i)}, {d: color-day}, {n: color-night}]"
 mode $mode_backlight {
 # change backlight brightness
 	bindsym grave exec --no-startup-id xbacklight -set 0

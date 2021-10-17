@@ -5,7 +5,7 @@ let g:terminal_kill = 1
 
 let g:asyncrun_open = 6
 
-let g:asyncrun_exit = "silent call system('notify-send -u low -t 1000 [VIM]AsyncRun finished')"
+let g:asyncrun_exit = "silent call system('notify-send -u low -t 1000 [vim: AsyncRun] finished')"
 
   let g:asynctasks_extra_config = [
       \ '~/.config/nvim/common_tasks.ini'
