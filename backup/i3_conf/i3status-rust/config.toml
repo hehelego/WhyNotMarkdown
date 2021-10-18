@@ -17,7 +17,7 @@ interface_name_include = []
 [[block]]
 block = "custom"
 shell = "fish"
-command = ''' python ~/.config/i3status-rust/query-backlight.py '''
+command = '''~/.config/i3status-rust/query-backlight.py'''
 json = false
 interval = 5
 

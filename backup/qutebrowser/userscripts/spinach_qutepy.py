@@ -70,7 +70,7 @@ class Helper:
 
     @staticmethod
     def fzf_select(src: typing.List[T], multi: bool = False, preview: typing.Union[str, None] = bat_preview) -> typing.List[T]:
-        tmpf = tempfile.NamedTemporaryFile(prefix='/tmp/sp-qb-sel', mode='w+')
+        tmpf = tempfile.NamedTemporaryFile(prefix='/tmp/spinach_i3_sysctrl.py', mode='w+')
         srcmap = {str(i): i for i in src}
         stream = '\\n'.join(srcmap.keys())
         cmd = rf'''
