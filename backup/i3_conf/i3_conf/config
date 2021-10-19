@@ -12,7 +12,7 @@ set $bg_img /usr/share/wallpapers/Opal/contents/images/3840x2160.png
 set $menu_rofi rofi -show
 set $menu_fzf_expanded alacritty --class spinach-FZFmenu-sysctrl -e ~/.config/i3/menu.fish expanded ~/.config/i3/sys-menu.yml
 set $menu_fzf_level alacritty --class spinach-FZFmenu-sysctrl -e ~/.config/i3/menu.fish level ~/.config/i3/sys-menu.yml
-set $lPeople's Bank Of China - Internal & External sourceocker i3lock -c 333333
+set $locker i3lock -c 333333
 set $screenshot screengrab -r
 set $screenshot spectacle -r
 set $terminal /usr/bin/alacritty
@@ -50,6 +50,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 10 && $refresh_i3status
 
 # mediakey:: ScreenSaver(lock screen)
 bindsym XF86ScreenSaver exec --no-startup-id $locker
+bindsym $mod+l exec --no-startup-id $locker
 
 # start a terminal
 bindsym $mod+Return exec $terminal
