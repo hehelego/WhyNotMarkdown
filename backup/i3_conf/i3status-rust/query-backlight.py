@@ -9,7 +9,7 @@ def main():
                                  capture_output=True,
                                  timeout=3)
         data = handler.stdout.decode()
-        msg = math.floor(float(data))
+        msg = round(float(data))
         assert 0 <= msg <= 100
     except Exception as _:
         msg = 'ERR'
