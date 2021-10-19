@@ -59,6 +59,8 @@ bindsym $mod+Shift+Return exec $terminal --option background_opacity=1.0
 bindsym Print exec --no-startup-id $screenshot
 
 # start rofi (a program launcher)
+bindsym $mod+b exec --no-startup-id $menu_rofi
+# my fzf-menu for system management
 bindsym $mod+d exec --no-startup-id $menu_fzf_expanded
 bindsym $mod+shift+d exec --no-startup-id $menu_fzf_level
 for_window [instance="spinach-FZFmenu-sysctrl"] fullscreen enable

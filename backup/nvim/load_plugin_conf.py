@@ -7,7 +7,7 @@ import traceback
 
 def notify_send(msg: Any, level: str, expire_time: int) -> None:
     import subprocess
-    subprocess.run(['notify-send',
+    subprocess.Popen(['notify-send',
                     '-u', level,
                     '-t', str(expire_time),
                     f'[vim: spinach] {msg}'])
