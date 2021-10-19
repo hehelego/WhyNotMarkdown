@@ -26,7 +26,7 @@ backup ~/.ssh/config                                 ~/.workspace/git-repo/WhyNo
 backup ~/.tmux.conf                                  ~/.workspace/git-repo/WhyNotMarkdown/backup/tmux.conf
 backup ~/.config/systemd/                            ~/.workspace/git-repo/WhyNotMarkdown/backup/systemd/
 backup ~/.config/environment.d/                      ~/.workspace/git-repo/WhyNotMarkdown/backup/environment.d/
-backup ~/.config/i3/config                           ~/.workspace/git-repo/WhyNotMarkdown/backup/i3_conf/config
+backup ~/.config/i3/                                 ~/.workspace/git-repo/WhyNotMarkdown/backup/i3_conf/i3_conf/
 backup ~/.config/i3status-rust/                      ~/.workspace/git-repo/WhyNotMarkdown/backup/i3_conf/i3status-rust/
 backup ~/.config/fish/                               ~/.workspace/git-repo/WhyNotMarkdown/backup/fish/
 backup ~/.config/nvim/                               ~/.workspace/git-repo/WhyNotMarkdown/backup/nvim/
