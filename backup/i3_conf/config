@@ -177,7 +177,8 @@ bindsym $mod+r mode $mode_window_resize
 mode $mode_window_resize {
 	bindsym Left   resize shrink width 10 px or 10 ppt
 	bindsym Down   resize grow height 10 px or 10 ppt
-	bindsym Up     resize shrink height 10 px or 10 ppt bindsym Right  resize grow width 10 px or 10 ppt
+	bindsym Up     resize shrink height 10 px or 10 ppt
+	bindsym Right  resize grow width 10 px or 10 ppt
 
 	bindsym Return mode $mode_default
 	bindsym Escape mode $mode_default
