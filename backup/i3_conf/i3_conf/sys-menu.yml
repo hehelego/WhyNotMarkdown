@@ -58,7 +58,7 @@ system:
           - lock:
               desc: lock down the current session
               action: loginctl lock-session
-          - exit:
+          - logout:
               desc: terminate the current session
               action: loginctl terminate-session $XDG_SESSION_ID
           - sleep:
@@ -72,10 +72,10 @@ system:
         son:
           - internal only:
               desc: only use the eDP video output
-              action: display_default
+              action: display_internal
           - external only:
               desc: only use the external USB-C-DP video output
-              action: display_extend
+              action: display_external
           - all:
               desc: only use all the video display output
               action: display_all

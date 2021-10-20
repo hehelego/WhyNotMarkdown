@@ -24,7 +24,7 @@ font pango:SourceCodePro 10
 exec --no-startup-id xss-lock --transfer-sleep-lock -- $locker # lock screen before session being suspended
 exec --no-startup-id feh --bg-fill $bg_img # set background wall paper
 exec --no-startup-id picom -CGb -m 1.0 # provide a "X compositor"
-exec --no-startup-id fish -c display_default # set resolution,dpi,gamma
+exec --no-startup-id fish -c display_internal # set resolution,dpi,gamma
 exec --no-startup-id fish -c restart_im # input method
 exec --no-startup-id keynav # navigate mouse with keyboard
 exec --no-startup-id dunst --config ~/.config/dunst/dunstrc # notification server
@@ -190,9 +190,9 @@ mode $mode_window_resize {
 set $mode_display_output "display-output::[{1: (internal)eDP}, {2: (external)USB-C-DP}, {3: (internal+external)all}]"
 bindsym $mod+p mode $mode_display_output
 mode $mode_display_output {
-	bindsym 1 exec --no-startup-id fish -c display_default, mode $mode_default
-	bindsym 2 exec --no-startup-id fish -c display_extend,  mode $mode_default
-	bindsym 3 exec --no-startup-id fish -c display_all,     mode $mode_default
+	bindsym 1 exec --no-startup-id fish -c display_internal, mode $mode_default
+	bindsym 2 exec --no-startup-id fish -c display_external, mode $mode_default
+	bindsym 3 exec --no-startup-id fish -c display_all,      mode $mode_default
 
 	bindsym Escape      mode $mode_default
 	bindsym Return      mode $mode_default
