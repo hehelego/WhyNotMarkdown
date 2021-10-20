@@ -44,7 +44,7 @@
 
 ### CLI utilities
 
-- coreutils, rust-coreutils
+- coreutils, uutils-(the cross-platform rust rewriten version of coreutils)
 - tmux
 - git(TUI `lazygit`)
 - rsync
@@ -60,10 +60,11 @@
 - trash-cli
 - ncdu
 - lnav
-- bat
-- delta
-- exa(alternative to ls)
-- fd(alternative to find)
+- bat(alternative to coreutils/cat)
+- delta(alternative to diffutils/diff)
+- exa(alternative to coreutils/ls)
+- fd(alternative to coreutils/find)
+- procs(alternative to procps-ng/ps)
 - zoxide
 - jq,hq,yq (parse+prettyprint for json/html/xml/yaml)
 
@@ -102,6 +103,7 @@
 - screengrab,spectacle
 - simplescreenrecorder
 - screenkey
+- freerdp,xfreerdp(for connecting to a remote machine running windows)
 
 ## MISC
 
