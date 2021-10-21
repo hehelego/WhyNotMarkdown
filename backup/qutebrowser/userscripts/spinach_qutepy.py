@@ -1,11 +1,11 @@
 #!/usr/bin/python
 
 import os
-import sys
-import typing
-import pprint
-import tempfile
+from pprint import pprint
 import subprocess
+import sys
+import tempfile
+from typing import Any, List, TypeVar, Union
 
 
 class Qute:
@@ -46,9 +46,9 @@ class Qute:
 
 class Helper:
     @staticmethod
-    def log(pre: str, obj: typing.Any):
+    def log(pre: str, obj: Any):
         print(pre, end=': ', file=sys.stdout)
-        pprint.pprint(obj, stream=sys.stdout)
+        pprint(obj, stream=sys.stdout)
         print(f'{pre}: {obj}', file=sys.stderr)
 
     @staticmethod
@@ -66,28 +66,32 @@ class Helper:
                 --line-range :500 \
             ' \
     '''
-    T = typing.TypeVar('T')
+    T = TypeVar('T')
 
     @staticmethod
-    def fzf_select(src: typing.List[T], multi: bool = False, preview: typing.Union[str, None] = bat_preview) -> typing.List[T]:
-        tmpf = tempfile.NamedTemporaryFile(prefix='/tmp/spinach_i3_sysctrl.py', mode='w+')
-        srcmap = {str(i): i for i in src}
-        stream = '\\n'.join(srcmap.keys())
+    def fzf_select(src: List[T], multi: bool = False, preview: Union[str, None] = bat_preview) -> List[T]:
+        input_file = tempfile.NamedTemporaryFile(prefix='/tmp/spinach_i3_sysctrl.py', mode='w+')
+        output_file = tempfile.NamedTemporaryFile(prefix='/tmp/spinach_i3_sysctrl.py', mode='w+')
+        src_map = {str(i): i for i in src}
+        for i in src_map.keys():
+            print(i,file=input_file)
+        input_file.flush()
         cmd = rf'''
-            echo -n -e {stream} \
+            cat {input_file.name} \
             | fzf \
                 {'--multi' if multi else ''} \
                 {preview if preview else ''}\
-            > {tmpf.name}
+            > {output_file.name}
             '''
         subprocess.run(['alacritty', '-e', 'fish', '-c', cmd])
-        tmpf.seek(0)
+        output_file.seek(0)
         selected = [
-            srcmap[i]
-            for i in tmpf.read().split('\n')
-            if i in srcmap
+            src_map[i]
+            for i in output_file.read().split('\n')
+            if i in src_map
         ]
-        tmpf.close()
+        output_file.close()
+        input_file.close()
 
         Helper.log('selected:', selected)
         return selected

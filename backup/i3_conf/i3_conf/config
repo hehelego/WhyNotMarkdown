@@ -10,16 +10,14 @@
 set $mod Mod4
 set $bg_img /usr/share/wallpapers/Opal/contents/images/3840x2160.png
 set $menu_rofi rofi -show
-set $menu_fzf_expanded alacritty --class spinach-FZFmenu-sysctrl -e ~/.config/i3/menu.fish expanded ~/.config/i3/sys-menu.yml
-set $menu_fzf_level alacritty --class spinach-FZFmenu-sysctrl -e ~/.config/i3/menu.fish level ~/.config/i3/sys-menu.yml
+set $menu_fzf_expanded alacritty --class spinach-FZFmenu-sysctrl -e ~/.config/i3/menu.fish --show expanded
+set $menu_fzf_mixed alacritty --class spinach-FZFmenu-sysctrl -e ~/.config/i3/menu.fish --show mixed
 set $locker i3lock -c 333333
 set $screenshot screengrab -r
 set $screenshot spectacle -r
 set $terminal /usr/bin/alacritty
 
 font pango:SourceCodePro 10
-
-
 
 exec --no-startup-id xss-lock --transfer-sleep-lock -- $locker # lock screen before session being suspended
 exec --no-startup-id feh --bg-fill $bg_img # set background wall paper
@@ -54,7 +52,6 @@ bindsym $mod+l exec --no-startup-id $locker
 
 # start a terminal
 bindsym $mod+Return exec $terminal
-bindsym $mod+Shift+Return exec $terminal --option background_opacity=1.0
 
 # select a region and take a screenshot
 bindsym Print exec --no-startup-id $screenshot
@@ -63,7 +60,7 @@ bindsym Print exec --no-startup-id $screenshot
 bindsym $mod+b exec --no-startup-id $menu_rofi
 # my fzf-menu for system management
 bindsym $mod+d exec --no-startup-id $menu_fzf_expanded
-bindsym $mod+shift+d exec --no-startup-id $menu_fzf_level
+bindsym $mod+shift+d exec --no-startup-id $menu_fzf_mixed
 for_window [instance="spinach-FZFmenu-sysctrl"] fullscreen enable
 
 # restart the fcitx5 input method

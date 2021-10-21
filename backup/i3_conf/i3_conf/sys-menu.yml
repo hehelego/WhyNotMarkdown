@@ -67,6 +67,15 @@ system:
           - hibernate:
               desc: sleep, to disk
               action: systemctl hibernate
+    - i3:
+        desc: managing i3wm session
+        son:
+          - reload:
+              desc: reload i3 configuration
+              action: i3-msg reload
+          - restart:
+              desc: restart i3wm
+              action: i3-msg restart
     - display output:
         desc: select video display output device
         son:
@@ -145,6 +154,51 @@ system:
           - controller:
               desc: pause audio volume GUI controller
               action: pavucontrol
-    - rofi:
+    - dunst:
+        desc: control the notification daemon
+        son:
+          - clear:
+              desc: close all notification
+              action: dunstctl close-all
+          - disable:
+              desc: stop notifying
+              action: dunstctl set-paused true
+          - enable:
+              desc: start notifying
+              action: dunstctl set-paused false
+          - toggle:
+              desc: toggle status
+              action: dunstctl set-paused toggle
+    - misc:
+        desc: uncategorized misc shortcuts
+        son:
+          - restart fcitx:
+              desc: restart the fcitx5 input method
+              action: restart_im
+          - emoji selector:
+              desc: spawn the KDE emoji selector
+              action: ibus-ui-emojier-plasma
+    - rofi menu:
         desc: run rofi menu
         action: rofi -show
+    - apps:
+        desc: frequently used applications
+        son:
+          - alacritty:
+              desc: terminal emulator
+              action: alacritty
+          - ranger:
+              desc: ranger TUI file manager
+              action: alacritty -e fish -c ranger
+          - broot:
+              desc: broot TUI file manager
+              action: alacritty -e fish -c br
+          - dolphin:
+              desc: dolphin GUI file manager from KDE project
+              action: dolphin
+          - qutebrowser:
+              desc: a keyboard-based vim-flavor highly-customizable browser built on QtWebEngine(chromium)
+              action: qutebrowser
+          - qutebrowser-private:
+              desc: private mode for qutebrowser
+              action: qb_private
