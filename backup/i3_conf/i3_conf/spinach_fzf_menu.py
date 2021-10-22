@@ -8,10 +8,13 @@ import tempfile
 from typing import Any, Callable, Dict, IO, List, TypeVar, Union
 
 
+class Config:
+    log_file = '/tmp/spinach_fzfmenu.py.log'
+
 class Helper:
     @staticmethod
     def log(pre: str, msg: Any) -> None:
-        with open('/tmp/spinach_fzfmenu.py.log', 'a') as f:
+        with open(Config.log_file, 'a') as f:
             print(pre, file=f, end=':')
             pprint(msg, stream=f)
             print('', file=f)
@@ -158,6 +161,9 @@ class EntryPath:
 
     def pop_head(self) -> EntryPath:
         return EntryPath.from_list(self.path[1:])
+
+    def as_list(self) -> List[str]:
+        return self.path[:]
 
     def _find(self, cur: MenuEntry, p: int) -> Union[None, MenuEntry]:
         if p >= len(self.path) or self.path[p] != cur.key:
@@ -328,8 +334,8 @@ class MixedMode(Navigator):
         return groups+actions
 
     def full_path(self, choice: str) -> EntryPath:
-        path = choice[choice.index('\t')+1:]
-        return self.path.join(EntryPath.from_rawpath(path))
+        path = EntryPath.from_rawpath(choice[choice.index('\t')+1:])
+        return self.path.join(path.pop_head())
 
     def select(self, choice: str) -> MenuEntry:
         path = EntryPath.from_rawpath(choice[choice.index('\t')+1:])
@@ -370,19 +376,25 @@ def main_preview(finder: Navigator, preview_callback: Callable[[EntryPath, MenuE
     path = EntryPath.from_rawpath(Helper.readfile(pathfile))
     Helper.info('before re-root', path)
     finder.re_root(path)
+    path = finder.full_path(choice)
     entry = finder.select(choice)
     print(preview_callback(path, entry), end='')
 
 
-def main(argv: List[str], load: Callable[[], MenuEntry], preview: Callable[[EntryPath, MenuEntry], str]):
+def main(argv: List[str], load: Callable[[], MenuEntry], preview: Callable[[EntryPath, MenuEntry], str], log_file: str):
     '''
+    - argv:
+        arguments passed to fzf-menu
     - load:
         input: nothing
         output: root entry of a menu
     - preview:
         input: the path to the hover entry and the entry itself
         output: preview text
+    - log_file:
+        path to store the logs
     '''
+    Config.log_file = log_file
     ap = argparse.ArgumentParser()
     ap.add_argument('--mode',
                     type=str,

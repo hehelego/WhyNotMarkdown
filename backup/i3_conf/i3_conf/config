@@ -10,8 +10,8 @@
 set $mod Mod4
 set $bg_img /usr/share/wallpapers/Opal/contents/images/3840x2160.png
 set $menu_rofi rofi -show
-set $menu_fzf_expanded alacritty --class spinach-FZFmenu-sysctrl -e ~/.config/i3/menu.fish --show expanded
-set $menu_fzf_mixed alacritty --class spinach-FZFmenu-sysctrl -e ~/.config/i3/menu.fish --show mixed
+set $menu_fzf_mixed    alacritty --class spinach-FZFmenu --title sys-control-fzfmenu-mixed    -e ~/.config/i3/menu-sys.fish --show mixed
+set $menu_fzf_expanded alacritty --class spinach-FZFmenu --title sys-control-fzfmenu-expanded -e ~/.config/i3/menu-sys.fish --show expanded
 set $locker i3lock -c 333333
 set $screenshot screengrab -r
 set $screenshot spectacle -r
@@ -61,7 +61,7 @@ bindsym $mod+b exec --no-startup-id $menu_rofi
 # my fzf-menu for system management
 bindsym $mod+d exec --no-startup-id $menu_fzf_expanded
 bindsym $mod+shift+d exec --no-startup-id $menu_fzf_mixed
-for_window [instance="spinach-FZFmenu-sysctrl"] fullscreen enable
+for_window [instance="spinach-FZFmenu"] fullscreen enable
 
 # restart the fcitx5 input method
 bindsym $mod+shift+i exec --no-startup-id fish -c restart_im

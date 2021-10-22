@@ -9,7 +9,7 @@ from spinach_fzf_menu import EntryPath, Helper, MenuEntry, MenuParser, main
 
 if __name__ == '__main__':
     def load():
-        menu_file = os.path.expanduser('~/.config/i3/sys-menu.yml')
+        menu_file = os.path.expanduser('~/.config/i3/sysmenu.yml')
         doc = yaml.safe_load(Helper.readfile(menu_file))
         root = MenuParser.from_object(doc)
         return root
@@ -28,4 +28,4 @@ if __name__ == '__main__':
         ])
         return res
 
-    main(sys.argv, load, preview)
+    main(sys.argv, load, preview, '/tmp/spinach_sysmenu.log')

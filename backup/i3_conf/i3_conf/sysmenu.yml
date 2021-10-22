@@ -88,27 +88,9 @@ system:
           - all:
               desc: only use all the video display output
               action: display_all
-    - media play:
+    - playerctl:
         desc: media play control
-        son:
-          - toggle:
-              desc: play or pause
-              action: playerctl play-pause
-          - play:
-              desc: continue playing
-              action: playerctl play
-          - pause:
-              desc: temporarily stop playing
-              action: playerctl pause
-          - stop:
-              desc: stop playing
-              action: playerctl stop
-          - next:
-              desc: next file
-              action: playerctl next
-          - previous:
-              desc: previous file
-              action: playerctl previous
+        action: $HOME/.config/i3/menu-playerctl.fish
     - volume:
         desc: pause audio volume control using pactl
         son:
