@@ -47,6 +47,7 @@
 - coreutils, uutils-(the cross-platform rust rewriten version of coreutils)
 - tmux
 - git(TUI `lazygit`)
+- GnuPG
 - rsync
 - fzf,rg,ag(fuzzy file finder, rip grep, the silver searcher)
 - top,htop,bashtop
@@ -54,9 +55,8 @@
 - man pages(`man-db,man-pages`)
 - `tldr` (see [github:tldr-pages](https://github.com/tldr-pages/tldr) and [tldr.sh](https://tldr.sh))
 - pandoc
-- GnuPG
 - openSSL
-- age
+- age (see [github:age](https://github.com/FiloSottile/age))
 - trash-cli
 - ncdu
 - lnav
@@ -65,7 +65,8 @@
 - exa(alternative to coreutils/ls)
 - fd(alternative to coreutils/find)
 - procs(alternative to procps-ng/ps)
-- zoxide
+- zoxide(see [github:zoxide](https://github.com/ajeetdsouza/zoxide))
+- starship(see [starship.rs](https://starship.rs/) and [github:starship](https://github.com/starship/starship))
 - jq,hq,yq (parse+prettyprint for json/html/xml/yaml)
 
 ### working
