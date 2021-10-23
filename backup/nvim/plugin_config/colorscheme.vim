@@ -1,5 +1,4 @@
-
-let s:cs='gruvbox'
+let s:cs='onedark'
 
 " see https://github.com/morhetz/gruvbox
 if s:cs=='gruvbox'

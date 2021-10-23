@@ -26,39 +26,50 @@ add_newline = false
 
 [time]
 disabled = false
-format = "TIME=[$time]($style) "
+format = "[TIME=](dimmed)[$time]($style) "
 time_format = "%Y-%m-%d@%H:%M:%S"
+style = "bold purple"
 [cmd_duration]
 disabled = false
 min_time = 1
-format = "LAST_DUR=[$duration]($style) "
+format = "[LAST_DUR=](dimmed)[$duration]($style) "
+style = "bold purple"
+[jobs]
+symbol_threshold = 1
+number_threshold = 1
+format = "[JOBS=](dimmed)[$number]($style) "
+style = "bold purple"
+[shlvl]
+disabled = false
+threshold = 0
+format = "[SHLVL=](dimmed)[$shlvl]($style) "
+style = "bold purple"
 
 [status]
 disabled = false
 pipestatus = true
 map_symbol = false
 recognize_signal_code = true
-format = "[\\[$symbol$signal_name$status\\]]($style)"
-pipestatus_format = "$pipestatus ↦ [\\[$symbol$signal_name$status\\]]($style)"
+format = "[\\[$signal_name$symbol$status\\]]($style)"
+pipestatus_format = "$pipestatus ↦ [\\[$signal_name$symbol$status\\]]($style)"
 pipestatus_separator = "|"
 style = "blue"
 symbol = "[𐄂](bold red)"
-signal_symbol = "[𐄂](bold yello)"
+signal_symbol = "[𐄂](bold yellow)"
 success_symbol = "[🗸](bold green)"
 
-[shlvl]
-disabled = false
-format = "[SHLVL=$shlvl]($style) "
-style = "dimmed"
-threshold = 0
+
 [hostname]
 disabled = false
 ssh_only = false
 format = "[$hostname]($style)"
+style = "bold dimmed #00b33c"
 [username]
-format = "[$user]($style)"
 disabled = false
 show_always = true
+format = "[$user]($style)"
+style_root = "bold red"
+style_user = "bold yellow"
 [directory]
 truncate_to_repo = false
 [character]

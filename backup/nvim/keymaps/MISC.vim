@@ -2,19 +2,6 @@
 "      keymapping       "
 """""""""""""""""""""""""
 
-""""""""""""""""""
-" SECITON: buffer
-""""""""""""""""""
-
-nnoremap <silent> <leader>bt :<C-u>Filetypes<CR>
-xnoremap <silent> <leader>bt :<C-u>Filetypes<CR>
-nnoremap <silent> <leader>bw :<C-u>write<CR>
-xnoremap <silent> <leader>bw :<C-u>write<CR>
-nnoremap <silent> <leader>be :edit<CR>
-xnoremap <silent> <leader>be :edit<CR>
-nnoremap <silent> <leader>bf :BLines<CR>
-xnoremap <silent> <leader>bf :BLines<CR>
-
 """""""""""""""""
 " SECITON: MISC
 """""""""""""""""
@@ -31,6 +18,60 @@ xnoremap <silent> <leader>r :edit<CR>
 inoremap <silent><expr> <C-l> execute('nohlsearch')
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR>
 xnoremap <silent> <C-l> :<C-u>nohlsearch<CR>
+
+"""""""""""""""""
+" SECITON: editor UI
+"""""""""""""""""
+
+function! ToggleMouse()
+  if matchstr(&mouse,"a")=="a"
+    set mouse-=a
+  else
+    set mouse=a
+  endif
+endfunction
+function! ToggleTransparentBg()
+  if !exists("g:transparent_bg_state")
+    let g:transparent_bg_state = 0
+  endif
+
+  if g:transparent_bg_state==0
+    let g:transparent_bg_state = 1
+    highlight Normal guibg=NONE ctermbg=NONE
+  else
+    let g:transparent_bg_state = 0
+    execute(":colorscheme " . g:colors_name)
+  endif
+endfunction
+nnoremap <silent> <leader>em :<C-u>call ToggleMouse()<CR>
+xnoremap <silent> <leader>em :<C-u>call ToggleMouse()<CR>
+nnoremap <silent> <leader>el :<C-u>set cursorline!<CR>
+xnoremap <silent> <leader>el :<C-u>set cursorline!<CR>
+nnoremap <silent> <leader>ec :<C-u>set cursorcolumn!<CR>
+xnoremap <silent> <leader>ec :<C-u>set cursorcolumn!<CR>
+nnoremap <silent> <leader>ea :<C-u>set number!<CR>
+xnoremap <silent> <leader>ea :<C-u>set number!<CR>
+nnoremap <silent> <leader>er :<C-u>set relativenumber!<CR>
+xnoremap <silent> <leader>er :<C-u>set relativenumber!<CR>
+nnoremap <leader>et :<C-u>call ToggleTransparentBg()<CR>
+xnoremap <leader>et :<C-u>call ToggleTransparentBg()<CR>
+nnoremap <silent> <leader>es :<C-u>Colors<CR>
+xnoremap <silent> <leader>es :<C-u>Colors<CR>
+
+
+""""""""""""""""""
+" SECITON: buffer
+""""""""""""""""""
+
+nnoremap <silent> <leader>bt :<C-u>Filetypes<CR>
+xnoremap <silent> <leader>bt :<C-u>Filetypes<CR>
+nnoremap <silent> <leader>bw :<C-u>write<CR>
+xnoremap <silent> <leader>bw :<C-u>write<CR>
+nnoremap <silent> <leader>be :edit<CR>
+xnoremap <silent> <leader>be :edit<CR>
+nnoremap <silent> <leader>bf :BLines<CR>
+xnoremap <silent> <leader>bf :BLines<CR>
+
 
 """"""""""""""""""""""""""""""""""
 " SECITON: windows/tabs/buffers

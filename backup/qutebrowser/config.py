@@ -108,6 +108,10 @@ config.bind('<Space>ec', 'edit-command', mode='normal')
 # edit text-field in external editor
 config.bind('<Alt-e>', 'edit-text', mode='insert')
 
+# play video in MPV
+config.bind('<Space>m', 'hint links spawn mpv {hint-url}', mode='normal')
+
+
 # keepassxc integration
 config.bind('<Alt-u>', 'spawn --userscript qute-keepassxc --key qutebrowser-keepassxc-connection-233', mode='insert')
 config.bind('<Space>pw', 'spawn --userscript qute-keepassxc --key qutebrowser-keepassxc-connection-233', mode='normal')

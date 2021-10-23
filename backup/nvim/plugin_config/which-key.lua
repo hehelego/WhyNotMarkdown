@@ -90,12 +90,23 @@ local buffer_keymap = {
   e = 'cur-edit',
   f = 'cur-find',
 }
+local editorui_keymap = {
+  name = 'editor-ui',
+  m = 'mouse',
+  l = 'cursor-line',
+  c = 'cursor-column',
+  a = 'lineno-absolute',
+  r = 'lineno-relative',
+  t = 'transparent-background',
+  s = 'select-colorscheme',
+}
 local leader_keymap = {
   name = '<leader>',
 
   b = buffer_keymap,
   c = comment_keymap,
-  r = 'reload-current-file',
+  e = editorui_keymap,
+  r = 'reload-cur_buf',
   f = fzf_keymap,
   g = git_keymap,
   p = path_keymap,
@@ -113,11 +124,6 @@ leader_keymap['<space>'] = {
     s = {'<CMD>History/<CR>', 'search'},
     c = {'<CMD>History:<CR>', 'command'},
   },
-  c = {
-    name = 'colorscheme',
-    t = {'<CMD>highlight Normal guibg=NONE ctermbg=NONE<CR>', 'transparent-background'},
-    c = {'<CMD>Colors<CR>', 'select-color-theme'},
-  },
   f = {
     name = 'fzf-ui',
     c = {'<CMD>Commands<CR>', 'commands'},
@@ -127,24 +133,6 @@ leader_keymap['<space>'] = {
     k = {'<CMD>Maps<CR>', 'keymaps'},
     h = {'<CMD>Helptags<CR>', 'help'},
     t = {'<CMD>FzfAsyncTask<CR>' ,'tasks'},
-  },
-  e = {
-    name = 'editor',
-    c = {
-      name = 'cursor',
-      r = {'<CMD>set cursorline!<CR>', 'cursor-line'},
-      c = {'<CMD>set cursorcolumn!<CR>', 'cursor-column'},
-    },
-    n = {
-      name = 'line-number',
-      a = {'<CMD>set number!<CR>' ,'absolute'},
-      r = {'<CMD>set relativenumber!<CR>' ,'relative'},
-    },
-    m = {
-      name = 'mouse',
-      m = {'<CMD>set mouse=a<CR>', 'on'},
-      o = {'<CMD>set mouse-=a<CR>', 'off'},
-    },
   },
   p = {
     name = 'plugins',
