@@ -1,5 +1,5 @@
 [Unit]
-Description=v2raya
+Description=v2raya: the v2ray client
 
 [Service]
 ExecStart=/usr/bin/v2raya --lite

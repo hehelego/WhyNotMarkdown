@@ -29,6 +29,7 @@ backup ~/.config/environment.d/                      ~/.workspace/git-repo/WhyNo
 backup ~/.config/i3/                                 ~/.workspace/git-repo/WhyNotMarkdown/backup/i3_conf/i3_conf/
 backup ~/.config/i3status-rust/                      ~/.workspace/git-repo/WhyNotMarkdown/backup/i3_conf/i3status-rust/
 backup ~/.config/fish/                               ~/.workspace/git-repo/WhyNotMarkdown/backup/fish/
+backup ~/.config/starship/                           ~/.workspace/git-repo/WhyNotMarkdown/backup/starship/
 backup ~/.config/nvim/                               ~/.workspace/git-repo/WhyNotMarkdown/backup/nvim/
 backup ~/.config/alacritty/                          ~/.workspace/git-repo/WhyNotMarkdown/backup/alacritty/
 backup ~/.config/dunst/                              ~/.workspace/git-repo/WhyNotMarkdown/backup/i3_conf/dunst/

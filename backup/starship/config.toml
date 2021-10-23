@@ -1,0 +1,69 @@
+format = """
+$directory\
+$vcsh\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$hg_branch\
+$package\
+$nix_shell\
+$memory_usage\
+$env_var\
+$custom\
+$shlvl\
+$time\
+$cmd_duration\
+$jobs\
+$battery\
+$line_break\
+$username@$hostname \
+$status\
+$character\
+"""
+add_newline = false
+
+[time]
+disabled = false
+format = "TIME=[$time]($style) "
+time_format = "%Y-%m-%d@%H:%M:%S"
+[cmd_duration]
+disabled = false
+min_time = 1
+format = "LAST_DUR=[$duration]($style) "
+
+[status]
+disabled = false
+pipestatus = true
+map_symbol = false
+recognize_signal_code = true
+format = "[\\[$symbol$signal_name$status\\]]($style)"
+pipestatus_format = "$pipestatus ↦ [\\[$symbol$signal_name$status\\]]($style)"
+pipestatus_separator = "|"
+style = "blue"
+symbol = "[𐄂](bold red)"
+signal_symbol = "[𐄂](bold yello)"
+success_symbol = "[🗸](bold green)"
+
+[shlvl]
+disabled = false
+format = "[SHLVL=$shlvl]($style) "
+style = "dimmed"
+threshold = 0
+[hostname]
+disabled = false
+ssh_only = false
+format = "[$hostname]($style)"
+[username]
+format = "[$user]($style)"
+disabled = false
+show_always = true
+[directory]
+truncate_to_repo = false
+[character]
+success_symbol = "[>](bold green)"
+error_symbol = "[>](bold red)"
+signal_symbol = "[x](#ffff00)"
+vicmd_symbol = "[<](bold green)"
+

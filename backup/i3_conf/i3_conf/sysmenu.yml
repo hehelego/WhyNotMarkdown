@@ -160,6 +160,9 @@ system:
           - emoji selector:
               desc: spawn the KDE emoji selector
               action: ibus-ui-emojier-plasma
+    - sysz:
+        desc: systemd-systemctl wrapper
+        action: alacritty -e sysz
     - rofi menu:
         desc: run rofi menu
         action: rofi -show
