@@ -9,14 +9,20 @@ from typing import Any, Callable, Dict, IO, List, TypeVar, Union
 
 
 class Config:
-    log_file = '/tmp/spinach_fzfmenu.py.log'
+    logfile_path = '/tmp/spinach_fzfmenu.py.log'
 
 class Helper:
     @staticmethod
+    def log_file() -> IO[str]:
+        return open(Config.logfile_path,'a')
+    @staticmethod
     def log(pre: str, msg: Any) -> None:
-        with open(Config.log_file, 'a') as f:
-            print(pre, file=f, end=':')
-            pprint(msg, stream=f)
+        with Helper.log_file() as f:
+            print(pre, file=f, end=':\n')
+            if type(msg)==str:
+                print(msg,file=f)
+            else:
+                pprint(msg, stream=f)
             print('', file=f)
 
     @staticmethod
@@ -394,7 +400,7 @@ def main(argv: List[str], load: Callable[[], MenuEntry], preview: Callable[[Entr
     - log_file:
         path to store the logs
     '''
-    Config.log_file = log_file
+    Config.logfile_path = log_file
     ap = argparse.ArgumentParser()
     ap.add_argument('--mode',
                     type=str,
