@@ -1,26 +1,24 @@
 format = """
 $directory\
-$vcsh\
 $git_branch\
 $git_commit\
 $git_state\
 $git_metrics\
 $git_status\
 $hg_branch\
-$package\
-$nix_shell\
-$memory_usage\
-$env_var\
-$custom\
+$fill\
+$vcsh\
 $shlvl\
 $time\
 $cmd_duration\
 $jobs\
-$battery\
 $line_break\
+$custom\
 $username@$hostname \
 $status\
 $character\
+"""
+right_format = """
 """
 add_newline = false
 
@@ -77,4 +75,7 @@ success_symbol = "[>](bold green)"
 error_symbol = "[>](bold red)"
 signal_symbol = "[x](#ffff00)"
 vicmd_symbol = "[<](bold green)"
+
+[fill]
+symbol = " "
 
