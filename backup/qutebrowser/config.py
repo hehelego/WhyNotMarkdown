@@ -12,7 +12,7 @@ config.set('colors.webpage.preferred_color_scheme', 'dark')
 config.set('content.autoplay', False)
 config.set('content.javascript.can_access_clipboard', True)
 config.set('content.pdfjs', True)
-config.set('content.proxy', 'socks://127.0.0.1:1089')
+config.set('content.proxy', 'http://127.0.0.1:8889')
 config.set('fonts.default_family', 'monospace')
 config.set('scrolling.smooth', True)
 config.set('qt.highdpi', True)
@@ -99,7 +99,7 @@ config.bind('<Ctrl-Shift-p>', 'print', mode='normal')
 
 # toggle proxy
 config.bind(
-    '<Space>tp', 'config-cycle -tp content.proxy socks://127.0.0.1:1089 none')
+    '<Space>tp', 'config-cycle -tp content.proxy http://127.0.0.1:8889 none')
 
 # edit url in external editor
 config.bind('<Space>eu', 'edit-url', mode='normal')
