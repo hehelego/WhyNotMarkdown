@@ -8,6 +8,12 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
+set $left h
+set $down j
+set $up k
+set $right l
+
+
 set $bg_img /usr/share/wallpapers/Opal/contents/images/3840x2160.png
 set $menu_rofi rofi -show
 set $menu_fzf_mixed    alacritty --class spinach-FZFmenu --title sys-control-fzfmenu-mixed    -e ~/.config/i3/menu-sys.fish --show mixed
@@ -48,7 +54,6 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 10 && $refresh_i3status
 
 # mediakey:: ScreenSaver(lock screen)
 bindsym XF86ScreenSaver exec --no-startup-id $locker
-bindsym $mod+l exec --no-startup-id $locker
 
 # start a terminal
 bindsym $mod+Return exec $terminal
@@ -82,7 +87,8 @@ bindsym $mod+i exec --no-startup-id ibus-ui-emojier-plasma
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-
+# exit
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'exit i3wm session' -B 'confirm' 'i3-msg exit'"
 
 
 # kill focused window
@@ -96,12 +102,20 @@ bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
 
 # move the focused container
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -113,10 +127,8 @@ bindsym $mod+e layout toggle split
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
-# split in horizontal orientation
-bindsym $mod+h split h
-# split in vertical orientation
-bindsym $mod+v split v
+# toggle container split orientation
+bindsym $mod+v split toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -168,6 +180,9 @@ bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
 
+# scratchpad
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
 
 
 set $mode_default "default"
@@ -197,6 +212,7 @@ mode $mode_display_output {
 	bindsym $mod+Escape mode $mode_default
 	bindsym $mod+Return mode $mode_default
 }
+
 
 
 # status bar (i3status-rs)
