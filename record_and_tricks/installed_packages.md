@@ -65,6 +65,7 @@
 - exa(alternative to coreutils/ls)
 - fd(alternative to coreutils/find)
 - procs(alternative to procps-ng/ps)
+- duf(alternative to df and du)
 - zoxide(see [github:zoxide](https://github.com/ajeetdsouza/zoxide))
 - starship(see [starship.rs](https://starship.rs/) and [github:starship](https://github.com/starship/starship))
 - jq,hq,yq (parse+prettyprint for json/html/xml/yaml)

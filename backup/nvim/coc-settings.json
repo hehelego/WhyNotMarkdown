@@ -1,25 +1,6 @@
 {
 	"rust-analyzer.updates.prompt": false,
 	"rust-analyzer.server.path": "/usr/bin/rust-analyzer",
-	// "languageserver": {
-	//   "haskell": {
-	//     "command": "haskell-language-server-wrapper",
-	//     "args": [
-	//       "--lsp"
-	//     ],
-	//     "rootPatterns": [
-	//       "*.cabal",
-	//       "stack.yaml",
-	//       "cabal.project",
-	//       "package.yaml",
-	//       "hie.yaml"
-	//     ],
-	//     "filetypes": [
-	//       "haskell",
-	//       "lhaskell"
-	//     ]
-	//   }
-	// },
 	"explorer.icon.enableNerdfont": true,
 	"texlab.chktex.onOpenAndSave": true,
 	"markdownlint.config": {

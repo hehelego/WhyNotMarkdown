@@ -8,7 +8,7 @@ alias tree_ex="exa --long --all -T"
 alias fzff="fd -H --type file | fzf -m"
 alias fzfd="fd -H --type directory | fzf -m"
 alias bat="bat --pager=less"
-alias cat="bat"
+alias cat="bat --plain"
 alias back="cd_back_parent"
 
 abbr --add -- - "cd -"
