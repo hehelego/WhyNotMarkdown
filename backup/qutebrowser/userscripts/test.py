@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from spinach_qute_userscript_base import Qute, Helper
+from spinach_qutepy import Qute, Helper
 
 if __name__ == '__main__':
     qute = Qute()

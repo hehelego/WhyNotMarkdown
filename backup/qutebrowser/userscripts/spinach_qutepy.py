@@ -14,14 +14,16 @@ class Qute:
                     if k.startswith('QUTE')}
         self.mode = self.get_env('mode')
         self.user_agent = self.get_env('user_agent')
-        self.fifo = open(self.get_env('fifo'), 'w')
+        self.fifo = open(self._ge('fifo'), 'w')
         self.url = self.get_env('url')
         self.title = self.get_env('title')
-        self.config_dir = self.get_env('config_dir')
-        self.data_dir = self.get_env('data_dir')
-        self.download_dir = self.get_env('download_dir')
+        self.config_dir = self._ge('config_dir')
+        self.data_dir = self._ge('data_dir')
+        self.download_dir = self._ge('download_dir')
 
-    def get_env(self, name: str) -> str:
+    def get_env(self, name: str) -> Union[str, None]:
+        return self.env.get(f'QUTE_{name.upper()}')
+    def _ge(self, name: str) -> str:
         return self.env[f'QUTE_{name.upper()}']
 
     def __del__(self) -> None:
@@ -51,6 +53,13 @@ class Helper:
         pprint(obj, stream=sys.stdout)
         print(f'{pre}: {obj}', file=sys.stderr)
 
+    T_not_none = TypeVar('T_not_none')
+
+    @staticmethod
+    def not_none(x: Union[T_not_none, None]) -> T_not_none:
+        assert(x is not None)
+        return x
+
     @staticmethod
     def readfile(path: str) -> str:
         content = None
@@ -66,15 +75,17 @@ class Helper:
                 --line-range :500 \
             ' \
     '''
-    T = TypeVar('T')
+    T_fzf_select = TypeVar('T_fzf_select')
 
     @staticmethod
-    def fzf_select(src: List[T], multi: bool = False, preview: Union[str, None] = bat_preview) -> List[T]:
-        input_file = tempfile.NamedTemporaryFile(prefix='/tmp/spinach_i3_sysctrl.py', mode='w+')
-        output_file = tempfile.NamedTemporaryFile(prefix='/tmp/spinach_i3_sysctrl.py', mode='w+')
+    def fzf_select(src: List[T_fzf_select], multi: bool = False, preview: Union[str, None] = bat_preview) -> List[T_fzf_select]:
+        input_file = tempfile.NamedTemporaryFile(
+            prefix='/tmp/spinach_i3_sysctrl.py', mode='w+')
+        output_file = tempfile.NamedTemporaryFile(
+            prefix='/tmp/spinach_i3_sysctrl.py', mode='w+')
         src_map = {str(i): i for i in src}
         for i in src_map.keys():
-            print(i,file=input_file)
+            print(i, file=input_file)
         input_file.flush()
         cmd = rf'''
             cat {input_file.name} \
