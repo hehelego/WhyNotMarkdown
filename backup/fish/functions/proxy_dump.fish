@@ -1,9 +1,13 @@
 function proxy_dump
-        echo "all_proxy   = $all_proxy"
-        echo "http_proxy  = $http_proxy"
-        echo "https_proxy = $https_proxy"
-        echo "ftp_proxy   = $ftp_proxy"
-        echo "rsync_proxy = $rsync_proxy"
-        echo "no_proxy    = $no_proxy"
+        set vars "all_proxy" "http_proxy" "https_proxy" "ftp_proxy" "rsync_proxy" "no_proxy"
+
+        for v in $vars
+                if set -q $v
+                        set -S $v
+                else
+                        echo -e "\$$v \tis not set"
+                end
+                echo ""
+        end
 end
 

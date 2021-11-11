@@ -186,15 +186,17 @@ set/unset proxy environment variables in fish shell, and share them between sess
 - fish shell official tutorial
 - fish shell official documentation
 
-1. `set --show VARIABLE_NAME`; `-x` for export; '-e' to erase; `-l,-g,-U;--local,--global,--universal` to specify scope;
-2. universal: sort of permanent for the current user; shared between all the fish-shell sessions and preserved even after reboot.
-3. global: can shadow universal ones; not visible between sessions or after reboot;
+1. `set --show VARIABLE_NAME`; `-x` for export; '-e' to erase; `-l,-g,-U; --local,--global,--universal` to specify scope;
+2. universal: sort of permanent for the current user; shared between all the fish-shell-sessions; preserved even after reboot.
+3. global: can shadow universal ones; not shared between fish-sessions; not preserved after reboot;
 4. local: can shadow global ones;
-5. `set -e VAR` will delete the variable in the nearest scope where `VAR` is set.
+5. `set -e VAR` delete the variable in the nearest scope where `VAR` is set.
+6. `set -s VAR` show where is `VAR` defined and the value of it.
+7. `set -q VAR` determine whether `VAR` is set.
 
 **note**: fish will automatically load functions in `~/.config/fish/functions/`  
 
-**fish shell have special ways to deal with PATH**, try `set --help` for more information.
+**fish shell have special ways to deal with PATH**, try `set --help` or `man fish set` for more information.
 
 ### 解决方案
 
@@ -229,9 +231,6 @@ function proxy_dump
   echo "no_proxy    = $no_proxy"
 end
 ```
-
-As mentioned in the 5th tip, `set -e` can erase the variable in local/global/universal.  
-So we might have to run `proxy_off` for a few times to thoroughly remove proxy environment.
 
 ## keyboard shortcuts: terminal emulator, fish shell
 
