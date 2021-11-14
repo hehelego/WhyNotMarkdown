@@ -1,13 +1,14 @@
 #!/usr/bin/python
 
-from spinach_qutepy import Qute, Helper
-
-import subprocess
+import argparse
 import os
+import subprocess
 import sys
 import typing
+
 import yaml
-import argparse
+
+from spinach_qutepy import Fzf, Helper, Qute
 
 
 class Bookmark:
@@ -94,13 +95,13 @@ def filter_by_tags_every(bookmark_file_paths: typing.List[str], tags: typing.Lis
 
 
 def select_tags(all_tags: typing.List[str]) -> typing.List[str]:
-    selected = Helper.fzf_select(all_tags, multi=True, preview=None)
+    selected = Fzf.fzf_select(all_tags, multi=True, preview=None, prompt='bookmark tag> ')
     Helper.log('selected-tags', selected)
     return selected
 
 
 def select_bookmark(bookmark_file_paths: typing.List[str]) -> typing.Union[Bookmark, None]:
-    selected = Helper.fzf_select(bookmark_file_paths)
+    selected = Fzf.fzf_select(bookmark_file_paths, prompt='bookmark> ')
     Helper.log('selected-bookmark-file', selected)
     bmfile = selected[0] if len(selected) > 0 else ''
     if os.path.isfile(bmfile):

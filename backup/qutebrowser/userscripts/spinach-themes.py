@@ -4,7 +4,7 @@
 # see https://gitlab.com/dwt1/dotfiles/-/blob/master/.config/qutebrowser/config.py
 # see qute://help/settings.html#content.user_stylesheets
 
-from spinach_qutepy import Qute, Helper
+from spinach_qutepy import Fzf, Qute, Helper
 
 import subprocess
 import os
@@ -37,7 +37,7 @@ if __name__ == '__main__':
     themes_dir = os.path.join(qute.config_dir, 'userstyles')
     os.chdir(themes_dir)
     themes = get_themes_all(themes_dir)
-    selected = Helper.fzf_select(themes)
+    selected = Fzf.fzf_select(themes, prompt='theme> ')
     if len(selected) > 0:
         qute.exec(f':set -tp content.user_stylesheets {os.path.join(themes_dir, selected[0])}')
     else:

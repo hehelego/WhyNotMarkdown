@@ -11,16 +11,18 @@ from typing import Any, Callable, Dict, IO, List, TypeVar, Union
 class Config:
     logfile_path = '/tmp/spinach_fzfmenu.py.log'
 
+
 class Helper:
     @staticmethod
     def log_file() -> IO[str]:
-        return open(Config.logfile_path,'a')
+        return open(Config.logfile_path, 'a')
+
     @staticmethod
     def log(pre: str, msg: Any) -> None:
         with Helper.log_file() as f:
             print(pre, file=f, end=':\n')
-            if type(msg)==str:
-                print(msg,file=f)
+            if type(msg) == str:
+                print(msg, file=f)
             else:
                 pprint(msg, stream=f)
             print('', file=f)
@@ -40,10 +42,14 @@ class Helper:
         with open(path) as f:
             return f.read()
 
+    @staticmethod
+    def shell_run(cmd: str) -> None:
+        subprocess.run(['fish', '-c', cmd])
+
     T = TypeVar('T')
 
     @staticmethod
-    def fzf_select(src: List[T], multi: bool = True, preview_cmd: Union[None, str] = None) -> List[T]:
+    def fzf_select(src: List[T], multi: Union[None, bool] = True, preview_cmd: Union[None, str] = None, prompt: Union[None, str] = '> ') -> List[T]:
         input_file = tempfile.NamedTemporaryFile(
             prefix='/tmp/spinach_i3_sysctrl.py', mode='w+')
         output_file = tempfile.NamedTemporaryFile(
@@ -53,11 +59,16 @@ class Helper:
             print(i, file=input_file)
         input_file.flush()
         input_file.seek(0)
+
         fzf_cmd = ['fzf']
         if multi:
             fzf_cmd.append('--multi')
         if preview_cmd:
             fzf_cmd.extend(['--preview', preview_cmd])
+        if prompt:
+            fzf_cmd.extend(['--prompt', prompt])
+
+        Helper.log('command', fzf_cmd)
         subprocess.run(
             fzf_cmd, stdin=input_file, stdout=output_file)
         output_file.seek(0)
@@ -71,10 +82,6 @@ class Helper:
 
         Helper.log('selected', selected)
         return selected
-
-    @staticmethod
-    def shell_run(cmd: str) -> None:
-        subprocess.run(['fish', '-c', cmd])
 
 
 class Action:
@@ -351,7 +358,7 @@ class MixedMode(Navigator):
         return self.cur
 
 
-def main_select(finder: Navigator, shell_cmd_self: str) -> None:
+def main_select(finder: Navigator, shell_cmd_self: str, prompt: Union[None, str]) -> None:
     def _update_path(file: IO[str], path: EntryPath) -> None:
         file.seek(0)
         file.truncate(0)
@@ -365,7 +372,7 @@ def main_select(finder: Navigator, shell_cmd_self: str) -> None:
     while True:
         _update_path(tmpf.file, finder.get_cur_path())
         choices = finder.choices()
-        selected = Helper.fzf_select(choices, False, preview_cmd)
+        selected = Helper.fzf_select(choices, False, preview_cmd, prompt)
         if len(selected) > 0:
             path = selected[0]
             entry = finder.select(path)
@@ -387,7 +394,7 @@ def main_preview(finder: Navigator, preview_callback: Callable[[EntryPath, MenuE
     print(preview_callback(path, entry), end='')
 
 
-def main(argv: List[str], load: Callable[[], MenuEntry], preview: Callable[[EntryPath, MenuEntry], str], log_file: str):
+def main(argv: List[str], load: Callable[[], MenuEntry], preview: Callable[[EntryPath, MenuEntry], str], log_file: str, prompt: str = '> '):
     '''
     - argv:
         arguments passed to fzf-menu
@@ -400,6 +407,7 @@ def main(argv: List[str], load: Callable[[], MenuEntry], preview: Callable[[Entr
     - log_file:
         path to store the logs
     '''
+
     Config.logfile_path = log_file
     ap = argparse.ArgumentParser()
     ap.add_argument('--mode',
@@ -438,4 +446,4 @@ def main(argv: List[str], load: Callable[[], MenuEntry], preview: Callable[[Entr
     if mode == 'preview':
         main_preview(finder, preview, pathfile,  choice)
     else:
-        main_select(finder, 'python '+' '.join(argv))
+        main_select(finder, 'python '+' '.join(argv), prompt)

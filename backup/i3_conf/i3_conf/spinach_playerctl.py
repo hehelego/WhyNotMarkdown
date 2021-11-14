@@ -98,6 +98,8 @@ def preview(path: EntryPath, entry: MenuEntry) -> str:
 
 if __name__ == '__main__':
     try:
-        main(sys.argv, load, preview, '/tmp/spinach_playerctl.log')
+        main(sys.argv, load, preview, 
+             log_file='/tmp/spinach_playerctl.log',
+             prompt='playerctl> ')
     except:
         Helper.err('exception', traceback.format_exc())

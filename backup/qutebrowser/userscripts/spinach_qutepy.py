@@ -23,6 +23,7 @@ class Qute:
 
     def get_env(self, name: str) -> Union[str, None]:
         return self.env.get(f'QUTE_{name.upper()}')
+
     def _ge(self, name: str) -> str:
         return self.env[f'QUTE_{name.upper()}']
 
@@ -67,7 +68,12 @@ class Helper:
             content = f.read()
         return content
 
-    bat_preview = r'''--preview \
+
+class Fzf:
+    T_fzf_select = TypeVar('T_fzf_select')
+    default_multi = False
+    default_prompt = '> '
+    default_preview = r'''--preview \
             'bat {} \
                 --language css \
                 --color always \
@@ -75,10 +81,9 @@ class Helper:
                 --line-range :500 \
             ' \
     '''
-    T_fzf_select = TypeVar('T_fzf_select')
 
     @staticmethod
-    def fzf_select(src: List[T_fzf_select], multi: bool = False, preview: Union[str, None] = bat_preview) -> List[T_fzf_select]:
+    def fzf_select(src: List[T_fzf_select], multi: bool = default_multi, preview: Union[str, None] = default_preview, prompt: str = default_prompt) -> List[T_fzf_select]:
         input_file = tempfile.NamedTemporaryFile(
             prefix='/tmp/spinach_i3_sysctrl.py', mode='w+')
         output_file = tempfile.NamedTemporaryFile(
@@ -91,7 +96,8 @@ class Helper:
             cat {input_file.name} \
             | fzf \
                 {'--multi' if multi else ''} \
-                {preview if preview else ''}\
+                {preview if preview else ''} \
+                --prompt "{prompt}" \
             > {output_file.name}
             '''
         subprocess.run(['alacritty', '-e', 'fish', '-c', cmd])
