@@ -97,6 +97,9 @@ bindsym $mod+Shift+q kill
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+# focus parent, child
+bindsym $mod+a focus parent
+bindsym $mod+Shift+a focus child
 # focus another container
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
