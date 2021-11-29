@@ -1,7 +1,7 @@
 configuration {
   modi: [combi, drun, window, emoji, keys];
-  combi-modi: [window, drun];
-  theme: "fancy";
   font: "SourceCodePro 14";
   show-icons: true;
+  combi-modi: [window, drun];
 }
+@theme "fancy"
