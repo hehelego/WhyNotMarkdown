@@ -5,7 +5,7 @@ from datetime import datetime
 from pprint import pprint
 import subprocess
 import tempfile
-from typing import Any, Callable, Dict, IO, List, TypeVar, Union
+from typing import Any, Callable, IO, TypeVar, Optional
 
 
 class Config:
@@ -49,7 +49,7 @@ class Helper:
     T = TypeVar('T')
 
     @staticmethod
-    def fzf_select(src: List[T], multi: Union[None, bool] = True, preview_cmd: Union[None, str] = None, prompt: Union[None, str] = '> ') -> List[T]:
+    def fzf_select(src: list[T], multi: Optional[bool] = True, preview_cmd: Optional[str] = None, prompt: Optional[str] = '> ') -> list[T]:
         input_file = tempfile.NamedTemporaryFile(
             prefix='/tmp/spinach_i3_sysctrl.py', mode='w+')
         output_file = tempfile.NamedTemporaryFile(
@@ -110,7 +110,7 @@ class MenuEntry:
     def is_leaf(self) -> bool:
         return False
 
-    def get_son(self) -> List[MenuEntry]:
+    def get_son(self) -> list[MenuEntry]:
         return []
 
     def get_action(self) -> Action:
@@ -133,7 +133,7 @@ class MenuEntry:
 
 
 class EntryPath:
-    def __init__(self, path: List[str]) -> None:
+    def __init__(self, path: list[str]) -> None:
         self.path = path
 
     def __str__(self) -> str:
@@ -159,7 +159,7 @@ class EntryPath:
         return EntryPath(raw_path.split('/'))
 
     @staticmethod
-    def from_list(keys: List[str]) -> EntryPath:
+    def from_list(keys: list[str]) -> EntryPath:
         return EntryPath(keys)
 
     @staticmethod
@@ -175,10 +175,10 @@ class EntryPath:
     def pop_head(self) -> EntryPath:
         return EntryPath.from_list(self.path[1:])
 
-    def as_list(self) -> List[str]:
+    def as_list(self) -> list[str]:
         return self.path[:]
 
-    def _find(self, cur: MenuEntry, p: int) -> Union[None, MenuEntry]:
+    def _find(self, cur: MenuEntry, p: int) -> Optional[MenuEntry]:
         if p >= len(self.path) or self.path[p] != cur.key:
             return None
         p += 1
@@ -190,13 +190,13 @@ class EntryPath:
                 return res
         return None
 
-    def find(self, menu: MenuEntry) -> Union[None, MenuEntry]:
+    def find(self, menu: MenuEntry) -> Optional[MenuEntry]:
         return self._find(menu, 0)
 
 
 class MenuParser:
     @staticmethod
-    def from_object(doc: Dict[str, Any]) -> MenuEntry:
+    def from_object(doc: dict[str, Any]) -> MenuEntry:
         keys = list(doc.keys())
         assert(len(keys) == 1)
         key = keys[0]
@@ -226,14 +226,14 @@ class EntryLeaf(MenuEntry):
 
 
 class EntryInner(MenuEntry):
-    def __init__(self, key: str, desc: str, son: List[MenuEntry]) -> None:
+    def __init__(self, key: str, desc: str, son: list[MenuEntry]) -> None:
         super().__init__(key, desc)
         self.son = son
 
     def is_inner(self) -> bool:
         return True
 
-    def get_son(self) -> List[MenuEntry]:
+    def get_son(self) -> list[MenuEntry]:
         return self.son
 
 
@@ -255,7 +255,7 @@ class Navigator(ABC):
         return
 
     @abstractmethod
-    def choices(self) -> List[str]:
+    def choices(self) -> list[str]:
         return
 
     @abstractmethod
@@ -279,7 +279,7 @@ class ExpandedMode(Navigator):
     def get_cur_path(self) -> EntryPath:
         return EntryPath.empty_path()
 
-    def choices(self) -> List[str]:
+    def choices(self) -> list[str]:
         return [str(i) for i in self.subs.keys()]
 
     def full_path(self, choice: str) -> EntryPath:
@@ -306,7 +306,7 @@ class LevelMode(Navigator):
     def get_cur_path(self) -> EntryPath:
         return self.path
 
-    def choices(self) -> List[str]:
+    def choices(self) -> list[str]:
         return [str(i) for i in self.subs.keys()]
 
     def full_path(self, choice: str) -> EntryPath:
@@ -339,7 +339,7 @@ class MixedMode(Navigator):
     def get_cur_path(self) -> EntryPath:
         return self.path
 
-    def choices(self) -> List[str]:
+    def choices(self) -> list[str]:
         groups = [f'GROUP\t{k}' for (
             k, v) in self.subs.items() if v.is_inner()]
         actions = [f'ACTION\t{k}' for (
@@ -358,7 +358,7 @@ class MixedMode(Navigator):
         return self.cur
 
 
-def main_select(finder: Navigator, shell_cmd_self: str, prompt: Union[None, str]) -> None:
+def main_select(finder: Navigator, shell_cmd_self: str, prompt: Optional[str]) -> None:
     def _update_path(file: IO[str], path: EntryPath) -> None:
         file.seek(0)
         file.truncate(0)
@@ -394,7 +394,7 @@ def main_preview(finder: Navigator, preview_callback: Callable[[EntryPath, MenuE
     print(preview_callback(path, entry), end='')
 
 
-def main(argv: List[str], load: Callable[[], MenuEntry], preview: Callable[[EntryPath, MenuEntry], str], log_file: str, prompt: str = '> '):
+def main(argv: list[str], load: Callable[[], MenuEntry], preview: Callable[[EntryPath, MenuEntry], str], log_file: str, prompt: str = '> '):
     '''
     - argv:
         arguments passed to fzf-menu

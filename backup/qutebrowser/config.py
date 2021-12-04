@@ -130,30 +130,14 @@ config.bind('<Space>z', 'config-cycle -tp statusbar.show never always ;; config-
 # run the developing userscript
 config.bind('<Space>T', 'spawn --userscript test.py', mode='normal')
 
-# spinach's bookmarks selector: open bookmark
-# [o, t, w] for open in current-tab, new-tab, new-window
-# [a, e] for match-any-selected-tag, match-all-selected-tag
-config.bind(
-    '<Space>boo', 'spawn --userscript spinach-bookmarks.py', mode='normal')
-config.bind('<Space>boa',
-            'spawn --userscript spinach-bookmarks.py --tags-match-any', mode='normal')
-config.bind('<Space>boe',
-            'spawn --userscript spinach-bookmarks.py --tags-match-every', mode='normal')
-config.bind(
-    '<Space>btt', 'spawn --userscript spinach-bookmarks.py --tab', mode='normal')
-config.bind('<Space>bta',
-            'spawn --userscript spinach-bookmarks.py --tab --tags-match-any', mode='normal')
-config.bind('<Space>bte',
-            'spawn --userscript spinach-bookmarks.py --tab --tags-match-every', mode='normal')
-config.bind('<Space>bww',
-            'spawn --userscript spinach-bookmarks.py --window', mode='normal')
-config.bind('<Space>bwa',
-            'spawn --userscript spinach-bookmarks.py --window --tags-match-any', mode='normal')
-config.bind('<Space>bwe',
-            'spawn --userscript spinach-bookmarks.py --window --tags-match-every', mode='normal')
+# spinach's bookmarks selector: open bookmark, with full feature
+config.bind('<Space>b', 'spawn --userscript spinach-bookmarks.py --full', mode='normal')
 # override the default key bindings
 config.bind('b', 'spawn --userscript spinach-bookmarks.py', mode='normal')
-config.bind('B', 'spawn --userscript spinach-bookmarks.py --tab', mode='normal')
+config.bind('B', 'spawn --userscript spinach-bookmarks.py  --tab', mode='normal')
+# additional key bindings
+config.bind('bt', 'spawn --userscript spinach-bookmarks.py --tab', mode='normal')
+config.bind('bw', 'spawn --userscript spinach-bookmarks.py --win', mode='normal')
 
 # spinach's theme selector: switch user stylesheets
 config.bind('<Space>s', 'spawn --userscript spinach-themes.py', mode='normal')

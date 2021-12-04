@@ -2,19 +2,19 @@
 import subprocess
 import sys
 import traceback
-from typing import Union, Callable, Dict, List
+from typing import Callable, Union
 
 from spinach_fzf_menu import EntryPath, Helper, MenuEntry, MenuParser, main
 
 
-PlayerList = List[str]
-ActionEntry = Dict[str, Dict[str, str]]
-ActionList = List[ActionEntry]
-EntryGenerator = Callable[[PlayerList], Dict[str, Union[str, ActionList]]]
+PlayerList = list[str]
+ActionEntry = dict[str, dict[str, str]]
+ActionList = list[ActionEntry]
+EntryGenerator = Callable[[PlayerList], dict[str, Union[str, ActionList]]]
 
 
 def create_eg(desc: str, cmd: str) -> EntryGenerator:
-    def wrapper(players: PlayerList) -> Dict[str, Union[str, ActionList]]:
+    def wrapper(players: PlayerList) -> dict[str, Union[str, ActionList]]:
         return {
             'desc': desc,
             'son': [
@@ -33,7 +33,7 @@ def load():
     if players[0] == 'No players found':
         players = []
 
-    entry_gens: Dict[str, EntryGenerator] = {
+    entry_gens: dict[str, EntryGenerator] = {
         'status': create_eg('show the status', 'status'),
         'metadata': create_eg('show the metadata', 'metadata'),
         'play': create_eg('continue playing', 'play'),

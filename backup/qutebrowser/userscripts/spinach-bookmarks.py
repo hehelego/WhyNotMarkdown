@@ -4,7 +4,7 @@ import argparse
 import os
 import subprocess
 import sys
-import typing
+from typing import Optional
 
 import yaml
 
@@ -19,7 +19,7 @@ class Bookmark:
         - tags
     '''
 
-    def __init__(self, url: str, name: str, tags: typing.List[str]) -> None:
+    def __init__(self, url: str, name: str, tags: list[str]) -> None:
         self.url = url
         self.name = name
         self.tags = tags
@@ -32,9 +32,9 @@ class Bookmark:
     def load(raw: str):
         obj = yaml.safe_load(raw)
         url, name, tags = obj['url'], obj['name'], obj['tags']
-        assert(type(url)==str)
-        assert(type(name)==str)
-        assert(type(tags)==list)
+        assert(type(url) == str)
+        assert(type(name) == str)
+        assert(type(tags) == list)
         return Bookmark(url, name, tags)
 
     def dump(self) -> str:
@@ -46,20 +46,14 @@ class Bookmark:
     def __repr__(self) -> str:
         return str(self)
 
-    def match_any(self, tags: typing.List[str]) -> bool:
-        for t in tags:
-            if t in self.tags:
-                return True
-        return False
-
-    def match_every(self, tags: typing.List[str]) -> bool:
+    def match(self, tags: list[str]) -> bool:
         for t in tags:
             if t not in self.tags:
                 return False
         return True
 
 
-def get_bookmarks_paths_all(bookmarks_directory: str) -> typing.List[str]:
+def get_bookmarks_paths_all(bookmarks_directory: str) -> list[str]:
     os.chdir(bookmarks_directory)
     return [
         path
@@ -69,7 +63,7 @@ def get_bookmarks_paths_all(bookmarks_directory: str) -> typing.List[str]:
     ]
 
 
-def get_tags_all(bookmarks_directory: str) -> typing.List[str]:
+def get_tags_all(bookmarks_directory: str) -> list[str]:
     return list({
         j
         for i
@@ -78,29 +72,36 @@ def get_tags_all(bookmarks_directory: str) -> typing.List[str]:
     })
 
 
-def filter_by_tags_any(bookmark_file_paths: typing.List[str], tags: typing.List[str]) -> typing.List[str]:
+def filter_bookmarks_by_tag(bookmark_file_paths: list[str], tags: list[str]) -> list[str]:
     return [
         i
         for i in bookmark_file_paths
-        if Bookmark.load(Helper.readfile(i)).match_any(tags)
+        if Bookmark.load(Helper.readfile(i)).match(tags)
     ]
 
 
-def filter_by_tags_every(bookmark_file_paths: typing.List[str], tags: typing.List[str]) -> typing.List[str]:
-    return [
-        i
-        for i in bookmark_file_paths
-        if Bookmark.load(Helper.readfile(i)).match_every(tags)
+def select_mode() -> tuple[bool, bool]:
+    all_modes = [
+        'new window',
+        'new tab',
+        'inplace'
     ]
+    selected = Fzf.fzf_select(all_modes, multi=False,
+                              preview=None, prompt='mode> ')
+    Helper.log('selected-mode', selected)
+    nw = True if 'new window' in selected else False
+    nt = True if 'new tab' in selected else False
+    return (nt, nw)
 
 
-def select_tags(all_tags: typing.List[str]) -> typing.List[str]:
-    selected = Fzf.fzf_select(all_tags, multi=True, preview=None, prompt='bookmark tag> ')
+def select_tags(all_tags: list[str]) -> list[str]:
+    selected = Fzf.fzf_select(all_tags, multi=True,
+                              preview=None, prompt='tag> ')
     Helper.log('selected-tags', selected)
     return selected
 
 
-def select_bookmark(bookmark_file_paths: typing.List[str]) -> typing.Union[Bookmark, None]:
+def select_bookmark(bookmark_file_paths: list[str]) -> Optional[Bookmark]:
     selected = Fzf.fzf_select(bookmark_file_paths, prompt='bookmark> ')
     Helper.log('selected-bookmark-file', selected)
     bmfile = selected[0] if len(selected) > 0 else ''
@@ -112,14 +113,10 @@ def select_bookmark(bookmark_file_paths: typing.List[str]) -> typing.Union[Bookm
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(
-        description='spinach bookmarks manager for qutebrowser')
+    parser = argparse.ArgumentParser()
     parser.add_argument('--tab', action='store_true', dest='tab')
-    parser.add_argument('--window', action='store_true', dest='win')
-    parser.add_argument('--tags-match-any',
-                        action='store_true', dest='tag_any')
-    parser.add_argument('--tags-match-every',
-                        action='store_true', dest='tag_every')
+    parser.add_argument('--win', action='store_true', dest='win')
+    parser.add_argument('--full', action='store_true', dest='full')
 
     args = parser.parse_args(sys.argv[1:])
     qute = Qute()
@@ -133,10 +130,14 @@ if __name__ == '__main__':
     Helper.log('bookmarks', bms)
     Helper.log('tags', tags)
 
-    if args.tag_any:
-        bms = filter_by_tags_any(bms, select_tags(tags))
-    if args.tag_every:
-        bms = filter_by_tags_every(bms, select_tags(tags))
-    bm = select_bookmark(bms)
-    if bm is not None:
-        qute.open_url(bm.url, new_window=args.win, new_tab=args.tab)
+    if args.full:
+        tags = select_tags(tags)
+        bm = select_bookmark(filter_bookmarks_by_tag(bms, tags))
+        if bm is not None:
+            nt, nw = select_mode()
+            Helper.log('mode', f'tab={nt} win={nw}')
+            qute.open_url(bm.url, new_window=nw, new_tab=nt)
+    else:
+        bm = select_bookmark(bms)
+        if bm is not None:
+            qute.open_url(bm.url, new_window=args.win, new_tab=args.tab)

@@ -5,7 +5,7 @@ from pprint import pprint
 import subprocess
 import sys
 import tempfile
-from typing import Any, List, TypeVar, Union
+from typing import Any, TypeVar, Optional
 
 
 class Qute:
@@ -21,7 +21,7 @@ class Qute:
         self.data_dir = self._ge('data_dir')
         self.download_dir = self._ge('download_dir')
 
-    def get_env(self, name: str) -> Union[str, None]:
+    def get_env(self, name: str) -> Optional[str]:
         return self.env.get(f'QUTE_{name.upper()}')
 
     def _ge(self, name: str) -> str:
@@ -37,8 +37,6 @@ class Qute:
         return True
 
     def open_url(self, url: str, new_window: bool = False, new_tab: bool = False) -> bool:
-        if url is None:
-            return False
         option = ''
         if new_window:
             option += '-w'
@@ -57,7 +55,7 @@ class Helper:
     T_not_none = TypeVar('T_not_none')
 
     @staticmethod
-    def not_none(x: Union[T_not_none, None]) -> T_not_none:
+    def not_none(x: Optional[T_not_none]) -> T_not_none:
         assert(x is not None)
         return x
 
@@ -83,7 +81,7 @@ class Fzf:
     '''
 
     @staticmethod
-    def fzf_select(src: List[T_fzf_select], multi: bool = default_multi, preview: Union[str, None] = default_preview, prompt: str = default_prompt) -> List[T_fzf_select]:
+    def fzf_select(src: list[T_fzf_select], multi: bool = default_multi, preview: Optional[str] = default_preview, prompt: str = default_prompt) -> list[T_fzf_select]:
         input_file = tempfile.NamedTemporaryFile(
             prefix='/tmp/spinach_i3_sysctrl.py', mode='w+')
         output_file = tempfile.NamedTemporaryFile(

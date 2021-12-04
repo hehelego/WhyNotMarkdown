@@ -8,10 +8,9 @@ from spinach_qutepy import Fzf, Qute, Helper
 
 import subprocess
 import os
-import typing
 
 
-def get_themes(themes_dir: str, search: str) -> typing.List[str]:
+def get_themes(themes_dir: str, search: str) -> list[str]:
     os.chdir(themes_dir)
     themes = [
         path
@@ -23,11 +22,11 @@ def get_themes(themes_dir: str, search: str) -> typing.List[str]:
     return themes
 
 
-def get_themes_all(themes_dir: str) -> typing.List[str]:
+def get_themes_all(themes_dir: str) -> list[str]:
     return get_themes(themes_dir, 'all-sites')
 
 
-def get_themes_full(themes_dir: str) -> typing.List[str]:
+def get_themes_full(themes_dir: str) -> list[str]:
     return get_themes(themes_dir, '')
 
 
