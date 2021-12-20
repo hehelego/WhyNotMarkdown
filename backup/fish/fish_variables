@@ -2,7 +2,6 @@
 # VERSION: 3.0
 SETUVAR --export EDITOR:nvim
 SETUVAR --export FZF_DEFAULT_COMMAND:fd\x20\x2dH\x20\x2d\x2dtype\x20file
-SETUVAR --export PAGER:vimpager
 SETUVAR --export TERM:xterm\x2dcolor
 SETUVAR --export VISUAL:nvim
 SETUVAR __fish_initialized:3100
