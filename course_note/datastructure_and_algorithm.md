@@ -44,17 +44,17 @@ Therefore, the expected number of comparisions is
 
 $$
 \begin{aligned}
-\mathrm{E}\left(\text{comparison}\right)
-&=\mathrm{E}\left(
+\mathbb{E}\left(\text{comparison}\right)
+&=\mathbb{E}\left(
 \sum_{i=1}^n\sum_{j=i+1}^n
 \text{compared}(i,j)
 \right)\\
 &=\sum_{i=1}^n\sum_{j=i+1}^n
-\mathrm{E}\left(
+\mathbb{E}\left(
 \text{compared}(i,j)
 \right)\\
 &=\sum_{i=1}^n\sum_{j=i+1}^n
-\mathrm{P}\left(
+\Pr\left(
 \text{compared}(i,j)
 \right)\\
 &=\sum_{i=1}^n\sum_{j=i+1}^n
@@ -63,11 +63,10 @@ $$
 \end{aligned}
 $$
 
-## alternative solution
-
+### alternative solution
 
 $$
-\mathrm{E}\left[C(n)\right]=(n-1)+\frac{1}{n}\sum_{i=0}^{n-1} \mathrm{E}\left[C(i)+C(n-1-i)\right]
+\mathbb{E}\left[C(n)\right]=(n-1)+\frac{1}{n}\sum_{i=0}^{n-1} \mathbb{E}\left[C(i)+C(n-1-i)\right]
 $$
 
 and initial condition $T(1)=1,T(0)=0$
@@ -93,3 +92,37 @@ C_n
 &\approx 2n\ln n
 \end{aligned}
 $$
+
+## Trick: Converting paths in directed graph to paths in undirected graph
+
+Given a directed graph $G=(V,E)$, where $E\subseteq \{(u,v)\mid u,v\in V\}$.  
+We can construct a undirected graph $G'=(V',E')$ where:
+
+$$
+\begin{aligned}
+V'&= \{ v_{in}\mid v\in V\} \cup \{ v_{out} \mid v\in V\}\\
+E'&= \{ \{u_{out},v_{in}\} \mid (u,v)\in E\}
+\end{aligned}
+$$
+
+Then
+
+- Every path $u\to v$ in $G$ corresponds to a path $u_{out}\to v_{in}$ in $G'$.  
+- Every path $u_{out}\to v_{in}$ in $G'$ corresponds to a path $u\to v$ in $G$.  
+
+Another way:
+
+$$
+\begin{aligned}
+V^\ast&= \{v_0 \mid v\in V\}\cup \{ v_{in}\mid v\in V\} \cup \{ v_{out} \mid v\in V\}\\
+E^\ast&= \{ \{u_{out},v_{in}\} \mid (u,v)\in E\} \cup \{\{v_{in},v_0\} \mid v\in V\} \cup \{\{v_0,v_{out}\} \mid v\in V\}
+\end{aligned}
+$$
+
+### reduction examples
+
+#### 3-SAT to IS
+
+#### 3-SAT to Ham-CYC
+
+#### 3-SAT to 3-COLOR
