@@ -90,7 +90,7 @@ system:
               action: display_all
     - playerctl:
         desc: media play control
-        action: $HOME/.config/i3/menu-playerctl.fish
+        action: alacritty --class spinach-FZFmenu -t playerctl-menu:expanded -e $HOME/.config/i3/menu-playerctl.fish --show expanded
     - volume:
         desc: pause audio volume control using pactl
         son:

@@ -76,6 +76,8 @@ config.unbind('<Ctrl-e>', mode='insert')
 
 
 # tab-manipulation
+config.bind('gt', 'tab-next', mode='normal')
+config.bind('gT', 'tab-prev', mode='normal')
 config.bind('<Alt-j>', 'tab-next', mode='normal')
 config.bind('<Alt-k>', 'tab-prev', mode='normal')
 config.bind('<Alt-Shift-k>', 'tab-move -', mode='normal')
