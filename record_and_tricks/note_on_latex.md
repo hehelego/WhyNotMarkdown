@@ -48,6 +48,12 @@ Some random text in the page
 Text that will now be at the bottom of the page
 ```
 
+### minted: remember to specify the output directory
+
+```latex
+\usepackage[outputdir=tex-output, cachedir=tex-output]{minted}
+```
+
 ### breaking changes / deprecated commands
 
 - logic operators in math mode: `\land,\lor,\lnot`, instead of `\and \or \not`.
