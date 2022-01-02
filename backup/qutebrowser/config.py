@@ -101,7 +101,7 @@ config.bind('<Ctrl-Shift-p>', 'print', mode='normal')
 
 # toggle proxy
 config.bind(
-    '<Space>tp', 'config-cycle -tp content.proxy http://127.0.0.1:8889 none')
+    '<Space>tp', 'config-cycle -tp content.proxy http://127.0.0.1:8889 socks5://127.0.0.1:1089 none')
 
 # edit url in external editor
 config.bind('<Space>eu', 'edit-url', mode='normal')

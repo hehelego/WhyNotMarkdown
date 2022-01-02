@@ -16,7 +16,7 @@ abbr --add -- - "cd -"
 
 
 # SECTION: zoxide
-#
+set -gx _ZO_FZF_OPTS ''
 zoxide init fish | source
 
 
