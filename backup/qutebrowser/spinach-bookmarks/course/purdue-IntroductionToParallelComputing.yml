@@ -1,7 +1,8 @@
-name: MIT the missing semester of your CS education
+name: Purdue Introduction to parallel computing
 tags:
-  - MIT
   - CS
+  - parallel computing
+  - HPC
   - course
 url:
-  https://missing.csail.mit.edu/
+  https://www.cs.purdue.edu/homes/ayg/book/Slides/
