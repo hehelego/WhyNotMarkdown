@@ -1,7 +1,5 @@
 name: windy
 tags:
   - weather
-  - windy
-  - rainy
 url:
   https://www.windy.com/

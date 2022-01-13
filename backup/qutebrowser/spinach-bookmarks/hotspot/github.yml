@@ -1,6 +1,4 @@
 name: github
-tags:
-  - git
-  - github
+tags: []
 url:
   https://www.github.com

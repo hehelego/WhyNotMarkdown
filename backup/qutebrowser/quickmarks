@@ -41,7 +41,6 @@ Cambridge Dictionary https://dictionary.cambridge.org/
 小站备考 http://top.zhan.com/
 Firefox Monitor https://monitor.firefox.com/
 have i been pwned https://haveibeenpwned.com/
-密码学硬核笔记——扩展维纳攻击_Gm1y's Blog-CSDN博客 https://blog.csdn.net/jcbx_/article/details/109306542
 Pentagonal number theorem - Wikipedia https://en.wikipedia.org/wiki/Pentagonal_number_theorem
 Partial fraction decomposition - Wikipedia https://en.wikipedia.org/wiki/Partial_fraction_decomposition
 Finite Calculus: A Tutorial https://www.cs.purdue.edu/homes/dgleich/publications/Gleich%202005%20-%20finite%20calculus.pdf
@@ -81,19 +80,7 @@ UCSB CS170 lecture note on operating system OS https://sites.cs.ucsb.edu/~rich/c
 CIS 194 intro to haskell https://www.seas.upenn.edu/~cis194/spring13/
 piazza https://piazza.com/
 Gradescope https://www.gradescope.com/
-上海科技大学 https://www.shanghaitech.edu.cn/
-张江理工 egate http://egate.shanghaitech.edu.cn/new/index.html
-张江理工 eams 教务系统 https://eams.shanghaitech.edu.cn/eams/home.action
-张江理工 BB https://elearning.shanghaitech.edu.cn:8443/
-张江理工 library 图书馆 https://library.shanghaitech.edu.cn/
-EF solo https://corporate.ef.com.cn/campus/mypage/home
-Jiumo Search 鸠摩文档搜索 https://www.jiumodiary.com/
-iTechX gitee https://itechx.gitee.io/dashboard.html
-iTechX github https://i-techx.github.io/dashboard
-张江理工CS本科生培养方案 http://faculty.sist.shanghaitech.edu.cn/office/Academics/Undergraduate/Degree%20Programmes/2020%20Bachelor%20Degree%20Programs%20in%20CS.html
 大学英语六级真题 | 英语真题在线 https://zhenti.burningvocabulary.com/cet6
-yangyw / ChocoPy · GitLab http://s3l.shanghaitech.edu.cn:8081/yangyw/chocopy
-网友的nas http://nas4.sjtu.moe:10000/
 CCF https://www.ccf.org.cn/
 ACM https://www.acm.org/
 IEEE https://www.ieee.org/
@@ -119,6 +106,7 @@ Codeforces https://codeforces.com/
 hdu oj http://acm.hdu.edu.cn/
 Virtual Judge(vjudge) https://vjudge.net/
 nowcoder(打比赛进acm.nowcoder.com) https://www.nowcoder.com/
+密码学硬核笔记——扩展维纳攻击_Gm1y's Blog-CSDN博客 https://blog.csdn.net/jcbx_/article/details/109306542
 fjzzq blog https://www.cnblogs.com/zzqsblog/
 xehoth  blog https://blog.xehoth.cc/
 _rqy's Blog https://rqy.moe/
@@ -127,11 +115,12 @@ yyb blog https://www.cnblogs.com/cjyyb
 ycb blog https://www.cnblogs.com/GuessYCB
 flash hu https://www.cnblogs.com/flashhu
 Sengxian's Blog https://blog.sengxian.com/
+jdhao-blog https://jdhao.github.io/
 Qizy's Sites(yzq) https://qizy.tech/
 czyhe的gitpages https://kingsann.github.io/
 riteme.site https://riteme.site/
 memset0's Notebook https://memset0.cn/
-Mr_Spade - 博客园 https://www.cnblogs.com/Mr-Spade
+Mr_Spade's blog https://www.cnblogs.com/Mr-Spade
 Magolor's Blog https://magolor.cn/
 EtaoinWu https://etaoinwu.com/
 OIerDB https://bytew.net/OIer/
@@ -178,23 +167,30 @@ Overleaf latex doc https://www.overleaf.com/learn
  lshort intro to latex https://www.ctan.org/tex-archive/info/lshort/
 Octave doc https://octave.org/doc/v5.2.0/
 MATLAB Documentation https://www.mathworks.com/help/matlab/
-sympy docs https://docs.sympy.org/latest/index.html
 sagemath doc https://doc.sagemath.org/html/en/
-sagemath doc zh-cn https://www.osgeo.cn/sagemath/index.html
 Vim scripting cheatsheet https://devhints.io/vimscript
 neovim doc https://neovim.io/doc/user/
 coc.nvim https://github.com/neoclide/coc.nvim
 cppreference https://en.cppreference.com/w/
 python doc https://docs.python.org/3/
-rust ref https://doc.rust-lang.org/reference/index.html
+rustref https://doc.rust-lang.org/reference/index.html
 rustbook https://doc.rust-lang.org/book/
 golang document https://golang.org/doc/
 HaskellWiki https://wiki.haskell.org/Haskell
-haskell documentation https://www.haskell.org/documentation/
 Regex Crossword https://regexcrossword.com/
 Tìngäzìk: (Probably Not) the World’s Kindest Online Puzzle Game https://tingazik.1a23.studio/
 编程作业作业收集 https://csprojectedu.com/
-shanghaitech-mail https://mail.shanghaitech.edu.cn
 CS364A-algorithmic-game-theory http://timroughgarden.org/f13/f13.html
-jdhao-blog https://jdhao.github.io/
+Jiumo Search 鸠摩文档搜索 https://www.jiumodiary.com/
 google scholar https://scholar.google.com/
+shanghaitech-mail https://mail.shanghaitech.edu.cn
+shanghaitech-ca2021 https://robotics.shanghaitech.edu.cn/courses/ca/21s/
+上海科技大学 https://www.shanghaitech.edu.cn/
+张江理工-egate http://egate.shanghaitech.edu.cn/new/index.html
+张江理工-eams教务系统 https://eams.shanghaitech.edu.cn/eams/home.action
+张江理工-BB https://elearning.shanghaitech.edu.cn:8443/
+张江理工-library图书馆 https://library.shanghaitech.edu.cn/
+EF solo https://corporate.ef.com.cn/campus/mypage/home
+iTechX gitee https://itechx.gitee.io/dashboard.html
+iTechX github https://i-techx.github.io/dashboard
+berkeley cs61c https://inst.eecs.berkeley.edu/~cs61c/sp21/

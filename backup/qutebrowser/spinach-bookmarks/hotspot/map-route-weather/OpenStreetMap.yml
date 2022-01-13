@@ -1,6 +1,5 @@
-name: OpenStreetMap
+name: Open Street Map
 tags:
-  - OSM
-  - open street map
+  - map
 url:
   https://www.openstreetmap.org/

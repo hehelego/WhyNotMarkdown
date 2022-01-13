@@ -1,9 +1,7 @@
 name: OEIS
 tags:
   - math
-  - OI
-  - CP
-  - competitive programming
   - wiki
+  - tool
 url:
   https://oeis.org/

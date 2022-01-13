@@ -9,13 +9,12 @@ alias fzff="fd -H --type file | fzf -m"
 alias fzfd="fd -H --type directory | fzf -m"
 alias bat="bat --pager=less"
 alias cat="bat --plain"
-alias back="cd_back_parent"
-
-abbr --add -- - "cd -"
+alias codepy="code --enable-proposed-api ms-toolsai.jupyter ."
 
 
 
 # SECTION: zoxide
+#
 set -gx _ZO_FZF_OPTS ''
 zoxide init fish | source
 
@@ -27,6 +26,7 @@ set -gx FZF_DEFAULT_COMMAND "fd -H --type file"
 
 
 # SECTION: starship
+#
 if not test "$TERM" = "linux"
     set -gx STARSHIP_CONFIG ~/.config/starship/config.toml
     starship init fish | source

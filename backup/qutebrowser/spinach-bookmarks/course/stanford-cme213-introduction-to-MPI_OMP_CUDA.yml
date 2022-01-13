@@ -1,5 +1,6 @@
 name: stanford CME213 introduction to MPI, OpenMP and CUDA
 tags:
+  - CS
   - HPC
   - parallel computing
 url:

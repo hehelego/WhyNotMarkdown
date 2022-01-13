@@ -110,6 +110,10 @@ config.bind('<Space>ec', 'edit-command', mode='normal')
 # edit text-field in external editor
 config.bind('<Alt-e>', 'edit-text', mode='insert')
 
+# download page
+config.bind('<Space>d', 'download', mode='normal')
+config.bind('<Space>D', 'hint links download', mode='normal')
+
 # play video in MPV
 config.bind('<Space>m', 'hint links spawn mpv {hint-url}', mode='normal')
 
@@ -125,7 +129,6 @@ config.bind('<Space>R', 'restart', mode='normal')
 
 # ZEN mode (hidding the tab-bar and status-bar)
 config.bind('<Space>z', 'config-cycle -tp statusbar.show never always ;; config-cycle -tp tabs.show never always ;; clear-messages ;; download-clear')
-
 
 ##################################### PART C: userscripts #####################################
 

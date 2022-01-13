@@ -1,6 +1,6 @@
 name: library genesis
 tags:
+  - library
   - libgen
-  - ebooks
 url:
   http://gen.lib.rus.ec/

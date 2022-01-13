@@ -46,14 +46,13 @@ backup ~/.workspace/backup.fish                      ~/.workspace/git-repo/WhyNo
 
 
 backup ~/.workspace/Passwords.kdbx                   ~/.workspace/BACKUP/Passwords.kdbx
+backup ~/.workspace/kee-file                         ~/.workspace/BACKUP/kee-file
 backup ~/.workspace/thunderbird-calendar.ics         ~/.workspace/BACKUP/thunderbird-calendar.ics
 backup ~/.workspace/firefox-bookmarks.json           ~/.workspace/BACKUP/firefox-bookmarks.json
 backup ~/.workspace/backup.fish                      ~/.workspace/BACKUP/backup.fish
-backup ~/.workspace/TODO.md                          ~/.workspace/BACKUP/TODO.md
 
 backup ~/SHTU/                                       ~/.workspace/BACKUP/SHTU/
 backup ~/SOUND/                                      ~/.workspace/BACKUP/SOUND/
-backup ~/MOOC/                                       ~/.workspace/BACKUP/MOOC/
 backup ~/.workspace/git-repo/                        ~/.workspace/BACKUP/git-repo
 backup ~/.workspace/resources/                       ~/.workspace/BACKUP/resources/
 
