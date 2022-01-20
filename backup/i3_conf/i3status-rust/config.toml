@@ -10,16 +10,9 @@ primary_only=true
 interface_name_exclude = ["br\\-[0-9a-f]{12}", "docker\\d+"]
 interface_name_include = []
 
-# [[block]]
-# block = "backlight"
-# device = "/sys/class/backlight/amdgpu_bl0"
-
 [[block]]
-block = "custom"
-shell = "fish"
-command = "python ~/.config/i3status-rust/query-backlight.py"
-json = false
-interval = 5
+block = "backlight"
+on_click = "lxrandr"
 
 [[block]]
 block = "sound"
@@ -36,7 +29,8 @@ interval = 30
 [[block]]
 block = "battery"
 driver = "upower"
-format = "{percentage}% {time}"
+format = "{percentage} {time}"
+allow_missing = true
 good=70
 info=50
 warning=30

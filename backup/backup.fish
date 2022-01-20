@@ -24,6 +24,7 @@ backup_setup
 
 
 
+backup ~/.gitconfig                                  ~/.workspace/git-repo/WhyNotMarkdown/backup/gitconfig
 backup ~/.ssh/config                                 ~/.workspace/git-repo/WhyNotMarkdown/backup/ssh.conf
 backup ~/.tmux.conf                                  ~/.workspace/git-repo/WhyNotMarkdown/backup/tmux.conf
 backup ~/.config/systemd/                            ~/.workspace/git-repo/WhyNotMarkdown/backup/systemd/

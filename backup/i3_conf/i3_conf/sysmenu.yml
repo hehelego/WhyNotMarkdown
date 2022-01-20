@@ -184,6 +184,3 @@ system:
           - qutebrowser:
               desc: a keyboard-based vim-flavor highly-customizable browser built on QtWebEngine(chromium)
               action: qutebrowser
-          - qutebrowser-private:
-              desc: private mode for qutebrowser
-              action: qb_private

@@ -137,6 +137,7 @@ config.bind('<Space>T', 'spawn --userscript test.py', mode='normal')
 
 # spinach's bookmarks selector: open bookmark, with full feature
 config.bind('<Space>b', 'spawn --userscript spinach-bookmarks.py --full', mode='normal')
+config.bind('<Space>B', 'spawn --userscript spinach-bookmarks.py --full', mode='normal')
 # override the default key bindings
 config.bind('b', 'spawn --userscript spinach-bookmarks.py', mode='normal')
 config.bind('B', 'spawn --userscript spinach-bookmarks.py  --tab', mode='normal')

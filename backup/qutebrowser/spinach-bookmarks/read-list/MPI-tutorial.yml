@@ -2,6 +2,5 @@ name: MPI tutorial
 tags:
   - HPC
   - parallel computing
-  - open MPI
 url:
   https://mpitutorial.com/

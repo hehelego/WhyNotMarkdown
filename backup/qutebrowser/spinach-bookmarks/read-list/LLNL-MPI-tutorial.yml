@@ -2,6 +2,5 @@ name: LLNL-MPI-tutorial
 tags:
   - HPC
   - parallel computing
-  - MPI
 url:
   https://hpc-tutorials.llnl.gov/mpi/ 

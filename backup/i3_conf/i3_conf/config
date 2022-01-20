@@ -7,223 +7,226 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod4
-set $left h
-set $down j
-set $up k
-set $right l
+set $mod                      Mod4
+set $left                     h
+set $down                     j
+set $up                       k
+set $right                    l
+set $exec_                    exec --no-startup-id
 
-set $refresh_i3status killall -SIGUSR1 i3status-rs
-set $menu_fzf_expanded    alacritty --class spinach-FZFmenu -t sys-menu:expanded       -e ~/.config/i3/menu-sys.fish       --show expanded
-set $menu_fzf_mixed       alacritty --class spinach-FZFmenu -t sys-menu:mixed          -e ~/.config/i3/menu-sys.fish       --show mixed
-set $menu_fzf_playerctl   alacritty --class spinach-FZFmenu -t playerctl-menu:expanded -e ~/.config/i3/menu-playerctl.fish --show expanded
-set $menu_rofi            rofi -show
-set $locker               i3lock -c 333333
-set $screenshot           screengrab -r
-set $screenshot           spectacle -r
-set $bg_img               /usr/share/wallpapers/Opal/contents/images/3840x2160.png
-set $terminal             /usr/bin/alacritty
+# set $refresh_i3status       killall -SIGUSR1 i3status
+set $refresh_i3status         killall -SIGUSR1 i3status-rs
+set $menu_fzf_expanded        alacritty --class spinach-FZFmenu -t sys-menu:expanded       -e ~/.config/i3/menu-sys.fish       --show expanded
+set $menu_fzf_mixed           alacritty --class spinach-FZFmenu -t sys-menu:mixed          -e ~/.config/i3/menu-sys.fish       --show mixed
+set $menu_fzf_playerctl       alacritty --class spinach-FZFmenu -t playerctl-menu:expanded -e ~/.config/i3/menu-playerctl.fish --show expanded
+set $menu_rofi                rofi -show
+set $locker                   i3lock -c 333333
+# set $screenshot             screengrab -r
+set $screenshot               spectacle -r
+set $bg_img                   /usr/share/wallpapers/Opal/contents/images/3840x2160.png
+set $terminal                 /usr/bin/alacritty
+# set font used by i3 widgets
+font                          pango:SourceCodePro 10
 
-font pango:SourceCodePro 10
+# lock screen: lock screen before session being suspended
+$exec_                        xss-lock --transfer-sleep-lock -- $locker
+# wallpaper: set background wallpaper
+$exec_                        feh --bg-fill $bg_img
+# X compositor: start picom
+$exec_                        picom -CGb -m 1.0
+# display: set resolution,dpi,gamma,backlight; reset xrandr-gamma
+$exec_                        fish -c 'display_internal; xbacklight -set 100; redshift -x'
+# input method: start fcitx5
+$exec_                        fish -c restart_im
+# input: navigate mouse with keyboard
+$exec_                        keynav 'loadconfig ~/.config/keynav/keynavrc'
+# notification: start dunst notification server
+$exec_                        dunst --config ~/.config/dunst/dunstrc
 
-# set background wall paper
-exec --no-startup-id feh --bg-fill $bg_img
-# lock screen before session being suspended
-exec --no-startup-id xss-lock --transfer-sleep-lock -- $locker
-# provide a "X compositor"
-exec --no-startup-id picom -CGb -m 1.0
-# set resolution,dpi,gamma
-exec --no-startup-id fish -c display_internal
-# input method
-exec --no-startup-id fish -c restart_im
-# navigate mouse with keyboard
-exec --no-startup-id keynav
-# start notification server
-exec --no-startup-id dunst --config ~/.config/dunst/dunstrc
-# reset xrandr-gamma
-exec --no-startup-id redshift -x
 
 # Use pactl to adjust volume in PulseAudio.
-bindsym XF86AudioRaiseVolume  exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@   +5%    && $refresh_i3status
-bindsym XF86AudioLowerVolume  exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@   -5%    && $refresh_i3status
-bindsym XF86AudioMute         exec --no-startup-id pactl set-sink-mute   @DEFAULT_SINK@   toggle && $refresh_i3status
-bindsym XF86AudioMicMute      exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-
+bindsym XF86AudioRaiseVolume  $exec_ pactl set-sink-volume @DEFAULT_SINK@   +5%    ; $exec_ $refresh_i3status
+bindsym XF86AudioLowerVolume  $exec_ pactl set-sink-volume @DEFAULT_SINK@   -5%    ; $exec_ $refresh_i3status
+bindsym XF86AudioMute         $exec_ pactl set-sink-mute   @DEFAULT_SINK@   toggle ; $exec_ $refresh_i3status
+bindsym XF86AudioMicMute      $exec_ pactl set-source-mute @DEFAULT_SOURCE@ toggle ; $exec_ $refresh_i3status
 # mediakey:: media player (need playerctl)
-bindsym XF86AudioPlay         exec --no-startup-id playerctl play-pause && $refresh_i3status
-bindsym XF86AudioPause        exec --no-startup-id playerctl play-pause && $refresh_i3status
-bindsym XF86AudioStop         exec --no-startup-id playerctl stop       && $refresh_i3status
-bindsym XF86AudioNext         exec --no-startup-id playerctl next       && $refresh_i3status
-bindsym XF86AudioPrev         exec --no-startup-id playerctl previous   && $refresh_i3status
+bindsym XF86AudioPlay         $exec_ playerctl play-pause ; $exec_ $refresh_i3status
+bindsym XF86AudioPause        $exec_ playerctl play-pause ; $exec_ $refresh_i3status
+bindsym XF86AudioStop         $exec_ playerctl stop       ; $exec_ $refresh_i3status
+bindsym XF86AudioNext         $exec_ playerctl next       ; $exec_ $refresh_i3status
+bindsym XF86AudioPrev         $exec_ playerctl previous   ; $exec_ $refresh_i3status
 # mediakey:: backlight control (need xorgs-xbacklight or acpilight)
-bindsym XF86MonBrightnessUp   exec --no-startup-id xbacklight -inc 10 && $refresh_i3status
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10 && $refresh_i3status
+bindsym XF86MonBrightnessUp   $exec_ xbacklight -inc 10 ; $exec_ $refresh_i3status
+bindsym XF86MonBrightnessDown $exec_ xbacklight -dec 10 ; $exec_ $refresh_i3status
 # mediakey:: ScreenSaver(lock screen)
-bindsym XF86ScreenSaver       exec --no-startup-id $locker
+bindsym XF86ScreenSaver       $exec_ $locker
+# select a region and take a screenshot
+bindsym Print                 $exec_ $screenshot
 
 # start a terminal
-bindsym $mod+Return           exec $terminal
-bindsym $mod+Shift+Return     exec $terminal --option background_opacity=1.0
+bindsym $mod+Return           $exec_ $terminal
+bindsym $mod+Shift+Return     $exec_ $terminal --option background_opacity=1.0
 
-# select a region and take a screenshot
-bindsym Print exec --no-startup-id $screenshot
 
 # start rofi (a program launcher)
-bindsym $mod+b exec --no-startup-id $menu_rofi
+bindsym $mod+d                $exec_ $menu_rofi
 # my fzf-menu
-bindsym $mod+d       exec --no-startup-id $menu_fzf_expanded
-bindsym $mod+shift+d exec --no-startup-id $menu_fzf_mixed
-bindsym $mod+m       exec --no-startup-id $menu_fzf_playerctl
-for_window [instance="spinach-FZFmenu"] fullscreen enable
+bindsym $mod+b                $exec_ $menu_fzf_expanded
+bindsym $mod+shift+b          $exec_ $menu_fzf_mixed
+bindsym $mod+m                $exec_ $menu_fzf_playerctl
+# force fzf-menu to use fullscreen
+for_window                    [instance="spinach-FZFmenu"] fullscreen enable
 
 # restart the fcitx5 input method
-bindsym $mod+shift+i exec --no-startup-id fish -c restart_im
-
-# close the latest notification
-bindsym $mod+n exec --no-startup-id dunstctl close
-# pop one history notification
-bindsym $mod+shift+n exec --no-startup-id dunstctl history-pop
-
-
+bindsym $mod+shift+i          $exec_ fish -c restart_im
 # open the emoji selector
-bindsym $mod+i exec --no-startup-id ibus-ui-emojier-plasma
-
-# reload the configuration file
-bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-# exit
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'exit i3wm session' -B 'confirm' 'i3-msg exit'"
-
+bindsym $mod+i                $exec_ ibus-ui-emojier-plasma
+# close the latest notification
+bindsym $mod+n                $exec_ dunstctl close
+# pop one history notification
+bindsym $mod+shift+n          $exec_ dunstctl history-pop
 
 # kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+Shift+q          kill
+# reload the configuration file
+bindsym $mod+Shift+c          reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r          restart
+# exit
+bindsym $mod+Shift+e          $exec_ i3-nagbar -t warning -m 'exit i3wm session' -B 'confirm' 'i3-msg exit'
+
 
 # Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
+floating_modifier             $mod
 
+# switch to the window that generates a notification
+bindsym $mod+grave            [urgent="latest"] focus
 # focus parent, child
-bindsym $mod+a          focus parent
-bindsym $mod+Shift+a    focus child
+bindsym $mod+a                focus parent
+bindsym $mod+Shift+a          focus child
 # focus another container
-bindsym $mod+Left       focus left
-bindsym $mod+Down       focus down
-bindsym $mod+Up         focus up
-bindsym $mod+Right      focus right
-bindsym $mod+$left      focus left
-bindsym $mod+$down      focus down
-bindsym $mod+$up        focus up
-bindsym $mod+$right     focus right
+bindsym $mod+Left             focus left
+bindsym $mod+Down             focus down
+bindsym $mod+Up               focus up
+bindsym $mod+Right            focus right
+bindsym $mod+$left            focus left
+bindsym $mod+$down            focus down
+bindsym $mod+$up              focus up
+bindsym $mod+$right           focus right
 
 # move the focused container
-bindsym $mod+Shift+Left     move left
-bindsym $mod+Shift+Down     move down
-bindsym $mod+Shift+Up       move up
-bindsym $mod+Shift+Right    move right
-bindsym $mod+Shift+$left    move left
-bindsym $mod+Shift+$down    move down
-bindsym $mod+Shift+$up      move up
-bindsym $mod+Shift+$right   move right
+bindsym $mod+Shift+Left       move left
+bindsym $mod+Shift+Down       move down
+bindsym $mod+Shift+Up         move up
+bindsym $mod+Shift+Right      move right
+bindsym $mod+Shift+$left      move left
+bindsym $mod+Shift+$down      move down
+bindsym $mod+Shift+$up        move up
+bindsym $mod+Shift+$right     move right
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+bindsym $mod+f                fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+s                layout stacking
+bindsym $mod+w                layout tabbed
+bindsym $mod+e                layout toggle split
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+space      floating toggle
 
 # toggle container split orientation
-bindsym $mod+v split toggle
+bindsym $mod+v                split toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $mod+space            focus mode_toggle
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
+set $ws1                      "1"
+set $ws2                      "2"
+set $ws3                      "3"
+set $ws4                      "4"
+set $ws5                      "5"
+set $ws6                      "6"
+set $ws7                      "7"
+set $ws8                      "8"
+set $ws9                      "9"
+set $ws10                     "10"
 
 # switch to workspace
-bindsym $mod+1 workspace number $ws1
-bindsym $mod+2 workspace number $ws2
-bindsym $mod+3 workspace number $ws3
-bindsym $mod+4 workspace number $ws4
-bindsym $mod+5 workspace number $ws5
-bindsym $mod+6 workspace number $ws6
-bindsym $mod+7 workspace number $ws7
-bindsym $mod+8 workspace number $ws8
-bindsym $mod+9 workspace number $ws9
-bindsym $mod+0 workspace number $ws10
+bindsym $mod+1                workspace number $ws1
+bindsym $mod+2                workspace number $ws2
+bindsym $mod+3                workspace number $ws3
+bindsym $mod+4                workspace number $ws4
+bindsym $mod+5                workspace number $ws5
+bindsym $mod+6                workspace number $ws6
+bindsym $mod+7                workspace number $ws7
+bindsym $mod+8                workspace number $ws8
+bindsym $mod+9                workspace number $ws9
+bindsym $mod+0                workspace number $ws10
 
-# switch to the window that generates a notification
-bindsym $mod+grave [urgent="latest"] focus
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number $ws1
-bindsym $mod+Shift+2 move container to workspace number $ws2
-bindsym $mod+Shift+3 move container to workspace number $ws3
-bindsym $mod+Shift+4 move container to workspace number $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5
-bindsym $mod+Shift+6 move container to workspace number $ws6
-bindsym $mod+Shift+7 move container to workspace number $ws7
-bindsym $mod+Shift+8 move container to workspace number $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
+bindsym $mod+Shift+1          move container to workspace number $ws1
+bindsym $mod+Shift+2          move container to workspace number $ws2
+bindsym $mod+Shift+3          move container to workspace number $ws3
+bindsym $mod+Shift+4          move container to workspace number $ws4
+bindsym $mod+Shift+5          move container to workspace number $ws5
+bindsym $mod+Shift+6          move container to workspace number $ws6
+bindsym $mod+Shift+7          move container to workspace number $ws7
+bindsym $mod+Shift+8          move container to workspace number $ws8
+bindsym $mod+Shift+9          move container to workspace number $ws9
+bindsym $mod+Shift+0          move container to workspace number $ws10
 
 
 # scratchpad
-bindsym $mod+Shift+minus move scratchpad
-bindsym $mod+minus scratchpad show
+bindsym $mod+Shift+minus      move scratchpad
+bindsym $mod+minus            scratchpad show
 
 
-set $mode_default "default"
+set $mode_default             "default"
+set $mode_resize              "resize::[{⬅️: -width}, {➡️: +width}, {⬆️: -height}, {⬇️: +height}]"
+set $mode_display_output      "display-output::[{1: (internal)eDP}, {2: (external)USB-C-DP}, {3: (internal+external)all}]"
 
-set $mode_window_resize "resize::[{⬅️: -width}, {➡️: +width}, {⬆️: -height}, {⬇️: +height}]"
-bindsym $mod+r mode $mode_window_resize
-mode $mode_window_resize {
-	bindsym Left   resize shrink width 10 px or 10 ppt
-	bindsym Down   resize grow height 10 px or 10 ppt
-	bindsym Up     resize shrink height 10 px or 10 ppt
-	bindsym Right  resize grow width 10 px or 10 ppt
+bindsym $mod+r                mode $mode_resize
+mode $mode_resize {
+  bindsym $left               resize shrink width  10 px or 10 ppt
+  bindsym $down               resize grow   height 10 px or 10 ppt
+  bindsym $up                 resize shrink height 10 px or 10 ppt
+  bindsym $right              resize grow   width  10 px or 10 ppt
 
-	bindsym Return mode $mode_default
-	bindsym Escape mode $mode_default
-	bindsym $mod+r mode $mode_default
+  bindsym Left                resize shrink width  10 px or 10 ppt
+  bindsym Down                resize grow   height 10 px or 10 ppt
+  bindsym Up                  resize shrink height 10 px or 10 ppt
+  bindsym Right               resize grow   width  10 px or 10 ppt
+
+  # Return to default mode
+	bindsym Return              mode $mode_default
+	bindsym Escape              mode $mode_default
+	bindsym $mod+r              mode $mode_default
 }
 
-set $mode_display_output "display-output::[{1: (internal)eDP}, {2: (external)USB-C-DP}, {3: (internal+external)all}]"
-bindsym $mod+p mode $mode_display_output
+bindsym $mod+p                mode $mode_display_output
 mode $mode_display_output {
-	bindsym 1 exec --no-startup-id fish -c display_internal, mode $mode_default
-	bindsym 2 exec --no-startup-id fish -c display_external, mode $mode_default
-	bindsym 3 exec --no-startup-id fish -c display_all,      mode $mode_default
+	bindsym 1                   $exec_ fish -c display_internal, mode $mode_default
+	bindsym 2                   $exec_ fish -c display_external, mode $mode_default
+	bindsym 3                   $exec_ fish -c display_all,      mode $mode_default
 
-	bindsym Escape      mode $mode_default
-	bindsym Return      mode $mode_default
-	bindsym $mod+Escape mode $mode_default
-	bindsym $mod+Return mode $mode_default
+  # Return to default mode
+	bindsym Return              mode $mode_default
+	bindsym Escape              mode $mode_default
+	bindsym $mod+p              mode $mode_default
 }
 
 
 
 # status bar (i3status-rs)
 bar {
-	status_command i3status-rs
-	font pango: SourceCodePro, FontAwesome5Free, FontAwesome5Brands 10
-	position bottom
+	status_command              i3status-rs
+	font                        pango: SourceCodePro, FontAwesome5Free, FontAwesome5Brands 10
+	position                    bottom
 }
 
 # window padding and margin
-smart_gaps on
-gaps inner 5
+smart_gaps                    on
+gaps                          inner 5

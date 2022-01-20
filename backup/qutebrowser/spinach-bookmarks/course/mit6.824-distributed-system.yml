@@ -2,5 +2,6 @@ name: mit6.824 distributed system
 tags:
   - distributed computing
   - CS
+  - course
 url:
   https://pdos.csail.mit.edu/6.824/schedule.html

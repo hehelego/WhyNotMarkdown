@@ -1,0 +1,17 @@
+[core]
+    pager = delta
+    quotepath = false
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    side-by-side = true
+    line-numbers = true
+[merge]
+    conflictstyle = diff3
+[diff]
+    colorMoved = default
+
+[user]
+    name = hehelego
+    email = 2364261262@qq.com

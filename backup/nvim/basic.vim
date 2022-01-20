@@ -2,8 +2,8 @@ set encoding=utf-8
 
 set noexpandtab
 
-set termguicolors
 set guicursor=n-v-c-sm:block,i-ci-ve:block,r-cr-o:block
+set termguicolors
 set number
 set relativenumber
 set cmdheight=1
