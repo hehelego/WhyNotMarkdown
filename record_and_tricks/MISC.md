@@ -482,10 +482,13 @@ run `/usr/bin/env` to show all environment variables
 2. install `python-pynacl` package
 3. generate a GPG key pair `gpg --full-generate-key`
 4. add key bindings in configuration
+5. you may need to run `rm -f ~/.local/share/qutebrowser/keepassxc.key.gpg` and re-connect qutebrowser to KeePassXC.
 
 ```python
-config.bind('<Alt-u>', 'spawn --userscript qute-keepassxc --key qutebrowser-keepassxc-connection-233', mode='insert')
-config.bind('<Space>pw', 'spawn --userscript qute-keepassxc --key qutebrowser-keepassxc-connection-233', mode='normal')
+leader: str = ','
+qutekey: str = 'B2D0D2EAB1C80196DA262CD9F019D7B44FB345C6'
+config.bind(f'<Alt-p>',   f'spawn --userscript qute-keepassxc --key {qutekey}', mode='insert')
+config.bind(f'{leader}p', f'spawn --userscript qute-keepassxc --key {qutekey}', mode='normal')
 ```
 
 ### gpu acceleration

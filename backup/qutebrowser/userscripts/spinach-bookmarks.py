@@ -140,4 +140,6 @@ if __name__ == '__main__':
     else:
         bm = select_bookmark(bms)
         if bm is not None:
+            nt, nw = args.win, args.tab
+            Helper.log('mode', f'tab={nt} win={nw}')
             qute.open_url(bm.url, new_window=args.win, new_tab=args.tab)

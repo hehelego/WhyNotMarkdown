@@ -106,6 +106,7 @@
 - simplescreenrecorder
 - screenkey
 - freerdp,xfreerdp(for connecting to a remote machine running windows)
+- ydcv: [ydcv-rs](https://github.com/farseerfc/ydcv-rs), [ORIGINAL ydcv](https://github.com/felixonmars/ydcv/)
 
 ## MISC
 
