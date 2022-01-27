@@ -133,9 +133,6 @@ system:
           - mute-input:
               desc: mute the audio input
               action: pactl set-source-mute @DEFAULT_SOURCE@ toggle
-          - controller:
-              desc: pause audio volume GUI controller
-              action: pavucontrol
     - dunst:
         desc: control the notification daemon
         son:
@@ -151,36 +148,33 @@ system:
           - toggle:
               desc: toggle status
               action: dunstctl set-paused toggle
-    - misc:
-        desc: uncategorized misc shortcuts
-        son:
-          - restart fcitx:
-              desc: restart the fcitx5 input method
-              action: restart_im
-          - emoji selector:
-              desc: spawn the KDE emoji selector
-              action: ibus-ui-emojier-plasma
-    - sysz:
-        desc: systemd-systemctl wrapper
-        action: alacritty -e sysz
-    - rofi menu:
-        desc: run rofi menu
-        action: rofi -show
     - apps:
         desc: frequently used applications
         son:
           - alacritty:
-              desc: terminal emulator
+              desc: the alacritty terminal emulator
               action: alacritty
-          - ranger:
-              desc: ranger TUI file manager
-              action: alacritty -e fish -c ranger
-          - broot:
-              desc: broot TUI file manager
-              action: alacritty -e fish -c br
-          - dolphin:
-              desc: dolphin GUI file manager from KDE project
-              action: dolphin
+          - konsole:
+              desc: terminal emulator from the KDE project
+              action: konsole
+          - neovim-qt:
+              desc: neovim editor GUI
+              action: nvim-qt
+          - firefox:
+              desc: the firefox web browser
+              action: firefox
           - qutebrowser:
               desc: a keyboard-based vim-flavor highly-customizable browser built on QtWebEngine(chromium)
               action: qutebrowser
+          - dolphin:
+              desc: dolphin GUI file manager from KDE project
+              action: dolphin
+          - keepassXC:
+              desc: keepassXC password manager
+              action: keepassxc
+          - pavucontrol:
+              desc: pauseaudio volume GUI controller
+              action: pavucontrol
+          - lxrandr:
+              desc: configure display output
+              action: lxrandr
