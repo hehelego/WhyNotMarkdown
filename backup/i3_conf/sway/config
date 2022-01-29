@@ -4,10 +4,11 @@
 #
 # Read `man 5 sway` for a complete reference.
 
-# specify the font used by sway widgets
-font                      pango:SourceCodePro 10
+
 ### Variables
 #
+# specify the font used by sway widgets
+font                      pango:SourceCodePro 16
 # Logo key. Use Mod1 for Alt.
 set $mod                  Mod4
 # Home row direction keys, like vim
@@ -17,8 +18,18 @@ set $up                   k
 set $right                l
 # Frequently used applications
 set $term                 alacritty
-set $locker               swaylock -f -c 000000
+set $locker               swaylock -f -c 333333
 set $menu                 wofi --show drun
+# refresh the status bar
+# set $refresh_i3status     killall -SIGUSR1 i3status
+set $refresh_i3status     killall -SIGUSR1 i3status-rs
+
+### Startup Applications
+#
+#
+xwayland                  enabled
+exec                      fish -c restart_im
+exec                      dunst --config ~/.config/dunst/dunstrc
 
 ### Output configuration
 #
@@ -30,18 +41,18 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
-# output eDP-1 scale 2
-# output DP-1  scale 2
-# output DP-2  scale 2
+output eDP-1 scale 1
+output DP-1  scale 1
+output DP-2  scale 1
 
 ### Idle configuration
 #
 # Example configuration:
 #
 exec swayidle -w \
-         timeout 300 'swaylock -f -c 000000' \
+         timeout 300 'swaylock -f -c 333333' \
          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-         before-sleep 'swaylock -f -c 000000'
+         before-sleep 'swaylock -f -c 333333'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -90,6 +101,31 @@ exec swayidle -w \
     # mouse button for dragging.
     floating_modifier                $mod normal
 
+
+    # restart the fcitx5 input method
+    bindsym $mod+Shift+i             exec fish -c restart_im  
+    # close the latest notification
+    bindsym $mod+n                   exec dunstctl close
+    # pop one history notification
+    bindsym $mod+shift+n             exec dunstctl history-pop
+
+
+    # Use pactl to adjust volume in PulseAudio.
+    bindsym XF86AudioRaiseVolume     exec pactl set-sink-volume @DEFAULT_SINK@   +5%    ; exec $refresh_i3status
+    bindsym XF86AudioLowerVolume     exec pactl set-sink-volume @DEFAULT_SINK@   -5%    ; exec $refresh_i3status
+    bindsym XF86AudioMute            exec pactl set-sink-mute   @DEFAULT_SINK@   toggle ; exec $refresh_i3status
+    bindsym XF86AudioMicMute         exec pactl set-source-mute @DEFAULT_SOURCE@ toggle ; exec $refresh_i3status
+    # mediakey:: media player (need playerctl)
+    bindsym XF86AudioPlay            exec playerctl play-pause ; exec refresh_i3status
+    bindsym XF86AudioPause           exec playerctl play-pause ; exec refresh_i3status
+    bindsym XF86AudioStop            exec playerctl stop       ; exec refresh_i3status
+    bindsym XF86AudioNext            exec playerctl next       ; exec refresh_i3status
+    bindsym XF86AudioPrev            exec playerctl previous   ; exec refresh_i3status
+    # mediakey:: backlight control (need xorgs-xbacklight or acpilight)
+    bindsym XF86MonBrightnessUp      exec xbacklight -inc 10 ; exec refresh_i3status
+    bindsym XF86MonBrightnessDown    exec xbacklight -dec 10 ; exec refresh_i3status
+    # mediakey:: ScreenSaver(lock screen)
+    bindsym XF86ScreenSaver          exec $locker
 
 #
 # Moving around:
