@@ -14,7 +14,11 @@ xnoremap > >gv
 nnoremap <silent> <leader>r :edit<CR>
 xnoremap <silent> <leader>r :edit<CR>
 
-" (temporarily) turn off highlight search result
+" source vimscript in current buffer
+nnoremap <silent> <leader>s :source %<CR>
+xnoremap <silent> <leader>s :source %<CR>
+
+" (temporarily) turn off highlight search result: <Ctrl>+l
 inoremap <silent><expr> <C-l> execute('nohlsearch')
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR>
 xnoremap <silent> <C-l> :<C-u>nohlsearch<CR>
@@ -65,10 +69,6 @@ xnoremap <silent> <leader>es :<C-u>Colors<CR>
 
 nnoremap <silent> <leader>bt :<C-u>Filetypes<CR>
 xnoremap <silent> <leader>bt :<C-u>Filetypes<CR>
-nnoremap <silent> <leader>bw :<C-u>write<CR>
-xnoremap <silent> <leader>bw :<C-u>write<CR>
-nnoremap <silent> <leader>be :edit<CR>
-xnoremap <silent> <leader>be :edit<CR>
 nnoremap <silent> <leader>bf :BLines<CR>
 xnoremap <silent> <leader>bf :BLines<CR>
 
@@ -112,44 +112,24 @@ xnoremap <silent> <leader>qn :<C-u>cnext<CR>
 nnoremap <silent> <leader>qp :<C-u>cprevious<CR>
 xnoremap <silent> <leader>qp :<C-u>cprevious<CR>
 
-" selected text <-> system clipboard
-nnoremap <silent> <leader>xy "+y
-xnoremap <silent> <leader>xy "+y
-nnoremap <silent> <leader>xp "+p
-xnoremap <silent> <leader>xp "+p
 
 """""""""""""""""
 " SECITON: path
 """""""""""""""""
 
-" yank path-of-file to clipboard
-function! GetPath(choice)
-  let l:path      = expand('%:p')
-  let l:directory = expand('%:p:h')
-  let l:file      = expand('%:p:t')
-  let l:paths = [l:path, l:directory, l:file]
-	return l:paths[a:choice]
-endfunction
-function! YankPath(choice)
-	let l:p = GetPath(a:choice)
-  let @+=l:p
-  let @"=l:p
-endfunction
-nnoremap <silent> <leader>pyp :call YankPath(0)<CR>
-xnoremap <silent> <leader>pyp :call YankPath(0)<CR>
-nnoremap <silent> <leader>pyd :call YankPath(1)<CR>
-xnoremap <silent> <leader>pyd :call YankPath(1)<CR>
-nnoremap <silent> <leader>pyf :call YankPath(2)<CR>
-xnoremap <silent> <leader>pyf :call YankPath(2)<CR>
-
 " insert path of current file
-inoremap <silent><expr> <A-f> GetPath(2)
-inoremap <silent><expr> <A-F> GetPath(0)
+inoremap <silent><expr> <A-f> expand('%')
 
+"""""""""""""""""
+" SECITON: clipboard
+"""""""""""""""""
 
-nnoremap <leader>pp :<C-u>cd ..<CR>
-xnoremap <leader>pp :<C-u>cd ..<CR>
-nnoremap <leader>pw :<C-u>pwd<CR>
-xnoremap <leader>pw :<C-u>pwd<CR>
-nnoremap <leader>ph :<C-u>cd $HOME<CR>
-xnoremap <leader>ph :<C-u>cd $HOME<CR>
+" selected text <-> X11 xclip clipboard/primary
+nnoremap <silent> <leader>yx "+y
+xnoremap <silent> <leader>yx "+y
+nnoremap <silent> <leader>px "+p
+xnoremap <silent> <leader>px "+p
+nnoremap <silent> <leader>yX "*y
+xnoremap <silent> <leader>yX "*y
+nnoremap <silent> <leader>pX "*p
+xnoremap <silent> <leader>pX "*p

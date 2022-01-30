@@ -1,23 +1,28 @@
-from typing import List, Any
-import vim
 import os
 import sys
 import traceback
+from typing import Any
+
+import vim
 
 
 def notify_send(msg: Any, level: str, expire_time: int) -> None:
     import subprocess
-    subprocess.Popen(['notify-send',
-                    '-u', level,
-                    '-t', str(expire_time),
-                    f'[vim: spinach] {msg}'])
+    try:
+        subprocess.run(['notify-send',
+                        '-u', level,
+                        '-t', str(expire_time),
+                        f'[vim: spinach] {msg}'],
+                       timeout=0.1)
+    except:
+        print("oh fuck")
 
 
 def py_log(msg): return notify_send(msg, 'low', 1000)
 def py_err(msg): return notify_send(msg, 'critical', 5000)
 
 
-def load_plugin_configs(black_list: List[str] = []) -> None:
+def load_plugin_configs(black_list: list[str] = []) -> None:
     py_log('start loading custom keymappings')
     keymap_dir = os.path.expandvars(r'$HOME/.config/nvim/keymaps')
     loading = ''

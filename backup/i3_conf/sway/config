@@ -249,7 +249,7 @@ mode $mode_resize {
 # Read `man 5 sway-bar` for more information about this section.
 bar {
     status_command                   i3status-rs
-    font                             pango: SourceCodePro, FontAwesome5Free, FontAwesome5Brands 10
+    font                             pango: SourceCodePro, FontAwesome6Free, FontAwesome6Brands 10
     position                         bottom
 }
 

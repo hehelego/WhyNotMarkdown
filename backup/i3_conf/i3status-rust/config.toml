@@ -28,7 +28,7 @@ interval = 30
 
 [[block]]
 block = "battery"
-driver = "upower"
+driver = "sysfs"
 format = "{percentage} {time}"
 allow_missing = true
 good=70

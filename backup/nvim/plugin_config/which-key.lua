@@ -16,6 +16,22 @@ local fzf_keymap = {
   b = 'buffers',
   w = 'windows',
 }
+local buffer_keymap = {
+  name = 'buffer',
+
+  t = 'filetype',
+  f = 'find',
+}
+local editorui_keymap = {
+  name = 'editor-ui',
+  m = 'mouse',
+  l = 'hl-line',
+  c = 'hl-column',
+  a = 'ln-absolute',
+  r = 'ln-relative',
+  t = 'transparent-bg',
+  s = 'colors',
+}
 local comment_keymap = {
   name = 'comment',
 
@@ -33,32 +49,17 @@ local quickfix_keymap = {
   o = 'open',
   p = 'prev',
 }
-local xclip_keymap = {
-  name = 'xclip',
+local yank_keymap = {
+  name = 'clip-in',
 
-  y = 'yank:\tvim->xclip',
-  p = 'paste:\txclip->vim',
+  x = 'xclip clipboard',
+  X = 'xclip primary',
 }
-local path_keymap = {
-  name = 'path',
+local put_keymap = {
+  name = 'clip-out',
 
-  y = {
-    name = 'yank',
-
-    d = 'directory',
-    f = 'file',
-    p = 'fullpath',
-  },
-  p = 'cd ..',
-  w = 'pwd',
-  h = 'cd $HOME',
-}
-local undotree_keymap = {
-  name = 'undo-tree',
-
-  u = 'toggle',
-  o = 'focus',
-  c = 'close',
+  x = 'xclip clipboard',
+  X = 'xclip primary',
 }
 local git_keymap = {
   name = 'git',
@@ -82,39 +83,32 @@ local vista_keymap = {
   c = 'close',
   v = 'toggle',
 }
-local buffer_keymap = {
-  name = 'buffer',
+local undotree_keymap = {
+  name = 'undo-tree',
 
-  t = 'cur-filetype',
-  w = 'cur-write',
-  e = 'cur-edit',
-  f = 'cur-find',
+  u = 'toggle',
+  o = 'focus',
+  c = 'close',
 }
-local editorui_keymap = {
-  name = 'editor-ui',
-  m = 'mouse',
-  l = 'cursor-line',
-  c = 'cursor-column',
-  a = 'lineno-absolute',
-  r = 'lineno-relative',
-  t = 'transparent-background',
-  s = 'select-colorscheme',
-}
+
+
+
 local leader_keymap = {
   name = '<leader>',
 
   b = buffer_keymap,
   c = comment_keymap,
   e = editorui_keymap,
-  r = 'reload-cur_buf',
   f = fzf_keymap,
   g = git_keymap,
-  p = path_keymap,
+  p = put_keymap,
   q = quickfix_keymap,
-  t = 'file-tree',
+  r = 'reload %',
+  s = 'source %',
+  t = 'coc-explorer',
   u = undotree_keymap,
   v = vista_keymap,
-  x = xclip_keymap,
+  y = yank_keymap,
 }
 leader_keymap['<space>'] = {
   name = 'MORE',
@@ -190,11 +184,15 @@ local easymotion_keymap = {
 
   f = '[char]',
   F = '[char,char]',
-  k = '^line up',
-  j = '^line down',
-  K = 'line$ up',
-  J = 'line$ down',
+  k = '^line',
+  j = '^line',
+  K = 'line$',
+  J = 'line$',
   w = '^word',
   W = 'word$',
 }
-wk.register(easymotion_keymap, { prefix = '\\' })
+easymotion_keymap[','] = 'ANYWHERE-search'
+easymotion_keymap['.'] = 'REPEAT-search'
+easymotion_keymap['n'] = 'PREV-match'
+easymotion_keymap['N'] = 'NEXT-match'
+wk.register(easymotion_keymap, { prefix = ',' })

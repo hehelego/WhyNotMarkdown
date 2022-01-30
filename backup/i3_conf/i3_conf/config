@@ -7,6 +7,10 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
+# set font used by i3 widgets
+font                          pango: SauceCodePro Nerd Font 10
+
+
 set $mod                      Mod4
 set $left                     h
 set $down                     j
@@ -25,8 +29,6 @@ set $locker                   i3lock -c 333333
 set $screenshot               spectacle -r
 set $bg_img                   /usr/share/wallpapers/Opal/contents/images/3840x2160.png
 set $terminal                 /usr/bin/alacritty
-# set font used by i3 widgets
-font                          pango:SourceCodePro 10
 
 # lock screen: lock screen before session being suspended
 $exec_                        xss-lock --transfer-sleep-lock -- $locker
@@ -223,7 +225,7 @@ mode $mode_display_output {
 # status bar (i3status-rs)
 bar {
 	status_command              i3status-rs
-	font                        pango: SourceCodePro, FontAwesome5Free, FontAwesome5Brands 10
+	font                        pango: SourceCodePro, FontAwesome6Free, FontAwesome6Brands 10
 	position                    bottom
 }
 
