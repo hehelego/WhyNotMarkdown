@@ -133,3 +133,24 @@ nnoremap <silent> <leader>yX "*y
 xnoremap <silent> <leader>yX "*y
 nnoremap <silent> <leader>pX "*p
 xnoremap <silent> <leader>pX "*p
+
+"""""""""""""""""
+" SECITON: words look up
+"""""""""""""""""
+
+" lookup the word using [ydcv](https://github.com/farseerfc/ydcv-rs)
+function! LookupWord(word)
+python3 << ENDPY
+try:
+  def lookup(word):
+    import subprocess
+    subprocess.run(['ydcv', '-n', word], timeout=1)
+
+  import vim
+  lookup(vim.eval('a:word'))
+except Exception as e:
+  print(f'[error: LookupWord] {e}')
+ENDPY
+endfunction
+
+nnoremap <silent><expr> <leader>w LookupWord(expand('<cword>'))

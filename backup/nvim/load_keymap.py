@@ -11,11 +11,12 @@ def notify_send(msg: Any, level: str, expire_time: int) -> None:
     try:
         subprocess.run(['notify-send',
                         '-u', level,
-                        '-t', str(expire_time),
-                        f'[vim: spinach] {msg}'],
+                        '-t', f'{expire_time}',
+                        '-a', '[vim: spinach]',
+                        f'{msg}'],
                        timeout=0.1)
-    except:
-        print("oh fuck")
+    except Exception as e:
+        print(f'[error] {e}')
 
 
 def py_log(msg): return notify_send(msg, 'low', 1000)
