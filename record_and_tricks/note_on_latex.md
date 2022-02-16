@@ -24,6 +24,14 @@
 
 ## LaTeX tips
 
+### stacking text on a equal sign
+
+$$
+x[n]\ast y[n]
+{\stackrel {\text{def}}{=}}
+\sum_{k=-\infty}^{+\infty}x[k] y[n-k]
+$$
+
 ### latexmk fish shell script
 
 ```fish
