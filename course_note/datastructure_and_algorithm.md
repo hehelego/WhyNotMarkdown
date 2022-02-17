@@ -1,6 +1,9 @@
-# note on CS101, data structure and algorithm
+# note on DSA
 
-> ShanghaiTech SIST CS101
+> - ShanghaiTech SIST CS101: Algorithm and Data Structures. Fall2021
+> - ShanghaiTech SIST CS240: Design and Analysis of Algorithms. Spring2022
+> - MIT 6.006: Introduction to Algorithms. OCW Spring2020
+> - MIT 6.046: Design and Analysis of Algorithms. OCW Spring2015
 
 ## expected comparision in randomized quicksort
 
@@ -126,3 +129,83 @@ $$
 #### 3-SAT to Ham-CYC
 
 #### 3-SAT to 3-COLOR
+
+## medians of medians
+
+> Given an sequence $(a_1,a_2\ldots a_n)$ where the elements of distinct elements.  
+> Find the $k$-th least element $x$ such that $k-1 = \sum_{i=1}^n [a_i < x]$.  
+
+WLOG, let $5\mid n$.  
+Divides the sequence into groups of fives:
+
+$$
+\begin{aligned}
+B_1
+&=(a_1,a_2,a_3,a_4,a_5)\\
+B_2
+&=(a_6,a_7,a_8,a_9,a_10)\\
+B_i
+&=(a_{5i-4},a_{5i-3},a_{5i-2},a_{5i-1},a_{5i})\\
+&\ldots\\
+B_{n/5}
+&=(a_{n-4},a_{n-3},a_{n-2},a_{n-1},a_{n})\\
+\end{aligned}
+$$
+
+Find the median of each group $B_i$ denoted by $b_i$.  
+Find the median of $(b_1\ldots b_{n/5})$, which is the $(n/10)$-th least element in sequence $b$.  
+Let $x$ be the median of medians.
+
+Partition $a$ into $\{a_i \mid a_i <x\}\cup \{x\}\cup \{a_i \mid a_i >x\}$.  
+Let $s=\sum_{i=1}^n [a_i \leq x]$
+
+- $s=k$, $x$ is the desired $k$-th element
+- $k<s$, recursively find $k$-th in LHS $\{a_i \mid a_i <x\}$
+- $k>s$, recursively find $(k-s)$-th in RHS $\{a_i \mid a_i >x\}$
+
+### key observation
+
+We claim that the sets $L=\{a_i \mid a_i<x\}$,$R=\{a_i \mid a_i>x\}$
+satisfy $\frac{3}{10}n\leq |L|,|R| \leq {7}{10}n$.  
+
+Consider the groups $B_i$,
+we have $\frac{n}{5} \times \frac{1}{2}$ groups $B_j$
+such that the median within that group is less than $x$ i.e. $b_j < x$.  
+In group $B_j$ we have at least $3$ elements less than $x$.  
+That is $|L| \geq \frac{3n}{10}$.
+
+For the same reason, we have $|R| \geq \frac{3n}{10}$.  
+Therefore $|L|,|R| \leq \frac{7n}{10}$.
+
+### complexity
+
+$$
+T(n) \leq T\left( \frac{n}{5} \right) + T\left( \frac{7n}{10} \right) + O(n)
+$$
+
+This is in fact a linear algorithm.  
+Let's verify it quickly, suppose that the $O(n)$ term is bounded by $an$ and $T(n)$ is bounded by $bn$.
+
+$$
+bn \leq \frac{1}{5}bn + \frac{7}{10}bn + an
+\implies
+b\leq \frac{a}{10}
+$$
+
+## Gaussian trick and Karatsuba's algorithm
+
+$$
+(a_1 x + a_0)(b_1 x + b_0)
+=a_1b_1 x^2 + (a_1b_0 + a_0b_1)x + a_0b_0
+$$
+
+four multiplications
+
+$$
+(a_1+a_0)(b_1+b_0)
+=a_1b_1 + (a_1b_0+a_0b_1) + a_0b_0
+$$
+
+three multiplications
+
+use this recursively $T(n)=3T(n/2)+O(n)$
