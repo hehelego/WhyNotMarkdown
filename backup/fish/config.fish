@@ -1,8 +1,8 @@
 # SECTION: alias and abbr
 #
 alias ls="exa"
-alias ll="exa --long"
-alias la="exa --long --all"
+alias ll="exa --long --group-directories-first"
+alias la="exa --long --all --group-directories-first"
 alias tree="exa -T"
 alias tree_ex="exa --long --all -T"
 alias fzff="fd -H --type file | fzf -m"
