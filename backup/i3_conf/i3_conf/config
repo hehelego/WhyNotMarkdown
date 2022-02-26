@@ -67,8 +67,6 @@ bindsym Print                 $exec_ $screenshot
 
 # start a terminal
 bindsym $mod+Return           $exec_ $terminal
-bindsym $mod+Shift+Return     $exec_ $terminal --option background_opacity=1.0
-
 
 # start rofi (a program launcher)
 bindsym $mod+d                $exec_ $menu_rofi
