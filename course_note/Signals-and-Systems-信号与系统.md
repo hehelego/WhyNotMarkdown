@@ -42,6 +42,10 @@ mathematics textbook on Fourier Analysis, Complex Analysis, ODE, PDE
   - DTFT(Discrete-Time Fourier Transform) for discrete-time signals
   - DFT(Discrete Fourier Transform) for finite discrete-time sequences
 - sampling theorem
+  - Dirac comb function: frequency-domain comb and time-domain comb
+  - amplitude modulation, convolution theorem for Fourier transform and its inverse
+  - reconstructing bandlimited signals from samples using $\mathrm{sinc} x=\frac{\sin x}{x}$ function
+  - aliasing
 - applications
   - solving linear differential/difference equation with Laplace/Z Transform.
   - filter designing
@@ -159,6 +163,11 @@ Y(z)
 \end{aligned}
 $$
 
+The convolution theorem enables us to express LTI causality and BIBO stability in terms of the system function
+
+- causality
+- BIBO stability
+
 The algebraic properties of Z transforms
 
 Suppose that $X(z)=\mathcal{Z}\{x[n]\}, Y(z)=\mathcal{Z}\{y[n]\}$
@@ -169,6 +178,8 @@ Suppose that $X(z)=\mathcal{Z}\{x[n]\}, Y(z)=\mathcal{Z}\{y[n]\}$
 - scaling: for every complex number $a$, $a^n x[n]\to X(a^{-1} z)$
 - conjugation: ${(re^{i\theta})}^{\ast}=re^{-i\theta}$ $x^{\ast}[n]\to X^{\ast}(z^{\ast})$
 - differentiation: $nx[n]\to -z\frac{\mathrm{d}}{\mathrm{d} z}X(z)$
+
+These properties allow us the analysis the interconnection of LTI systems using their system function.
 
 Another helpful property is the Parseval Theorem, which helps to evaluate the inner product $\sum_{n} x[n]y^{\ast}[n]$
 
@@ -196,5 +207,65 @@ $$
 &=\sum_{n}x[n] \int_{-\infty}^{+\infty} e^{-st} \delta(t-nT) \mathrm{d} t
 =\sum_{n} x[n] e^{-snT}\\
 &=\mathcal{Z}\{x[n]\}(z) \mid_{z=e^{sT}}
+\end{aligned}
+$$
+
+### osciilation of discrete complex exponentials
+
+![ee150-complex-exponential-frequency](../static/EE150-note-discrete-exponential-frequency.png)
+
+$x[n]=e^{j \omega n}=\cos(\omega n)+i\sin(\omega n)$ (note that $e^{j\omega n}=e^{j(\omega + 2\pi) n}$)
+
+### Dirac comb and uniform sampling
+
+> see [dsp stackexchange: sampling theorem and dirac comb](https://dsp.stackexchange.com/questions/1409/sampling-theorem-and-dirac-comb#1444)
+
+$$
+\operatorname{comb}_T(t)=\sum_{n=-\infty}^{+\infty}\delta(t-nT)
+$$
+
+is called the Dirac comb function which is used to study uniform sampling.
+
+$$
+x(t)\operatorname{comb}_T(t)
+=\sum_{n=-\infty}^{+\infty}x(t)\delta(t-nT)
+=\sum_{n=-\infty}^{+\infty}x(nT)\delta(t-nT)
+$$
+
+The Fourier transform of time-domain comb turns out to be a frequency-domain comb.
+
+$$
+\mathcal{F} \left\{ \sum_{n}\delta(t-nT) \right\}
+=\frac{1}{T}\sum_{n}\delta(f-\frac{k}{T})
+$$
+
+Then we can apply convolution theorem to find the spectrum of the samples.
+
+***TODO*** finish this section
+
+### convolution and singularity signals
+
+We can verify that the following systems are LTI systems
+
+- identity: $I:y(t)=x(t)$
+- differentiator: $D:y(t)=\frac{\mathrm{d}}{\mathrm{d} t}x(t)$
+- integrator: $D^{-1}:y(t)=\int_{-\infty}^{t}x(\tau)\mathrm{d}\tau$
+- time-shifting operator: $S_T:y(t)=x(t-T)$
+
+Let $\delta,d,u,s_T$ be their impulse responses respectively.
+
+- convolution, integration, differentiation, shifting can be re-arranged arbitrarily.
+- $\frac{\mathrm{d}^k t}{\mathrm{d} t^k}(x\ast y)=d^k\ast (x\ast y)=(d^i \ast x)\ast (d^{k-i}\ast y)$
+- $\delta \ast \delta =\delta$
+- convolving a signals with unit step is equivalent to taking the integration.
+
+### derivate of the Dirac delta function
+
+$$
+\begin{aligned}
+\int_{-\infty}^{+\infty} f(x)\left( \frac{\mathrm{d}}{\mathrm{d} x}\delta(x) \right)\mathrm{d}x
+&=\int_{-\infty}^{+\infty} f(x) \mathrm{d} \delta(x)\\
+&=f(x)\delta(x)\mid_{-\infty}^{+\infty}-\int_{-\infty}^{+\infty} f'(x) \delta(x) \mathrm{d} x\\
+&= -f'(0)\delta(x)
 \end{aligned}
 $$
