@@ -17,7 +17,10 @@ let g:NERDDefaultAlign = 'left'
 let g:NERDAltDelims_java = 1
 
 " Add your own custom formats or override the defaults
-let g:NERDCustomDelimiters = {}
+let g:NERDCustomDelimiters = {
+      \ 'riscv_asm': { 'left': '#' },
+      \ 'c': { 'left': '//' },
+      \ }
 
 " Allow commenting and inverting empty lines (useful when commenting a region)
 let g:NERDCommentEmptyLines = 1

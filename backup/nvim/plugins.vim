@@ -42,4 +42,6 @@ Plug 'xuhdev/vim-latex-live-preview'
 " for whichkey keybindings map
 Plug 'folke/which-key.nvim'
 
+" for risc-v assembly syntax support
+Plug 'henry-hsieh/riscv-asm-vim'
 call plug#end()
