@@ -9,10 +9,14 @@
 
 ### for a more rigorous mathematical approach
 
-- [wikipedia: Fubini's Theorem](https://en.wikipedia.org/wiki/Fubini's_theorem) [wikipedia: Series](https://en.wikipedia.org/wiki/Series_(mathematics)) [wikipedia: Function Series](https://en.wikipedia.org/wiki/Function_series).
-  The correctness of interchanging summation/integration/differentiation with summation/integration/differentiation.
+- [wikipedia: Hilbert Space](https://en.wikipedia.org/wiki/Hilbert_space).
+  For functional inner product spaces.
+- [wikipedia: Harmonic analysis](https://en.wikipedia.org/wiki/Harmonic_analysis).
+  For generalized Fourier analysis.
 - [wikipedia: Distribution](https://en.wikipedia.org/wiki/Distribution_(mathematics)).
   Also known as _generalized function_. The theory for singularity signals.
+- [wikipedia: Fubini's Theorem](https://en.wikipedia.org/wiki/Fubini's_theorem) [wikipedia: Series](https://en.wikipedia.org/wiki/Series_(mathematics)) [wikipedia: Function Series](https://en.wikipedia.org/wiki/Function_series).
+  The correctness of interchanging summation/integration/differentiation with summation/integration/differentiation.
 - [wikipedia: Dirichlet Kernel](https://en.wikipedia.org/wiki/Dirichlet_kernel).
   For studying the convergence property of Fourier series/transform.
 
@@ -39,7 +43,8 @@ mathematics textbook on Fourier Analysis, Complex Analysis, ODE, PDE
   - causality and BIBO stability of a LTI system via unit impulse response via ROC(region of convergence) of system function
   - FS(Fourier Series) of continuous time periodic signals
   - FT(Fourier Transform) of continuous time aperiodic signals
-  - DTFT(Discrete-Time Fourier Transform) for discrete-time signals
+  - DTFS(Discrete-Time Fourier Series) for periodic discrete-time signals
+  - DTFT(Discrete-Time Fourier Transform) for aperiodic discrete-time signals
   - DFT(Discrete Fourier Transform) for finite discrete-time sequences
 - sampling theorem
   - Dirac comb function: frequency-domain comb and time-domain comb
@@ -183,9 +188,31 @@ These properties allow us the analysis the interconnection of LTI systems using 
 
 Another helpful property is the Parseval Theorem, which helps to evaluate the inner product $\sum_{n} x[n]y^{\ast}[n]$
 
-#### TODO: the rest of the story
+#### the rest of the story
+
+- power and energy signals
+- differential equation and difference equation
+- Fourier analysis for DT/CT periodic/aperiodic signals
+- exploiting Laplace transform and Z transform
+- Bilateral/Unilateral Laplace transform
+- applications: sampling, feedback system
 
 ## notes, tricks, traps
+
+### serial/cascade interconnection
+
+Function composition is not commutative in general.  
+
+$$
+H_1: y(t)=2x(t)
+\quad
+H_2: y(t)=x^2(t)
+$$
+
+Then for $x(t)\to H_1\to H_2 \to y(t)$ we have $y(t)=4x^2(t)$
+and for $x(t)\to H_2\to H_1 \to y(t)$ we have $y(t)=2x^2(t)$.
+
+However, for LTI systems, serial connection is commutative since convolution is commutative.
 
 ### connection between discrete-time signal and continuous-time impulses train
 
@@ -245,19 +272,30 @@ Then we can apply convolution theorem to find the spectrum of the samples.
 
 ### convolution and singularity signals
 
+Properties of convolution
+
+- commutative: $x\ast y = y\ast x$
+- associative: $f\ast g\ast h =(f\ast g)\ast h = f\ast (g\ast h)$
+- linearity: $(\alpha f)\ast g = \alpha (f\ast g)$ and $(f+g)\ast h=f\ast h+f\ast h$
+
 We can verify that the following systems are LTI systems
 
-- identity: $I:y(t)=x(t)$
-- differentiator: $D:y(t)=\frac{\mathrm{d}}{\mathrm{d} t}x(t)$
-- integrator: $D^{-1}:y(t)=\int_{-\infty}^{t}x(\tau)\mathrm{d}\tau$
-- time-shifting operator: $S_T:y(t)=x(t-T)$
+- identity: $I:y(t)=x(t)$.  
+  Impulse responses $h(t)=\delta(t)$
+- differentiator: $D:y(t)=\frac{\mathrm{d}}{\mathrm{d} t}x(t)$.  
+  Impulse responses $h(t)=\frac{\mathrm{d}}{\mathrm{d} t} \delta(t)$
+- integrator: $D^{-1}:y(t)=\int_{-\infty}^{t}x(\tau)\mathrm{d}\tau$.  
+  Impulse responses $h(t)=u(t)=[t\geq 0]$
+- time-shifting operator: $S_T:y(t)=x(t-T)$.  
+  Impulse responses $h(t)=\delta(t-T)$
 
 Let $\delta,d,u,s_T$ be their impulse responses respectively.
 
 - convolution, integration, differentiation, shifting can be re-arranged arbitrarily.
 - $\frac{\mathrm{d}^k t}{\mathrm{d} t^k}(x\ast y)=d^k\ast (x\ast y)=(d^i \ast x)\ast (d^{k-i}\ast y)$
+- $f\ast g = (d\ast f)\ast (i\ast g)$
+- $s_A\ast s_B = s_{A+B}$
 - $\delta \ast \delta =\delta$
-- convolving a signals with unit step is equivalent to taking the integration.
 
 ### derivate of the Dirac delta function
 
@@ -269,3 +307,7 @@ $$
 &= -f'(0)\delta(x)
 \end{aligned}
 $$
+
+integrate by parts
+
+### Fourier Analysis
