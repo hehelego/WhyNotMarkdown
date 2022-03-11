@@ -15,3 +15,8 @@
 [user]
     name = hehelego
     email = 2364261262@qq.com
+	signingkey = F7D0A1002746FB81
+[gpg]
+	program = gpg2
+[commit]
+	gpgsign = true
