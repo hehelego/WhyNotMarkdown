@@ -50,6 +50,13 @@ disable the `uvcvideo` kernel module.
 
 `echo "blacklist uvcvideo" | sudo tee /etc/modprobe.d/no-webcam.conf`
 
+### appendix
+
+- use `lsmod` to find the kernel modules.
+- `cat /proc/asound/modules` to find modules for microphone
+- `sudo modeprob $module` to load kernel a module
+- `sudo modeprob --remove $module` unload kernel a module
+
 ## 修改rime InputMethod的config pannel的trigger keybinding
 
 ### 描述
