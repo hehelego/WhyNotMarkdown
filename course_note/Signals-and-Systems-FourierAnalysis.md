@@ -138,11 +138,11 @@ where $x(t),y(t)$ have period $T_0$ and $\omega_0 = \frac{2\pi}{T}$.
 
 **_TODO_**
 
-## Fourier Series for Continuous-Time Aperiodic Signals: CTFT
+## Fourier Transform for Continuous-Time Aperiodic Signals: CTFT
 
 **_TODO_**
 
-## Fourier Series for Discrete-Time Aperiodic Signals: DTFT
+## Fourier Transform for Discrete-Time Aperiodic Signals: DTFT
 
 **_TODO_**
 
