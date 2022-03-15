@@ -309,5 +309,3 @@ $$
 $$
 
 integrate by parts
-
-### Fourier Analysis
