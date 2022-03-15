@@ -245,7 +245,7 @@ $x[n]=e^{j \omega n}=\cos(\omega n)+i\sin(\omega n)$ (note that $e^{j\omega n}=e
 
 ### Dirac comb and uniform sampling
 
-> see [dsp stackexchange: sampling theorem and dirac comb](https://dsp.stackexchange.com/questions/1409/sampling-theorem-and-dirac-comb#1444)
+> see [dsp stackexchange: sampling theorem and Dirac comb](https://dsp.stackexchange.com/questions/1409/sampling-theorem-and-dirac-comb#1444)
 
 $$
 \operatorname{comb}_T(t)=\sum_{n=-\infty}^{+\infty}\delta(t-nT)

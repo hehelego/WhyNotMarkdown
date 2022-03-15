@@ -125,7 +125,7 @@ where $x(t),y(t)$ have period $T_0$ and $\omega_0 = \frac{2\pi}{T}$.
 - linearity: $\mathrm{FS}\{\alpha x(t) + \beta y(t)\} = \alpha a_k+\beta b_k$
 - convolution sum theorem: $\mathrm{FS}\{x(t)y(t)\}=(a\ast b) [k]$
 - periodic convolution integral theorem: $\mathrm{FS}\{(x\ast y)(t)\}=T a_k b_k$
-- $\mathrm{FS}\left\{ \sum_{n} \delta(t-nT) \right\} = \frac{1}{T}$: the dirac comb
+- $\mathrm{FS}\left\{ \sum_{n} \delta(t-nT) \right\} = \frac{1}{T}$: the Dirac comb
 - $\mathrm{FS}\left\{ \sum_{n} \delta(t-t_0-nT) \right\} = \frac{1}{T} e^{-jk\omega_0 t_0}$: time-shift
 - $\mathrm{FS}\{x(t-t_0)\}=e^{-jk\omega_0 t_0}a_k$
 - time reversal: $\mathrm{FS}\{x(-t)\}=a_{-k}$
@@ -136,8 +136,77 @@ where $x(t),y(t)$ have period $T_0$ and $\omega_0 = \frac{2\pi}{T}$.
 
 ## Fourier Series for Discrete-Time Periodic Signals: DTFS
 
+**_TODO_**
+
 ## Fourier Series for Continuous-Time Aperiodic Signals: CTFT
+
+**_TODO_**
 
 ## Fourier Series for Discrete-Time Aperiodic Signals: DTFT
 
+**_TODO_**
+
 ## Discrete Fourier Transform: DFT
+
+**_TODO_**
+
+## (Continuous-Time) Fourier Transform for Periodic Signals
+
+Notice that the inverse Fourier Transform of $2\pi \delta(\omega - \omega_0)$ is
+
+$$
+\frac{1}{2\pi}\int_{-\infty}^{+\infty} 2\pi \delta(\omega-\omega_0) e^{j\omega t} \mathrm{d}\omega
+=\int_{-\infty}^{+\infty} \delta(\omega-\omega_0) e^{j\omega t} \mathrm{d}\omega
+=e^{j\omega_0 t}
+$$
+
+Suppose that $x(t)$ has period $T_0$, and $x(t)=\sum_{k} a_k e^{jk\omega_0 t}$
+where $\omega_0 = \frac{2\pi}{T}$.
+
+$$
+a_k = \frac{1}{T_0}\int_{<T_0>} x(t)e^{-jk\omega_0 t}\mathrm{d}t
+\quad
+x(t)=\sum_{k} a_k e^{j k \omega_0 t}
+$$
+
+We can define the Fourier Transform of $x(t)$ as
+
+$$
+X(\omega) = 2\pi \sum_{k} a_k\delta(\omega-k\omega_0)
+$$
+
+We can verify that
+
+$$
+\frac{1}{2\pi}\int_{-\infty}^{+\infty} X(\omega_0) e^{j\omega t}\mathrm{d}\omega
+=\sum_{k} a_k \int_{-\infty}^{+\infty} \delta(\omega-k\omega_0)e^{j\omega t}\mathrm{d}\omega
+=\sum_{k} a_k e^{j k\omega_0 t}
+$$
+
+### example: Fourier Transform of the Dirac comb
+
+Consider the Dirac comb function
+
+$$
+\mathrm{Comb}_T(t)=\sum_{n=-\infty}^{+\infty}\delta(t-nT)
+$$
+
+Let $\omega_0 = \frac{2\pi}{T}$ be the fundamental angle frequency.  
+The Fourier Series of $\mathrm{Comb}_T$ can be computed as
+
+$$
+\begin{aligned}
+a_k
+&=\frac{1}{T}\int_{-T/2}^{+T/2} \mathrm{Comb}_T(t)e^{-jk\omega_0 t}\mathrm{d}t\\
+&=\frac{1}{T}\int_{-T/2}^{+T/2} \delta(t)e^{-jk\omega_0 t}\mathrm{d}t\\
+&=\frac{1}{T}
+\end{aligned}
+$$
+
+So the Fourier Transform of the Dirac Comb is
+
+$$
+\mathcal{F}\{ \mathrm{Comb}_T(t) \}(\omega)
+=\frac{2\pi}{T} \sum_{n}\delta(\omega-k\omega_0)
+=\omega_0 \mathrm{Comb}_{\omega_0}(\omega)
+$$
