@@ -10,7 +10,7 @@ y(t)=\int_{-\infty}^{+\infty} e^{s(t-\tau)}h(\tau)\mathrm{d}\tau
 =e^{st}=\int_{-\infty}^{+\infty} e^{-\tau}h(\tau)\mathrm{d}\tau
 $$
 
-Let $H(s)=\mathcal{L}\{h(t)\}=\int_{-\infty}^{+\infty} e^{-\tau}h(\tau)\mathrm{d}\tau$ be a function of $s$,
+Let $H(s)=\mathcal{L}\{h(t)\}(s)=\int_{-\infty}^{+\infty} e^{-st}h(t)\mathrm{d}t$ be a function of $s$,
 then $e^{st}\stackrel{H}{\to}H(s) e^{st}$.
 
 In the discrete-time case, let $h[n]$ be the impulse response and $x[n]=z^n$ be the input
@@ -21,7 +21,7 @@ y[n]=\sum_{k=-\infty}^{+\infty}z^{n-k}h[k]
 $$
 
 Let $H(z)=\mathcal{Z}\{h[n]\}=\sum_{k=-\infty}^{+\infty}h[k]z^{-k}$
-then $x[n]\stackrel{H}{\to} H(z) z^n$
+then $z[n]\stackrel{H}{\to} H(z) z^n$
 
 Now we know that
 
@@ -32,10 +32,30 @@ So we want to express signals in terms of linear combination of complex exponent
 
 In Fourier analysis, we decompose signals into linear combination of $e^{j \omega t}$ or $e^{j\omega n}$.  
 
+- $|e^{j\omega t}|\equiv 1$
+- $|e^{j\omega n}|\equiv 1$
+
+Considering that $|\int f(t)e^{j\omega t}|\mathrm{d}t\leq \int |f(t)| |e^{j\omega t}|\mathrm{d}t\leq \int |f(t)|$
+we find that the Fourier Series and Fourier Transform always exists for absolutely integrable functions,
+which makes the problem easier.
+
 ## orthogonal and normal basis property
 
-For $S_{T}=\{f\in L^2[-T/2,T/2] \mid f(t)=f(t+T)\}$ define $\left<f,g\right>=\frac{1}{T}\int_{-T/2}^{+T/2} f(t)g^{\ast}(t)\mathrm{d} t$  
-then $\{e^{j k \omega t}\mid k\in \mathbb{Z}\}$ is a orthonormal basis, where $\frac{2\pi}{\omega}=T$.
+Let $S_{T}=\{f\in L^2[-T/2,T/2] \mid f(t)=f(t+T)\}$ be the space of square integrable signals with period $T$.  
+Define a inner product on $S_{T}$:
+
+$$
+\left<f,g\right>=\frac{1}{T}\int_{-T/2}^{+T/2} f(t)g^{\ast}(t)\mathrm{d} t
+$$
+
+We can verify that this is a inner product
+
+- $\left<f,g\right>={\left(\left<g,f\right>\right)}^{\ast}$
+- $\left<f+g,h\right> = \left<f,h\right> + \left<g,h\right>$
+- $\left<\alpha f,h\right> = \alpha \left<f,g\right>$
+- $\left<f,f\right> \geq 0$ (we have a equal sign only when $f\equiv 0$ nearly everywhere)
+
+Then $\{e^{j k \omega t}\mid k\in \mathbb{Z}\}$ is a orthonormal basis, where $\frac{2\pi}{\omega}=T$.
 
 $$
 \left< e^{j n\omega t}, e^{j m\omega t} \right>
@@ -97,6 +117,8 @@ $$
 \end{aligned}
 $$
 
+(which is known as the Parseval's identity)
+
 Let $a_k,b_k$ be the FS of $f,g$ then
 
 $$
@@ -115,7 +137,13 @@ Dirichlet conditions:
 - finite number of extrema during any single period
 - finite number of discontinuities in any finite interval of time (each of these discontinuities is finite).
 
-The FS at $x=t$ converges to $\frac{1}{2}\left( \lim_{t\to t_0^{-}}x(t) +\lim_{t\to t_0^{+}}x(t)\right)$
+The FS at $x=t$ converges to
+
+$$
+\frac{
+  \lim\limits_{t\to t_0^{-}}x(t) +\lim\limits_{t\to t_0^{+}}x(t)
+}{2}
+$$
 
 ### properties of CTFS
 
@@ -124,7 +152,8 @@ where $x(t),y(t)$ have period $T_0$ and $\omega_0 = \frac{2\pi}{T}$.
 
 - linearity: $\mathrm{FS}\{\alpha x(t) + \beta y(t)\} = \alpha a_k+\beta b_k$
 - convolution sum theorem: $\mathrm{FS}\{x(t)y(t)\}=(a\ast b) [k]$
-- periodic convolution integral theorem: $\mathrm{FS}\{(x\ast y)(t)\}=T a_k b_k$
+- periodic convolution integral theorem: $\mathrm{FS}\{(x\ast y)(t)\}=T a_k b_k$  
+  where $(x\ast y)(t)=\int_{0}^{T} x(\tau)y(t-\tau)\mathrm{d}\tau$ is the periodic convolution integral.
 - $\mathrm{FS}\left\{ \sum_{n} \delta(t-nT) \right\} = \frac{1}{T}$: the Dirac comb
 - $\mathrm{FS}\left\{ \sum_{n} \delta(t-t_0-nT) \right\} = \frac{1}{T} e^{-jk\omega_0 t_0}$: time-shift
 - $\mathrm{FS}\{x(t-t_0)\}=e^{-jk\omega_0 t_0}a_k$
@@ -136,7 +165,79 @@ where $x(t),y(t)$ have period $T_0$ and $\omega_0 = \frac{2\pi}{T}$.
 
 ## Fourier Series for Discrete-Time Periodic Signals: DTFS
 
-**_TODO_**
+### orthonormal basis of signals with a fixed period
+
+Let $S_N=\{x[n]:\mathbb{Z}\to \mathbb{C}\mid \forall n\in \mathbb{Z}\ x[n+N]=x[n]\}$ be the discrete-time signals with period $N$.  
+We define the inner product on $S_N$ to be
+
+$$
+\left<x[n],y[n]\right>
+=\frac{1}{N}\sum_{n=0}^{N-1}x[n]y^{\ast}[n]
+$$
+
+We can verify that this operator is a inner product.
+
+Now let us consider the set
+$\{ x_k[n]=e^{j k \omega_0 n}\mid k\in \mathbb{Z} \}$
+where $\omega_0 = \frac{2\pi}{N}$  
+(Notice that $x_{k+N}[n]=e^{j (k+N) \omega_0 n}=e^{j k\omega_0 n} e^{j(2\pi) n}=x_{k}[n]$.
+Thus the set can be simplified to $\{ x_k[n]=e^{j k \omega_0 n}\mid k=0,1,2\ldots N-1 \}$
+reminder: $[0,2\pi]$ close to $\pi$ high frequency, cloes to $0$ or $2\pi$ low frequency.)
+
+$$
+\begin{aligned}
+\left< x_p[n], x_q[n]\right>
+&=\frac{1}{N}\sum_{k=0}^{N-1} x_p[k] x^\ast_q[k]
+=\frac{1}{N}\sum_{k=0}^{N-1} e^{j p\omega_0 k}e^{-j q\omega_0 k}
+=\frac{1}{N}\sum_{k=0}^{N-1} {\left( e^{j (p-q)\omega_0} \right)}^k\\
+&=\begin{cases}
+\frac{1}{N}\cdot N    &p =   q\\
+\frac{1}{N}\frac{1-e^{j(p-q)\omega_0 N}}{1-e^{j (p-q)\omega_0}}  &p\neq q
+\end{cases}
+=\begin{cases}
+1    &p =   q\\
+\frac{1}{N}\frac{1-e^{j 2\pi(p-q)}}{1-e^{j (p-q)\omega_0}}  &p\neq q
+\end{cases}\\
+&=[p=q]=\delta[p-q]
+\end{aligned}
+$$
+
+Thus, the set of exponentials with period $N$ forms a orthonormal set.  
+Further more, we can show that this is a complete basis.
+
+### extracting the coefficients
+
+Suppose that $x[n]$ with period $N$ can be written as $x[n]=\sum_{k=0}^{N-1} a_k e^{j k\omega n}$ where $\omega = \frac{2\pi}{N}$.  
+Then
+
+$$
+\left<x[n],e^{j(m\omega)n}\right>
+=\sum_{k=0}^{N-1} \left<a_k e^{jk\omega n},e^{j(m\omega) n}\right>
+=a_m
+$$
+
+That is to say
+
+$$
+a_k
+=\left<x[n],e^{j(m\omega) n}\right>
+=\frac{1}{N}\sum_{k=0}^{N-1} x[k] e^{-j(m\omega) k}
+$$
+
+### convergence issue
+
+The DTFS for periodic signal is guaranteed to be exist
+and always converges to the original signal.
+
+### properties of DTFS
+
+Suppose that $x[n],y[n]$ are discrete-time signals with periodic $N$, let $\omega =\frac{2\pi}{N}$.  
+Let $a_k,b_k$ be the FS of $x[n],y[n]$ respectively.
+
+- linearity
+- time-shift
+- convolution theorem
+- Parseval: $\left<x[n],y[n]\right>=\sum_{k=0}^{N-1} a_k b_k^{\ast}$
 
 ## Fourier Transform for Continuous-Time Aperiodic Signals: CTFT
 
