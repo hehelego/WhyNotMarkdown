@@ -24,6 +24,43 @@
 
 ## LaTeX tips
 
+### counters
+
+- create a counter `\newcounter{cnt}`
+- directly set the value `\setcounter{cnt}{val}`
+- increase the counter by one `\stepcounter{cnt}`
+- add a number to the counter `\addtocounter{cnt}{num}`
+- accessing the counter `\arabic{cnt}, \roman{cnt}, \Roman{cnt}, \alph{cnt}, \Alph{cnt}`
+
+### remove the numbering in section style
+
+```latex
+\section*{Section 1}
+\addcontentsline{toc}{section}{\protect\numberline{}Section 1}%
+\section*{Section 2}
+\addcontentsline{toc}{section}{\protect\numberline{}Section 2}%
+```
+
+### conditional statements using ifthenelse
+
+see package `ifthen, xifthen, ifthenx`.  
+
+example:
+
+```latex
+\newenvironment{problem}[1]{
+    \newpage
+    \stepcounter{problemscounter}
+    \setcounter{problempartcounter}{0}
+    \chead{Problem \arabic{problemscounter}}
+    \ifthenelse{\isempty{#1}}
+    { \section{Problem \arabic{problemscounter}} }
+    { \section{Problem \arabic{problemscounter}: {#1}} }
+}{
+
+}
+```
+
 ### stacking text on a equal sign
 
 $$
@@ -31,6 +68,8 @@ x[n]\ast y[n]
 {\stackrel {\text{def}}{=}}
 \sum_{k=-\infty}^{+\infty}x[k] y[n-k]
 $$
+
+Alternatively, use `extarrows` package.
 
 ### latexmk fish shell script
 
