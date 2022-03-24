@@ -160,8 +160,9 @@ where $x(t),y(t)$ have period $T_0$ and $\omega_0 = \frac{2\pi}{T}$.
 - time reversal: $\mathrm{FS}\{x(-t)\}=a_{-k}$
 - time scaling: $x(\alpha t)=\sum_{k} a_k e^{jk\omega_0 (\alpha t)}$
 - conjugation: $\mathrm{FS}\{x^\ast(t)\}=a_{-k}^\ast$
-- derivative: $\mathrm{FS}\{\frac{\mathrm{d}}{\mathrm{d} t}x(t)\}=(jk\omega_0) a_k$
+- derivative: $\mathrm{FS}\{\frac{\mathrm{d}}{\mathrm{d} t}x(t)\}=(jk\omega_0) a_k$.
 - integral: $\mathrm{FS}\{\int_{-\infty}^{t} x(\tau)\mathrm{d}\tau\}=\frac{a_k}{jk\omega_0}$
+- **note:** speecial case for $a_0$ in differential and integration
 
 ## Fourier Series for Discrete-Time Periodic Signals: DTFS
 
@@ -241,7 +242,115 @@ Let $a_k,b_k$ be the FS of $x[n],y[n]$ respectively.
 
 ## Fourier Transform for Continuous-Time Aperiodic Signals: CTFT
 
-**_TODO_**
+### periodic replication of an aperiodic signal: CTFS to CTFT
+
+Given an aperiodic signal $x(t)$ and a positive real number $T$,
+we can define $y(t)$ to be
+
+$$
+y(t)=
+\begin{cases}
+x(t)           & |t|<T/2\\
+x(t\bmod T)    & |t|>T/2\\
+\end{cases}
+$$
+
+- on $t\in [-T/2,T/2]$, we have $y(t)=x(t)$
+- on $t\in [T/2,3T/2]$, we have $y(t)=x(t-T)$
+- on $t\in [-3T/2,-T/2]$, we have $y(t)=x(t+T)$
+
+Now consider the Fourier Series of $y(t)$, let $\omega_0=\frac{2\pi}{T}$
+
+$$
+a_k
+=\frac{1}{T}\int_{-T/2}^{T/2} x(t)e^{-jk\omega_0 t}\mathrm{d}t
+\qquad
+x(t)
+=\sum_{k=-\infty}^{+\infty} a_k e^{jk\omega_0 t}
+$$
+
+Define
+
+$$
+X(j\omega) = \int_{-T/2}^{+T/2} x(t)e^{-j\omega t}\mathrm{d}t
+$$
+
+Then
+
+$$
+a_k=\frac{1}{T} X(j k\omega_0) = \frac{\omega_0}{2\pi}X(j k\omega_0)
+\qquad
+x_T(t)=\frac{1}{2\pi}\sum_{k} X(jk\omega_0)e^{jk\omega_0 t} \omega_0
+$$
+
+As $T\to +\infty$, we have
+
+$$
+X(j\omega) = \int_{-\infty}^{+\infty} x(t)e^{-j\omega t}\mathrm{d}t
+\qquad
+x(t) = \frac{1}{2\pi} \int_{-\infty}^{+\infty} X(j\omega)e^{j\omega t} \mathrm{d}\omega
+$$
+
+which are the Fourier Transform (FT) and inverse Fourier Transform (iFT).  
+
+The Fourier Transform can viewed as a speecial case of the Laplace Transform.  
+So the eigen vector property can be applyied
+
+$$
+\mathcal{F}\{x(t)\}(\omega) = \mathcal{L}\{x(t)\}(j\omega)
+\implies
+x(t)\ast e^{j\omega t} = X(j\omega) e^{j\omega t}
+$$
+
+### another integrable function space and orthonormal complete basis
+
+Let $S=\{f:\mathbb{R}\to \mathbb{C}\mid \int_{-\infty}^{+\infty} |f| < \infty\}$.  
+Define a inner product on $S$ as $\left<f,g\right>=\lim_{T\to +\infty} \frac{1}{T}\int_{-T/2}^{T/2} f(t)g^\ast(t)\mathrm{d} t$.
+Then $\{e^{j\omega t}\mid \omega \in \mathbb{R}\}$ is a orthonormal basis.
+
+When $\omega_0\neq \omega_1$, we have
+
+$$
+\begin{aligned}
+\left<e^{j\omega_0 t},e^{j\omega_1 t}\right>
+&=\lim_{T\to +\infty} \frac{1}{T}\int_{-T/2}^{T/2} e^{j(\omega_0-\omega_1) t}\mathrm{d}t\\
+&=\lim_{T\to +\infty} \frac{1}{T}\frac{e^{j\omega T/2}-e^{-j\omega T/2}}{j\omega} \quad (\text{where}\ \omega=\omega_0-\omega_1)\\
+&=\lim_{T\to +\infty} \frac{1}{T}\frac{2j\, \sin(j\omega T/2)}{j\omega}=0
+\end{aligned}
+$$
+
+and
+
+$$
+\left<e^{j\omega t},e^{j\omega t}\right>
+=\lim_{T\to +\infty} \frac{1}{T}\int_{-T/2}^{T/2}e^{j\omega t}e^{-j\omega t} \mathrm{d}t
+=\lim_{T\to +\infty} \frac{1}{T}\int_{-T/2}^{T/2}1\mathrm{d}t=1
+$$
+
+### properties of CTFT
+
+Consider a square signal $w_T(t)=u(t+T)-u(t-T)
+=\begin{cases}
+1&|t| < T\\
+0&\text{otherwise}\\
+\end{cases}$
+
+$$
+\begin{aligned}
+X(j\omega)
+&=\int_{-\infty}^{+\infty} x(t) e^{-j\omega t}\mathrm{d}t
+=\int_{-T}^{+T} e^{-j\omega t}\mathrm{d}t\\
+&={\left.\left( \frac{e^{-j\omega t}}{-j\omega} \right)\right|}_{-T}^{+T}
+=\frac{e^{-j\omega T}-e^{j\omega T}}{-j\omega}\\
+&=\frac{2\sin(\omega T)}{\omega}
+=2T\, \frac{\sin(\omega T)}{\omega T}
+=2T\, \operatorname{sinc}(\omega T/\pi)
+\end{aligned}
+$$
+
+Where $\operatorname{sinc}(x) = \frac{\sin (\pi x)}{(\pi x)}$
+
+The theory of Fourier Transform can be also derived from these basic properties.
 
 ## Fourier Transform for Discrete-Time Aperiodic Signals: DTFT
 
