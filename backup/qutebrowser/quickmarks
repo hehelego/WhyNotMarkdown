@@ -90,11 +90,6 @@ arXiv https://arxiv.org/
 CSRankings https://csrankings.org/
 dblp https://dblp.uni-trier.de/
 Parallel Computing Intro (LLNL HPC tutorial) https://hpc.llnl.gov/training/tutorials/introduction-parallel-computing-tutorial#References
-Software Foundations https://softwarefoundations.cis.upenn.edu/
-SF zh https://coq-zh.github.io/SF-zh/
-PLFA https://plfa.github.io/
-PLFA zh https://agda-zh.github.io/PLFA-zh/
-SICP pdf https://github.com/sarabander/sicp-pdf
 Project Euler https://projecteuler.net/
 OI archive(vue frontend) https://oi-archive.memset0.cn/#/
 OI archive http://oi-archive.github.io/
@@ -161,10 +156,10 @@ ustc-lug: linux 101 https://101.lug.ustc.edu.cn/
 F-Droid https://f-droid.org/
 Learn Git Branching https://learngitbranching.js.org/
 Vim Awesome https://vimawesome.com/
-乱码恢复指北 | Re:Linked https://blog.outv.im/2019/encoding-guide/
+乱码恢复指北 https://blog.outv.im/2019/encoding-guide/
 hehelego/whynotmarkdown: spinach's note on everything https://github.com/hehelego/WhyNotMarkdown
 Overleaf latex doc https://www.overleaf.com/learn
- lshort intro to latex https://www.ctan.org/tex-archive/info/lshort/
+lshort intro to latex https://www.ctan.org/tex-archive/info/lshort/
 Octave doc https://octave.org/doc/v5.2.0/
 MATLAB Documentation https://www.mathworks.com/help/matlab/
 sagemath doc https://doc.sagemath.org/html/en/
@@ -179,7 +174,6 @@ golang document https://golang.org/doc/
 HaskellWiki https://wiki.haskell.org/Haskell
 Regex Crossword https://regexcrossword.com/
 Tìngäzìk: (Probably Not) the World’s Kindest Online Puzzle Game https://tingazik.1a23.studio/
-编程作业作业收集 https://csprojectedu.com/
 CS364A-algorithmic-game-theory http://timroughgarden.org/f13/f13.html
 Jiumo Search 鸠摩文档搜索 https://www.jiumodiary.com/
 google scholar https://scholar.google.com/
@@ -209,3 +203,9 @@ quora https://www.quora.com/
 venus https://autolab.sist.shanghaitech.edu.cn/venus/
 autolab https://autolab.sist.shanghaitech.edu.cn/
 ca-gitlab https://autolab.sist.shanghaitech.edu.cn/gitlab/
+Software Foundations https://softwarefoundations.cis.upenn.edu/
+SF zh https://coq-zh.github.io/SF-zh/
+PLAI https://www.plai.org/
+PLFA https://plfa.github.io/
+PLFA zh https://agda-zh.github.io/PLFA-zh/
+SICP pdf https://github.com/sarabander/sicp-pdf

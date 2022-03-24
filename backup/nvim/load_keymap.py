@@ -14,7 +14,7 @@ def notify_send(msg: Any, level: str, expire_time: int) -> None:
                         '-t', f'{expire_time}',
                         '-a', '[vim: spinach]',
                         f'{msg}'],
-                       timeout=0.1)
+                       timeout=0.5)
     except Exception as e:
         print(f'[error] {e}')
 

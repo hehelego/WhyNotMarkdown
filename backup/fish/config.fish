@@ -1,16 +1,22 @@
+# SECTION: env
+#
+set -gx TERMINAL alacritty
+set -gx EDITOR nvim
+set -gx VISUAL nvim
+set -gx MANPAGER "nvim +Man!"
+
+
 # SECTION: alias and abbr
 #
 alias ls="exa"
 alias ll="exa --long --group-directories-first"
 alias la="exa --long --all --group-directories-first"
-alias tree="exa -T"
-alias tree_ex="exa --long --all -T"
-alias fzff="fd -H --type file | fzf -m"
-alias fzfd="fd -H --type directory | fzf -m"
+alias tree="exa --tree"
+alias tree-list="exa --tree --long --all"
+alias fzff="fd --hidden --type file | fzf --multi --cycle"
+alias fzfd="fd --hidden --type directory | fzf --multi --cycle"
 alias bat="bat --pager=less"
 alias cat="bat --plain"
-alias codepy="code --enable-proposed-api ms-toolsai.jupyter ."
-
 
 
 # SECTION: zoxide
@@ -19,10 +25,10 @@ set -gx _ZO_FZF_OPTS ''
 zoxide init fish | source
 
 
-
 # SECTION: fzf
 #
 set -gx FZF_DEFAULT_COMMAND "fd -H --type file"
+set -gx FZF_DEFAULT_OPTS "--cycle"
 
 
 # SECTION: starship

@@ -12,18 +12,29 @@ local fzf_keymap = {
   h = 'history',
   r = 'ripgrep',
   a = 'silver-search',
-  -- find buffers and windows
+  -- find in buffers and windows
   b = 'buffers',
   w = 'windows',
 }
+local fzf_ex_keymap = {
+  name = 'fzf-ex',
+
+  c = 'commands',
+  r = 'registers',
+  m = 'marks',
+  t = 'asynctasks',
+  h = 'helps'
+}
 local buffer_keymap = {
   name = 'buffer',
-
-  t = 'filetype',
-  f = 'find',
+  f = 'search-contents',
+  r = 'reload-file',
+  s = 'source-vimscript',
+  t = 'select-filetype',
 }
 local editorui_keymap = {
   name = 'editor-ui',
+
   m = 'mouse',
   l = 'hl-line',
   c = 'hl-column',
@@ -50,25 +61,25 @@ local quickfix_keymap = {
   p = 'prev',
 }
 local yank_keymap = {
-  name = 'clip-in',
+  name = 'clip-take',
 
-  x = 'xclip clipboard',
-  X = 'xclip primary',
+  x = 'xclip-clipboard',
+  X = 'xclip-primary',
 }
 local put_keymap = {
-  name = 'clip-out',
+  name = 'clip-put',
 
-  x = 'xclip clipboard',
-  X = 'xclip primary',
+  x = 'xclip-clipboard',
+  X = 'xclip-primary',
 }
 local git_keymap = {
   name = 'git',
   -- TODO: more git integration
   g = 'repo-summary',
-  b = 'blame',
-  l = 'log',
-  d = 'diff',
-  m = 'merge',
+  b = 'blame %',
+  l = 'log %',
+  L = 'log',
+  d = 'diff %',
 }
 local vista_keymap = {
   name = 'vista',
@@ -100,11 +111,10 @@ local leader_keymap = {
   c = comment_keymap,
   e = editorui_keymap,
   f = fzf_keymap,
+  F = fzf_ex_keymap,
   g = git_keymap,
   p = put_keymap,
   q = quickfix_keymap,
-  r = 'reload %',
-  s = 'source %',
   t = 'coc-explorer',
   u = undotree_keymap,
   v = vista_keymap,
@@ -112,22 +122,6 @@ local leader_keymap = {
 }
 leader_keymap['<space>'] = {
   name = 'MORE',
-  h = {
-    name = 'history',
-    h = {'<CMD>History<CR>', 'file'},
-    s = {'<CMD>History/<CR>', 'search'},
-    c = {'<CMD>History:<CR>', 'command'},
-  },
-  f = {
-    name = 'fzf-ui',
-    c = {'<CMD>Commands<CR>', 'commands'},
-    r = {'<CMD>FzfRegister<CR>', 'registers'},
-    f = {'<CMD>FzfFunctions<CR>', 'functions'},
-    m = {'<CMD>Marks<CR>', 'marks'},
-    k = {'<CMD>Maps<CR>', 'keymaps'},
-    h = {'<CMD>Helptags<CR>', 'help'},
-    t = {'<CMD>FzfAsyncTask<CR>' ,'tasks'},
-  },
   p = {
     name = 'plugins',
 
@@ -139,7 +133,6 @@ leader_keymap['<space>'] = {
     U     = {'<CMD>PlugUpgrade<CR>', 'vimplug-upgrade'},
     [';'] = {'<CMD>CocUpdate<CR>', 'coc-update'},
   },
-  t = {'<CMD>FzfAsyncTask<CR>' ,'asynctasks'},
   v = {
     name = 'document-preview',
 
@@ -150,7 +143,7 @@ leader_keymap['<space>'] = {
       t = {'<CMD>MarkdownPreviewStop<CR>', 'toggle'},
     },
     t = {
-      name = 'latex',
+      name = 'LaTeX',
       t = {'<CMD>LLPStartPreview<CR>', 'start'},
     },
   },
