@@ -108,6 +108,8 @@
 - screenkey
 - freerdp,xfreerdp(for connecting to a remote machine running windows)
 - ydcv: [ydcv-rs](https://github.com/farseerfc/ydcv-rs), [ORIGINAL ydcv](https://github.com/felixonmars/ydcv/)
+- cloc
+- onefetch
 
 ## MISC
 
@@ -151,10 +153,9 @@
 
 ### extensions/plugins for browser(firefox)
 
-- Cookie Quick Manager
-- vimium, surfingkeys, vixen
-- Dark Reader
-- User-Agent Switcher and Manager
-- uBlock origin
-- privacy badger
-- sidebery
+- cookie: Cookie Quick Manager
+- user-agent: User-Agent Switcher and Manager
+- block trackers: uBlock origin, privacy badger
+- night color dark mode: Dark Reader
+- tabs/windows manager: sidebery
+- vim-flavor keybinding: vimium, surfingkeys, vixen
