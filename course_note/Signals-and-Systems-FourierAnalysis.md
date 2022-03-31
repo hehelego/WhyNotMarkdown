@@ -352,6 +352,32 @@ Where $\operatorname{sinc}(x) = \frac{\sin (\pi x)}{(\pi x)}$
 
 The theory of Fourier Transform can be also derived from these basic properties.
 
+### duality of CTFT
+
+$$
+\begin{aligned}
+X(\omega)
+&=\mathcal{F}\{x(t)\}(\omega)\\
+\mathcal{F}\{X(t)\}(\omega)
+&=2\pi x(-\omega)
+\end{aligned}
+$$
+
+Proof:
+
+$$
+\begin{aligned}
+x(t)
+&=\frac{1}{2\pi} \int_{-\infty}^{+\infty} X(\omega) e^{j\omega t}\mathrm{d}\omega\\
+2\pi x(-t)
+&=\int_{-\infty}^{+\infty} X(\omega) e^{j\omega (-t)}\mathrm{d}\omega
+=\int_{-\infty}^{+\infty} X(\omega) e^{-j\omega t}\mathrm{d}\omega\\
+&=\mathcal{F}\{X(\omega)\}(t)\\
+2\pi x(-\omega)
+&=\mathcal{F}\{X(t)\}(\omega)\\
+\end{aligned}
+$$
+
 ## Fourier Transform for Discrete-Time Aperiodic Signals: DTFT
 
 **_TODO_**
