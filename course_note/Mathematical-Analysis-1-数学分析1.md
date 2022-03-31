@@ -2,7 +2,6 @@
 
 [TOC]
 
-
 ## 极限
 
 > 指导思想.  
@@ -31,7 +30,6 @@ $$
 \end{aligned}
 $$
 
-
 - 误差法
 
 $\lim_{n\to\infty} \sqrt[n]{n}$,当$n>1$时,有.$2^n>n>1\implies 2>\sqrt[n]{n}>1$  
@@ -51,8 +49,6 @@ $$
 
 - 放缩(基于经典不等式,基于极限定义) | 夹逼
 
-
-
 - `stolz` $\frac{0}{0},\frac{*}{\infty}$
 
   $\{b_n\}$严格递增到$+\infty$则$\lim_{n\to\infty}\frac{a_{n+1}-a_n}{b_{n+1}-b_n}=A\implies \lim_{n\to\infty}\frac{a_n}{b_n}=A$其中$A\in \mathbb R,+\infty ,-\infty$不可以是$\infty$.  
@@ -60,12 +56,9 @@ $$
   $\{a_n\}\to 0,\{b_n\}\to 0$且$\{b_n\}$严格递减,则$\lim_{n\to\infty}\frac{a_{n+1}-a_n}{b_{n+1}-b_n}=A\implies \lim_{n\to\infty}\frac{a_n}{b_n}=A$其中$A\in \mathbb R,+\infty ,-\infty$
 
 - `L'H` $\frac{0}{0},\frac{*}{\infty}$  
-  
 	$f,g$在$U_0(x_0,\delta)$可导,且在其中$g'(x)\neq 0$则.
 	1. $\lim f(x)=\lim g(x)=0$,此时$\lim\frac{f'(x)}{g'(x)}=l\implies \lim\frac{f(x)}{g(x)}=l$其中$l$可以是实数或者infty.  
 	2. $\lim f(x)=\lim g(x)=\infty$,此时$\lim \frac{f'(x)}{g'(x)}=l\implies \frac{f(x)}{g(x)}=l$
-
-
 
 ## 经典反例
 
@@ -88,11 +81,7 @@ $$
 $$
 这里下标奇数/偶数的子列收敛性不同,于是$b_n=\frac{a_{n+1}}{a_n}$不收敛.
 
-
-
 ### 002
-
-
 
 ## 经典习题
 

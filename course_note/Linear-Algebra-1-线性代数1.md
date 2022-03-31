@@ -7,10 +7,9 @@
 
 [TOC]
 
-
 ## Equivalent Statements
 
-for a $n\times n$ square matrix $A$. the following equations 
+for a $n\times n$ square matrix $A$. the following equations
 
 - $A$ is invertible($\iff$ A is left invertible $\iff$ A is right invertible)
 - $A\vec{x}=\vec{0}$ has only the trivial solution($\vec x=\vec 0$)
@@ -21,7 +20,6 @@ for a $n\times n$ square matrix $A$. the following equations
 - $\det(A) \neq 0$
 - row(column) vectors of $A$ are linearly independent
 - $\lambda=0$ is not a eigenvalue of $A$, $p(\lambda)=\det(\lambda I-A),p(0)=\det(-A)={(-1)}^n \det(A)\neq 0$
-
 
 ## elimination & determinant & inversion
 
@@ -147,7 +145,6 @@ $$
 \end{aligned}
 $$
 
-
 ### 4
 
 $$
@@ -190,7 +187,6 @@ a&b&a\\
 \end{aligned}
 $$
 
-
 ### Vandermonde determinant
 
 $$
@@ -203,11 +199,7 @@ x_1^n & x_2^n & x_3^n&\dots& x_n^n\\
 \end{pmatrix}=\prod_{1\leq j< i\leq n}(x_i-x_j)
 $$
 
-
-
-
 ## MISC
-
 
 ### 关于 $A\,adj(A)=\det(A) I$
 
@@ -229,9 +221,7 @@ $$
 \end{aligned}
 $$
 
-  
-
-### 三角不等式.(实数或者向量)
+### 三角不等式
 
 $$
 \begin{aligned}
@@ -245,6 +235,7 @@ $$
 $$
 
 > 补充,关于Cauchy-Schwarz inequality的proof  
+>
 > $$
 > \begin{aligned}
 > &\forall \vec a,\vec b \quad f(x)=||\, x\vec a-\vec b\,||\\
@@ -254,11 +245,8 @@ $$
 > \implies &(\vec a\cdot\vec b)\leq |\vec a|^2|\vec b|^2\implies \vec a\cdot \vec b\leq |\vec a||\vec b|
 > \end{aligned}
 > $$
-> 
+>
 > 当且仅当$\exists x,\vec b=x\vec a$时可以取等.
-
-
-
 
 ### 最小二乘法(least squares)
 
@@ -267,8 +255,7 @@ $$
 > 通常是$m\gg n$的情况
 
 考虑$A\vec x$的意义,是$A$的列向量的线性组合.$\{A\vec x\mid x\in \mathbb R^n\}=span(\{\vec a_1,\vec a_2\dots \vec a_n\})$是一个$\mathbb R^m$的子空间(或者说,一个超平面).  
-所以这个$||A\vec x-\vec b||$就是超平面上向量到$\vec b$的距离,取$\min$就是$\vec b$到平面的距离,我们要做投影.    
-
+所以这个$||A\vec x-\vec b||$就是超平面上向量到$\vec b$的距离,取$\min$就是$\vec b$到平面的距离,我们要做投影.
 
 我们考虑证明一下,做射影得到$x$使得目标函数被最小化.  
 设$W=\text{column-space}(A)$  
@@ -284,7 +271,6 @@ $$
 \end{aligned}
 $$
 
-
 ### dim basis rank span
 
 基本上是一回事...  
@@ -297,10 +283,7 @@ $$
 
 这告诉我们$span(\{v_1,v_2\dots v_n\})$的basis可以有两个办法得到,第一种是不断加入不能被已有向量表示的新向量;另一种是不断从中删掉被其他向量表示的向量.
 
-
-
 ### PIE and dim
-
 
 > if $U,V$ are subspace of finite-dimensional vector space $W$,  
 > $U\cap V=\{v\in W\mid (v\in U)\land (v\in V)\}$and $U+V=\{x+y\mid x\in U,y\in V\}$  
@@ -326,19 +309,14 @@ $$
 - 显然$span(A\cup S\cup B)=U+V$首先$(A\cup S\cup B)\subset U+V$于是$span(A\cup B\cup S)\subset U+V$,只需要证明$\forall y\in U+V,y\in span(A\cup S\cup B)$即可,  
   按照定义进行拆解$\exist u\in U,v\in V\ \text{ s.t. }\ u+v=y$有$u\in span(A\cup S)\to u\in span(A\cup S\cup B)$同理$v\in span(A\cup S\cup B)$.任意set of vectors的span都是个subspace,于是加法是封闭的,那么$u+v=y\in span(A\cup S\cup B)$.
 
-
-
 这个性质还可以扩展$\dim(\sum W_i)\quad W_i\text{ is a subspace of }V$.
-
-
 
 ### change of basis
 
-考虑$v=\sum_{i=1}^n x_i\vec{e_i}$其中$e$是standard basis.我们定义$v$的coordinate是$(x_1,x_2\dots x_n)$一个$n\times 1$的row vector.    
+考虑$v=\sum_{i=1}^n x_i\vec{e_i}$其中$e$是standard basis.我们定义$v$的coordinate是$(x_1,x_2\dots x_n)$一个$n\times 1$的row vector.
 这里记$(v)_{E}=(x_1,x_2\dots x_n)$即以$E$为basis意义下的coordinate.
 
 假设$S=\{s_1,s_2\dots s_n\}$也是空间的basis,我们要求出$y=(v)_S=(y_1,y_2\dots y_n)$其中$v=\sum_{i=1}^n y_i\vec{s_i}$
-
 
 $$
 \begin{aligned}
@@ -346,12 +324,11 @@ $$
 x_1\\ x_2\\ \vdots\\ x_n \end{bmatrix}
 =\begin{bmatrix}s_1&s_2&\dots &s_n\end{bmatrix}
 \begin{bmatrix}y_1\\ y_2\\ \vdots\\ y_n\end{bmatrix}
-\newline\\
+\\
 &\text{let }S=\begin{bmatrix}s_1&s_2&\dots &s_n\end{bmatrix}\\
 &v=\vec{x}=S\vec{y}\implies y=S^{-1}x
 \end{aligned}
 $$
-
 
 下面考虑change of basis,一个向量$x=(x_1,x_2\dots x_n)$分别在$A,B$表示为$a=(x)_A,b=(x)_B$.  
 $$
@@ -364,10 +341,9 @@ $$
 称$B^{-1}A$为$P_{A\to B}$是A到B的transition matrix.  
 简单一点的想法是向量$x$在$A$下表示为$y$,那么换到standard basis下面表示就是$Ay$. 一个standard matrix下的向量要转换到$B$为basis,那么就要左边乘一个$B^{-1}$于是就是$B^{-1}A\ y$了
 
-
 ### intersection of column space
 
-> $\mathrm{span}(v_1,v_2\dots v_n)=\mathrm{col}(\begin{bmatrix}v_1,v_2\dots v_n\end{bmatrix})$ 
+> $$\mathrm{span}(v_1,v_2\dots v_n)=\mathrm{col}(\begin{bmatrix}v_1,v_2\dots v_n\end{bmatrix})$$
 
 $$
 \begin{aligned}
@@ -386,15 +362,12 @@ remark:
 $A\mid -B$和$A\mid B$的null space是类似的.  
 对于一个vector space $V$的subspace $W$显然有$\{-w\mid w\in W\}=W$.  
 
-
 ### 正交分解定理
 
-> Consider a inner product space $V$ and two vectors $\vec u,\vec x\in V$ where $u\neq 0$   
+> Consider a inner product space $V$ and two vectors $\vec u,\vec x\in V$ where $u\neq 0$
 > $\exist k \text{ s.t. }\vec x=k\vec u+\vec b \text{ where } (b, u)=0,\vec b\perp \vec u$
 
 考虑把$x$投影到$u$上面去,这部分应该是$(\frac{u}{||u||},x)$
-
-
 
 $$
 \begin{aligned}
@@ -413,9 +386,6 @@ $$
 \end{aligned}
 $$
 
-
-
-
 ### 关于$W+W^\perp$
 
 > Given that $W \text{ is a subspace of } V\quad \dim(V)=n$  
@@ -424,7 +394,6 @@ $$
 首先是$W$为零空间$\{\vec 0\}$这是trivial的.  
 
 Let $B=(u_1,u_2\dots u_m)$ be a basis of $W$.  
-
 
 $$
 \begin{aligned}
@@ -453,10 +422,7 @@ $$
 
 and $W+W^\perp\subseteq V$, so $V=W+W^\perp$
 
-
-
-
-### 一个线性代数中的极为基础的问题.
+### 一个线性代数中的极为基础的问题
 
 > For two $n\times n$ square real matrix $A,B$ such that $BA=I$,  
 > Prove that $AB=I$  
@@ -489,11 +455,10 @@ $n\times n$ square matrix和$V\to V(\text{where }\dim(V)=n)$之间存在双射,�
 
 $f$满足$\forall y\exists x\text { s.t. }f\,x=y$. 设$f\, t=y$,那么$(g\circ f)t=g\, y=t$,矛盾
 
-
 综上,$g$必须存在左逆,即$h\circ g=I$. 下面再证明$h=f$.  
 这很简单$h\circ g\circ f=(h\circ g)\circ f=I\circ f=I$,另一方面$h\circ g\circ f=h\circ (g\circ f)=h\circ I=h$  
 
-> 映射组合的结合律证明咕咕了...找本正经集合论书去吧.   
+> 映射组合的结合律证明咕咕了...找本正经集合论书去吧.
 
 到这里我们说明了,这种定义在整个空间$V$上的映射$f:V\to V$,满足$g\circ f=I\implies f\circ g=I$
 
@@ -506,15 +471,10 @@ $f$满足$\forall y\exists x\text { s.t. }f\,x=y$. 设$f\, t=y$,那么$(g\circ f
 
 于是$I=AB$,完成证明.
 
-
-
-
-
 ### 经典习题: rank(A+B) leq rank(A)+rank(B)
 
 > given two $m\times n$ matrices $A,B$,  
 > prove that $\mathrm{rank}(A+B)\leq \mathrm{rank}(A)+\mathrm{rank}(B)$
-
 
 by definition $\mathrm{rank}(A)=\dim(R(A))=\dim(C(A))$, where $C(A),R(A)$ are row/column spaces of $A$ respectively.  
 let $A=\begin{bmatrix}a_1&a_2&\ldots &  a_n\end{bmatrix},B=\begin{bmatrix}b_1&b_2&\ldots &  b_n\end{bmatrix}$, $C(A)=\mathrm{span}(a_1,a_2\ldots a_n)$
@@ -553,15 +513,13 @@ A^TA x=0&\implies x^T A^TAx =\lang Ax,Ax \rang=0\implies Ax=0
 \end{aligned}
 $$
 
-
 #### real symmetric matrix has only real eigenvalues
 
 > note that:
-> 
+>
 > - real symmetric:  $A=A^T=\overline A$
-> - complex vector space standard inner product: $\lang x,y\rang=\sum x_i \overline{y_i}=x^T \overline y$ 
+> - complex vector space standard inner product: $\lang x,y\rang=\sum x_i \overline{y_i}=x^T \overline y$
 > - dot product($n\times 1$ column vector $x,y$) : $x^Ty=y^T x=\sum x_iy_i$
-
 
 $$
 \begin{aligned}
@@ -572,23 +530,18 @@ Ax&=\lambda x\\
 \end{aligned}
 $$
 
-
-
 ### rank-nullity theorem的经典证明
 
 rank是极大无关行向量集合的大小,初等行变换不改变它,消元到RREF,leading ones所在的row vector就是一组row vecs的basis.  
 
 另一个定理告诉我们某个列向量子集线性无关,那么任意进行行变换,这些列向量仍然线性无关(虽然行变换会改变列空间).于是包含leading varible的column对应的column vector线性无关,再原矩阵中找到这些行也是线性无关的. 两者都是count of leading varible于是row rank=column rank.  
 
-
 nullity的话,是RREF中free varibles的数目,于是rank+nullity=count of column.  
-
-
-
 
 ### 关于rank-nullity theorem的一些思考
 
 > given a linear transform $T:U\to V$, we define the that:  
+>
 > - $\mathrm{ker}(T)=\{v\mid T(v)=0\},\mathrm{im}(T)=\{T(v)\mid v\in U\}$ (image set也称为range)
 > - $rank(T)=\dim(im(T)),nullity(T)=\dim(ker(T))$
 
@@ -599,7 +552,6 @@ nullity的话,是RREF中free varibles的数目,于是rank+nullity=count of colum
 
 这样我们就证明了非常重要的rank-nullity theorem.
 
-
 再来几个rank-nullity的题目.  
 
 #### 来源不明的作业题
@@ -609,10 +561,8 @@ nullity的话,是RREF中free varibles的数目,于是rank+nullity=count of colum
 
 这个技巧很常见,对于$f\circ g$,我们考察$h:\mathrm{im}(g)\to \mathrm{im}(f\circ g),h(x)=f(x)$  
 
-
 考察$f:\mathrm{im}\left(\varphi^k\right)\to \mathrm{im}\left(\varphi^{k+1}\right),f(x)=\varphi(x)$.  
 考虑一下$\ker(f)$,显然是$\ker(\varphi)\cap \mathrm{im}\left(\varphi^k\right)$
-
 
 使用RN theorem有.  
 
@@ -700,13 +650,11 @@ $$
 \end{aligned}
 $$
 
-
 ### 张江理工 线性代数1-2020fall-finalexam题
 
 > given two $n\times n$ matrix $A,B$ such that,  
 > $A^{2020}=0\quad AB=BA\quad B\neq 0$,  
 > show that $\mathrm{rank}(AB)\leq \mathrm{rank}(B)-1$ (or equivalently $r(AB)< r(B)$
-
 
 如果$\mathrm{rank}(B)=\mathrm{rank}(AB)=\mathrm{rank}(BA)$,  
 于是$C(BA)\subseteq C(B)\land \dim(C(BA))=\dim(C(B))$故$C(BA)=C(B)$.  
@@ -719,7 +667,6 @@ $C(A^{k} B)=C(A^{k-1}BA)=C(A^{k-1}B)$,
 
 考察$C(A^{2020}B)$有,$C(B)=C(A^{2020}B)=C(0B)=C(0)=\{\vec 0\}$  
 而$B\neq 0$,矛盾. 故假设错误,应当有$rank(AB) < rank(B)$.
-
 
 ### square root of positive linear operator
 
@@ -735,11 +682,10 @@ $A$ is a positive definite one, so the eigenvalues of $A$ are positive, therefor
 > $$\ln \left|\frac{A+B}{2}\right|\geqslant \frac{\ln|A|+\ln|B|}{2}$$
 > 其中$|M|=\det(M)$
 
-
 设$A=P^T P$,令$Q=P^{-1}$有$Q^T A Q=I_n$有  
 考察$Q^T B Q$, 仍然是正定二次型对应的矩阵, 由谱定理, 它可以被某正交矩阵$R$正交对角化.  
 即$R^T (Q^T B Q) R = {(QR)}^T B {(QR)}= \mathrm{diag}(d_1,d_2\ldots d_n)$ 其中$d_i$是$Q^T B Q$的特征值.  
-同时有${(QR)}^T A {(QR)}=I_n$, 以及${(QR)}^T (A+B) {(QR)}=\mathrm{diag}(d_1+1,d_2+1\ldots d_n+1)$ 
+同时有${(QR)}^T A {(QR)}=I_n$, 以及${(QR)}^T (A+B) {(QR)}=\mathrm{diag}(d_1+1,d_2+1\ldots d_n+1)$
 
 于是有
 $$
@@ -762,6 +708,4 @@ $$
 &\geqslant - \frac{1}{2}\ln |Q|+\frac{1}{2}\sum_i \ln d_i=\ln |A|+\ln |B|
 \end{aligned}
 $$
-
-
 
