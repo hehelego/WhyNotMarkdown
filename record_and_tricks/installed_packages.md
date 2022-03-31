@@ -24,9 +24,10 @@
 - editor: vim,neovim,kate
 - file manager: ranger,broot
 - document viewer: okular (requires `poppler,poppler-data`)
-- calibre: ebook manager and converter
+- ebook manager/converter: calibre
+- notebook: vnote
 - browser: firefox,qutebrowser
-- mail client: thunderbird,kmail
+- email,calendar,rss: thunderbird,kmail
 - IM: telegram
 - password manager: keepassxc
 
