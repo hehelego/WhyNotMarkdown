@@ -4,26 +4,26 @@
 
 给一个正整数序列$(a_1,a_2,a_3\dots a_n)$.
 定义$H(S)=\gcd_{i\in S}(a_i)=\max\{d\mid \forall i\in S,d\mid a_i\}$.
-所有满足元素最大公因子大于$1$的子序列的gcd乘元素数量的求和,即
+所有满足元素最大公因子大于$1$的子序列的 gcd 乘元素数量的求和,即
+
 $$
 \sum_{S\subseteq\{1,2,3\dots n\}}|S|[H(S)\neq 1]H(S)
 $$
-
 
 ## solution
 
 挺正常的莫比乌斯反演...
 
-
-
 令$\text{eq}(i)=\sum_{j=1}^n [a_j=i],\text{div}(i)=\sum_{j=1}^n[i\mid a_j],m=\max_i a_i$
 设
+
 $$
 f(d)=\sum_{S\subseteq \{1,2,3\dots n\}}[H(S)=d]|S|\\
 g(d)=\sum_{S\subseteq \{1,2,3\dots n\}}[d\mid H(S)]|S|
 $$
 
 有
+
 $$
 g(d)=\sum_{1\leq i}f(id)\\
 f(d)=\sum_{1\leq i}\mu(i)g(id)\\
@@ -32,16 +32,17 @@ f(d)=\sum_{1\leq i}\mu(i)g(id)\\
 \sum_{1\leq T}\sum_{d\mid T}\mu(d)f(Tn)=\sum_{1\leq T}f(Tn)\sum_{d\mid T}\mu(d)=\sum_{1\leq T}f(Tn)[T=1]=f(n)
 $$
 
-
-
 我们要求的答案是
+
 $$
 \text{ans: }\sum_{2\leq i}if(i)=\sum_{2\leq i}i\sum_{1\leq j}\mu(j)g(ij)\\
-=\sum_{2\leq T}g(T)\sum_{d\mid T,d\gt 1}d\mu(\frac{T}{d})\\
+=\sum_{2\leq T}g(T)\sum_{d\mid T,d> 1}d\mu(\frac{T}{d})\\
 =\sum_{2\leq T}g(T)(\sum_{d\mid T}d\mu(\frac{T}{d})-1\mu(\frac{T}{1}))\\
 =\sum_{2\leq T}g(T)(\varphi(T)-\mu(T))
 $$
+
 其中
+
 $$
 g(d)=\sum_{i=1}^{\text{div(d)}}\binom{\text{div}(d)}{i}i\\
 F(n)=\sum_{i=1}^n\binom{n}{i}i=\sum_{i=1}^n\frac{n!}{i!(n-i)!}i
@@ -50,9 +51,6 @@ F(n)=\sum_{i=1}^n\binom{n}{i}i=\sum_{i=1}^n\frac{n!}{i!(n-i)!}i
 =n\sum_{i=0}^{n-1}\binom{n-1}{i}
 =n2^{n-1}
 $$
-
-
-
 
 ## code
 
@@ -115,4 +113,3 @@ namespace spinach{
 }
 int main(){ return spinach::main(); }
 ```
-

@@ -300,7 +300,7 @@ $$
 - 链式法则/一阶微分形式不变性
 - $$\vec y=F(\vec x)\implies \mathrm{d}y_1\wedge \mathrm{d}y_2\ldots \mathrm{d}y_n=\frac{\partial (y_1,y_2\ldots y_n)}{\partial (x_1,x_2\ldots x_n)}\mathrm{d}x_1\wedge \mathrm{d}x_2\ldots \mathrm{d}x_n$$
 
-还可以推广到`3-form,4-form ...`的积分,做法和结论是一致的.
+还可以推广到 _3-form,4-form_ 的积分,做法和结论是一致的.
 
 #### $\mathbb{R}^3$中第一类曲线积分中的换元/座标系变换
 
@@ -360,6 +360,7 @@ $\vec r(u,v)={\left(x(u,v),y(u,v),z(u,v)\right)}^{T}$其中$(u,v)$取遍$D$, $D$
 和定义在其上的函数$f(\vec r)=f(x,y,z)$.  
 
 则有第一类曲面积分
+
 $$
 \begin{aligned}
 \iint_{\vec r\in S}f(\vec r)\mathrm{d}S
@@ -379,10 +380,14 @@ $$
 进行变换$u=u(p,q),v=v(p,q)$引入新的参数$p,q$,其中$(p,q)\in \Delta$  
 并且设$\vec d(p,q)=\vec r(u(p,q),v(p,q))$,  
 考察面积元
-$\mathrm{d}S=\left\vert \left\vert
+
+$$
+\mathrm{d}S=\left\vert \left\vert
 \overrightarrow{r_u}\times \overrightarrow{r_v}
 \right\vert \right\vert
-\mathrm{d}u \mathrm{d}v$
+\mathrm{d}u \mathrm{d}v
+$$
+
 的变化,有.
 
 $$
@@ -468,8 +473,10 @@ $$
 ### Cantor's intersection theorem
 
 > Given a sequence of compact,non-empty,cloesd set $S_0\supset S_1\supset S_2\ldots \text{ s.t. } \lim_{n\to \infty} \mathrm{diam}(S_n)=0$  
-> > $$\renewcommand{\vec}[1]{\overrightarrow{#1}}\mathrm{diam}(S)=\sup_{\vec{x_0},\vec{x_1}\in S} ||\vec{x_0}-\vec{x_1}||$$
 > Show that $\cap_{n=0}^{\infty} S_n=\{x\}$
+>
+> where
+> $$\mathrm{diam}(S)=\sup_{\vec{x}_0,\vec{x}_1\in S} \begin{Vmatrix}\vec{x}_0-\vec{x}_1 \end{Vmatrix}$$
 
 
 Let $T_k=S_{k+1}\setminus S_k\text{ and }T=\{T_0,T_1\ldots\}$.  
@@ -490,6 +497,7 @@ Finally, we can prove that $x$ is the unique element in $\cap_{n=0}^{\infty} S_n
 
 
 > 要点
+>
 > - A.C.
 > - 选点避免重复. 闭集对于这种不重复的序列,取极限后,极限仍然在该闭集中.
 
@@ -582,6 +590,7 @@ $$
 
 
 一个有用的性质
+
 $$
 \nabla \cdot (f\nabla f)
 =\sum_{i=1}^n

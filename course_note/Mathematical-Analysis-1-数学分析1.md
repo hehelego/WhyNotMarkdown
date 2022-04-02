@@ -66,6 +66,7 @@ $$
 
 $\{a_n\}$收敛,是否有$\lim_{n\to\infty}\frac{a_{n+1}}{a_n}=1$.  
 问题出在收敛于$0$的情况,给出反例.  
+
 $$
 \begin{aligned}
 &a_n=\begin{cases}
@@ -79,6 +80,7 @@ $$
 \end{cases}
 \end{aligned}
 $$
+
 这里下标奇数/偶数的子列收敛性不同,于是$b_n=\frac{a_{n+1}}{a_n}$不收敛.
 
 ### 002
@@ -102,6 +104,7 @@ $$
 直观上,它肯定是$0$,比如看看$k=\frac12,\frac13,\frac23$.  
 
 这里要用上幂函数单调性,可以参考$x^\alpha\ (x\geq 0)$对于$\alpha<0,\alpha>0$的图像.
+
 $$
 \begin{aligned}
 &(n+1)^k> n^k\implies (n+1)^k-n^k>0\\
@@ -109,9 +112,11 @@ $$
 &0<(n+1)^k-n^k<n^{k-1}
 \end{aligned}
 $$
+
 其中$-1<k-1<0$于是$n^{k-1}$收敛于$0$,控制住了$(n+1)^k-n^k$.  
 
 另一个做法,看起来更自然些(可以由$k=\frac23$推广得到).
+
 $$
 \begin{aligned}
 &\text{let }r=1-k\quad (0<r<1)\\
@@ -125,8 +130,7 @@ $$
 
 $$
 \begin{aligned}
-&\lim_{n\to\infty} \prod_{i=1}^{n} \frac{2i-1}{2i}\\
-\newline
+&\lim_{n\to\infty} \prod_{i=1}^{n} \frac{2i-1}{2i}\\[2ex]
 &\forall n,\ a_n>0\\
 &a_{n}=\prod_{i=1}^{n} \frac{2i-1}{2i}\\
 &a_{n+1}=a_{n}\times \frac{2(n+1)-1}{2(n+1)}<a_{n}
@@ -160,32 +164,33 @@ $$
 
 
 
-### 005
+### 005 数列不动点极限
 
 $$
 a>0,a_0>0\quad a_n=\frac{1}{2}(a_{n-1}+\frac{a}{a_{n-1}})
 $$
 
 这个是$a_n\to\sqrt a$
+
 $$
 a_1=1,a_{n+1}=a_n+\frac{1}{a_n}
 $$
+
 这个是严格单调发散到$+\infty$
-
-
 
 ### 006关于e的极限
 
-> 取倒数,分解指数
+取倒数,分解指数
 
 $$
 \begin{aligned}
-&\lim_{n\to\infty}(1-\frac{1}{n})^n=\lim_{n\to \infty}(\frac{n-1}{n})^n
+\lim_{n\to\infty}(1-\frac{1}{n})^n
+&=\lim_{n\to \infty}(\frac{n-1}{n})^n
 =\frac{1}{\lim_{n\to\infty}(\frac{n}{n-1})^n}\\
 &=\frac{1}{\lim_{n\to \infty}(1+\frac{1}{n-1})^{n-1}\times (1+\frac{1}{n-1})}\\
 &=\frac{1}{e\times 1}=e^{-1}\\
-\newline\\
-&\lim_{n\to \infty}(1-\frac{1}{2n})^{n}=\lim_{n\to \infty}(1-(\frac{n}{2})^{-1})^{\frac{n}{2}}\times (1-(\frac{n}{2})^{-1})^{\frac{n}{2}}\\
+\lim_{n\to \infty}(1-\frac{1}{2n})^{n}
+&=\lim_{n\to \infty}(1-(\frac{n}{2})^{-1})^{\frac{n}{2}}\times (1-(\frac{n}{2})^{-1})^{\frac{n}{2}}\\
 &=e^{-1}\times e^{-1}=e^{-2}
 \end{aligned}
 $$
@@ -200,18 +205,43 @@ $$
 ### 反例函数.
 
 $$
-\sin(x^2),\sin(x^{-1}),D(x)=[x\in \mathbb{Q}],R(x)=\begin{cases}x=\frac{p}{q},(p,q)=1 \to \frac{1}{q}\\0\end{cases}
+\sin(x^2)
+\quad
+\sin(x^{-1})
+\quad
+D(x)=[x\in \mathbb{Q}]
+\quad
+R(x)=\begin{cases}
+x=\frac{p}{q}\ \text{where}\ (p,q)=1
+&\to \frac{1}{q}\\
+\text{otherwise}
+&\to 0
+\end{cases}
 $$
 
 
-连续函数的换元.  
-> $f(g(x))$若$\lim_{x\to x_0}g(x)=t,\lim_{y\to t}f(y)=A,\exists \delta>0,\text{s.t.}\forall x\in U_0(x_0,\delta)\ g(x)\neq t\implies \lim_{x\to x_0}f(g(x))=A$  
+### 连续函数的换元
 
-这里有`内层函数在邻域内不等于极限值`的约束,因为$f(t)$与$\lim_{y\to t} f(y)$是无关的,可能会约束不住.  
-但是连续函数用不着这个约束.
+对于 $f(g(x))$  
+有
 
-连续函数的海涅归结原理.  
-类似上面的情况.
+$$
+\begin{cases}
+\displaystyle \lim_{x\to x_0}g(x)=t\\
+\displaystyle \lim_{y\to t}f(y)=A\\
+\displaystyle \exists \delta>0\,\text{s.t.}\forall x\in U_0(x_0,\delta)\ g(x)\neq t\\
+\end{cases}
+\implies
+\lim_{x\to x_0} f(g(x))=A
+$$
+
+这里有 _内层函数在邻域内不等于极限值_ 的约束, 因为$f(t)$与$\lim_{y\to t} f(y)$是无关的
+缺少这个条件, $f(g(x))$ 在邻域内可能由于取到 $f(t)$ 而破坏极限.  
+此外,若外层函数$f$是连续函数时, 我们不需要这一约束条件.
+
+### 连续函数的海涅归结原理
+
+类似上面极限换元规则.
 
 
 ## 一元函数微分学  
@@ -266,25 +296,27 @@ $$
 
 #### 高阶导数的一些公式
 
-$$(uv)^n=\sum_{i=0}^n \binom{n}{i} u^{(i)}v^{(n-i)}$$  
-> 似乎称为莱布尼兹公式?
+$$
+(uv)^n=\sum_{i=0}^n \binom{n}{i} u^{(i)}v^{(n-i)}
+$$
 
 #### 构造
 
-关于导数的构造,
+关于导数的构造, (详见ODE求解章节)
 
 - $e^x f(x)\to e^x(f(x)+f'(x))$
 - $e^{-x} f(x)\to e^{-x}(f'(x)-f(x))$
 - $xf(x)\to f(x)+f'(x)$
 - $\frac{f(x)}{x}\to \frac{1}{x^2}(f'(x)-xf(x))$
 
-还可以乘个常数之类的... 
+有时还需要乘上一个常数或者加上一个低次多项式进行修正.
 
-#### 构造(1)
+#### 一个有趣的构造
 
-> 在$[0,1]$二阶可微的函数$f(x)$满足$f(0)=f'(0),f(1)=f'(1)$, 求证$\exists \xi\in (0,1)\quad f(\xi)=f''(\xi)$.  
+> 在$[0,1]$二阶可微的函数$f(x)$满足$f(0)=f'(0),f(1)=f'(1)$,  
+> 求证$\exists \xi\in (0,1)\quad f(\xi)=f''(\xi)$.  
 
-这肯定要构造$g(x)$满足$g(0)=g(1)=0$然后$\exists \xi g'(\xi)=0$.  
+这肯定要构造$g(x)$满足$g(0)=g(1)=0$然后$\exists \xi\in(0,1)\ g'(\xi)=0$.  
 自然想法是$g(x)=f(x)-f'(x)$但是这样$g'(x)=f'(x)-f''(x)$差了一阶导数.  
 另一个构造更好用,它是$g(x)=e^x(f(x)-f'(x))\quad g'(x)=e^x(f-f'+f'-f'')=e^x(f-f'')$  
 
@@ -298,18 +330,22 @@ $$(uv)^n=\sum_{i=0}^n \binom{n}{i} u^{(i)}v^{(n-i)}$$
 > 在这里$y'=\frac{1}{x}$在$x\to 0$时,$y'$远大于$x$,于是$\Delta y\sim f'(x)\Delta x$可以很大.
 
 考虑$a_n=e^{-n}$与$b_n=e^{-(n+1)}$这两个序列的间距
+
 $$
 |e^{-n}-e^{-(n+1)}|< |e^{-n}|+|e^{-(n+1)}|<2|e^{-n}|=\frac{2}{e^n}
 $$
-这是可以任意小的($\forall\epsilon >0,\exist N,\forall n>N\quad |a_n-b_n|<\epsilon$)
+
+这是可以任意小的(形式化地讲是 $\forall\epsilon >0,\exists N\ \text{s.t.}\ \forall n>N\quad |a_n-b_n|<\epsilon$)
 
 然而
+
 $$
 \ln(e^{-n})-\ln(e^{-(n+1)})=1
 $$
-并不能任意小,函数不能是一致连续.
 
-另一个想法更简单,考虑$a_n=\frac{1}{n},b_n=\frac{1}{2n}$
+并不能任意小,所以$y=\ln x$在$(0,1)$并非一致连续.
+
+另一个想法更简,考虑$a_n=\frac{1}{n},b_n=\frac{1}{2n}$
 
 
 
@@ -379,7 +415,7 @@ $$
 $$
 \begin{aligned}
 &\forall \epsilon>0,\text{ let }\delta=(\frac{\epsilon}{2M})^2\\
-&\forall x_1,x_2>0\text{ s.t. }|x_2-x_1|<\delta\quad \exist\xi\in(x_1,x_2)\\
+&\forall x_1,x_2>0\text{ s.t. }|x_2-x_1|<\delta\quad \exists\xi\in(x_1,x_2)\\
 &|f(x_2)-f(x_1)|=|2(\sqrt{x_2}-\sqrt{x_1})\sqrt{\xi}f'(\xi)|\\
 &<|2\sqrt{x_2-x_1}\sqrt\xi f'(\xi)|\\
 &\leq |2M\sqrt{\delta}|=\epsilon
@@ -513,7 +549,7 @@ remark: 上下限不一样的时候,除了换元,还可以试试差分一下.
 
 #### 非常经典的积分计算
 
-> $$\int_0^1 \frac{\ln (x+1)}{1+x^2}\mathrm dx$$
+$$\int_0^1 \frac{\ln (x+1)}{1+x^2}\mathrm dx$$
 
 $$
 \begin{aligned}
@@ -523,8 +559,16 @@ I=&\int_0^\frac{\pi}{4} \frac{\ln(\tan t+1)}{1+\tan^2 t}\sec^2\mathrm dt
 =&\int_\frac{\pi}{4}^0\ln(\tan(\frac{\pi}{4}-x)+1)\mathrm d(\frac{\pi}{4}-x)\\
 =&\int_0^\frac{\pi}{4}\left[\ln 2-\ln(1+\tan x)\right]\mathrm dx=\frac{\pi}{4}\ln 2-I\\
 &\implies I=\frac{\pi}{8}\ln 2\\
-&\text{where: }\tan(\frac{\pi}{4}-x)=\frac{1-\tan x}{1+\tan x},\tan(\frac{\pi}{4})+1=\frac{2}{1+\tan x}
 \end{aligned}
+$$
+
+其中
+
+$$
+\tan(\frac{\pi}{4}-x)
+=\frac{1-\tan x}{1+\tan x}
+\quad
+\tan(\frac{\pi}{4})+1=\frac{2}{1+\tan x}  
 $$
 
 
@@ -540,7 +584,7 @@ $$
 I&=\int_0^{\pi/2}\frac{\cos^3 x}{\cos^3 x+\sin^3 x}\mathrm dx
 =\int_{\pi/2}^0 \frac{\cos^3(\frac{\pi}{2}-x)}{\sin^3 x+\cos^3 x}\mathrm d(\frac{\pi}{2}-x)\\
 &=\int_0^{\pi/2}\frac{\sin^3 x}{\cos^3 x+\sin^3 x}\mathrm dx\\
-2I&=\int_0^{\pi/2}\frac{\sin^3 x+\cos^3 x}{\sin^3 x+\cos^3 x}\mathrm dx =\int_0^{\pi/2}\1\mathrm dx=\frac{\pi}{2}\\
+2I&=\int_0^{\pi/2}\frac{\sin^3 x+\cos^3 x}{\sin^3 x+\cos^3 x}\mathrm dx =\int_0^{\pi/2} 1\mathrm dx=\frac{\pi}{2}\\
 I&=\frac{\pi}{4}
 \end{aligned}
 $$
@@ -569,13 +613,17 @@ $$
 
 #### 分部积分的基础套路
 
+> 对于 $\ln,\exp$ 总可以通过分部积分和多项式互相消除
+
+第一个例子是 $\ln^k x$
+
 $$
 I_k=\int \ln^k x\mathrm{d}x
 =x\ln^k x-\int x\, k\ln^{k-1}x\frac{1}{x}\mathrm{d}x
 =x\ln^k x-k\int \ln^{k-1}\mathrm{d}x=x\ln^k x - k I_{k-1}
 $$
 
-
+下一个例子是 $x^k e^x$
 
 $$
 I_k=\int x^k e^x\mathrm{d}x
@@ -584,14 +632,17 @@ I_k=\int x^k e^x\mathrm{d}x
 =x^k e^x -k I_{k-1}
 $$
 
+最后是 非常经典的 $\sin^n x$
 
 $$
 \begin{aligned}
-I_n&=\int_{0}^{\pi/2}\sin^n x\mathrm{d} x\\
-&=-\int_{0}^{\pi/2}\sin^{n-1}x \mathrm{d}(\cos x)\\
+I_n
+&=\int_{0}^{\pi/2}\sin^n x\ \mathrm{d} x\\
+&=-\int_{0}^{\pi/2}\sin^{n-1}x\ \mathrm{d}(\cos x)\\
 &=-\left(\sin^{n-1}x\cos x\right)\vert_{0}^{\pi/2}+(n-1)\int_0^{\pi/2}\sin^{n-2}\cos^2 x\mathrm{d}x\\
 &=0+(n-1)\int_0^{\pi/2}\sin^{n-2}(1-\sin^2 x)\mathrm{d}x\\
 &=(n-1)I_{n-2}-(n-1)I_n\\
-I_n=\frac{n-1}{n}I_{n-2}
+nI_n
+&=\frac{n-1}{n}I_{n-2}
 \end{aligned}
 $$
