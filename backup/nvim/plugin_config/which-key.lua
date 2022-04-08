@@ -42,6 +42,7 @@ local editorui_keymap = {
   r = 'ln-relative',
   t = 'transparent-bg',
   s = 'colors',
+  p = 'pair-color',
 }
 local comment_keymap = {
   name = 'comment',

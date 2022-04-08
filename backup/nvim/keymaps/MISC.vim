@@ -40,14 +40,20 @@ function! ToggleTransparentBg()
     execute(":colorscheme " . g:colors_name)
   endif
 endfunction
+
 nnoremap <silent> <leader>em :<C-u>call ToggleMouse()<CR>
+
+nnoremap <leader>et :<C-u>call ToggleTransparentBg()<CR>
+
 nnoremap <silent> <leader>el :<C-u>set cursorline!<CR>
 nnoremap <silent> <leader>ec :<C-u>set cursorcolumn!<CR>
+
 nnoremap <silent> <leader>ea :<C-u>set number!<CR>
 nnoremap <silent> <leader>er :<C-u>set relativenumber!<CR>
-nnoremap <leader>et :<C-u>call ToggleTransparentBg()<CR>
-nnoremap <silent> <leader>es :<C-u>Colors<CR>
 
+nnoremap <silent> <leader>ep :<C-u>RainbowToggle<CR>
+
+nnoremap <silent> <leader>es :<C-u>Colors<CR>
 
 """"""""""""""""""
 " SECITON: buffer

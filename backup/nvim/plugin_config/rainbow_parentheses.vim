@@ -1,7 +1,4 @@
-" see https://github.com/kien/rainbow_parentheses.vim
+" see https://github.com/luochen1990/rainbow
 
-
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+" default: turn on
+let g:rainbow_active = 1

@@ -29,7 +29,7 @@ Plug 'tpope/vim-fugitive'
 " for viewing change history and back tracing
 Plug 'mbbill/undotree'
 " for colorizing pair parentheses
-Plug 'kien/rainbow_parentheses.vim'
+Plug 'luochen1990/rainbow'
 " for quick commenting/uncommenting
 Plug 'preservim/nerdcommenter'
 " text alignment
