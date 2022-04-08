@@ -41,7 +41,6 @@ backup ~/.config/rofi/                               ~/.workspace/git-repo/WhyNo
 backup ~/.config/keynav/                             ~/.workspace/git-repo/WhyNotMarkdown/backup/keynav/
 backup ~/.config/qutebrowser/                        ~/.workspace/git-repo/WhyNotMarkdown/backup/qutebrowser/
 backup ~/.config/fontconfig/fonts.conf               ~/.workspace/git-repo/WhyNotMarkdown/backup/font.conf
-backup ~/.workspace/firefox-bookmarks.json           ~/.workspace/git-repo/WhyNotMarkdown/backup/FF_bookmarks.json
 backup ~/.workspace/backup.fish                      ~/.workspace/git-repo/WhyNotMarkdown/backup/backup.fish
 
 
@@ -49,7 +48,6 @@ backup ~/.workspace/backup.fish                      ~/.workspace/git-repo/WhyNo
 backup ~/.workspace/Passwords.kdbx                   ~/.workspace/BACKUP/Passwords.kdbx
 backup ~/.workspace/kee-file                         ~/.workspace/BACKUP/kee-file
 backup ~/.workspace/thunderbird-calendar.ics         ~/.workspace/BACKUP/thunderbird-calendar.ics
-backup ~/.workspace/firefox-bookmarks.json           ~/.workspace/BACKUP/firefox-bookmarks.json
 backup ~/.workspace/backup.fish                      ~/.workspace/BACKUP/backup.fish
 
 backup ~/SHTU/                                       ~/.workspace/BACKUP/SHTU/

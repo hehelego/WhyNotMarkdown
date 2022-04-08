@@ -1,6 +1,6 @@
-name: Documentation of sagemath chinese translation
+name: Documentation of sagemath
 tags:
   - doc
   - sagemath
 url:
-  https://www.osgeo.cn/sagemath/index.html
+  https://doc.sagemath.org/html/en/
