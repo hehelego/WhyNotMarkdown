@@ -21,7 +21,7 @@
 
 - terminal emulator: alacritty
 - input method: fcitx5 framework + rime input method
-- editor: vim,neovim,kate
+- editor: vim,neovim; helix,kakoune; VSCodium
 - file manager: ranger,broot
 - document viewer: okular (requires `poppler,poppler-data`)
 - ebook manager/converter: calibre
@@ -35,13 +35,13 @@
 
 - networkmanager,nmtui,nmcli
 - iwd,iw,iwctl
-- nettools (for arp)
+- nettools (for `arp`)
 - ufw
 - openssh, sshfs
 - curl,httpie
 - wget,aria2
-- nmap (for nmap,ncat)
-- v2ray (frontend `qv2ray` or `v2raya`)
+- nmap (for `nmap`,`ncat`)
+- v2ray (frontend `v2raya`)
 - proxychains-ng
 
 ### CLI utilities
@@ -117,8 +117,8 @@
 ### uncategorized
 
 - qBittorrent
-- FOSS office alternative: LibreOffice
-- spell checker: aspell
+- FOSS office suite: LibreOffice
+- spell checker: aspell, ispell, hunspell
 
 ### social media
 
