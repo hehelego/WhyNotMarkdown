@@ -13,15 +13,15 @@ alias ll="exa --long --group-directories-first"
 alias la="exa --long --all --group-directories-first"
 alias tree="exa --tree"
 alias tree-list="exa --tree --long --all"
-alias fzff="fd --hidden --type file | fzf --multi --cycle"
-alias fzfd="fd --hidden --type directory | fzf --multi --cycle"
+alias fzff="fd --hidden --type file      | fzf --multi --cycle --preview='stat {}'"
+alias fzfd="fd --hidden --type directory | fzf --multi --cycle --preview='exa -F1 {}'"
 alias bat="bat --pager=less"
 alias cat="bat --plain"
 
 
 # SECTION: zoxide
 #
-set -gx _ZO_FZF_OPTS ''
+set -gx _ZO_FZF_OPTS "--cycle --preview='exa -F1 {2..}'"
 zoxide init fish | source
 
 

@@ -1,5 +1,5 @@
 function cdfzf
-	set target (fd --hidden --type directory | fzf)
+	set target (fzfd)
 	if test -n "$target"
 		cd $target
 	end
