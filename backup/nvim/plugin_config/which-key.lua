@@ -9,6 +9,7 @@ local fzf_keymap = {
   name = 'fzf',
   -- find files
   f = 'files',
+  g = 'git-files',
   h = 'history',
   r = 'ripgrep',
   a = 'silver-search',
@@ -102,12 +103,24 @@ local undotree_keymap = {
   o = 'focus',
   c = 'close',
 }
+local asynctasks_keymap = {
+  a = 'list',
+  s = 'stop',
+}
+asynctasks_keymap['.'] = 'run-last'
+local zoxide_keymap = {
+  z = 'home',
+  i = 'find-jump',
+}
 
-
+--
+-- SECTION: leader keymap
+--
 
 local leader_keymap = {
   name = '<leader>',
 
+  a = asynctasks_keymap,
   b = buffer_keymap,
   c = comment_keymap,
   e = editorui_keymap,
@@ -120,6 +133,7 @@ local leader_keymap = {
   u = undotree_keymap,
   v = vista_keymap,
   y = yank_keymap,
+  z = zoxide_keymap,
 }
 leader_keymap['<space>'] = {
   name = 'MORE',
@@ -152,6 +166,9 @@ leader_keymap['<space>'] = {
 wk.register(leader_keymap, { prefix = '<leader>' })
 
 
+--
+-- SECTION: coc LSP keymap
+--
 
 
 local coc_keymap = {
@@ -172,6 +189,9 @@ local coc_keymap = {
 }
 wk.register(coc_keymap, { prefix = ';' })
 
+--
+-- SECTION: easymotion keymap
+--
 
 local easymotion_keymap = {
   name = 'easymotion',

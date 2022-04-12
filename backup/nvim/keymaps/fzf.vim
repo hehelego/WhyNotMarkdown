@@ -1,5 +1,6 @@
 " find files
 nnoremap <silent> <leader>ff :<C-u>Files<CR>
+nnoremap <silent> <leader>fg :<C-u>GFiles<CR>
 nnoremap <silent> <leader>fh :<C-u>History<CR>
 nnoremap <leader>fr :<C-u>Rg 
 nnoremap <leader>fa :<C-u>Ag 

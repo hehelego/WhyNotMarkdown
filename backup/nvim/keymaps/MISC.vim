@@ -101,7 +101,8 @@ nnoremap <silent> <leader>qp :<C-u>cprevious<CR>
 """""""""""""""""
 
 " insert path of current file
-inoremap <silent><expr> <A-f> expand('%')
+inoremap <silent><expr> <A-f> expand('%:p:t')
+inoremap <silent><expr> <A-F> expand('%:p')
 
 """""""""""""""""
 " SECITON: clipboard
@@ -123,18 +124,4 @@ xnoremap <silent> <leader>pX "*p
 """""""""""""""""
 
 " lookup the word using [ydcv](https://github.com/farseerfc/ydcv-rs)
-function! LookupWord(word)
-python3 << ENDPY
-try:
-  def lookup(word):
-    import subprocess
-    subprocess.run(['ydcv', '-n', word], timeout=1)
-
-  import vim
-  lookup(vim.eval('a:word'))
-except Exception as e:
-  print(f'[error: LookupWord] {e}')
-ENDPY
-endfunction
-
-nnoremap <silent><expr> <leader>w LookupWord(expand('<cword>'))
+nnoremap <silent> <leader>w :<C-u>AsyncRun! -silent ydcv -n <cword><CR>

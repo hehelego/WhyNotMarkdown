@@ -19,6 +19,8 @@ Plug 'mhinz/vim-startify'
 " for FZF,ag,rg integration
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+" for jumping between directories
+Plug 'nanotee/zoxide.vim'
 " for viewing symbol/tag tree
 Plug 'liuchengxu/vista.vim'
 " for running shell command asynchronously
