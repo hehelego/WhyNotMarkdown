@@ -72,19 +72,19 @@ bindsym $mod+Return           $exec_ $terminal
 bindsym $mod+d                $exec_ $menu_rofi
 # my fzf-menu
 bindsym $mod+b                $exec_ $menu_fzf_expanded
-bindsym $mod+shift+b          $exec_ $menu_fzf_mixed
+bindsym $mod+Shift+b          $exec_ $menu_fzf_mixed
 bindsym $mod+m                $exec_ $menu_fzf_playerctl
 # force fzf-menu to use fullscreen
 for_window                    [instance="spinach-FZFmenu"] fullscreen enable
 
 # restart the fcitx5 input method
-bindsym $mod+shift+i          $exec_ fish -c restart_im
+bindsym $mod+Shift+i          $exec_ fish -c restart_im
 # open the emoji selector
 bindsym $mod+i                $exec_ ibus-ui-emojier-plasma
 # close the latest notification
 bindsym $mod+n                $exec_ dunstctl close
 # pop one history notification
-bindsym $mod+shift+n          $exec_ dunstctl history-pop
+bindsym $mod+Shift+n          $exec_ dunstctl history-pop
 
 # kill focused window
 bindsym $mod+Shift+q          kill
@@ -93,7 +93,10 @@ bindsym $mod+Shift+c          reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r          restart
 # exit
-bindsym $mod+Shift+e          $exec_ i3-nagbar -t warning -m 'exit i3wm session' -B 'confirm' 'i3-msg exit'
+bindsym $mod+Shift+e          $exec_ i3-nagbar \
+                              -t warning -m 'exit i3wm session' \
+                              -B 'exit' 'i3-msg exit' \
+                              -B 'shutdown' 'shutdown -P now' \
 
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -185,8 +188,21 @@ bindsym $mod+minus            scratchpad show
 
 
 set $mode_default             "default"
+set $mode_session             "session::[{l: lock}, {s: suspend}, {h: hibernate}]"
 set $mode_resize              "resize::[{⬅️: -width}, {➡️: +width}, {⬆️: -height}, {⬇️: +height}]"
 set $mode_display_output      "display-output::[{1: (internal)eDP}, {2: (external)USB-C-DP}, {3: (internal+external)all}]"
+
+bindsym $mod+Escape           mode $mode_session
+mode $mode_session {
+	bindsym l                   $exec_ $locker,             mode $mode_default
+	bindsym s                   $exec_ systemctl suspend,   mode $mode_default
+	bindsym h                   $exec_ systemctl hibernate, mode $mode_default
+
+  # Return to default mode
+	bindsym Return              mode $mode_default
+	bindsym Escape              mode $mode_default
+	bindsym $mod+Escape         mode $mode_default
+}
 
 bindsym $mod+r                mode $mode_resize
 mode $mode_resize {

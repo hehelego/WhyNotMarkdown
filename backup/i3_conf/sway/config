@@ -92,7 +92,10 @@ exec swayidle -w \
     bindsym $mod+Shift+c             reload
     bindsym $mod+Shift+r             reload
     # Exit sway (terminates the current Wayland session)
-    bindsym $mod+Shift+e             exec swaynag -t warning -m 'Exit sway' -b 'Confirm' 'swaymsg exit'
+    bindsym $mod+Shift+e             exec swaynag \
+                                     -t warning -m 'exit sway' \
+                                     -B 'exit' 'swaymsg exit' \
+                                     -B 'shutdown' 'shutdown -P now' \
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -107,7 +110,7 @@ exec swayidle -w \
     # close the latest notification
     bindsym $mod+n                   exec dunstctl close
     # pop one history notification
-    bindsym $mod+shift+n             exec dunstctl history-pop
+    bindsym $mod+Shift+n             exec dunstctl history-pop
 
 
     # Use pactl to adjust volume in PulseAudio.
@@ -221,8 +224,21 @@ exec swayidle -w \
 #   - switch display output
 #
 
-set $mode_default                    "default"
-set $mode_resize                     "resize::[{⬅️: -width}, {➡️: +width}, {⬆️: -height}, {⬇️: +height}]"
+set $mode_default             "default"
+set $mode_session             "session::[{l: lock}, {s: suspend}, {h: hibernate}]"
+set $mode_resize              "resize::[{⬅️: -width}, {➡️: +width}, {⬆️: -height}, {⬇️: +height}]"
+
+bindsym $mod+Escape           mode $mode_session
+mode $mode_session {
+	bindsym l                   $exec_ $locker,             mode $mode_default
+	bindsym s                   $exec_ systemctl suspend,   mode $mode_default
+	bindsym h                   $exec_ systemctl hibernate, mode $mode_default
+
+  # Return to default mode
+	bindsym Return              mode $mode_default
+	bindsym Escape              mode $mode_default
+	bindsym $mod+Escape         mode $mode_default
+}
 
 bindsym $mod+r mode $mode_resize
 mode $mode_resize {
