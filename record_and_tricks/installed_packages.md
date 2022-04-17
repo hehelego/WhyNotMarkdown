@@ -70,6 +70,8 @@
 - starship (see [starship.rs](https://starship.rs/) and [github:starship](https://github.com/starship/starship))
 - pandoc
 - jq,hq,yq (parse/pretty/extract/convert for json/html/xml/yaml)
+- stow
+- chezmoi
 
 ### working
 
