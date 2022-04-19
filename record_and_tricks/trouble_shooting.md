@@ -420,38 +420,6 @@ SDL_IM_MODULE=fcitx
 XMODIFIERS=@im=fcitx
 ```
 
-## vim highlight cleared after changing colorscheme
-
-> 2021.5.15
-
-### 问题描述
-
-启动时使用`colorscheme gruvbox`,
-使用中切换到其他配色,
-发现很多`highlight group`被清除了,
-比如`signcolumn`中的来自LSP的`warning,error`.
-
-### 参考信息
-
-- [stackoverflow: gvim remove syntax highlighting after switching colorschemes](https://stackoverflow.com/questions/12915797/gvim-remove-syntax-highlighting-groups)
-- [github/vim issue: How to mitigate highlighting issues when switching colorschemes](https://github.com/vim/vim/issues/4405)
-- [github/solarized issue: Vim colorscheme leaves a wake of destruction when switching away](https://github.com/altercation/solarized/issues/102)
-- gruvbox,one的vim colorscheme源文件
-- [github repo: vim colorscheme switcher](https://github.com/xolox/vim-colorscheme-switcher)
-
-> The way Vim color schemes are written isn’t really compatible with the idea of quickly switching between lots of color schemes.
-> In my opinion this is an ugly implementation detail of how Vim works internally,
-> in other words I think it’s a bug that should be fixed...
-
-### 解决方案
-
-**TODO**
-暂时未解决 temporarily unable to fix it.
-
-This problem have been disturbing vim users for over 10 years and haven't yet been fixed.  
-There is a plugin for workaround [xolox's vim-colorscheme-switcher](https://github.com/xolox/vim-colorscheme-switcher).  
-However, as far as I am concerned, I personally suggest never change the colorscheme after startup.
-
 ## proxy settings for ssh
 
 ### 问题描述
