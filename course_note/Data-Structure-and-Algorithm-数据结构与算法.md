@@ -5,7 +5,7 @@
 > - MIT 6.006: Introduction to Algorithms. OCW Spring2020
 > - MIT 6.046: Design and Analysis of Algorithms. OCW Spring2015
 
-## expected comparision in randomized quicksort
+## expected comparison in randomized quicksort
 
 ### reference and links
 
@@ -13,7 +13,7 @@
 
 ### problem statement
 
-A permutation of $[n]=\{1,2,3\ldots n\}$ is choosen uniformly from all the permutations.
+A permutation of $[n]=\{1,2,3\ldots n\}$ is chosen uniformly from all the permutations.
 
 ```haskell
 qsort::(Ord a)=>[a]->[a]
@@ -33,17 +33,17 @@ when building the tree for `(x:xs)`, all the elements in `xs` is compared once w
 `xs` then got split into two disjoint part `lhs,rhs` and no comparison across the two set is performed.
 
 Consider $(i,i+1)$, they always get compared once.  
-For $(1,n)$ they get compared if and only if the pivot is $1$ or $n$ when spliting the whole sequence.  
-Generally for $(i,j)$ the comparision between then happens if and only if $k=i+1,i+2\ldots j-1,j$ is not selected as pivot before $i$ or $j$ is selected as pivot.(when $k>j$ is selected as a pivot, the pair is in the left subtree; while choosing $k<i$ as a pivot, the pair goes to the right subtree).  
+For $(1,n)$ they get compared if and only if the pivot is $1$ or $n$ when splitting the whole sequence.  
+Generally for $(i,j)$ the comparison between then happens if and only if $k=i+1,i+2\ldots j-1,j$ is not selected as pivot before $i$ or $j$ is selected as pivot.(when $k>j$ is selected as a pivot, the pair is in the left subtree; while choosing $k<i$ as a pivot, the pair goes to the right subtree).  
 
 Consider this scenario:  
 Given a sequence $(a_1,a_2\ldots a_n)$ we repeatedly delete an element randomly, what is the probability that for all $k$ such that $i<k<j$, the time that $k$ get deleted is latter than the time for $i$ and the time for $j$.  
 
 $(a_1\ldots a_{i-1})$ and $(a_{j+1}\ldots a_n)$ are redundant, we can ignore them.  
-The problem becomes: given a sequence of $j-i+1$ elements, an element is uniformly random selected, what is the probability that the head or the tail is choosen.  
+The problem becomes: given a sequence of $j-i+1$ elements, an element is uniformly random selected, what is the probability that the head or the tail is chosen.  
 The answer is $\frac{2}{j-i+1}$  
 
-Therefore, the expected number of comparisions is
+Therefore, the expected number of comparisons is
 
 $$
 \begin{aligned}
@@ -99,7 +99,7 @@ $$
 ## Trick: Converting paths in directed graph to paths in undirected graph
 
 Given a directed graph $G=(V,E)$, where $E\subseteq \{(u,v)\mid u,v\in V\}$.  
-We can construct a undirected graph $G'=(V',E')$ where:
+We can construct an undirected graph $G'=(V',E')$ where:
 
 $$
 \begin{aligned}
@@ -124,15 +124,15 @@ $$
 
 ### reduction examples
 
-#### 3-SAT to IS
+#### 3-SAT to independent set
 
-#### 3-SAT to Ham-CYC
+#### 3-SAT to Hamilton Cycle
 
 #### 3-SAT to 3-COLOR
 
 ## medians of medians
 
-> Given an sequence $(a_1,a_2\ldots a_n)$ where the elements of distinct elements.  
+> Given a sequence $(a_1,a_2\ldots a_n)$ where the elements of distinct elements.  
 > Find the $k$-th least element $x$ such that $k-1 = \sum_{i=1}^n [a_i < x]$.  
 
 WLOG, let $5\mid n$.  
@@ -175,7 +175,7 @@ In group $B_j$ we have at least $3$ elements less than $x$.
 That is $|L| \geq \frac{3n}{10}$.
 
 For the same reason, we have $|R| \geq \frac{3n}{10}$.  
-Therefore $|L|,|R| \leq \frac{7n}{10}$.
+Therefore, $|L|,|R| \leq \frac{7n}{10}$.
 
 ### complexity
 
@@ -209,3 +209,16 @@ $$
 three multiplications
 
 use this recursively $T(n)=3T(n/2)+O(n)$
+
+## Hall's theorem and Konig's theorem for bipartite-graph
+
+two important theorems concerning the bipartite graph
+
+- [wikipedia: Kőnig's theorem](https://en.wikipedia.org/wiki/Kőnig's_theorem_(graph_theory))
+- [wikipedia: Hall's marriage theorem](https://en.wikipedia.org/wiki/Hall's_marriage_theorem)
+
+**TODO:** proof of the frequently used theorem on bipartite graph
+
+## The max-flow min-cut theorem
+
+**TODO:** proof of the max-flow min-cut theorem

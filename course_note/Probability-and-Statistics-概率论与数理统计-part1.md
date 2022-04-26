@@ -258,7 +258,7 @@ taking limit when $n\to \infty$ on both side, $6=\sum_{i=1}^6 i\lim_{n\to\infty}
 
 ### more on indicators
 
-For $n$ (arbitary, independence is not required)events $A_1,A_2\ldots A_n$ and their indicators $I_1,I_2\ldots I_n$.  
+For $n$ (arbitrary, independence is not required)events $A_1,A_2\ldots A_n$ and their indicators $I_1,I_2\ldots I_n$.  
 Let $X=\sum_{i=1}^n I_i$, consider $\binom{X}{k}$
 
 - $k=0$, $\binom{X}{0}=1$ and $E\left(\binom{X}{0}\right)=1$
@@ -308,7 +308,7 @@ $
 
 ## ch5 Continuous Random Variable
 
-### normals
+### the normal distribution
 
 If $
 X\sim \mathcal{N}(\mu_1,\sigma_1^2),
@@ -407,9 +407,9 @@ M_Y(t)
 \quad (t>0)
 $$
 
-The momnets are $\mathbb{E}(Y^n)=n!$ and $\mathbb{E}(X^n)=\mathbb{E}\left( {\left(\frac{Y}{\lambda}\right)}^n \right)=\frac{n!}{\lambda^n}$
+The moments are $\mathbb{E}(Y^n)=n!$ and $\mathbb{E}(X^n)=\mathbb{E}\left( {\left(\frac{Y}{\lambda}\right)}^n \right)=\frac{n!}{\lambda^n}$
 
-### min,max of independent exponentials
+### min and max of independent exponentials
 
 Given three independent exponentials random variable.
 
@@ -437,18 +437,19 @@ P(\max(X_1,X_2,X_3)<t)
 \end{aligned}
 $$
 
-Thus, $\min(X_1,X_2,X_3)\sim \mathrm{Expo}(\lambda_1+\lambda_2+\lambda_3)$, but $\max(X_1,X_2,X_3)$ is not an exponentials r.v.  
+Thus, $\min(X_1,X_2,X_3)\sim \mathrm{Expo}(\lambda_1+\lambda_2+\lambda_3)$,
+while $\max(X_1,X_2,X_3)$ is not an exponential r.v.  
 
 ### expectation of max of i.i.d. exponentials via memoryless property
 
 Let $X_1,X_2\ldots X_n\sim\mathrm{Expo}(\lambda)$ be $n$ i.i.d. r.v.s. Find $\mathbb{E}(\max(X_1,X_2\ldots X_n))$  
 Let $T_1=\mathrm{kth}(1,\{X_i\}), T_2=\mathrm{kth}(2,\{X_i\})\ldots , T_n=\mathrm{kth}(n,\{X_i\})$ then $\max(\{X_i\})=\sum_i T_i$  
 
-- For $T_1$ can be seen as the first arival time in a Poisson process with parameter $n\lambda$.  
+- For $T_1$ can be seen as the first arrivals time in a Poisson process with parameter $n\lambda$.  
   (merged $n$ Poisson process with parameter $\lambda$)
-- For $T_2$, by memoryless property, can be viewed as the first arival time in a Poisson process with parameter $(n-1)\lambda$.  
+- For $T_2$, by memoryless property, can be viewed as the first arrivals time in a Poisson process with parameter $(n-1)\lambda$.  
   (merged $n-1$ Poisson process with parameter $\lambda$)
-- For $T_n$, by memoryless property, can be viewed as the first arival time in a Poisson process with parameter $1\lambda$.  
+- For $T_n$, by memoryless property, can be viewed as the first arrivals time in a Poisson process with parameter $1\lambda$.  
   (a Poisson process with parameter $\lambda$)
 
 Then $\mathbb{E}(\max X_i)=\sum_{i=1}^n \frac{1}{i\lambda}$

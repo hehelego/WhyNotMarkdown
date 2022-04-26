@@ -15,7 +15,7 @@ Let $X=\sum_{i}I(A_i)$ approximately, has a Poisson distribution $\mathrm{Pois}(
 - number of arrivals in an interval of length $t$ is a $\mathrm{Pois}(\lambda t)=e^{-\lambda t}\frac{{(\lambda t)}^n}{n!}$.
 - time between two arrivals has an Exponential distribution.
 - disjoint intervals are independent process.
-- sum of poisson process is a poisson process.
+- sum of Poisson process is a Poisson process.
 - $X,Y$ are independent Poisson r.v.s, then $X+Y$ has a Poisson distribution and $X|X+Y=n$ has a Binomial distribution.
 
 ### expected value of geometric distribution
@@ -72,13 +72,14 @@ E(X)
 =\int_0^{+\infty} \Pr(X\geq x)\mathrm{d}x
 $$
 
-### conditional independence in bayesian network
+### conditional independence in Bayesian network
 
 see
 
-- [zhihu王乐: 概率图模型之贝叶斯网络](https://zhuanlan.zhihu.com/p/30139208)
-- wikipedia
-- conditional probability chain rule:  
+- [Zhihu 王乐: 概率图模型之贝叶斯网络](https://zhuanlan.zhihu.com/p/30139208)
+- Wikipedia: Bayesian network
+- conditional probability chain rule
+
 $$
 \begin{aligned}
 P(A_1A_2A_3\ldots A_n)
@@ -128,10 +129,10 @@ A -> B -> C
 
 the network(graph) gives $P(B=b| A=a), P(C=c| B=b)$
 
-### PGF example: first occurance of a given pattern in coin filp sequence
+### PGF example: first occurrence of a given pattern in coin flip sequence
 
 > Given a sequence $(a_1,a_2\ldots a_n\ldots )$
-> where $a_i$ are i.i.d. Bernoulli random variable with prameter $p$, let $q=1-p$.  
+> where $a_i$ are i.i.d. Bernoulli random variable with parameter $p$, let $q=1-p$.  
 >
 > Let $X$ be the first time that $111$ is witnessed i.e. $X=k$ iff $(a_{k-2},a_{k-1},a_{k})=(1,1,1)$ and $\forall i<k, (a_{i-2},a_{i-1},a_i)\neq (1,1,1)$.  
 >
@@ -155,7 +156,7 @@ $$
   1. If $a_2=0$, this is another fresh start $P(X=n|a_1=1,a_2=0)=P(X=n-2)$
   2. If $a_2=1$, then $a_3=0$, otherwise we would have $X=3$, $P(X=n|a_1=1,a_2=1)=P(X=n-3)P(a_3=0)$
 
-Thus (LOTP with extra condition):
+Thus, by LOTP with extra condition:
 
 $$
 \begin{aligned}
@@ -254,7 +255,7 @@ f_{X_{(k)}}(x)
 $$
 
 Consider the $(\ast)$ step. $P(x-\delta < X_{(k)} < x+\delta ,\ X_{(k)}=X_1)$.
-To make that happen, both of the follwing two properties have to be satisfied.
+To make that happen, both of the following two properties have to be satisfied.
 
 - Place $X_1$ in the range $(x-\delta,x+\delta)$.  
 - For $X_2,X_3\ldots X_n$. Select $(k-1)$ $X_j$s that fall on to the left of $x$, while the other $(n-k)$ $X_j$s fall on to the right of $x$.
@@ -306,7 +307,7 @@ $$
 
 we have a few more related identities, $\sum_{i=k}^n,\sum_{i=0}^k,\int_0^x,\int_x^1$.
 
-#### two indentities
+#### two identities
 
 $$
 \begin{aligned}
@@ -416,7 +417,7 @@ $$
 
 - For $n$ i.i.d. $\mathrm{Expo}(\lambda)$ r.v.s. $X_1,X_2\ldots X_n$,
 the sum $Y=\sum_{i=1}^n X_i$ have a $\mathrm{Gamma}(n,\lambda)$ distribution.
-- In a Poisson process with prameter $\lambda$, the $k$-th arrival time $T_k$ has $\mathrm{Gamma}(k,\lambda)$ distribution.  
+- In a Poisson process with parameter $\lambda$, the $k$-th arrival time $T_k$ has $\mathrm{Gamma}(k,\lambda)$ distribution.  
   (note: $T_1<T_2\ldots T_n$, are dependent.)
 
 #### Beta-Gamma connection
@@ -475,22 +476,22 @@ $$
 
 #### Story of Beta and Gamma distribution
 
-- **Beta: ordered statistics of uniforms**  
+- **Beta**: ordered statistics of uniforms  
   $\beta(a+1,b+1)=\int_0^1 x^a{(1-x)}^b\mathrm{d}x=\frac{\Gamma(a+1)\Gamma(b+1)}{\Gamma(a+b+2)}=\frac{a! b!}{(a+b+1)!}$  
   Suppose that $X_1\ldots X_a, Z, Y_1\ldots Y_b$ are i.i.d. $\mathrm{Unif}(0,1)$ r.v.s.  
   The probability that $\max(X_1\ldots X_a) < Z < \min(Y_1\ldots Y_b)$ is $x^a {(1-x)}^b$
-- **Beta: (unknown) success probability of Bernoulli trials**  
-  In $\mathrm{Beta}(a,b)$, the parameters $a,b$ are called pesudo counts, where $a$ is the number of successful trials and $b$ is the number of failed trails.  
+- **Beta**: (unknown) success probability of Bernoulli trials  
+  In $\mathrm{Beta}(a,b)$, the parameters $a,b$ are called pseudo counts, where $a$ is the number of successful trials and $b$ is the number of failed trails.  
   If $p\sim \mathrm{Beta}(a,b), X|p\sim \mathrm{Bin}(n,p)$ and $X=k$ is observed.  
   The distribution of success probability get updated to $\mathrm{Beta}(a+k,b+(n-k))$
-- **Gamma: waiting time until the n-th arrival**  
+- **Gamma**: waiting time until the $n$-th arrival  
   $\mathrm{Gamma}(1,\lambda)=\mathrm{Expo}(\lambda)$  
   If $X_1\ldots X_n\sim\mathrm{Expo}(\lambda)$ are i.i.d. r.v.s.
   Then $\sum_i X_i\sim\mathrm{Gamma}(n,\lambda)$.
-- **Beta: the fraction of waiting time**  
+- **Beta**: the fraction of waiting time  
   $X\sim \mathrm{Gamma}(a,\lambda), Y\sim \mathrm{Gamma}(b,\lambda)$, waiting for $a+b$ independent arrivals with rate $\lambda$  
   Then $\frac{X}{X+Y}\sim\mathrm{Beta}(a,b)$
-- **Gamma: (unknown) rate of Poisson process**  
+- **Gamma**: (unknown) rate of Poisson process  
   $\lambda \sim \mathrm{Gamma}(r,b)$ is the prior distribution of the arrival rate $\lambda$  
   Then $X|\lambda \sim\mathrm{Pois}(\lambda t)$, the number of arrivals in $[0,t]$ for a Poisson process with parameter $\lambda$.  
   If $X=n$ is observed, the posterior distribution of $\lambda$ is updated to $\mathrm{Gamma}(r+n,b+t)$  
@@ -498,15 +499,15 @@ $$
 
 ### Conjugacy
 
-reference: [wikipedia: conjugacy prior](https://en.wikipedia.org/wiki/Conjugate_prior)
+reference: [Wikipedia: conjugacy prior](https://en.wikipedia.org/wiki/Conjugate_prior)
 
 #### Beta-Binomial
 
 If $p$ have a $\mathrm{Beta}(a,b)$ prior distribution, and $X|p=\mathrm{Bin}(n,p)$.  
 If $X=k$ is observed, the posterior distribution of $p$, $p|X=k$ is $\mathrm{Beta}(a+k,b+n-k)$  
-The positive real number $a,b$ are called _pesudo count_.  
+The positive real number $a,b$ are called _pseudo count_.  
 
-The prior distribution can be history records, uniform, or arbitarily picked things.
+The prior distribution can be history records, uniform, or arbitrarily picked things.
 
 $$
 \begin{aligned}
@@ -540,7 +541,7 @@ An extension of the Beta-Binomial conjugacy.
 #### Gamma-Poisson
 
 - The prior distribution of $\lambda$ is $\mathrm{Gamma}(r,b)$  
-- Obersvation $X|\lambda\sim \mathrm{Pois}(\lambda t)$. The number of arrivals in a Poisson process with parameter $\lambda$ in $[0,t]$ time.
+- Observation $X|\lambda\sim \mathrm{Pois}(\lambda t)$. The number of arrivals in a Poisson process with parameter $\lambda$ in $[0,t]$ time.
 - The posterior distribution $\lambda|X \sim \mathrm{Gamma}(r+n,b+t)$
 
 $$
@@ -576,19 +577,19 @@ $$
 \frac{r+n}{b+t}
 $$
 
-### (Conditioning on the first-step, Memoryless)
+### Conditioning on the first-step, memoryless
 
-(TODO: examples)
+TODO: examples
 
-### comparison: MAP,MLE,Bayesian Mean
+### estimator comparison: MAP, MLE, and the Bayesian Mean
 
 - MAP: Bayesian statistical inference. Maximize the posterior probability
-- MLE: Classical statistical inference. Maximize the likehood function.
+- MLE: Classical statistical inference. Maximize the likelihood function.
 - Bayesian Mean: Bayesian statistical inference. Conditional Expectation.
 
 ### The accept-reject sampling method
 
-Suppose that we can generate random samplees from PDF $g$,
+Suppose that we can generate random samples from PDF $g$,
 we want to generate samples from PDF $f$.
 
 Let $c\geq \sup_x \frac{f(x)}{g(x)}$.  

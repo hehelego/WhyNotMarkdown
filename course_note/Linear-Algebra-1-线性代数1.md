@@ -1,13 +1,14 @@
 # linear algebra
 
 > - 这是我在 2020 年在张江理工修读`线性代数1`课程中的记录
-> - 课程使用的教材是 Howard Anton 编写的 Elementry Linear Algebra,以及北京大学版高等代数.
+> - 课程使用的教材是 Howard Anton 编写的 Elementary Linear Algebra, 以及北京大学版高等代数.
 > - 这门课程并不完整.还有线性代数 2,会有更高层次的抽象以及无穷维线性空间的内容.  
->   由于我是 CS 学生而不是数学院的本科生,所以课程内容深度不会很大,广度也不是很足.
+>   由于我是 CS 学生而不是数学院的本科生, 所以课程内容深度不会很大, 广度也不是很足.
 
 ## Equivalent Statements
 
-for a $n\times n$ square matrix $A$. the following equations
+For a $n\times n$ square matrix $A$.
+The following criterions are equivalent to each other
 
 - $A$ is invertible($\iff$ A is left invertible $\iff$ A is right invertible)
 - $A\vec{x}=\vec{0}$ has only the trivial solution($\vec x=\vec 0$)
@@ -17,7 +18,7 @@ for a $n\times n$ square matrix $A$. the following equations
 - $\forall \vec{b},\ A\vec{x}=\vec{b}$ has unique solution
 - $\det(A) \neq 0$
 - row(column) vectors of $A$ are linearly independent
-- $\lambda=0$ is not a eigenvalue of $A$, $p(\lambda)=\det(\lambda I-A),p(0)=\det(-A)={(-1)}^n \det(A)\neq 0$
+- $\lambda=0$ is not an eigenvalue of $A$, $p(\lambda)=\det(\lambda I-A),p(0)=\det(-A)={(-1)}^n \det(A)\neq 0$
 
 ## elimination & determinant & inversion
 
@@ -393,7 +394,7 @@ $$
 $$
 
 我们求出$\begin{bmatrix}A\mid -B\end{bmatrix}$的 null space 的 basis,  
-是一些$\mathbb{R}^{2n}$的 vector,每个 vector 取前一半,再左乘上$A$,就是$\mathbb{col}(A)\cap \mathbb{col}(B)$的 basis 了.
+是一些$\mathbb{R}^{2n}$的 vector, 每个 vector 取前一半,再左乘上$A$,就是$\mathbb{col}(A)\cap \mathbb{col}(B)$的 basis 了.
 
 remark:  
 $A\mid -B$和$A\mid B$的 null space 是类似的.  
@@ -401,7 +402,7 @@ $A\mid -B$和$A\mid B$的 null space 是类似的.
 
 ### 正交分解定理
 
-> Consider a inner product space $V$ and two vectors $\vec u,\vec x\in V$ where $u\neq 0$ > $\exists k \text{ s.t. }\vec x=k\vec u+\vec b \text{ where } (b, u)=0,\vec b\perp \vec u$
+> Consider an inner product space $V$ and two vectors $\vec u,\vec x\in V$ where $u\neq 0$ > $\exists k \text{ s.t. }\vec x=k\vec u+\vec b \text{ where } (b, u)=0,\vec b\perp \vec u$
 
 考虑把$x$投影到$u$上面去,这部分应该是$(\frac{u}{||u||},x)$
 
@@ -445,11 +446,11 @@ u_m\cdot x\\
 \end{aligned}
 $$
 
-So the null space of $A$ is the orthogonal completement of $W$.
+So the null space of $A$ is the orthogonal complement of $W$.
 
 $rank(A)+nullity(A)=n$ where $rank(A)=rank(A^T)=m$ since the $m$ row vectors can form a basis, they are linearly independent.
 
-nullity of nullspace = dim of nullspace = dim of orthogonal completement.  
+nullity = dim of null-space = dim of orthogonal complement.  
 $\dim(W)+\dim(W^\perp)=n$, and $\dim(W\cap W^\perp)=\dim(\{\vec 0\})=0$ so.
 
 $$
@@ -466,14 +467,14 @@ and $W+W^\perp\subseteq V$, so $V=W+W^\perp$
 
 #### intro
 
-> 这里$V\to V$指 domain(定义域=原象集合)为$V$,codomain(象集合)是$V$的子集.  
+> 这里$V\to V$指 domain(定义域=原象集合)为$V$,co-domain(象集合)是$V$的子集.  
 > 和常见$A\to B$表示$\text{domain}\subseteq A,\text{codomain}\subseteq B$有区别.
 
 我们不妨用从 linear transform 来定义 matrix,  
 $n\times n$ square matrix 和$V\to V(\text{where }\dim(V)=n)$之间存在双射,乘法对应组合.  
 设$A$对应的线性变换为$f_A$,有$\forall x\in V,f_x=Ax,Ax=f_x$以及$f_B\circ f_A=f_{BA}$.
 
-#### existence of right inverse
+#### existance of right inverse
 
 定义映射$f$的逆为一个映射$g$,满足$g\circ f=I$  
 映射$f$可逆等价于$(x\neq y\to f\,x\neq f\, y)\land (\forall y\exists x(f\, x=y))$
@@ -533,7 +534,7 @@ $$
 
 remark: 简单来说,就是$\mathrm{span}\{a_i+b_i\}\subseteq \mathrm{span}\{a_i,b_i\}$加上$\dim(U+V)=\dim(U)+\dim(V)-\dim(U\cap V)$ **for finite dimensional vector space**
 
-### transpose,hermitian and innerproduct
+### transpose, hermitian and inner-product
 
 - real vector space: $\left< Ax,y\right> = y^T(Ax)= (A^T y)^T x = \left< x,A^T y\right>$
 - complex vector space: $\left< Ax,y\right> =y^\dag (Ax)= (A^\dag y)^\dag x = \left< x,A^\dag y\right>$
@@ -571,11 +572,11 @@ $$
 
 ### rank-nullity theorem 的经典证明
 
-rank 是极大无关行向量集合的大小,初等行变换不改变它,消元到 RREF,leading ones 所在的 row vector 就是一组 row vecs 的 basis.
+rank 是极大无关行向量集合的大小, 初等行变换不改变它, 消元到 RREF, leading ones 所在的 row vectors 就是一组 row space 的 basis.
 
-另一个定理告诉我们某个列向量子集线性无关,那么任意进行行变换,这些列向量仍然线性无关(虽然行变换会改变列空间).于是包含 leading varible 的 column 对应的 column vector 线性无关,再原矩阵中找到这些行也是线性无关的. 两者都是 count of leading varible 于是 row rank=column rank.
+另一个定理告诉我们某个列向量子集线性无关, 那么任意进行行变换, 这些列向量仍然线性无关(虽然行变换会改变列空间).于是包含 leading varible 的 column 对应的 column vector 线性无关, 再原矩阵中找到这些行也是线性无关的. 两者都是 count of leading varible 于是 row rank=column rank.
 
-nullity 的话,是 RREF 中 free varibles 的数目,于是 rank+nullity=count of column.
+nullity 的话, 是 RREF 中 free varibles 的数目, 于是 rank+nullity=count of column.
 
 ### 关于 rank-nullity theorem 的一些思考
 

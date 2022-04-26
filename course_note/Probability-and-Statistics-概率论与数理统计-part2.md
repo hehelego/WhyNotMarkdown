@@ -4,13 +4,13 @@
 
 ## ch8 Transformations
 
-### PDF transformation in variable substitution (with good smooth,bijective,differentiable properties)
+### PDF transformation in variable substitution (with good smooth, bijective, differentiable properties)
 
 For two continuous random variables $X,Y$ such that $X=g(Y)$.  
 Let $F_X(x)=P(X<x),F_Y(y)=P(Y<y)$ be the CDFs of $X,Y$ respectively
 and $f_X(x)=\lim_{\delta\to 0}\frac{P(|X-x|<\delta)}{2\delta}=\lim_{\delta\to 0}\frac{F_X(x+\delta)-F_X(x-\delta)}{2\delta}=F_X'(x),f_Y(y)=F_Y'(y)$ be the PDFs.
 
-Consider the probability that $X$ falls in $I_X=(x,x+\delta_X)$ and the corresponding interval $I_Y=(y,y+\delta_Y)$.  
+Consider the probability that $X$ falls in $I_X=(x,x+\delta_X)$ and the corresponding interval $I_Y=(y,y+\delta_Y)$,  
 where $\delta_Y=g'(x)\delta_X$ or $\mathrm{d}y=g'(x)\mathrm{d}x$
 
 $$
@@ -33,9 +33,9 @@ f_Y(\vec y) &= f_X(\vec x)\left|\frac{\partial (x_1,x_2\ldots x_n)}{\partial (y_
 \end{aligned}
 $$
 
-**note:** make use of "chain-rules" (the Jacobian of composed function is the product of Jacobian) and "inverse transformation" (Jacobian of inverse is the inverse of the Jacobian).
+**NOTE:** make use of "chain-rules" (the Jacobian of composed function is the product of Jacobian) and "inverse transformation" (Jacobian of inverse is the inverse of the Jacobian).
 
-### uncorrelated can not imply independent
+### Uncorrelated can not imply independent
 
 Let $X\sim \mathcal{N}(0,1)$ be a standard normal random variable,  
 $Y=X^2$.
@@ -49,7 +49,7 @@ $$
 
 **Special case:** For normal r.v.s, uncorrelated is equivalent to independent.
 
-### Covariance, Correaltion examples
+### Covariance, Correlation examples
 
 > Let $X,Y\sim\mathrm{Expo}(1)$ be two i.i.d. r.v.s.  
 > Find the correlation between $M=\max(X,Y)$ and $L=\min(X,Y)$.
@@ -94,8 +94,8 @@ $$
 ### Hyper-Geometric distribution variance
 
 > $X\sim\mathrm{HGeom}(w,b,n)$.  
-> we have $w$ white balls and $b$ black balls in a bag,  
-> draw $n$ balls from that bag, count the number of white balls tobe $X$.
+> We have $w$ white balls and $b$ black balls in a bag,  
+> draw $n$ balls from that bag, let $X$ be the number of white balls.
 
 Let $A_i$ be the event that the $i$-th drawn ball is white, and $I_i$ be the corresponding indicator  
 We have $I_i\sim \mathrm{Bern}\left(\frac{w}{w+b}\right)=\mathrm{Bern}(p)$, let $q=1-p=\frac{b}{w+b}$
@@ -119,7 +119,7 @@ $$
 
 ### multi-variate normal: MVN
 
-A random vector $\vec X=(X_1,X_2\ldots X_n)$ is said to be a MVN
+A random vector $\vec X=(X_1,X_2\ldots X_n)$ is said to be a MVN,
 iff $\mathrm{span}(X_1,X_2\ldots X_n)$, all the linear combination of the components, all have normal distribution (a constant value $c$ is viewed as $\mathcal{N}(c,0)$)
 
 #### examples
@@ -127,7 +127,7 @@ iff $\mathrm{span}(X_1,X_2\ldots X_n)$, all the linear combination of the compon
 - $X\sim \mathcal{N}(0,1), Y=SX, P(S=1)=P(S=-1)=\frac{1}{2}$.  
   The marginal distribution of $X$ and $Y$ are both $\mathcal{N}(0,1)$,  
   but $(X,Y)$ is not a MVN since $P(X+Y=0)=P(S=-1)=\frac{1}{2}$.
-- $X,Y\sim \mathcal{N}(0,1), Z=X+Y$ then $(X,Y,Z)$ is a MVN, although $Z$ is not independent from $(X,Y)$
+- $X,Y\sim \mathcal{N}(0,1), Z=X+Y$ then $(X,Y,Z)$ is a MVN, although $Z$ is not independent of $(X,Y)$
 
 #### BVN generating
 
@@ -146,7 +146,7 @@ $$
 \end{cases}
 $$
 
-Then
+Then a solution can be:
 
 $$
 \begin{cases}
@@ -156,8 +156,6 @@ c=\rho\\
 d=\sqrt{1-\rho^2}
 \end{cases}
 $$
-
-is a solution.
 
 #### BVN MGF
 
@@ -202,24 +200,30 @@ M_X(t_x)M_Y(t_y)
 \end{aligned}
 $$
 
-The joint/marginal MGF determines the joint/marginal distribution.
+We can find out that
 
-$\mathrm{Corr}(X,Y)=\rho=\frac{\mathrm{Cov}(X,Y)}{\sigma_x \sigma_y}=0$  
-**iff**  
-the product of marginal MGFs is equal to the joint MGF.  
-**iff**  
-the product of marginal PDFs is equal to the joint PDF.
+$$
+\mathrm{Corr}(X,Y)=\rho=\frac{\mathrm{Cov}(X,Y)}{\sigma_x \sigma_y}=0
+\iff
+M_{X,Y}(t_x,t_y) = M_{X}(t_x) M_{Y}(t_y)
+$$
+
+**NOTE:** The joint/marginal MGF determines the joint/marginal distribution.
+
+The product of marginal MGFs is equal to the joint MGF,  
+if and only if.  
+The product of marginal PDFs is equal to the joint PDF.
 
 This is a significant result: In MVN, uncorrelated is equivalent to independent.  
 (Generally speaking, uncorrelated is weaker than independent).
 
-### normal samples: sample mean and sample variance are independent
+### Normal Samples: sample mean and sample variance are independent
 
 $X_1,X_2\ldots X_n\sim \mathcal{N}(\mu,\sigma^2)$ are $n$ i.i.d. r.v.s.  
-Therefore $\bar{X}=\frac{1}{n}\sum_{i=1}^n X_i$ is a $\mathcal{N}\left(\mu, \frac{\sigma^2}{n}\right)$ random variable.
+Therefore, $\bar{X}=\frac{1}{n}\sum_{i=1}^n X_i$ is a $\mathcal{N}\left(\mu, \frac{\sigma^2}{n}\right)$ random variable.
 
 Consider $\vec{X}=(\bar X,X_1-\bar X,X_2-\bar X\ldots X_n-\bar X)$ is a linear combination of $(X_1,X_2\ldots X_n)$, which is a MVN.
-Thus $\vec{X}$ is a MVN.  
+Thus, $\vec{X}$ is a MVN.  
 Consider the covariance between $\bar X$ and $X_i-\bar X$.
 
 $$
@@ -237,17 +241,19 @@ In MVN, uncorrelated components are independent.
 So $\bar X$ is independent of $X_i-\bar{X}$ for all $1\leq i\leq n$.  
 (sample mean, distance from mean are independent)
 
-Consider $S_n=\frac{1}{n-1}\sum_{i=1}^n {(X_i-\bar X)}^2$, is a function of $(X_1-\bar X,X_2-\bar X,\ldots X_n-\bar X)$  
-so it is independent of $\bar{X}$.  
-Sample mean and sample variance are independent.
+Considering that $S_n=\frac{1}{n-1}\sum_{i=1}^n {(X_i-\bar X)}^2$, is a function of $(X_1-\bar X,X_2-\bar X,\ldots X_n-\bar X)$,  
+which are independent of $\bar{X}$,
+we can conclude that $S_n$ is independent of $\bar{X}$.  
 
-see also:
+That is: for i.i.d. samples of a normal distribution, the mean and the sample variance are independent.
+
+See also:
 
 - Chi-Square distribution (for Normal sample variance distribution)
 - Fisher's F-distribution
 - William Gosset's t-distribution
 
-### generating Normals, the Box-Muller method
+### Generating normal r.v.s, the Box-Muller method
 
 Let $U\sim \mathrm{Unif}(0,2\pi), T\sim \mathrm{Expo}(1)$ be independent r.v.s
 
@@ -322,8 +328,9 @@ $$
 #### proof: conditional expectation
 
 For the iterated conditional expectation.  
-This is a direct implication of the LOTE (law of total expectation)  
-Can be intepreted as **The total expectation is the weighted average of expectation within a group**.
+This is a direct implication of the law of total expectation  
+and can be interpreted as:  
+**The expectation is the weighted average of the means within each group**.
 
 $$
 \begin{aligned}
@@ -335,7 +342,16 @@ $$
 $$
 
 Let $\hat{\mathbb{E}}(\cdot)=\mathbb{E}(\cdot | Z)$, we have
-$\mathbb{\hat E}\left(\mathbb{\hat E}\left(X|Y\right)\right)$.
+$\mathbb{\hat E}\left(\mathbb{\hat E}\left(X|Y\right)\right)=\hat{\mathbb{E}}(X)$
+which is an extended version of the iterated conditional expectation
+
+$$
+\mathbb{E}\left[
+\mathbb{E} \left( X\mid Y \right)
+\mid Z
+\right]
+=\mathbb{E}\left[ X|Z \right]
+$$
 
 #### proof: conditional variance
 
@@ -374,7 +390,7 @@ $$
 #### examples: random sum
 
 > We have some random variables $X_1\ldots X_N$  
-> When the ranndom positive integer $N$ is given. We have $X_1,X_2\ldots X_N$ are i.i.d. with $\mathbb{E}(X_i)=\mu,\operatorname{Var}(X_i)=\sigma^2$  
+> When the random positive integer $N$ is given. We have $X_1,X_2\ldots X_N$ are i.i.d. with $\mathbb{E}(X_i)=\mu,\operatorname{Var}(X_i)=\sigma^2$  
 > Find the mean and variance of $X=\sum_{i=1}^N X_i$
 
 $$
@@ -438,7 +454,7 @@ For $Y\sim \mathrm{FS}(p)$, we have $\mathbb{E}(Y)=p\cdot 1 + q \left( 1+\mathbb
 
 #### Coin tosses sequence pattern matching
 
-> We filp a coin multiple times.
+> We flip a coin multiple times.
 >
 > - What is the expected number of tosses needed until $\mathrm{HT}$
 > - What is the expected number of tosses needed until $\mathrm{HH}$
@@ -447,9 +463,11 @@ For $Y\sim \mathrm{FS}(p)$, we have $\mathbb{E}(Y)=p\cdot 1 + q \left( 1+\mathbb
 > - What is the expected number of tosses needed until all of $\mathrm{HTT},\mathrm{TTTHHT},\mathrm{HHTTHH}$
 >
 > keywords:  
-> **DFA, KMP, Aho-Corasick**  
-> **PGF probability generating function**, **random walk on graph**  
-> **Markov Chain**, **Martingale**
+>
+> - DFA, KMP, Aho-Corasick
+> - PGF probability generating function
+> - random walk on graph
+> - Markov Chain**, **Martingale
 
 We will tackle the first three with the help of _Conditional Expectation_ and _Memoryless property of Bernoulli Process_.
 
@@ -517,22 +535,22 @@ Consider this vector space $(V,F,+,\cdot)$ where
 - $V=\{ X,Y\ldots \}$, is all the random variables (and all the functions of r.v.s. which are also random variables)
 - $F=\mathbb{R}$
 
-We can define a inner product on this space.
+We can define an inner product on this space.
 
 $$
 \left\langle X,Y \right\rangle=\mathbb{E}(XY)
 $$
 
-We can vertify that this is a _non-negative, additive, symmetry, homogeneous_ bilinear form.
+We can verify that this is a _non-negative, additive, symmetry, homogeneous_ bilinear form.
 
-Therefore $\mathbb{E}\left[(Y-\mathbb{E}(Y|X))\, h(X)\right]=0$ can be interpreted as:
+Therefore, $\mathbb{E}\left[(Y-\mathbb{E}(Y|X))\, h(X)\right]=0$ can be interpreted as:
 
 $$
 \left\langle Y-\mathbb{E}(Y|X),h(X) \right\rangle=0
 \iff (Y-\mathbb{E}(Y|X)) \perp h(X)
 $$
 
-This shows that $Y-\mathbb{E}(Y|X)$ and the sub-space $U=\{h(X)\mid h:\mathbb{V}\to \mathbb{V}\}$ are orthogonal.  
+This shows that $Y-\mathbb{E}(Y|X)$ and the subspace $U=\{h(X)\mid h:\mathbb{V}\to \mathbb{V}\}$ are orthogonal.  
 The projection of $Y$ on $U=\{ h(X) \}$ is $\mathbb{E}(Y|X)$
 
 #### MMSE
@@ -554,7 +572,7 @@ Where $\mathbb{E}(Y|X)-g(X)$, as a function of $X$ is orthogonal to $Y-\mathbb{E
 This is the Minimum Mean Square Error (MMSE) estimator of $Y$ given $X$.  
 $\operatorname{MMSE}(Y|X)=\operatorname{proj}_{\{h(X)\mid h:\mathbb{V}\to \mathbb{V}\}}(Y)=\mathbb{E}(Y|X)$.
 
-#### uniqueness of the projection
+#### Uniqueness of the projection
 
 For a function $g(X)$, $\left( \forall h,\, Y-g(X)\perp h(x) \right)\iff g(X)=\mathbb{E}(Y|X)$  
 Or in language of linear algebra: $v=\operatorname{proj}_{W} u \iff v\in W\land \left(\forall x\in W,\, 0=\left\langle x,u-v \right\rangle\right)$
@@ -643,10 +661,10 @@ $$
    $$
 6. Therefore, $Y-\mathrm{L}(Y|X)$ is orthogonal to $\{h(X)\mid h:V\to V\}$.  
    $\mathrm{L}(Y|X)$ is the projection of $Y$ on $\{h(X)\mid h:V\to V\}$.  
-   so $\mathrm{L}(Y|X)=\mathbb{E}(Y|X)$.
+   Hence, $\mathrm{L}(Y|X)=\mathbb{E}(Y|X)$.
 
-- The projection on function space gives MMSE (best approximation).
-- The projection on linear function spaec gives LLSE (best linear approximation).
+- The projection on function space gives MMSE (the best approximation).
+- The projection on linear function space gives LLSE (the best linear approximation).
 
 ## ch10 Inequalities and Limit Theorems
 
@@ -684,9 +702,9 @@ $$
 P(X=k)=P(k-1/2 < X < k+1/2)
 $$
 
-example: For $Y\sim\mathrm{Bin}(n,p)$, we can view $Y$ as sum of $n$ i.i.d. $\mathrm{Bern}(p)$  
+Example: For $Y\sim\mathrm{Bin}(n,p)$, we can view $Y$ as sum of $n$ i.i.d. $\mathrm{Bern}(p)$  
 Thus $Y$ approximately has $\mathcal{N}(np,npq)$ distribution,
-andd $\frac{Y-np}{\sqrt{npq}}$ has an $\mathcal{N}(0,1)$ distribution approximately.
+and $\frac{Y-np}{\sqrt{npq}}$ has a $\mathcal{N}(0,1)$ distribution approximately.
 
 $$
 \begin{aligned}
@@ -711,7 +729,7 @@ $\left\langle X,Y \right\rangle = \mathbb{E}(XY)$ is a real inner product on the
 - additive. $\mathbb{E}((X+Y)Z)=\mathbb{E}(XZ)+\mathbb{E}(YZ)$
 - homogeneous. $\mathbb{E}(kXY)=k\mathbb{E}(XY)$
 
-Thus ${\left\langle X,Y\right\rangle}^2\leq
+Thus, ${\left\langle X,Y\right\rangle}^2\leq
 { \left\langle X,X \right\rangle }
 { \left\langle Y,Y \right\rangle }$ which is $\mathbb{E}(XY)\leq \sqrt{\mathbb{E}(X^2)\mathbb{E}(Y^2)}$
 
@@ -822,13 +840,13 @@ $$
 g(x)=\sum_{n=0}^\infty \frac{g^{(n)}(\mu)}{n!}{(x-\mu)}^n
 $$
 
-Take the first order approximation (the tangent line at $(\mu,g(\mu))$:
+Take the first order approximation (the tangent line at $(\mu,g(\mu))$):
 
 $$
 f(x)=g(\mu)+(x-\mu)g'(\mu)
 $$
 
-We will show that this is a loewr bound of $g(x)$
+We will show that this is a lower bound of $g(x)$
 
 
 $$
@@ -963,6 +981,9 @@ The following form is more common in practice
 $$
 P(|X-\mu|\geq k\sigma) \leq \frac{1}{k^2}
 $$
+
+##### the single-sided Chebyshev's inequality
+
 
 #### introducing the MGF: Chernoff's inequality
 
@@ -1141,6 +1162,7 @@ $$
 external link: UCB (upper confidence bound) algorithm
 
 ## ch11 Markov Chain
+
 
 ## ch12 MCMC
 

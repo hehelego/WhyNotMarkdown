@@ -19,8 +19,7 @@
   The correctness of interchanging summation/integration/differentiation with summation/integration/differentiation.
 - [wikipedia: Dirichlet Kernel](https://en.wikipedia.org/wiki/Dirichlet_kernel).
   For studying the convergence property of Fourier series/transform.
-
-mathematics textbook on Fourier Analysis, Complex Analysis, ODE, PDE
+- Other mathematics textbook on Fourier Analysis, Complex Analysis, ODE and PDE.
 
 ### contents
 
@@ -29,18 +28,18 @@ mathematics textbook on Fourier Analysis, Complex Analysis, ODE, PDE
 - basis of signals and systems
   - definitions
   - time-domain transforms: delaying, scaling, reversal.
-  - signals that serves as fundamental building blocks: sinusoidal signals, complex exponentials, unit impulse, unit step.
+  - signals that serve as fundamental building blocks: sinusoidal signals, complex exponentials, unit impulse, unit step.
   - basic properties of systems: invertibility, memory/memoryless, causality, linearity, time-invariance
 - time-domain: decomposition of signals and analysis of LTI systems
   - unit impulse and impulse response
   - convolution: $h[n]=\sum_{k} x[k]y[n-k]\quad h(x)=\int_{-\infty}^{+\infty} f(t)g(x-t)$
-  - causality and BIBO stability of a LTI system via unit impulse response
+  - causality and BIBO stability of an LTI system via unit impulse response
   - interconnection of LTI systems
 - frequency-domain: decomposition of signals and analysis of LTI systems
   - complex exponentials and frequency response(system function)
   - convolution theorem: $\mathcal{L}\{(f\ast g)(t)\}=\mathcal{L}\{f(t)\}\cdot \mathcal{L}\{g(t)\}\quad \mathcal{Z}\{(x\ast y) [n]\}=\mathcal{Z}\{x[n]\}\cdot \mathcal{Z}\{y[n]\}$
   - Laplace Transform (for continuous time) and Z Transform (for discrete time)
-  - causality and BIBO stability of a LTI system via unit impulse response via ROC(region of convergence) of system function
+  - causality and BIBO stability of an LTI system via unit impulse response via ROC(region of convergence) of system function
   - FS(Fourier Series) of continuous time periodic signals
   - FT(Fourier Transform) of continuous time aperiodic signals
   - DTFS(Discrete-Time Fourier Series) for periodic discrete-time signals
@@ -49,7 +48,7 @@ mathematics textbook on Fourier Analysis, Complex Analysis, ODE, PDE
 - sampling theorem
   - Dirac comb function: frequency-domain comb and time-domain comb
   - amplitude modulation, convolution theorem for Fourier transform and its inverse
-  - reconstructing bandlimited signals from samples using $\mathrm{sinc} x=\frac{\sin x}{x}$ function
+  - reconstructing band-limited signals from samples using $\mathrm{sinc} x=\frac{\sin x}{x}$ function
   - aliasing
 - applications
   - solving linear differential/difference equation with Laplace/Z Transform.
@@ -79,9 +78,9 @@ are LTI systems.
 
 #### time domain decomposition of signals and the convolution
 
-For a LTI system $H$, define $\delta[n]\to h[n]$ to be the impulse response.  
+For an LTI system $H$, define $\delta[n]\to h[n]$ to be the impulse response.  
 
-For every signals $x[n]$, we can decompose it into a series of scaled delayed impulses.
+For every signal $x[n]$, we can decompose it into a series of scaled delayed impulses.
 
 $$
 \begin{aligned}
@@ -108,13 +107,13 @@ $$
 
 This is called the convolution sum $h*x=x*h$.
 
-The properties of a LTI systems correspond to the properties of its impulse response.
+The properties of an LTI systems correspond to the properties of its impulse response.
 
 - BIBO stability: absolutely summability of the impulse response
 - causality: whether the impulse response half sided $\forall n<0 \quad h[n]=0$
 - invertibility: $h*h^{-1}=\delta\iff \delta[n]=\sum_{k}$
 
-#### properties of convolution: parallel,serial(cascade) inter-connections of LTI systems
+#### properties of convolution: parallel and serial(cascade) inter-connections of LTI systems
 
 we can find some basic algebraic properties of the convolution operation
 
@@ -123,11 +122,11 @@ we can find some basic algebraic properties of the convolution operation
 - commutativity $f*g = g*f$
 - distribution over addition $f*(g+h)=f*g+f*h$
 
-these properties corresponds to properties of LTI systems
+these properties correspond to properties of LTI systems
 
-- The serial/cascade inter-connection of two LTI systems is still a LTI system,
+- The serial/cascade inter-connection of two LTI systems is still an LTI system,
   where the impulse response of such system is the convolution of the impulse responses for the two systems.
-- The serial/cascade inter-connection of two LTI systems is still a LTI system,
+- The serial/cascade inter-connection of two LTI systems is still an LTI system,
   where the impulse response of such system is the sum of the impulse responses for the two systems.
 - If we combine a sequence of serial connected LTI systems together, we can re-order them arbitrarily and the result remains the same.
 
@@ -136,7 +135,7 @@ these properties corresponds to properties of LTI systems
 LTI systems are just linear operators.
 Theories for spectrum developed in linear algebra can be applied in analysis of LTI systems.
 
-Consider a LTI system $H$ whose unit impulse response is $h[n]$.  
+Consider an LTI system $H$ whose unit impulse response is $h[n]$.  
 The response of $x[n]=z^n$ is $y[n]$ where
 
 $$
@@ -245,13 +244,13 @@ $x[n]=e^{j \omega n}=\cos(\omega n)+i\sin(\omega n)$ (note that $e^{j\omega n}=e
 
 ### Dirac comb and uniform sampling
 
-> see [dsp stackexchange: sampling theorem and Dirac comb](https://dsp.stackexchange.com/questions/1409/sampling-theorem-and-dirac-comb#1444)
+> see [DSP stack exchange: sampling theorem and Dirac comb](https://dsp.stackexchange.com/questions/1409/sampling-theorem-and-dirac-comb#1444)
 
 $$
 \operatorname{comb}_T(t)=\sum_{n=-\infty}^{+\infty}\delta(t-nT)
 $$
 
-is called the Dirac comb function which is used to study uniform sampling.
+This is called the Dirac comb function which is used to study uniform sampling.
 
 $$
 x(t)\operatorname{comb}_T(t)
@@ -268,7 +267,7 @@ $$
 
 Then we can apply convolution theorem to find the spectrum of the samples.
 
-***TODO*** finish this section
+**TODO:** finish this section
 
 ### convolution and singularity signals
 

@@ -1,8 +1,8 @@
-# EE150 course note: Fourier Analayis
+# EE150 course note: Fourier Analysis
 
 ## Overview
 
-Consider a LTI system with impulse response $h(t)$.
+Consider an LTI system with impulse response $h(t)$.
 The response for $x(t)=e^{st}$ is
 
 $$
@@ -25,8 +25,8 @@ then $z[n]\stackrel{H}{\to} H(z) z^n$
 
 Now we know that
 
-- for continuous-time LTI systems: $x_{s}(t)=e^{st}$ is an eigen-vector and the eigen-value is $\mathcal{L}\{h(t)\}(s)$.
-- for discrete-time LTI systems: $x_{z}[n]=z^n$ is an eigen-vector and the eigen-value is $\mathcal{Z}\{h[n]\}(z)$.
+- For continuous-time LTI systems: $x_{s}(t)=e^{st}$ is an eigenvector and the eigenvalue is $\mathcal{L}\{h(t)\}(s)$.
+- For discrete-time LTI systems: $x_{z}[n]=z^n$ is an eigenvector and the eigenvalue is $\mathcal{Z}\{h[n]\}(z)$.
 
 So we want to express signals in terms of linear combination of complex exponentials.  
 
@@ -42,20 +42,20 @@ which makes the problem easier.
 ## orthogonal and normal basis property
 
 Let $S_{T}=\{f\in L^2[-T/2,T/2] \mid f(t)=f(t+T)\}$ be the space of square integrable signals with period $T$.  
-Define a inner product on $S_{T}$:
+Define an inner product on $S_{T}$:
 
 $$
 \left<f,g\right>=\frac{1}{T}\int_{-T/2}^{+T/2} f(t)g^{\ast}(t)\mathrm{d} t
 $$
 
-We can verify that this is a inner product
+We can verify that this is an inner product
 
 - $\left<f,g\right>={\left(\left<g,f\right>\right)}^{\ast}$
 - $\left<f+g,h\right> = \left<f,h\right> + \left<g,h\right>$
 - $\left<\alpha f,h\right> = \alpha \left<f,g\right>$
-- $\left<f,f\right> \geq 0$ (we have a equal sign only when $f\equiv 0$ nearly everywhere)
+- $\left<f,f\right> \geq 0$ (we have an equal sign only when $f\equiv 0$ nearly everywhere)
 
-Then $\{e^{j k \omega t}\mid k\in \mathbb{Z}\}$ is a orthonormal basis, where $\frac{2\pi}{\omega}=T$.
+Then $\{e^{j k \omega t}\mid k\in \mathbb{Z}\}$ is an orthonormal basis, where $\frac{2\pi}{\omega}=T$.
 
 $$
 \left< e^{j n\omega t}, e^{j m\omega t} \right>
@@ -129,13 +129,13 @@ $$
 =\sum_{k} a_k b_k^\ast
 $$
 
-### convergence issue
+### convergence issue for CTFS
 
 Dirichlet conditions:
 
-- absolutely integrable over a period.
-- finite number of extrema during any single period
-- finite number of discontinuities in any finite interval of time (each of these discontinuities is finite).
+- Absolutely integrable over a period.
+- Finite number of extrema during any single period
+- Finite number of discontinuities in any finite interval of time (each of these discontinuities is finite).
 
 The FS at $x=t$ converges to
 
@@ -162,7 +162,7 @@ where $x(t),y(t)$ have period $T_0$ and $\omega_0 = \frac{2\pi}{T}$.
 - conjugation: $\mathrm{FS}\{x^\ast(t)\}=a_{-k}^\ast$
 - derivative: $\mathrm{FS}\{\frac{\mathrm{d}}{\mathrm{d} t}x(t)\}=(jk\omega_0) a_k$.
 - integral: $\mathrm{FS}\{\int_{-\infty}^{t} x(\tau)\mathrm{d}\tau\}=\frac{a_k}{jk\omega_0}$
-- **note:** speecial case for $a_0$ in differential and integration
+- **note:** special case for $a_0$ in differential and integration
 
 ## Fourier Series for Discrete-Time Periodic Signals: DTFS
 
@@ -176,14 +176,14 @@ $$
 =\frac{1}{N}\sum_{n=0}^{N-1}x[n]y^{\ast}[n]
 $$
 
-We can verify that this operator is a inner product.
+We can verify that this operator is an inner product.
 
 Now let us consider the set
 $\{ x_k[n]=e^{j k \omega_0 n}\mid k\in \mathbb{Z} \}$
 where $\omega_0 = \frac{2\pi}{N}$  
 (Notice that $x_{k+N}[n]=e^{j (k+N) \omega_0 n}=e^{j k\omega_0 n} e^{j(2\pi) n}=x_{k}[n]$.
-Thus the set can be simplified to $\{ x_k[n]=e^{j k \omega_0 n}\mid k=0,1,2\ldots N-1 \}$
-reminder: $[0,2\pi]$ close to $\pi$ high frequency, cloes to $0$ or $2\pi$ low frequency.)
+Thus, the set can be simplified to $\{ x_k[n]=e^{j k \omega_0 n}\mid k=0,1,2\ldots N-1 \}$
+reminder: $[0,2\pi]$ close to $\pi$ high frequency, close to $0$ or $2\pi$ low frequency.)
 
 $$
 \begin{aligned}
@@ -203,8 +203,8 @@ $$
 \end{aligned}
 $$
 
-Thus, the set of exponentials with period $N$ forms a orthonormal set.  
-Further more, we can show that this is a complete basis.
+Thus, the set of exponentials with period $N$ forms an orthonormal set.  
+Furthermore, we can show that this is a complete basis.
 
 ### extracting the coefficients
 
@@ -225,9 +225,9 @@ a_k
 =\frac{1}{N}\sum_{k=0}^{N-1} x[k] e^{-j(m\omega) k}
 $$
 
-### convergence issue
+### convergence issue for DTFS
 
-The DTFS for periodic signal is guaranteed to be exist
+The DTFS for periodic signal is guaranteed to exist
 and always converges to the original signal.
 
 ### properties of DTFS
@@ -293,8 +293,8 @@ $$
 
 which are the Fourier Transform (FT) and inverse Fourier Transform (iFT).  
 
-The Fourier Transform can viewed as a speecial case of the Laplace Transform.  
-So the eigen vector property can be applyied
+The Fourier Transform can be viewed as a special case of the Laplace Transform.  
+So the eigenvector property can be applied
 
 $$
 \mathcal{F}\{x(t)\}(\omega) = \mathcal{L}\{x(t)\}(j\omega)
@@ -305,8 +305,8 @@ $$
 ### another integrable function space and orthonormal complete basis
 
 Let $S=\{f:\mathbb{R}\to \mathbb{C}\mid \int_{-\infty}^{+\infty} |f| < \infty\}$.  
-Define a inner product on $S$ as $\left<f,g\right>=\lim_{T\to +\infty} \frac{1}{T}\int_{-T/2}^{T/2} f(t)g^\ast(t)\mathrm{d} t$.
-Then $\{e^{j\omega t}\mid \omega \in \mathbb{R}\}$ is a orthonormal basis.
+Define an inner product on $S$ as $\left<f,g\right>=\lim_{T\to +\infty} \frac{1}{T}\int_{-T/2}^{T/2} f(t)g^\ast(t)\mathrm{d} t$.
+Then $\{e^{j\omega t}\mid \omega \in \mathbb{R}\}$ is an orthonormal basis.
 
 When $\omega_0\neq \omega_1$, we have
 
@@ -446,3 +446,9 @@ $$
 =\frac{2\pi}{T} \sum_{n}\delta(\omega-k\omega_0)
 =\omega_0 \mathrm{Comb}_{\omega_0}(\omega)
 $$
+
+## MISC
+
+### Fourier Transform of the Heaviside unit step function
+
+**_TODO_**
