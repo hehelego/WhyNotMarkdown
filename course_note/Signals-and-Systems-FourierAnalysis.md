@@ -451,4 +451,85 @@ $$
 
 ### Fourier Transform of the Heaviside unit step function
 
-**_TODO_**
+- see [Fourier transform of the unit step function](https://bathmash.github.io/HELM/24_3_special_fourier_trnsform_pairs-web/24_3_special_fourier_trnsform_pairs-webse5.html)
+
+$u(t)=\mathbb{1}[t>0]=\begin{cases}
+1 & t>0\\
+0 & t<0\\
+\end{cases}$
+and the value for $u(0)$ can be selected as $0,1$ or $\frac{1}{2}$.
+
+The Fourier integral does not converge for $u(t)$,
+the Cauchy principal value of $u(t)$ diverges too.  
+We have to derive the CTFT for $u(t)$ through other ways.
+
+Let $f(t) = 2u(t)-1=\begin{cases}
+1  & t>0\\
+-1 & t<0\\
+\end{cases}$
+and $u(t)=\frac{1}{2}\left[ f(t)+1 \right]$
+i.e. the Odd-Even components of $u(t)$.
+
+This time, the P.V. of $f(t)$ is zero, which is finite
+but the Fourier integral still does not converge.
+
+Consider $f_\sigma(t) = \begin{cases}
+e^{-\sigma t}   & t>0\\
+-e^{\sigma t} & t<0\\
+\end{cases}$ for $\sigma > 0$.  
+We have $f(t)=\lim_{\sigma\to 0^{+}}f_\sigma(t)$ point-wisely,
+we hope that $\mathcal{F}\{f_\sigma\} \to \mathcal{F}\{f\}$.  
+(**Recall:**
+that is the way we derive Laplace Transform from the Fourier Transform,
+multiply the time-domain function by a real decaying exponential $e^{-\sigma t}$ for $\sigma>0$)
+
+$$
+\begin{aligned}
+\mathcal{F}\{f_\sigma(t)\}(\omega)
+&= \int_0^{+\infty} e^{-(\sigma+j\omega)t}\mathrm{d}t
+  -\int_{-\infty}^0 e^{-(-\sigma+j\omega)t}\mathrm{d}t\\
+&=\frac{1}{\sigma+j\omega} + \frac{1}{\sigma-j\omega}\\
+&=\frac{-2j\omega}{\sigma^2+\omega^2}
+\end{aligned}
+$$
+
+Let's define $\mathcal{F}\{f\}=\mathcal{F}\{f_\sigma\}$ as $\sigma\to 0^{+}$.  
+
+$$
+\mathcal{F}\{f\}(\omega) = \frac{-2j}{\omega} = \frac{2}{j\omega}
+$$
+
+Thus
+
+$$
+\mathcal{F}\{u(t)\}
+=\mathcal{F}\left\{ \frac{1}{2}(f(t)+1) \right\}
+=\frac{1}{2}\cdot \frac{2}{j\omega} + \frac{1}{2}\cdot 2\pi\delta(\omega)
+=\frac{1}{j\omega} + \pi \delta(\omega)
+$$
+
+Application: Suppose that the Fourier transform of $f(t)$ is $F(\omega)$ then
+
+$$
+\mathcal{F}\left\{
+	\int_{-\infty}^t f(t)\mathrm{d}t
+\right\}
+=\mathcal{F}\left\{ f(t) \ast u(t) \right\}
+=\mathcal{F}\{f(t)\} \cdot \mathcal{F}\{u(t)\}
+=\left[\frac{1}{j\omega}+\pi \delta(\omega)\right] F(\omega)
+$$
+
+That is $\frac{F(\omega)}{j\omega} + \pi \delta(\omega)F(0)$
+
+#### note on the Heaviside function
+
+The Laplace transform of $u(t)$ exists for $\mathfrak{Re}(s)>0$
+
+$$
+\mathcal{L}\{u(t)\}(s)
+=\int_0^{+\infty} u(t) e^{-st}\mathrm{d} t
+=\int_0^{+\infty} e^{-st}\mathrm{d} t
+=\frac{1}{s}
+$$
+
+The ROC means that we can not have $\mathcal{F}\{u(t)\}(\omega)=\mathcal{L}\{u(t)\}(0+j\omega)$.
