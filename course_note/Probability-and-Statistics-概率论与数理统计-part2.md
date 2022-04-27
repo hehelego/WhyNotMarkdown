@@ -243,7 +243,7 @@ So $\bar X$ is independent of $X_i-\bar{X}$ for all $1\leq i\leq n$.
 
 Considering that $S_n=\frac{1}{n-1}\sum_{i=1}^n {(X_i-\bar X)}^2$, is a function of $(X_1-\bar X,X_2-\bar X,\ldots X_n-\bar X)$,  
 which are independent of $\bar{X}$,
-we can conclude that $S_n$ is independent of $\bar{X}$.  
+we can conclude that $S_n$ is independent of $\bar{X}$.
 
 That is: for i.i.d. samples of a normal distribution, the mean and the sample variance are independent.
 
@@ -462,7 +462,7 @@ For $Y\sim \mathrm{FS}(p)$, we have $\mathbb{E}(Y)=p\cdot 1 + q \left( 1+\mathbb
 > - What is the expected number of tosses needed until one of $\mathrm{HTT},\mathrm{TTTHHT},\mathrm{HHTTHH}$
 > - What is the expected number of tosses needed until all of $\mathrm{HTT},\mathrm{TTTHHT},\mathrm{HHTTHH}$
 >
-> keywords:  
+> keywords:
 >
 > - DFA, KMP, Aho-Corasick
 > - PGF probability generating function
@@ -848,7 +848,6 @@ $$
 
 We will show that this is a lower bound of $g(x)$
 
-
 $$
 \begin{aligned}
 h(x)&=f(x)-g(x)\\
@@ -939,7 +938,7 @@ $$
 
 #### first step: the Markov's inequality
 
-For any non-negative random variable $X$ and positive real number $a>0$,  
+For any non-negative random variable $X$ and positive real number $a>0$,
 
 $$
 P(X\geq a)\leq \frac{\mathbb{E}(X)}{a}
@@ -982,12 +981,69 @@ $$
 P(|X-\mu|\geq k\sigma) \leq \frac{1}{k^2}
 $$
 
-##### the single-sided Chebyshev's inequality
+##### the one-sided Chebyshev's inequality
 
+Suppose that $\mathbb{E}(X)=\mu, \operatorname{Var}(X)=\sigma^2$,
+consider the probability $P(X-\mu>a)$ for a positive real number $a$.  
+
+For any positive real number $t$, we have that
+
+$$
+\begin{aligned}
+P(X-\mu>a)
+&= P(X-\mu+t > a+t)\\
+&\leq P({|X-\mu+t|} > a+t)\\
+&\leq \frac{\mathbb{E}{{(X-\mu + t)}^2}}{{(a+t)}^2}\\
+&= \frac{
+	\mathbb{E}\left[
+		{(X-\mu)}^2 +2(X-\mu) t +t^2
+	\right]
+}{
+	{(a+t)}^2
+}\\
+&= \frac{
+\mathbb{E}{(X-\mu)}^2
++2t \mathbb{E}(X-\mu)
++t^2
+}{{(a+t)}^2}\\
+&=\frac{\sigma^2 +  t^2}{{(a+t)}^2}\\
+P(X-\mu > a) &\leq \frac{\sigma^2 +  t^2}{{(a+t)}^2}\\
+\end{aligned}
+$$
+
+Let $g(t) = \frac{\sigma^2+t^2}{{(a+t)}^2}$, we try to find the minimum value of $g(t)$
+
+$$
+g'(t) = \frac{
+	2t\, {(a+t)}^2 - (\sigma^2+t^2)\, 2(a+t)
+}{ {(a+t)}^4 }
+=2 \frac{ at - \sigma^2 }{{(a+t)}^3}
+=0
+\implies t = \frac{\sigma^2}{a}
+$$
+
+And the minima is
+
+$$
+g( \sigma^2/a )
+= \frac{\sigma^2 +  \sigma^4/a^2}{{(a+\sigma^2/a)}^2}
+= \frac{\sigma^2 a^2 +  \sigma^4}{{(a^2+\sigma^2)}^2}
+= \frac{\sigma^2 (a^2 +  \sigma^2)}{{(a^2+\sigma^2)}^2}
+= \frac{\sigma^2}{a^2+\sigma^2}
+$$
+
+On the other hand, if we directly apply the Chebyshev's inequality,
+we only get
+
+$$
+P(X-\mu > a)\leq P(|X-\mu| > a) \leq \frac{\sigma^2}{a^2}
+$$
+
+Therefore, $P(X-\mu > a) \leq \frac{\sigma^2}{\sigma^2 + a^2}$
 
 #### introducing the MGF: Chernoff's inequality
 
-For any random variable $X$, and a real number $a$  
+For any random variable $X$, and a real number $a$
 
 $$
 \begin{aligned}
@@ -1049,7 +1105,7 @@ $$
 ##### proof of Hoeffding lemma: a direct application of Jensen's inequality
 
 Suppose that $\mathbb{E}(X)=0$ then $a\leq 0\leq b$.  
-Consider the function $f(x)=e^{\lambda x}$, we have $f^{\prime\prime}(x)=\lambda^2 e^{\lambda x}>0$, so $f(x)$ is convex.  
+Consider the function $f(x)=e^{\lambda x}$, we have $f^{\prime\prime}(x)=\lambda^2 e^{\lambda x}>0$, so $f(x)$ is convex.
 
 $$
 \forall x\in [a,b]
@@ -1162,7 +1218,6 @@ $$
 external link: UCB (upper confidence bound) algorithm
 
 ## ch11 Markov Chain
-
 
 ## ch12 MCMC
 
