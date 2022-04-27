@@ -18,8 +18,6 @@
   此repo的根目录,放置一些算法竞赛相关的笔记
 - `WhyNotMarkdown/static/`  
   一些文档会链接的静态文件(如图片).  
-- `WhyNotMarkdown/backup/`
-  工作环境配置文件备份(dotfiles).  
 - `WhyNotMarkdown/record_and_tricks/`  
   使用各种工具时遇到的问题的解决过程记录,和常用技巧整理.  
 - `WhyNotMarkdown/course_note/`  
