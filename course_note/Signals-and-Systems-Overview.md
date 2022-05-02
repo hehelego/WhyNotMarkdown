@@ -1,4 +1,4 @@
-# Note on: Signals and Systems 信号与系统
+# Note: Signals and Systems 信号与系统
 
 > - ShanghaiTech SIST EE150 Signals and Systems
 > - MIT 6.003 Signal Processing
@@ -69,8 +69,12 @@
 
 We can observe and verify that
 
+- $x(t)\to y(t)$ where $y(t)=x(t-t_0)$
+- $x(t)\to y(t)$ where $y(t)=\alpha x(t)$
 - $x(t)\to y(t)$ where $y(t)=\int_{-\infty}^t x(\tau)\mathrm{d}\tau$
 - $x(t)\to y(t)$ where $y(t)=\frac{\mathrm{d}}{\mathrm{d} t}x(t)$
+- $x[n]\to y[n]$ where $y[n]=x[n-n_0]$
+- $x[n]\to y[n]$ where $y[n]=\alpha x[n]$
 - $x[n]\to y[n]$ where $y[n]=\sum_{k\leq n} x[k]$
 - $x[n]\to y[n]$ where $y[n]=x[k]-x[k-1]$
 
@@ -111,7 +115,7 @@ The properties of an LTI systems correspond to the properties of its impulse res
 
 - BIBO stability: absolutely summability of the impulse response
 - causality: whether the impulse response half sided $\forall n<0 \quad h[n]=0$
-- invertibility: $h*h^{-1}=\delta\iff \delta[n]=\sum_{k}$
+- invertibility: $h*h^{-1}=\delta$
 
 #### properties of convolution: parallel and serial(cascade) inter-connections of LTI systems
 
@@ -186,6 +190,66 @@ Suppose that $X(z)=\mathcal{Z}\{x[n]\}, Y(z)=\mathcal{Z}\{y[n]\}$
 These properties allow us the analysis the interconnection of LTI systems using their system function.
 
 Another helpful property is the Parseval Theorem, which helps to evaluate the inner product $\sum_{n} x[n]y^{\ast}[n]$
+
+### continuous-time LTI system
+
+For a continuous LTI system $H$ if
+$\delta(t)\stackrel{H}{\to}h(t)$ then $x(t)\stackrel{H}{\to} h(t)\ast x(t)$.  
+We can explore the properties of LTI system $H$ by studying its impulse reponse $h(t)$.  
+
+The complex exponentials $x_s(t)=e^{st}$ for $s\in\mathbb{C}$ are the eigen-function of continuous-time LTI systems:
+
+$$
+e^{st}\to \int_{-\infty}^{+\infty} h(\tau)e^{s(t-\tau)} \mathrm{d}\tau
+=e^{st}\int_{-\infty}^{+\infty}h(\tau) e^{-s\tau}\mathrm{d}\tau
+$$
+
+The function $H(s)=\int_{-\infty}^{+\infty} h(\tau) e^{-s\tau}\mathrm{d}\tau$ is called the system function or the transfer function
+of LTI system $H$. $H(s)$ is the bilateral Laplace Transform of $h(t)$.
+
+Here we also have the convolution theorem for continuous-time LTI system:
+
+Suppose that $y=h\ast x$ and $X=\mathcal{L}\{h(t)\}, Y=\mathcal{L}\{y(t)\}, H=\mathcal{L}\{h(t)\}$
+
+$$
+\begin{aligned}
+Y(s)
+&=\int_{-\infty}^{+\infty} y(t) e^{-st}\mathrm{d}t\\
+&=\int_{-\infty}^{+\infty} \left(
+  \int_{-\infty}^{+\infty} h(\tau)x(t-\tau)\mathrm{d}\tau
+\right) e^{-st}\mathrm{d}t\\
+&=\int_{-\infty}^{+\infty} \left(
+  \int_{-\infty}^{+\infty}
+  h(\tau)   e^{-s\tau}
+  \cdot
+  x(t-\tau) e^{-s(t-\tau)}
+  \mathrm{d}\tau
+\right)
+\mathrm{d}t\\
+&=\int_{-\infty}^{+\infty}
+h(\tau)e^{-s\tau}
+\left(
+  \int_{-\infty}^{+\infty}
+  x(t-\tau)e^{-s(t-\tau)}\mathrm{d}t
+\right)
+\mathrm{d}\tau\\
+&=\int_{-\infty}^{+\infty}
+h(\tau)e^{-s\tau}
+\left(
+  \int_{-\infty}^{+\infty}
+  x(t)e^{-st}\mathrm{d}t
+\right)
+\mathrm{d}\tau\\
+&=\left(
+  \int_{-\infty}^{+\infty}
+  h(\tau)e^{-s\tau} \mathrm{d}\tau
+\right) \left(
+  \int_{-\infty}^{+\infty}
+  x(t)e^{-st}\mathrm{d}t
+\right)\\
+&=H(s) X(s)
+\end{aligned}
+$$
 
 #### the rest of the story
 
