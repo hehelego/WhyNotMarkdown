@@ -47,7 +47,7 @@
 ### CLI utilities
 
 - tmux
-- git(TUI `lazygit`)
+- git(TUI `lazygit`, TUI `gitui`)
 - GnuPG
 - rsync
 - fzf,rg,ag + ripgrep-all (`skim` rust implementation of fzf)
@@ -87,16 +87,16 @@
 - make,cmake,meson
 - clang, clangd, ccls
 - sagemath,octave
+- z3
 - scientific python eco-system (`scipy`,`numpy`,`pandas`,`matplotlib`,`seaborn`,`sympy`; `TensorFlow`,`PyTorch`,`mxnet`)
 - hyperfine,perf,gprof,strace,valgrind
 
 ### other utilities
 
-- rofi
 - xorg-apps (`pacman -Sg xorg-apps`)
-- redshift
-- xclip
-- klipper
+- rofi; wofi
+- redshift; gammastep
+- xclip; wl-clipboard
 - keynav
 - dunst
 - scrcpy
@@ -105,13 +105,11 @@
 - syncthing, timeshift, btrfs snapshot
 - SimpleScreenRecorder
 - graphviz
-- z3
-- screengrab,spectacle
+- flameshot; grim+slurp
 - simplescreenrecorder
-- screenkey
+- screenkey; ShowMeTheKey
 - freerdp,xfreerdp(for connecting to a remote machine running windows)
 - ydcv: [ydcv-rs](https://github.com/farseerfc/ydcv-rs), [ORIGINAL ydcv](https://github.com/felixonmars/ydcv/)
-- cloc
 - onefetch
 
 ## MISC
