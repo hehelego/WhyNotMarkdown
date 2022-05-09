@@ -97,7 +97,7 @@
 - rofi; wofi
 - redshift; gammastep
 - xclip; wl-clipboard
-- keynav
+- keynav, warpd
 - dunst
 - scrcpy
 - kde connect
