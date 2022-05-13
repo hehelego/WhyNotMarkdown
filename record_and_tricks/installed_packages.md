@@ -14,15 +14,15 @@
 - DE/WM (backend: Xorg/Wayland): i3wm (need a X compositor `picom`)/KDE plasma/sway
 - DM: sddm
 - fonts:
-  - sans serif, serif: `noto-fonts` (packages: `noto-fonts-{cjk,emoji,extra}`)
-  - monospace: `adobe-source-code-pro`,`ttf-liberation`,`ttf-hack`
+  - sans/serif: `Noto Sans CJK SC`,`Noto Serif CJK SC`
+  - monospace: `Hack`,`Hack Nerd Font Mono`,`Source Code Pro`
 
 ## daily enviornment
 
-- terminal emulator: alacritty
+- terminal emulator: alacritty, wezterm
 - input method: fcitx5 framework + rime input method
 - editor: vim,neovim; helix,kakoune; VSCodium
-- file manager: ranger,broot
+- file manager: ranger,ncdu,broot
 - document viewer: okular (requires `poppler,poppler-data`)
 - ebook manager/converter: calibre
 - notebook: vnote
@@ -137,11 +137,11 @@
 
 ### font family
 
-- google noto fonts (no tofu ~~不要豆腐~~, 字符集覆盖非常全)
-- adobe source fonts (思源字体)
+- google noto fonts (no tofu ~~不要豆腐~~, 字符集覆盖非常全) (`noto-fonts-{cjk,emoji,extra}`)
+- adobe source code pro fonts (`adobe-source-code-pro`)
+- hack monospace font (`ttf-hack`,`nerd-fonts-hack`)
 - liberation fonts (for compatibility with `Arial/Times New Roman/Courier New`, 提供windows上常见字体的兼容性)
-- SourceCodePro, LiberationMono, NotoSansMono, Iosveka
-- FontAwesome, NerdFonts
+- FontAwesome, NerdFonts: include icons in fonts
 
 ### hardware status monitoring/diagnosing tool
 
@@ -151,12 +151,3 @@
 - lscpu,lspci,lshw,hwinfo,lsusb...
 - wireshark, tcpdump
 - smartmontools
-
-### extensions/plugins for browser(firefox)
-
-- cookie: Cookie Quick Manager
-- user-agent: User-Agent Switcher and Manager
-- block trackers: uBlock origin, privacy badger
-- night color dark mode: Dark Reader
-- tabs/windows manager: sidebery
-- vim-flavor keybinding: vimium, surfingkeys, vixen
