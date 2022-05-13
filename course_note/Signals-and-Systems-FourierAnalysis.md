@@ -1391,6 +1391,50 @@ $$
 
 ### Example: the `sinc` function and window function
 
+For $0\leq A\leq \pi$,
+consider the signal with fundamental period $T_0=2\pi$
+and fundamental frequency $\omega_0=1$:
+
+$$
+x(t)=\begin{cases}
+1 & |t|<A\\
+0 & \text{otherwise}
+\end{cases}
+$$
+
+The Fourier Series coefficients of $x(t)$ $a_n$ is
+
+$$
+a_n = \frac{1}{2\pi}\int_{-A}^{A} e^{-jnt}\mathrm{d}t
+= {\left.\left( \frac{e^{-jnt}}{-jn} \right)\right|}^{A}_{-A}
+= \frac{2 \sin(nA)}{n}
+$$
+
+By time-frequency exchange property, the DTFT of $x[n]=\frac{2\sin (nA)}{n}$
+is $X(e^{j\omega})=\begin{cases}
+1 & |\omega| < A\\
+0 & \text{otherwise}\\
+\end{cases}$
+
+This is the ideal DT LPF.
+
+Now consider the DTFT of $x[n]=\begin{cases}
+1 & 0\leq |n|\leq M\\
+0 & \text{otherwise}
+\end{cases}$
+
+$$
+\begin{aligned}
+X(e^{j\omega})
+&=\sum_{n=-M}^{+M} e^{-j\omega n}
+=-1+\sum_{n=0}^{M} (e^{j\omega n}+e^{-j\omega n})\\
+&=-1
++\frac{1-e^{j\omega (M+1)}}{1-e^{j\omega}}
++\frac{1-e^{-j\omega (M+1)}}{1-e^{-j\omega}}\\
+&=\frac{\sin \left[ \omega (N+1/2) \right]}{\sin (\omega /2)}
+\end{aligned}
+$$
+
 ## Discrete Fourier Transform: DFT
 
 Finite in both time-domain and frequency-domain.  
@@ -1430,3 +1474,4 @@ Search for the following keywords if you are interested in the theory and applic
 - Time-domain derivative/differentiation
 - Frequency-domain derivative/differentiation
 - The constant factor $\frac{1}{2\pi}$, $\frac{1}{N}$, $\frac{1}{T}, 2\pi, N, T$
+- Copy the formulas and theorems to your cheatsheet, do not waste time deriving them.
