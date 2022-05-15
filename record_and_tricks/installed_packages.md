@@ -51,6 +51,7 @@
 - GnuPG
 - rsync
 - fzf,rg,ag + ripgrep-all (`skim` rust implementation of fzf)
+- ranger,ncdu,broot
 - top,htop,bashtop
 - tar,7zip,zip,gzip,bzip (GUI frontend `ark` from KDE project)
 - man pages(`man-db,man-pages`)
@@ -65,13 +66,14 @@
 - procs (alternative to procps-ng/ps)
 - duf (alternative to coreutils/df)
 - dust (alternative to coreutils/du)
-- ncdu (ncurses TUI du)
+- sd (alternative to sed and awk)
 - zoxide (see [github:zoxide](https://github.com/ajeetdsouza/zoxide))
 - starship (see [starship.rs](https://starship.rs/) and [github:starship](https://github.com/starship/starship))
 - pandoc
 - jq,hq,yq (parse/pretty/extract/convert for json/html/xml/yaml)
 - stow
 - chezmoi
+- pueue
 
 ### working
 
@@ -94,7 +96,7 @@
 ### other utilities
 
 - xorg-apps (`pacman -Sg xorg-apps`)
-- rofi; wofi
+- rofi
 - redshift; gammastep
 - xclip; wl-clipboard
 - keynav, warpd
