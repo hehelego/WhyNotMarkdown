@@ -222,3 +222,39 @@ two important theorems concerning the bipartite graph
 ## The max-flow min-cut theorem
 
 **TODO:** proof of the max-flow min-cut theorem
+
+## Applications of the network flow problems
+
+**TODO:**
+
+## Examples of local search algorithms
+
+- **TODO:** gradient descent algorithm
+- **TODO:** Metropolis algorithm, Simulated-Annealing algorithm
+- **TODO:** local-search max-cut 2-approximation
+
+## Fundamental of randomized algorithms
+
+- **TODO:** Markov's inequality
+- **TODO:** Chernoff bound
+
+## Examples of randomized algorithms
+
+- **TODO:** random-partitioning 2-approximation for max-cut
+- **TODO:** randomized quick sort
+- **TODO:** Universal hashing (the 2-universal hashing)
+- **TODO:** Perfect hashing
+- **TODO:** False positive rate analysis of Bloom filter
+- **TODO:** False positive rate analysis of Bloom filter
+- **TODO:** The contraction algorithm for global-min-cut
+- **TODO:** The $O(d! n)$ randomized algorithm for solving linear-programming
+
+## Examples of approximation algorithms
+
+- **TODO:** Set-Cover greedy $\ln(n)$ approximation
+- **TODO:** Vertex-Cover greedy 2-approximation
+- **TODO:** MST+shortcutting 2-approximation for metric-TSP
+- **TODO:** Christofides $3/2$-approximation for metric-TSP
+- **TODO:** Gonzalez's $2$-approximation for K-center problem
+- **TODO:** list scheduling (LS) an 2-approximation for optimal scheduling
+- **TODO:** Longest processing time (LPT) an $4/3$-approximation for optimal scheduling
