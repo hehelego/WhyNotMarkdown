@@ -96,7 +96,7 @@
   - `strace`: tracing system calls
   - `valgrind`: memory leak detector
   - `lsof`: list all opened files
-  - `htop`: process monitor
+  - `htop,bashtop,bpytop,btop`: resources (processes, network, disks, memory) monitor
   - `iotop`: I/O usage monitor
   - `powertop`: power consumption monitor
   - `s-tui`: CPU usage monitor
