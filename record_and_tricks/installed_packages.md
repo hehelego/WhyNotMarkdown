@@ -6,7 +6,7 @@
 
 - distro: Arch Linux
 - kernel: `linux` (the stable version)
-- bootloader: `grub`
+- bootloader: `systemd-boot` (CLI `bootctl`)
 - init: `systemd` (the only officially supported init system on Arch Linus)
 - shell: `fish`
 - package-manager: `pacman`(with `pacman-contrib` and `pacutils`), `yay` (an AUR helper)
