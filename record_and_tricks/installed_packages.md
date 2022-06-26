@@ -83,7 +83,7 @@
   - Rust
   - Haskell
   - Node.js
-- LaTeX: `texlive-most` group
+- LaTeX: `texlive-{most,lang}` group; `biber`; `tllocalmgr`
 - Mathematical software: `sagemath`, `octave`
 - scientific python ecosystem:
   - `python-{scipy,numpy,sympy}`
@@ -150,7 +150,8 @@
 - The hack fonts (`ttf-hack`,`nerd-fonts-hack`)
 - The iosevka fonts (`ttf-iosevka-nerd`)
 - The liberation fonts (replacing windows fonts such as `Arial,Times New Roman,Courier New`)
-- display icons: nerd fonts, font awesome.
+- The fandol fonts (`otf-fandol`, basic Chinese typesettings: Song/Hei/Kai/Fang)
+- display icons: nerd fonts, font awesome
 
 ### hardware status monitoring/diagnosing tool
 
