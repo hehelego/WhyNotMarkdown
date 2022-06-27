@@ -313,10 +313,10 @@ EndSection
 使用xrandr调整X输出的DPI,比如我这里用`xrandr --output eDP --mode 2560x1600 --rate 60 --scale 1 --dpi 192`,
 把它写入i3-config中使得i3 session启动时调整DPI.  
 
-参考按照wiki,配置Xresoureces  
+参考按照wiki,配置 X resources  
 
 ```plaintext
-!PATH=~/.Xresoureces
+!PATH=~/.Xresources
 Xft.dpi: 192
 
 ! These might also be useful depending on your monitor and personal preference:
