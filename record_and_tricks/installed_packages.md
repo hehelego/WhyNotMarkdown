@@ -4,9 +4,10 @@
 
 ## base
 
+- installer and reproducible installation: `archinstall`
 - distro: Arch Linux
 - kernel: `linux` (the stable version)
-- bootloader: `systemd-boot` (CLI `bootctl`)
+- bootloader: `systemd-boot` (CLI `/usr/bin/bootctl`) (replacing `grub`)
 - init: `systemd` (the only officially supported init system on Arch Linus)
 - shell: `fish`
 - package-manager: `pacman`(with `pacman-contrib` and `pacutils`), `yay` (an AUR helper)
@@ -133,13 +134,13 @@
 
 ### multimedia tools
 
-- `pulseaudio`
-- volume control: `pavucontrol` (provides `/usr/bin/pactl`)
-- `playerctl`
-- `kolourpaint` + `gimp` + `inkspace`
+- audio server: `pipewire` (replacing `pulseaudio`)
+- volume control: `/usr/bin/pactl`, `kmix`
+- media player controlling: `playerctl`
+- graphics drawing: `kolourpaint` + `gimp` + `inkspace`
 - metadata tools
-  - image: `exiv2`
   - `mediainfo`
+  - `exiv2`
 - `you-get`
 
 
