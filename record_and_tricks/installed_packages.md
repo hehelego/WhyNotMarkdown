@@ -39,7 +39,9 @@
 
 - `networkmanager`: provides `/usr/bin/{nmtui,nmcli}`
 - `iwd`: provides `/usr/bin/{iwd,iwctl}`
-- `nettools`: for `/usr/bin/arp`
+- `net-tools`: for `/usr/bin/arp`
+- `iproute2`: provides `/usr/bin/ip`
+- `macchanger`
 - `ufw`: firewall
 - `openssh`, `sshfs`
 - `curl`, `httpie`
@@ -129,7 +131,7 @@
 ### uncategorized
 
 - BitTorrent client: `qbittorrent`
-- FOSS office suite: `local/libreoffice-fresh`
+- FOSS office suite: `libreoffice-fresh`
 - spell checker: `aspell`, `hunspell`
 
 ### multimedia tools
