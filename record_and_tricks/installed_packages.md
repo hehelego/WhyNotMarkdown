@@ -125,6 +125,7 @@
 - display the keyboard actions: `screenkey`; `showmethekey`
 - RDP and VNC support: `freerdp`
 - dictionary lookup: `ydcv-rs`
+- rustdesk: `rustdesk`, `rustdesk-server`
 
 ## MISC
 
