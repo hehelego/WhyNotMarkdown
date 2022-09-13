@@ -87,6 +87,7 @@
   - Haskell
   - Node.js
 - LaTeX: `texlive-{most,lang}` group; `biber`; `tllocalmgr`
+- alternative to TexLive suite: `tectonic`
 - Mathematical software: `sagemath`, `octave`
 - scientific python ecosystem:
   - `python-{scipy,numpy,sympy}`
