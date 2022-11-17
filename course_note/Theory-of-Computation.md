@@ -121,6 +121,48 @@ The work around is simple:
 
 ## TM recursion theorem
 
+### A TM that print it self
+
+An implementation in python-3.10
+
+```python
+def A(): global w; w='def B(): r=f"def A(): global w; w={chr(39)}{w}{chr(39)}"; print(r); print(w); print("A()"); print("B()")'
+def B(): r=f"def A(): global w; w={chr(39)}{w}{chr(39)}"; print(r); print(w); print("A()"); print("B()")
+A()
+B()
+```
+
+- Part $A$: Clear the input tape. Print the description of $B$.
+- Part $B$:
+  1. Read the input tape $w$ and compose the description of $A$.
+  2. Print the description of a Turing machine that
+     runs $A$ and print $w$.
+- SELF: Run $A$ then run $B$.
+
+### the recursion theorem
+
+For every computable function $t:\Sigma^*\times \Sigma^*\to \Sigma^*$
+which can be computed by Turing machine $T$,
+exists a computable function $r:\Sigma^*\to \Sigma^*$ such that
+$\forall w\in \Sigma^*\ r(w)=t(\langle R \rangle, w)$
+
+That is: a Turing machine can obtain its description and carry out computation with it.
+
+$R$ can be constructed with an approach similar to the one for **SELF**.
+
+### fixed point theorem
+
+For every computable function $t:\Sigma^*\times \Sigma^*\to \Sigma^*$,
+eixsts a Turing machine $M$ such that
+the Turing machine $M'=t(\langle M\rangle)$ is equivalent to $M$
+that is: $L(M')=L(M)$
+
+Simple construction: $M$ on input $w$
+
+1. Obtain the description $\langle M \rangle$.
+2. Compute $N=f(M)$.
+3. Simulate $N$ on the input $w$.
+
 ## TM recognizability
 
 ### complement of TM membership is undecidable
