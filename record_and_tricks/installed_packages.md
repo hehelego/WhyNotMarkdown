@@ -39,14 +39,14 @@
 
 - `networkmanager`: provides `/usr/bin/{nmtui,nmcli}`
 - `iwd`: provides `/usr/bin/{iwd,iwctl}`
-- `net-tools`: for `/usr/bin/arp`
-- `iproute2`: provides `/usr/bin/ip`
+- `iproute2`: provides `/usr/bin/ip`, `nstat`, `ifstat`, `ss`
 - `macchanger`
-- `ufw`: firewall
+- `ufw`: easy to use `iptables` firewall
+- `iptables`: powerful network traffic filtering&redirecting
 - `openssh`, `sshfs`
 - `curl`, `httpie`
 - `wget`, `aria2`
-- `nmap`: provides `/usr/bin/{nmap,ncat}`
+- `nmap`: provides `/usr/bin/{nmap,ncat,nping}`
 - `v2ray`: frontend `v2raya`
 - `proxychains-ng`
 - network traffic analyzer: `wireshark`, `tcpdump`
