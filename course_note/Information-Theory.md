@@ -174,7 +174,7 @@ $$
 
 Q.E.D.
 
-#### Proof 2: By Hessian matrix
+#### Proof 2: Hessian matrix is negative-definite
 
 Consider the Hessian matrix
 
@@ -187,7 +187,7 @@ H(\vec{p})
 \frac{\partial}{\partial p_i}\left( -p_i \log p_i \right)
 \end{bmatrix}_{i}
 = \begin{bmatrix} - \ln p_i - 1 \end{bmatrix}_{i}\\
-\mathbf{H}(H(\vec{x}))
+\nabla^2 H(\vec{p})
 &= \begin{bmatrix}
 \frac{\partial}{\partial p_i} \left( -\ln p_j - 1 \right)
 \end{bmatrix}_{i,j}
@@ -258,16 +258,20 @@ $$
 
 Also called Kullback–Leibler divergence. It measures the difference of two distribution with identical support.
 
-Suppose that $P$ and $Q$ are two probability distribution on the same support $S$.
+Suppose that $p$ and $q$ are two probability distributions on the same support $S$.
 
 $$
-D(P||Q) = \sum_{x} p(x)\log \frac{p(x)}{q(x)}
+D(p||q) = \sum_{x} p(x)\log \frac{p(x)}{q(x)}
 = \mathbb{E}_{p(X)} \left[
 \log \frac{p(X)}{q(X)}
 \right]
 $$
 
-**note** KL-divergence is not a metric as $D(p||q) \neq D(q||p)$.
+**Note**: KL-divergence is not a _metric_
+
+- Asymmetric: $D(p||q) = D(q||p)$ is not true in general.
+- No triangular inequality: $D(p||r) + D(r||q) \geq D(p||q)$ not hold in general.
+
 See [wikipedia: statistical distance](https://en.wikipedia.org/wiki/Statistical_distance) for more elaboration.
 
 #### Cross Entropy
@@ -277,47 +281,51 @@ Similar to Kullback–Leibler divergence which measures the difference of two di
 Suppose that $P$ and $Q$ are two probability distribution on the same support $S$.
 
 $$
-H(P,Q) = \sum_{x} p(x) \log \frac{1}{q(x)}
+CE(P,Q) = \sum_{x} p(x) \log \frac{1}{q(x)}
 =\mathbb{E}_{p(X)} \left[
 \log \frac{1}{q(X)}
 \right]
 $$
 
-#### Entropy Relations
-
-![entropy relations](../static/EE142-entropy-relation.png)
+### Entropy algebraic Relations
 
 All the following simply properties can be proved by
 patterns recognition and summation transform.
 
-1. $H(P,P) = H(P)$
-2. $D(P||Q)=H(P,Q)-H(P,P)$
+1. $CE(P,P) = H(P)$
+2. $D(p||q) = CE(P,Q)-H(P)$
 3. $I(X;Y) = I(Y;X)$
 4. $I(X;Y) = D\left(\ p(X,Y) || p(X)p(Y) \ \right)$
 5. $I(X;Y) = H(X)-H(X|Y)$
 6. $H(X,Y) = H(X)+H(Y)-I(X;Y)$
+7. Chain rule 1: $H(X,Y)=H(X)+H(Y|X)$ and $I(X_1,X_2; Y) = I(X_1; Y) + I(X_2; Y| X_1)$
+8. Chain rule 2: $D_{KL}( p(x,y) || q(x,y) ) = D(p(y|x) || q(y|x)) + D( p(x) || q(x) )$
 
-Theorem 1: Entropy of $X$ is the cross entropy between $X$ and $X$.
+#### Theorem 1: self cross entropy and entropy
+
+Entropy of $X$ is the cross entropy between $X$ and $X$.
 
 $$
 \begin{aligned}
-H(P,Q) &= \mathbb{E}_{p(X)} \left[ \log \frac{1}{q(X)} \right]\\
-H(P,P) &= \mathbb{E}_{p(X)} \left[ \log \frac{1}{p(X)} \right] = H(P)\\
+CE(P,Q) &= \mathbb{E}_{p(X)} \left[ \log \frac{1}{q(X)} \right]\\
+CE(P,P) &= \mathbb{E}_{p(X)} \left[ \log \frac{1}{p(X)} \right] = H(P)\\
 \end{aligned}
 $$
 
-Theorem 2: KL-divergence of $P,Q$ and cross entropy of $P,Q$ differs by entropy of $P$.
+#### Theorem 2: KL-divergence and cross entropy
+
+KL-divergence of $P,Q$ and cross entropy of $P,Q$ differs by entropy of $P$.
 
 $$
 \begin{aligned}
-H(P,Q) - H(P,P) 
+CE(P,Q) - CE(P,P) 
 &=\mathbb{E}_{p(X)} \left[ \log \frac{1}{q(X)} \right] - \mathbb{E}_{p(X)} \left[ \log \frac{1}{p(X)} \right]\\
 &=\mathbb{E}_{p(X)} \left[ \log \frac{p(X)}{q(X)} \right]\\
-&=D(P||Q)
+&=D(p||q)
 \end{aligned}
 $$
 
-Theorem 3: Mutual information is symmetric.
+#### Theorem 3: Mutual information is symmetric
 
 $$
 I(X;Y) 
@@ -326,7 +334,11 @@ I(X;Y)
 = I(Y;X) 
 $$
 
-Theorem 4: Mutual information is the KL-divergence of joint distribution and product distribution.
+**Note**: KL-divergence (or relative entropy) is not asymmetric in general.
+
+#### Theorem 4: Mutual information in terms of KL-divergence
+
+Mutual information is the KL-divergence of joint distribution and product distribution.
 
 $$
 I(X;Y) 
@@ -334,11 +346,7 @@ I(X;Y)
 = D\left(\ p(X,Y) || p(X)p(Y) \ \right)
 $$
 
-Theorem 5: Mutual information is the shared information.
-
-$$
-I(X;Y) = H(X)-H(X|Y)
-$$
+#### Theorem 5: Mutual information is the shared information
 
 $$
 \begin{aligned}
@@ -359,8 +367,7 @@ I(X;Y)
 \end{aligned}
 $$
 
-
-Theorem 6: Principle of inclusion and exclusion.
+#### Theorem 6: Principle of inclusion and exclusion.
 
 $$
 \begin{aligned}
@@ -374,3 +381,157 @@ H(X)+H(Y)
 \end{aligned}
 $$
 
+#### Theorem 7: Chain rules of entropy
+
+Simple form: $H(X,Y)=H(X)+H(Y|X)$
+
+$$
+\begin{aligned}
+H(X_1,X_2\ldots X_n)
+&= \mathbb{E}\left[\log \frac{1}{p(X_1,X_2\ldots X_n)}\right]\\
+&= \mathbb{E}\left[\log \frac{1}{p(X_1)p(X_2\ldots X_n|X_1)}\right]\\
+&= \mathbb{E}\left[\log \frac{1}{p(X_1)} \right] + \mathbb{E}\left[\log \frac{1}{p(X_2\ldots X_n|X_1)}\right]\\
+&= H(X_1) + H(X_2\ldots X_n|X_1)\\
+H(X_2\ldots X_n|X_1)
+&= \mathbb{E}\left[\log \frac{1}{p(X_2,X_3\ldots X_n|X_1)}\right]\\
+&= \mathbb{E}\left[\log \frac{1}{p(X_2|X_1)p(X_3\ldots X_n|X_2)}\right]\\
+&= \mathbb{E}\left[\log \frac{1}{p(X_2|X_1)} \right] + \mathbb{E}\left[\log \frac{1}{p(X_3\ldots X_n|X_1,X_2)}\right]\\
+&= H(X_2|X_1) + H(X_3\ldots X_n|X_1,X_2)\\
+H(X_1,X_2\ldots X_n)
+&=H(X_1) + H(X_2|X_1) + H(X_3|X_1,X_2) \ldots H(X_n|X_1\ldots X_{n-1})\\
+&=\sum_{i=1}^{n} H(X_i|X_1,X_2\ldots X_{i-1})
+\end{aligned}
+$$
+
+For mutual information 
+
+$$
+\begin{aligned}
+I(X_1,X_2;Y)
+&=H(X_1,X_2)-H(X_1,X_2|Y)\\
+&=H(X_1)+H(X_2|X_1) - \left[ H(X_1|Y)+H(X_2|X_1,Y) \right]\\
+&=H(X_1)-H(X_1|Y) + H(X_2|X_1)-H(X_2|X_1,Y)\\
+&=I(X_1;Y) + I(X_2;Y | X_1)
+\end{aligned}
+$$
+
+In general:
+
+$$
+\begin{aligned}
+I(X_1,X_2\ldots X_n;Y)
+&=H(X_1\ldots X_n) - H(X_1\ldots X_n|Y)\\
+&=\sum_{i=1}^{n} H(X_i|X_1\ldots X_{i-1}) - \sum_{i=1}^{n} H(X_i|X_1\ldots X_{i-1},Y)\\
+&=\sum_{i=1}^{n} H(X_i|X_1\ldots X_{i-1}) - H(X_i|X_1\ldots X_{i-1},Y)\\
+&=\sum_{i=1}^{n} I(X_i;Y|X_1\ldots X_{i-1})
+\end{aligned}
+$$
+
+
+#### Theorem 8: KL-divergence of joint/conditional distribution
+
+$D_{KL}( p(x,y) || q(x,y) ) = D(p(y|x) || q(y|x)) + D( p(x) || q(x) )$
+
+$$
+\begin{aligned}
+D_{KL}( p(x,y) || q(x,y) )
+&= \mathbb{E}_{p(X,Y)}\left[
+\log \frac{p(X,Y)}{q(X,Y)}
+\right]\\
+&= \mathbb{E}_{p(X,Y)}\left[
+\log \frac{p(Y|X)}{q(Y|X)}
+\right]
++\mathbb{E}_{p(X,Y)}\left[
+\log \frac{p(X)}{q(X)}
+\right]\\
+&= \mathbb{E}_{p(X,Y)}\left[
+\log \frac{p(Y|X)}{q(Y|X)}
+\right]
++\mathbb{E}_{p(X)}\left[
+\log \frac{p(X)}{q(X)}
+\right]\\
+&= D(p(y|x) || q(y|x)) + D( p(x) || q(x) )
+\end{aligned}
+$$
+
+### Uncertainty Cardinality Analogy
+
+- entropy $H(X)$: measure of uncertainty.
+- joint entropy $H(X,Y)$: union of uncertainty of $X$ and $Y$.
+- mutual information $I(X;Y)$: intersection of uncertainty of $X$ and $Y$.
+- conditional entropy $H(X|Y)=H(X)-I(X;Y)$: set difference $X\setminus Y = X\cap \overline{Y}$.
+
+![Entropy Venn Diagram](../static/EE142-entropy-relation.png)
+
+Generalization for three or more variables: $I(X_1;X_2;\ldots ;X_n) = I(X_1;\ldots ;X_{n-1}) - I(X_1;\ldots ;X_{n-1} | X_n)$
+
+### Inequalities Toolbox
+
+- [Mean value inequality](https://en.wikipedia.org/wiki/Generalized_mean): quadratic mean, arithmetic mean, geometric mean, harmonic mean
+- [Cauchy–Schwarz inequality](https://en.wikipedia.org/wiki/Cauchy%E2%80%93Schwarz_inequality)
+- Taylor's series:  
+  - $e^x \geq x+1$
+  - $\ln x \leq x-1$
+  - $\ln \frac{1}{x} \geq 1-x$
+- Jensen's inequality:  
+  - Random variable $X$ and convex ($f''(x)\geq 0$) function $f$: $\mathbb{E}\left[f(X)\right] \geq f(\mathbb{E} X)$.  
+  - Random variable $X$ and concave ($f''(x)\leq 0$) function $f$: $\mathbb{E}\left[f(X)\right] \leq f(\mathbb{E} X)$.  
+- Log-sum inequality: Given two sequences of non-negative real numbers $a_i,b_i$.  
+  $$\sum_i a_i \ln \frac{a_i}{b_i} \geq \left(\sum_i a_i\right)\ln \frac{\sum_i a_i}{\sum_i b_i}$$
+
+#### Log-Sum Inequality
+
+Consider the random variable $X$ given by
+
+$$
+\Pr\left\{X=\frac{b_i}{\sum_j b_j}\right\} = \frac{a_i}{b_i}
+\qquad
+i=1,2\ldots n
+$$
+
+Consider the function $f(x)=x\ln x$ in $(0,1)$.
+The second order derivative $f''(x)=x^{-1}>0$ so $f(x)$ is convex.
+By Jensen's inequality: $\mathbb{E}\left[f(X)\right] \geq f(\mathbb{E} X)$
+
+$$
+\sum_i \frac{b_i}{\sum_j b_j} \left( \frac{a_i}{b_i} \ln \frac{a_i}{b_i} \right)
+\geq
+\left( \sum_i \frac{b_i}{\sum_j b_j} \frac{a_i}{b_i} \right)
+\ln \left( \sum_i \frac{b_i}{\sum_j b_j} \frac{a_i}{b_i} \right)
+$$
+
+That is
+
+$$
+\sum_i a_i \ln \frac{a_i}{b_i}
+\geq
+\left( \sum_i a_i \right)
+\ln \frac{\sum_i a_i}{\sum_i b_i}
+$$
+
+### Relative Entropy Convexity
+
+**TODO**
+
+### Mutual Information Convexity
+
+**TODO**
+
+### Entropy Inequality
+
+1. $H(X,Y) \leq H(X)+H(Y)$
+2. $H(X|Y) \leq H(X)$
+3. Ordering of $H(Y|X=x)$ and $H(Y)$ is undefined.
+4. $D_{KL}(P,Q) \geq 0$
+5. $I(X;Y) \geq 0$
+6. $I(X;Y) \leq \min(H(X),H(Y))$
+
+#### Markov Chain Inequalities
+
+**TODO**
+
+#### Fano's Inequality
+
+**TODO**
+
+## Asymptotic Equipartition Property (AEP)
