@@ -285,7 +285,7 @@ $$
 
 #### Entropy Relations
 
-![Entropy relations](Entropy_relation.png)
+![entropy relations](../static/EE142-entropy-relation.png)
 
 All the following simply properties can be proved by
 patterns recognition and summation transform.
