@@ -24,7 +24,7 @@
 ## daily environment
 
 - input method: fcitx5 framework + rime input method (`fcitx5` group and `fcitx5-rime`)
-- document viewer: `okular` (with `poppler, poppler-data`)
+- document viewer: `okular` (with `poppler, poppler-data`), `zathura` (with `zathura-{cb,djvu,pdf-poppler,ps}`)
 - e-book manager/converter: `calibre`
 - note-taking: `vnote`
 - browser: `firefox`, `qutebrowser`
