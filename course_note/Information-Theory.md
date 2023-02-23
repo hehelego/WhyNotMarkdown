@@ -301,7 +301,7 @@ patterns recognition and summation transform.
 7. Chain rule 1: $H(X,Y)=H(X)+H(Y|X)$ and $I(X_1,X_2; Y) = I(X_1; Y) + I(X_2; Y| X_1)$
 8. Chain rule 2: $D_{KL}( p(x,y) || q(x,y) ) = D(p(y|x) || q(y|x)) + D( p(x) || q(x) )$
 
-#### Theorem 1: self cross entropy and entropy
+#### Theorem 1: Self Cross Entropy and Entropy
 
 Entropy of $X$ is the cross entropy between $X$ and $X$.
 
@@ -548,16 +548,69 @@ For two random variables $X,Y$:
 
 ### Entropy Inequality
 
-1. $H(X,Y) \leq H(X)+H(Y)$
-2. $H(X|Y) \leq H(X)$
+1. $H(X|Y) \leq H(X)$
+2. $H(X,Y) \leq H(X)+H(Y)$
 3. Ordering of $H(Y|X=x)$ and $H(Y)$ is undefined.
 4. $D_{KL}(P,Q) \geq 0$
 5. $I(X;Y) \geq 0$
 6. $I(X;Y) \leq \min(H(X),H(Y))$
 
-#### Markov Chain Inequalities
+#### Theorem 1: uncertainty of a variable reduces with knowledge of another variable
 
-##### Markov Chain
+$$
+H(X)=H(X|Y)+I(X;Y) \geq H(X|Y)
+$$
+
+#### Theorem 2: union bound of joint entropy 
+
+$$
+H(X,Y) = H(X) + H(Y|X) \leq H(X) + H(Y)
+$$
+
+For multiple variables, we have $H(X_1,X_2\ldots X_n) \leq \sum_{i=1}^{n} H(X_i)$
+
+#### Theorem 3: a single event not necessarily reduces or increases the uncertainty
+
+**TODO** Examples
+
+#### Theorem 4: KL-divergence is non-negative
+
+First proof: $\ln \frac{1}{x} \geq 1-x$
+
+$$
+D(p||q)
+=\sum_x p(x) \log \frac{p(x)}{q(x)}
+\geq \sum_x p(x) \left( 1 - \frac{q(x)}{p(x)} \right)
+= \sum_x \left( p(x) - q(x) \right)
+= 1-1=0
+$$
+
+Second proof: log-sum inequality
+
+$$
+D(p||q)
+=\sum_x p(x) \log \frac{p(x)}{q(x)}
+\geq \left(\sum_x p(x)\right) \log \frac{\sum_x p(x)}{\sum_x q(x)}
+= 1 \log \frac{1}{1} = 0
+$$
+
+#### Theorem 5: mutual information is non-negative
+
+$$
+I(X;Y) = D(p(X,Y) || p(X)p(Y)) \geq 0
+$$
+
+#### Theorem 6: intersection is smaller than any operand
+
+$$
+I(X;Y) = H(X) - H(X|Y) \leq H(X)
+$$
+
+By symmetric, $I(X;Y)\leq H(Y)$.
+
+### Markov Chain Inequalities
+
+#### Markov Chain Definition
 
 Random variables $X,Y,Z$ are said to form a Markov chain if $p(x,y,z)=p(x)p(y|x)p(z|y)$,
 denoted by $X\to Y\to Z$.
@@ -568,13 +621,7 @@ denoted by $X\to Y\to Z$.
 
 Example: $X,Y$ i.i.d. $\mathrm{Bern}(1/2)$ and $Z_1=X\oplus Y$, $Z_2=X+Y$.
 
-##### Data Processing Inequality
-
-- If $X\to Y\to Z$, then $I(X;Y) \geq I(X;Z)$, $I(Y;Z)\geq I(X;Z)$
-- If $X\to Y\to Z$, then $I(X;Y|Z) \leq I(X;Y)$
-- In general, ordering of $I(X;Y|Z)$ and $I(X;Y)$ is indefinite.
-  1. $I(X;Y|Z)\leq I(X;Y)$ case: **TODO**
-  2. $I(X;Y|Z)\geq I(X;Y)$ case: **TODO**
+#### Data Processing Inequality
 
 If $X\to Y\to Z$, then $X,Z$ are independent given $Y$.
 
@@ -588,11 +635,222 @@ I(X;Y) &\geq I(X;Y|Z)
 \end{aligned}
 $$
 
-**TODO**
+In summary
 
-#### Fano's Inequality
+- If $X\to Y\to Z$, then $I(X;Y) \geq I(X;Z)$.  
+  $X\to Y\to Z$ implies $Z\to Y\to X$ so $I(Y;Z)\geq I(X;Z)$.
+- If $X\to Y\to Z$, then $I(X;Y|Z) \leq I(X;Y)$
+- In general, ordering of $I(X;Y|Z)$ and $I(X;Y)$ is indefinite.
+  1. $I(X;Y|Z)\leq I(X;Y)$ case: **TODO** examples
+  2. $I(X;Y|Z)\geq I(X;Y)$ case: **TODO** examples
+
+### Fano's Inequality
 
 **TODO**
 
 ## Asymptotic Equipartition Property (AEP)
+
+### Law of Large Numbers (LLN)
+
+See [Law of large numbers - Wikipedia](https://en.wikipedia.org/wiki/Law_of_large_numbers).
+
+$X_1,X_2\ldots X_n$ are i.i.d. $p(X)$ with finite expectation $\mathbb{E}X$.
+
+$$
+\frac{1}{n}\sum_{i=1}^n \to \mathbb{E} X
+$$
+
+- weak: in probability
+- strong: with probability 1
+
+### Central Limit Theorem (CLT)
+
+See [Central limit theorem - Wikipedia](https://en.wikipedia.org/wiki/Central_limit_theorem).
+
+$X_1,X_2\ldots X_n$ are i.i.d. $p(X)$ with finite expectation $\mu=\mathbb{E}X$ and variance $\sigma^2=\mathbb{E}\left[ {(X-\mu)}^2 \right]$
+
+Let $\bar{X}_n=\frac{1}{n}\sum_{i=1}^n$, then 
+
+$$
+\sqrt{n}(\bar{X}_n-\mu)\to \mathcal{N}(0,\sigma^2)
+\quad
+(\text{converge in distribution})
+$$
+
+### Convergence of Random Variables
+
+See [Convergence of random variables - Wikipedia](https://en.wikipedia.org/wiki/Convergence_of_random_variables).
+
+
+#### In probability
+
+$$
+\forall \epsilon > 0 \quad \lim_{n\to\infty} \Pr\left[ |X_n-X| > \epsilon \right] = 0
+$$
+
+That is:
+
+- For every $\epsilon>0$, the probability that $|X_n-X|>\epsilon$ can be arbitrarily small if $n$ is sufficiently large.
+- For every $\epsilon>0$, the probability that $|X_n-X|<\epsilon$ can be arbitrarily close to 1 if $n$ is sufficiently large.
+
+#### In mean square error
+
+$$
+\lim_{n\to\infty} \mathbb{E}\left[ {(X_n-X)}^2 \right] = 0
+$$
+
+That is:
+The mean square error $\mathbb{E}\left[ {(X_n-X)}^2 \right]$ can be arbitrarily small if $n$ is sufficiently large.
+
+#### With probability 1
+
+Also called _almost surely_
+
+$$
+\Pr\left[ \lim_{n\to\infty} X_n = X \right] = 1
+$$
+
+That is:
+The limit of the random sequence $(X_1,X_2\ldots X_n\ldots)$ is almost surely $X$.
+
+### AEP Theorem
+
+If $X_1,X_2\ldots X_n$ are i.i.d. $p(x)$ then
+
+$$
+-\frac{1}{n} \log p(X_1,X_2\ldots X_n) \to H(X)
+\quad
+(\text{in probability})
+$$
+
+By weak LLN (sample mean converges to expectation in probability)
+
+$$
+\frac{1}{n}\sum_{i=1}^n \log \frac{1}{p(X_i)}
+\to \mathbb{E}\left[ \log \frac{1}{p(X_i)} \right] = H(X)
+\quad
+(\text{in probability})
+$$
+
+where 
+
+$$
+\frac{1}{n}\sum_{i=1}^n \log \frac{1}{p(X_i)}
+=\frac{1}{n}\log \dfrac{1}{\prod_{i=1}^{n} p(X_i)}
+=\frac{1}{n} \log \dfrac{1}{p(X_1,X_2\ldots X_n)}
+=-\frac{1}{n} \log p(X_1,X_2\ldots X_n)
+$$
+
+As $X_1,X_2\ldots X_n$ are independent.
+
+### Typical Sequence
+
+For parameters: $p(X)$, $\epsilon$, $n$:  
+the typical set $A^{(n)}_{\epsilon}(p_x)$ is all sequences $(x_1\ldots x_n)$ such that
+
+$$
+2^{-n(H(X)+\epsilon)}
+\leq
+p(x_1,x_2\ldots x_n)
+\leq
+2^{-n(H(X)-\epsilon)}
+$$
+
+That is: sequences whose probability of occurring is close to $2^{-n H(X)}$
+
+**Note**: $A^{(n)}_{\epsilon_1} \subseteq A^{(n)}_{\epsilon_2}$ if $\epsilon_1 < \epsilon_2$.
+
+#### Properties of Typical Sequences
+
+For sequence of independent identically distributed random variables $(x_1,\ldots x_n)$.  
+When $\epsilon>0$ is a fixed positive real number.
+
+1. $\vec{x} \in A_{\epsilon}^{(n)}$ then $H(X)-\epsilon \leq -\frac{1}{n}\log p(\vec x)\leq H(X)+\epsilon$
+2. $|A_{\epsilon}^{(n)}| \leq 2^{n(H(X)+\epsilon)}$
+3. Exists $N$ such that $\Pr(\vec x\in A_{\epsilon}^{(n)}) > 1-\epsilon$ for all $n>N$.
+4. Exists $N$ such that $(1-\epsilon) 2^{n(H(X)-\epsilon)}\leq |A_{\epsilon}^{(n)}|$ for all $n$.
+
+**Insight**: the typical set is
+
+- of small cardinality
+- of high probability
+- every typical sequence is roughly equiprobable (every two sequences are equal likely)
+
+Proof for property 1:
+
+$$
+\begin{aligned}
+2^{-n(H(X)+\epsilon)}
+\leq
+&p(x_1,x_2\ldots x_n)
+\leq
+2^{-n(H(X)-\epsilon)}\\
+-n(H(X)+\epsilon)
+\leq
+&\log p(x_1,x_2\ldots x_n)
+\leq
+-n(H(X)-\epsilon)\\
+n(H(X)-\epsilon)
+\leq
+&-\log p(x_1,x_2\ldots x_n)
+\leq
+n(H(X)+\epsilon)\\
+H(X)-\epsilon
+\leq
+&-\frac{1}{n}\log p(x_1,x_2\ldots x_n)
+\leq
+H(X)+\epsilon\\
+\end{aligned}
+$$
+
+Proof for property 2:
+
+$$
+1\geq \Pr(\vec{x}\in A_{\epsilon}^{(n)})\geq |A_{\epsilon}^{(n)}| 2^{-n(H(X)+\epsilon)}
+\implies
+2^{n(H(X)+\epsilon)}\geq |A_{\epsilon}^{(n)}| 
+$$
+
+Proof for property 3 and property 4:
+
+AEP definition of converge by probability.
+
+$$
+\forall \epsilon>0
+.
+\lim_{n\to\infty}
+\Pr\left[
+\left\vert \frac{1}{n}\log \frac{1}{p(x_1,x_2\ldots x_n)} -H(X) \right\vert
+\leq \epsilon
+\right] = 1
+$$
+
+For a fixed $\epsilon$
+
+$$
+\lim_{n\to\infty}
+\Pr\left[
+(x_1\ldots x_n) \in A_{\epsilon}^{(n)}
+\right] = 1
+$$
+
+Therefore, for every $\delta>0$, exists $N_{\delta}$ such that:
+$\forall n>N_{\delta} . \Pr(A_{\epsilon}^{(n)})> 1-\delta$.
+
+$$
+2^{-n(H(X)-\epsilon)}|A_{\epsilon}^{(n)}| \geq \Pr(A_{\epsilon}^{(n)}) > 1-\delta
+\implies
+|A_{\epsilon}^{(n)}| \geq (1-\delta)2^{n(H(X)-\epsilon)}
+$$
+
+By setting $\delta=\epsilon$, we can prove 3 and 4.
+
+#### AEP Implications
+
+#### Strong Typical Sequence
+
+See [Typical set - Wikipedia](https://en.wikipedia.org/wiki/Typical_set).
+
+Also called letter typical sequence.  
+For every letter, difference between the frequency and the probability is small enough.
 
