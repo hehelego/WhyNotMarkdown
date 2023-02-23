@@ -84,7 +84,7 @@ $$
 
 Mean of self information
 
-**note** differential entropy and $2^{H(X)}$ are used to measure the uncertainty for continuous random variables.  
+**Note** differential entropy and $2^{H(X)}$ are used to measure the uncertainty for continuous random variables.  
 $H(x) = \int f(x)\log \frac{1}{f(x)} \mathrm{d} x$ 
 
 ### Bounds of Entropy
@@ -199,7 +199,7 @@ As the Hessian matrix is a negative-definite matrix, the scalar-field $H(\vec{x}
 
 ### Entropy of Multiple Variables
 
-**NOTE:** The support of $X,Y$ are not necessarily the same.
+**Side Note:** The support of $X,Y$ are not necessarily the same.
 
 #### Joint Entropy
 
@@ -267,7 +267,7 @@ D(p||q) = \sum_{x} p(x)\log \frac{p(x)}{q(x)}
 \right]
 $$
 
-**Note**: KL-divergence is not a _metric_
+**Caveat**: KL-divergence is not a _metric_
 
 - Asymmetric: $D(p||q) = D(q||p)$ is not true in general.
 - No triangular inequality: $D(p||r) + D(r||q) \geq D(p||q)$ not hold in general.
@@ -333,8 +333,6 @@ I(X;Y)
 = \mathbb{E}_{p(Y,X)} \left[ \log \frac{p(Y,X)}{p(Y)p(X)} \right]
 = I(Y;X) 
 $$
-
-**Note**: KL-divergence (or relative entropy) is not asymmetric in general.
 
 #### Theorem 4: Mutual information in terms of KL-divergence
 
@@ -427,6 +425,7 @@ I(X_1,X_2\ldots X_n;Y)
 \end{aligned}
 $$
 
+Chain rules are also hold for conditional joint entropy and conditional mutual information.
 
 #### Theorem 8: KL-divergence of joint/conditional distribution
 
@@ -464,6 +463,13 @@ $$
 ![Entropy Venn Diagram](../static/EE142-entropy-relation.png)
 
 Generalization for three or more variables: $I(X_1;X_2;\ldots ;X_n) = I(X_1;\ldots ;X_{n-1}) - I(X_1;\ldots ;X_{n-1} | X_n)$
+
+### Independent and Determined
+
+- $Y=f(X) \iff H(Y|X) = 0$. $Y$ Determined by $X$.
+- $X\perp Y \iff I(X;Y)=0$. $X$ shares not information with $Y$.
+
+**Caveat**: independence of $X,Y$ and conditional independence $X|Z,Y|Z$ are not related.
 
 ### Inequalities Toolbox
 
@@ -511,9 +517,32 @@ $$
 
 ### Relative Entropy Convexity
 
+$D_{KL}(p||q)$ is a convex function of the vector $(p,q)$.
+
+#### Proof
+
 **TODO**
 
 ### Mutual Information Convexity
+
+For two random variables $X,Y$:
+
+- If $p(x)$ is fixed, then $I(X;Y)$ is convex in $p(y|x)$.  
+  **Data compression** task is non-trivial.  
+  Design $p(y|x)$ to minimize the mutual information with fixed $p(x)$, where
+  $p(x)$ input, $p(y)$ output, $p(y|x)$ coding.  
+  _Convex function minimization_ is non-trivial.
+- If $p(y|x)$ is fixed, then $I(X;Y)$ is concave in $p(x)$.  
+  **Data transmission** task is non-trivial.  
+  Design $p(x)$ to maximize the mutual information with fixed $p(y|x)$, where
+  $p(x)$ coding, $p(y|x)$ channel characteristic, $p(y)$ output.  
+  _Concave function maximization_ is non-trivial.
+
+#### Convex in conditional distribution
+
+**TODO**
+
+#### Concave in prior distribution
 
 **TODO**
 
@@ -528,6 +557,37 @@ $$
 
 #### Markov Chain Inequalities
 
+##### Markov Chain
+
+Random variables $X,Y,Z$ are said to form a Markov chain if $p(x,y,z)=p(x)p(y|x)p(z|y)$,
+denoted by $X\to Y\to Z$.
+
+- $X\to Y\to Z$ iff $p(x,z|y)$ that is: $X,Z$ are conditional independent when $Y$ is given.
+- $X\to Y\to Z$ iff $Z\to Y\to X$.
+- If $Z=f(Y)$ or $H(Z|Y)=0$, then $X\to Y\to Z$
+
+Example: $X,Y$ i.i.d. $\mathrm{Bern}(1/2)$ and $Z_1=X\oplus Y$, $Z_2=X+Y$.
+
+##### Data Processing Inequality
+
+- If $X\to Y\to Z$, then $I(X;Y) \geq I(X;Z)$, $I(Y;Z)\geq I(X;Z)$
+- If $X\to Y\to Z$, then $I(X;Y|Z) \leq I(X;Y)$
+- In general, ordering of $I(X;Y|Z)$ and $I(X;Y)$ is indefinite.
+  1. $I(X;Y|Z)\leq I(X;Y)$ case: **TODO**
+  2. $I(X;Y|Z)\geq I(X;Y)$ case: **TODO**
+
+If $X\to Y\to Z$, then $X,Z$ are independent given $Y$.
+
+$$
+\begin{aligned}
+I(X;Y,Z)
+&= I(X;Y) + I(X;Z|Y) = I(X;Y)\\
+&= I(X;Z) + I(X;Y|Z)\\
+I(X;Y) &\geq I(X;Z)\\
+I(X;Y) &\geq I(X;Y|Z)
+\end{aligned}
+$$
+
 **TODO**
 
 #### Fano's Inequality
@@ -535,3 +595,4 @@ $$
 **TODO**
 
 ## Asymptotic Equipartition Property (AEP)
+
