@@ -123,8 +123,8 @@ that is $X$ is a discrete uniform distribution.
 ### Convexity of Entropy
 
 For $X\sim \mathrm{Bern}(p)$ that is $X=\begin{cases}
-1 & \text{w.p.}\ p\\
-0 & \text{w.p.}\ 1-p\\
+1 & \text{with probability}\ p\\
+0 & \text{with probability}\ 1-p\\
 \end{cases}$.
 
 The entropy of this binary random variable $H(X)=p\log\frac{1}{p} + (1-p)\log\frac{1}{1-p}$
@@ -519,9 +519,33 @@ $$
 
 $D_{KL}(p||q)$ is a convex function of the vector $(p,q)$.
 
-#### Proof
+For distribution pairs $(p_1,q_1)$ and $(p_2,q_2)$:
+for all $\lambda \in (0,1)$,
+by log-sum inequality
 
-**TODO**
+$$
+\begin{aligned}
+\left(\lambda p_1(x) + (1-\lambda) p_2(x)\right)
+  \log
+  \frac{\lambda p_1(x) + (1-\lambda) p_2(x)}
+       {\lambda q_1(x) + (1-\lambda) q_2(x)}
+&\leq
+\lambda p_1(x)  \log \frac{\lambda p_1(x)}{\lambda q_1(x)}
++\lambda p_2(x) \log \frac{\lambda p_2(x)}{\lambda q_2(x)}\\
+&=
+\lambda p_1(x)  \log \frac{p_1(x)}{q_1(x)}
++\lambda p_2(x) \log \frac{p_2(x)}{q_2(x)}\\
+\end{aligned}
+$$
+
+Thus, 
+
+$$
+D(\lambda p_1 + (1-\lambda) p_2 || \lambda q_1 + (1-\lambda) q_2)
+\leq \lambda D(p_1||q_1) + (1-\lambda) D(p_2||q_2)
+$$
+
+That is: $D_{KL}(p||q)$ is a convex function of the vector $(p,q)$.
 
 ### Mutual Information Convexity
 
@@ -537,14 +561,6 @@ For two random variables $X,Y$:
   Design $p(x)$ to maximize the mutual information with fixed $p(y|x)$, where
   $p(x)$ coding, $p(y|x)$ channel characteristic, $p(y)$ output.  
   _Concave function maximization_ is non-trivial.
-
-#### Convex in conditional distribution
-
-**TODO**
-
-#### Concave in prior distribution
-
-**TODO**
 
 ### Entropy Inequality
 
@@ -571,7 +587,24 @@ For multiple variables, we have $H(X_1,X_2\ldots X_n) \leq \sum_{i=1}^{n} H(X_i)
 
 #### Theorem 3: a single event not necessarily reduces or increases the uncertainty
 
-**TODO** Examples
+$$
+\def\arraystretch{1.5}
+\begin{array}{c|c|c|c|c|}
+   X \diagdown Y & 1            & 2            & 3            & 4            \\ \hline
+   1             & \frac{1}{8}  & \frac{1}{16} & \frac{1}{32} & \frac{1}{32} \\ \hline
+   2             & \frac{1}{16} & \frac{1}{8}  & \frac{1}{32} & \frac{1}{32} \\ \hline
+   3             & \frac{1}{16} & \frac{1}{16} & \frac{1}{16} & \frac{1}{16} \\ \hline
+   4             & \frac{1}{4}  & 0            & 0            & 0            \\ \hline
+\end{array}
+$$
+
+1. $\Pr(Y=1)=\frac{1}{4} \quad   p(X|Y=1)=(\frac{1}{2},\frac{1}{4},\frac{1}{8},\frac{1}{8}) \quad   H(X|Y=1)=\frac{7}{4}$.
+2. $\Pr(Y=2)=\frac{1}{4} \quad   p(X|Y=2)=(\frac{1}{4},\frac{1}{2},\frac{1}{8},\frac{1}{8}) \quad   H(X|Y=2)=\frac{7}{4}$.
+3. $\Pr(Y=3)=\frac{1}{4} \quad   p(X|Y=3)=(\frac{1}{4},\frac{1}{4},\frac{1}{4},\frac{1}{4}) \quad   H(X|Y=3)=2$.
+4. $\Pr(Y=4)=\frac{1}{4} \quad   p(X|Y=4)=(1,0,0,0) \quad   H(X|Y=4)=0$.
+
+- Marginal entropy: $p(X)=(\frac{1}{2},\frac{1}{4},\frac{1}{8},\frac{1}{8})$, $H(X)=\frac{7}{4}$
+- Conditional entropy: $H(X|Y) = \sum_y \Pr(Y=y) H(X|Y=y) =\frac{11}{8}$
 
 #### Theorem 4: KL-divergence is non-negative
 
@@ -641,8 +674,11 @@ In summary
   $X\to Y\to Z$ implies $Z\to Y\to X$ so $I(Y;Z)\geq I(X;Z)$.
 - If $X\to Y\to Z$, then $I(X;Y|Z) \leq I(X;Y)$
 - In general, ordering of $I(X;Y|Z)$ and $I(X;Y)$ is indefinite.
-  1. $I(X;Y|Z)\leq I(X;Y)$ case: **TODO** examples
-  2. $I(X;Y|Z)\geq I(X;Y)$ case: **TODO** examples
+  1. $I(X;Y|Z)\leq I(X;Y)$ case:
+  Any Markov chain that $X\to Y\to Z$.  
+  **Interpretation**: $Z$ provides some information shared by $X$ and $Y$.
+  2. $I(X;Y|Z)\geq I(X;Y)$ case: independently $X,Y\sim \mathrm{Bern}(1/2)$, $Z=X \oplus Y$ (exclusive-or).  
+  **Interpretation**: The connection between $X$ and $Y$ are clear only when $Z$ is known.
 
 ### Fano's Inequality
 
@@ -774,7 +810,7 @@ When $\epsilon>0$ is a fixed positive real number.
 
 - of small cardinality
 - of high probability
-- every typical sequence is roughly equiprobable (every two sequences are equal likely)
+- every typical sequence is roughly equi-probable (every two sequences are equal likely)
 
 Proof for property 1:
 
