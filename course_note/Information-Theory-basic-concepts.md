@@ -1,4 +1,4 @@
-# EE142 Information Theory Course Note
+# EE142 Information Theory Course Note part 1: basic concepts
 
 > - textbook: Elements of Information Theory.
 > - author: Thomas M. Cover
@@ -768,7 +768,7 @@ $$
 (\text{in probability})
 $$
 
-where 
+Since $X_1,X_2\ldots X_n$ are independent.
 
 $$
 \frac{1}{n}\sum_{i=1}^n \log \frac{1}{p(X_i)}
@@ -777,7 +777,19 @@ $$
 =-\frac{1}{n} \log p(X_1,X_2\ldots X_n)
 $$
 
-As $X_1,X_2\ldots X_n$ are independent.
+Thus
+
+$$
+- \frac{1}{n} \log p(X_1,X_2,\ldots, X_n) \to H(X)
+\quad
+(\text{in probability})
+$$
+
+Or
+
+$$
+p(X_1,X_2,\ldots X_n) \to 2^{-n H(X)}
+$$
 
 ### Typical Sequence
 
@@ -801,10 +813,10 @@ That is: sequences whose probability of occurring is close to $2^{-n H(X)}$
 For sequence of independent identically distributed random variables $(x_1,\ldots x_n)$.  
 When $\epsilon>0$ is a fixed positive real number.
 
-1. $\vec{x} \in A_{\epsilon}^{(n)}$ then $H(X)-\epsilon \leq -\frac{1}{n}\log p(\vec x)\leq H(X)+\epsilon$
-2. $|A_{\epsilon}^{(n)}| \leq 2^{n(H(X)+\epsilon)}$
-3. Exists $N$ such that $\Pr(\vec x\in A_{\epsilon}^{(n)}) > 1-\epsilon$ for all $n>N$.
-4. Exists $N$ such that $(1-\epsilon) 2^{n(H(X)-\epsilon)}\leq |A_{\epsilon}^{(n)}|$ for all $n$.
+1. $\vec{x} \in A_{\epsilon}^{(n)}$ if and only if $H(X)-\epsilon \leq -\frac{1}{n}\log p(\vec x)\leq H(X)+\epsilon$
+2. For all $n$, $|A_{\epsilon}^{(n)}| \leq 2^{n(H(X)+\epsilon)}$
+3. For all $\delta>0$, exists $N$ such that $\forall n>N . \Pr\left[ \vec x\in A_{\epsilon}^{(n)} \right] > 1-\delta$
+4. For all $\delta>0$, exists $N$ such that $\forall n>N . (1-\delta) 2^{n(H(X)-\epsilon)}\leq |A_{\epsilon}^{(n)}|$
 
 **Insight**: the typical set is
 
@@ -813,7 +825,6 @@ When $\epsilon>0$ is a fixed positive real number.
 - every typical sequence is roughly equi-probable (every two sequences are equal likely)
 
 Proof for property 1:
-
 $$
 \begin{aligned}
 2^{-n(H(X)+\epsilon)}
@@ -842,14 +853,15 @@ $$
 Proof for property 2:
 
 $$
-1\geq \Pr(\vec{x}\in A_{\epsilon}^{(n)})\geq |A_{\epsilon}^{(n)}| 2^{-n(H(X)+\epsilon)}
+1 \geq \Pr\left[ \vec{x}\in A_{\epsilon}^{(n)} \right]
+\geq |A_{\epsilon}^{(n)}| 2^{-n(H(X)+\epsilon)}
 \implies
 2^{n(H(X)+\epsilon)}\geq |A_{\epsilon}^{(n)}| 
 $$
 
 Proof for property 3 and property 4:
 
-AEP definition of converge by probability.
+Since $-\frac{1}{n}\log p(x_1,x_2\ldots x_n)$ converges to $H(X)$ in probability:
 
 $$
 \forall \epsilon>0
@@ -861,27 +873,79 @@ $$
 \right] = 1
 $$
 
-For a fixed $\epsilon$
+For a fixed $\epsilon$, $\vec{x} \in A_{\epsilon}^{(n)}$
+if and only if
+$-\frac{1}{n}\log p(\vec{x}) \in \left(H(X)-\epsilon,H(X)+\epsilon\right)$.
+Thus
 
 $$
+\forall \epsilon > 0 .
 \lim_{n\to\infty}
 \Pr\left[
-(x_1\ldots x_n) \in A_{\epsilon}^{(n)}
+(x_1,x_2\ldots x_n) \in A_{\epsilon}^{(n)}
 \right] = 1
 $$
 
 Therefore, for every $\delta>0$, exists $N_{\delta}$ such that:
-$\forall n>N_{\delta} . \Pr(A_{\epsilon}^{(n)})> 1-\delta$.
+$\forall n>N_{\delta} . \Pr\left[ \vec{x} \in A_{\epsilon}^{(n)} \right]> 1-\delta$.
 
 $$
-2^{-n(H(X)-\epsilon)}|A_{\epsilon}^{(n)}| \geq \Pr(A_{\epsilon}^{(n)}) > 1-\delta
+2^{-n(H(X)-\epsilon)}|A_{\epsilon}^{(n)}| \geq \Pr\left[ A_{\epsilon}^{(n)} \right] > 1-\delta
 \implies
 |A_{\epsilon}^{(n)}| \geq (1-\delta)2^{n(H(X)-\epsilon)}
 $$
 
-By setting $\delta=\epsilon$, we can prove 3 and 4.
-
 #### AEP Implications
+
+For a discrete memoryless source (DMS)
+that generates a discrete-time integer-valued stochastic process
+$X_1,X_2,\ldots$
+where all $X_i \sim p(X)$ are independent and identically distributed.  
+Let $\mathcal{X}$ be the support of $X_i$ or the alphabet.
+
+Consider a block coding that groups every $n$ symbols together.
+For every $\vec{x} = (x_1,x_2\ldots x_n)\in \mathcal{X}^n$,
+the coding $c(\vec{x})$ is determined by
+
+- Encode $(x_1,x_2\ldots x_n) \in A_{\epsilon}^{(n)}$ with a fixed-length coding scheme $c_0$.  
+  Takes $\log \left| A_{\epsilon}^{(n)} \right| \leq \log 2^{n(H(X)+\epsilon)} = nH(X) + \epsilon$ bits.
+- Encode $(x_1,x_2\ldots x_n) \not\in A_{\epsilon}^{(n)}$ with another fixed-length coding scheme $c_1$.  
+  Takes $\log \left| \mathcal{X}^n - A_{\epsilon}^{(n)} \right| \leq \log {|\mathcal{X}|}^{n}$ bits.
+
+Combine the two coding scheme:
+
+$$
+c(x) = \begin{cases}
+0c_0(x) & x \in A_{\epsilon}^{(n)}\\
+1c_1(x) & x \not\in A_{\epsilon}^{(n)}\\
+\end{cases}
+$$
+
+For every $n$ symbols, $c(x)$ on average takes
+
+$$
+\Pr\left[ \vec{x} \in A_{\epsilon}^{(n)} \right]
+\left( nH(X)+\epsilon \right)
++ \Pr\left[ \vec{x} \not\in A_{\epsilon}^{(n)} \right]
+n \log |\mathcal{X}|
++ 1
+$$
+
+So the expected code length for each symbol is,
+
+$$
+\Pr\left[ \vec{x} \in A_{\epsilon}^{(n)} \right]
+\left(H(X)+\frac{1}{n}\epsilon \right)
++ \Pr\left[ \vec{x} \not\in A_{\epsilon}^{(n)} \right]
+\log |\mathcal{X}|
++ \frac{1}{n}
+\to
+H(X)
+$$
+
+as $n$ goes to infinite.
+
+We will show that $H(X)$ is the optimal average code length for error-free data compression.
 
 #### Strong Typical Sequence
 
@@ -889,4 +953,50 @@ See [Typical set - Wikipedia](https://en.wikipedia.org/wiki/Typical_set).
 
 Also called letter typical sequence.  
 For every letter, difference between the frequency and the probability is small enough.
+
+### Joint AEP
+
+The joint typical set and joint AEP are key to channel capacity theorem.
+
+For sequences $(X_1,Y_1), (X_2,Y_2) \ldots$
+where $(X_i,Y_i) \sim p(X,Y)$ are independent identically distributed.  
+Let $\mathcal{X}$ and $\mathcal{Y}$ be the supports of $X$ and $Y$ respectively.  
+
+The joint typical set $A_{\epsilon}^{(n)}$ is defined as:
+For $(x^n,y^n) \in \mathcal{X}^n\times \mathcal{Y}^N$,
+$(x^n,y^n)$ is jointly typical iff the following three conditions are hold true
+
+$$
+\left| -\frac{1}{n}p(x^n) - H(X) \right| < \epsilon
+\quad
+\left| -\frac{1}{n}p(y^n) - H(Y) \right| < \epsilon
+\quad
+\left| -\frac{1}{n}p(x^n,y^n) - H(X,Y) \right| < \epsilon
+$$
+
+The joint AEP states that
+
+1. $\lim_{n\to\infty} \Pr\left[ (X^n,Y^n) \in A_{\epsilon}^{(n)} \right] = 1$
+2. For all $n$, $\left| A_{\epsilon}^{(n)} \right| \leq 2^{n(H(X,Y)+\epsilon)}$
+3. For every $\delta>0$, exists $N$ such that $\forall n>N . (1-\delta) 2^{n(H(X,Y)-\epsilon)} \leq |A^{(n)}_{\epsilon}|$
+4. For two randomly independently picked pair of sequence $(\tilde X^n,Y^n) \sim p(x^n)p(y^n)$
+   $$
+   (1-\epsilon) 2^{-n(I(X;Y)+3\epsilon)}
+   \leq
+   \Pr\left[ (X^n,Y^n) \in A_{\epsilon}^{(n)} \right]
+   \leq
+   2^{-n(I(X;Y)-3\epsilon)}
+   $$
+
+That is: joint typical pairs
+
+- of high probability
+- of low cardinality
+- of exponentially low error rate if $I(X;Y) > 0$.
+
+## Entropy Rate
+
+Entropy rate of discrete-time integer-valued stochastic processes.
+
+**TODO**
 
