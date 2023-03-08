@@ -996,7 +996,63 @@ That is: joint typical pairs
 
 ## Entropy Rate
 
-Entropy rate of discrete-time integer-valued stochastic processes.
+### Discrete Time Stochastic Process
 
-**TODO**
+Discrete-time stochastic process:
+$\{X_1,X_2,\ldots , X_n, \ldots\}$
+a series of random variables.
+
+Entropy rate of discrete-time integer-valued stochastic processes.  
+where each $X_i \in \mathcal{X}$ is a finite set.
+
+#### Stationary Process
+
+See [Stationary process - Wikipedia](https://en.wikipedia.org/wiki/Stationary_process)
+
+- strict stationary
+- weak stationary
+
+A stochastic process is stationary if the joint pmf is time invariant:
+
+$$
+\forall (x_1,\ldots,x_n) .
+\Pr(X_1=x_1,\ldots,X_n=x_n) = \Pr(X_{k}=x_1,\ldots,X_{k+n}=x_n)
+$$
+
+#### Markov stochastic process
+
+See [Markov chain - Wikipedia](https://en.wikipedia.org/wiki/Markov_chain)
+
+$$
+\forall n .
+p(X_{n+1}|X_1,X_2,\ldots,X_n) = p(X_{n+1}|X_n)
+$$
+
+- special case: memoryless or iid sequence.
+- key property: irreducible chains
+- key property: ergodic chains
+
+An integer-valued Markov chain can be described as a graph random walk.  
+Use a matrix $P_{ij} = \Pr\left( X_{k+1}=j|X_{k}=i \right)$ to describe the random walk.
+
+Stationary distribution: $\mu P = \mu$ where $\mu$ is a PMF.
+
+### Entropy Rate of Stochastic Process
+
+For a stochastic process $\mathcal{X} = \{X_i\}$.
+The entropy rate is defined as
+
+$$
+H(\mathcal{X}) = \lim_{n\to\infty} \frac{1}{n}H(X_1,\ldots,X_n)
+$$
+
+If the limit exists, by O'Stolz theorem
+
+$$
+H(\mathcal{X}) = \lim_{n\to\infty} H(X_n|X_{n-1},\ldots,X_1)
+$$
+
+- For i.i.d. stochastic process: the entropy rate is the entropy of each random variable.
+- For Markov chain: $\lim_{n\to\infty} H(X_n|X_{n-1},\ldots,X_1) = \lim_{n\to\infty} H(X_n|X_{n-1}) = H(X_2|X_1)$.  
+  Easy to find when the stationary distribution is known.
 
