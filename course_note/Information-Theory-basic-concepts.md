@@ -908,11 +908,29 @@ For every $\vec{x} = (x_1,x_2\ldots x_n)\in \mathcal{X}^n$,
 the coding $c(\vec{x})$ is determined by
 
 - Encode $(x_1,x_2\ldots x_n) \in A_{\epsilon}^{(n)}$ with a fixed-length coding scheme $c_0$.  
-  Takes $\log \left| A_{\epsilon}^{(n)} \right| \leq \log 2^{n(H(X)+\epsilon)} = nH(X) + \epsilon$ bits.
+  Required bits
+  $$
+  \left\lceil \log |A_{\epsilon}^{(n)}| \right\rceil
+  \leq
+  \left\lceil \log 2^{n(H(X)+\epsilon)} \right\rceil
+  =
+  \left\lceil n(H(X) + \epsilon) \right\rceil
+  \leq
+  n(H(X) + \epsilon) + 1
+  $$
 - Encode $(x_1,x_2\ldots x_n) \not\in A_{\epsilon}^{(n)}$ with another fixed-length coding scheme $c_1$.  
-  Takes $\log \left| \mathcal{X}^n - A_{\epsilon}^{(n)} \right| \leq \log {|\mathcal{X}|}^{n}$ bits.
+  The bits used 
+  $$
+  \left\lceil \log |\mathcal{X}^n \setminus A_{\epsilon}^{(n)}| \right\rceil
+  \leq
+  \left\lceil \log {|\mathcal{X}^{n}|} \right\rceil
+  =
+  \left\lceil n \log {|\mathcal{X}|} \right\rceil
+  \leq
+  n \log {|\mathcal{X}|} + 1
+  $$
 
-Combine the two coding scheme:
+Unify the two coding scheme with one extra bit:
 
 $$
 c(x) = \begin{cases}
@@ -925,22 +943,25 @@ For every $n$ symbols, $c(x)$ on average takes
 
 $$
 \Pr\left[ \vec{x} \in A_{\epsilon}^{(n)} \right]
-\left( nH(X)+\epsilon \right)
+\left( nH(X)+n\epsilon+1 \right)
 + \Pr\left[ \vec{x} \not\in A_{\epsilon}^{(n)} \right]
-n \log |\mathcal{X}|
+(n \log |\mathcal{X}| + 1)
 + 1
 $$
 
 So the expected code length for each symbol is,
 
 $$
-\Pr\left[ \vec{x} \in A_{\epsilon}^{(n)} \right]
-\left(H(X)+\frac{1}{n}\epsilon \right)
+\begin{aligned}
+& \Pr\left[ \vec{x} \in A_{\epsilon}^{(n)} \right]
+(H(X)+\epsilon/n)
 + \Pr\left[ \vec{x} \not\in A_{\epsilon}^{(n)} \right]
 \log |\mathcal{X}|
-+ \frac{1}{n}
-\to
-H(X)
++ \frac{2}{n}\\
+&\to 
+1\times (H(X)+0) + 0 \times \log |\mathcal{X}| + 0\\
+& = H(X)
+\end{aligned}
 $$
 
 as $n$ goes to infinite.
