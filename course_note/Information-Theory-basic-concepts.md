@@ -4,8 +4,6 @@
 > - author: Thomas M. Cover
 > - course: ShanghaiTech EE142 Information Theory
 
-[TOC]
-
 ## Introduction
 
 Two main questions in information theory:

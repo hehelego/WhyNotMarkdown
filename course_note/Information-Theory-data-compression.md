@@ -2,9 +2,6 @@
 
 ## Source Coding and Data Compression
 
-
-### Discrete Memoryless Source (DMS)
-
 ### Terminologies
 
 - source: a discrete-time integer-valued stochastic process $X_1,X_2\ldots$
@@ -286,5 +283,111 @@ The optimality of Huffman code can be proved by induction.
 See [Lempel–Ziv–Welch - Wikipedia](https://en.wikipedia.org/wiki/Lempel–Ziv–Welch)
 
 ## Channel Coding and Error Correction
+
+![channel coding block diagram](../static/EE142-channel-code-blocks.png)
+
+### Terminologies
+
+- source message $W$: a number in $[1:2^{nR}] = \{1,2,\ldots,2^{nR}\}$.  
+  Common assumption for simplification: $W\sim \mathrm{DUnif}[1:2^{nR}]$.
+- source encoder: $[1:2^{nR}]\to \mathcal{X}^n$, encodes a source message into a fixed length sequence (the codeword).
+
+  - block length $n$.
+  - codebook: source encoder is often deterministic, denoted by $X^n(1),X^n(2), \ldots, X^{n}(2^{nR})$,
+    where $X^n(k) = (X_1(k),X_2(k),\ldots X_n(k)$.
+  - transmission rate $R$: the (expected) number of bits transmitted by sending/receiving one symbol.  
+    The information in source message is $H(W)=\log 2^{nR}=nR$.
+    A codeword $X^n(W)$ carries $nR$ bits with $n$ symbols.
+
+- channel: $(\mathcal{X},p(Y^n|X^n),\mathcal{Y})$. The receiver end gets $Y^n\sim P(Y^n|X^n)$ when $X^n$ is send through the channel.  
+  Often composed of a modulator, a noisy analog channel and a demodulator.
+- memoryless channel: $p(Y_k|X_1\ldots X_k,Y_1\ldots Y_{k-1}) = p(Y_k|X_k)$.  
+  That is output $Y_k$ only related to $X_k$.  
+  Implication: $p(Y^n|X^n) = \prod_{i=1}^{n} p(Y_i|X_i)$
+- source decoder: An estimator $\hat{W}$ estimating $W$ using $Y^n$.
+
+The Markov chain (randomness comes from the noisy channel):
+
+$$
+W\to X^n \to Y^n \to \hat{W}
+$$
+
+- conditional probability of error: $\lambda_k^{(n)}=\Pr(\hat{W} \neq k | X=X(k))$
+
+  $$
+  \begin{aligned}
+  \lambda_k^{(n)}
+  &= \sum_{y^n\in \mathcal{Y}^n} \Pr(\hat{W}\neq k|W=k,Y=y^n) p(y^n|X^n(k)) & \\
+  &= \sum_{y^n\in \mathcal{Y}^n} \Pr(\hat{W}\neq k|Y=y^n) p(y^n|X^n(k)) & (\text{Markov Chain})\\
+  \end{aligned}
+  $$
+
+- average probability of error: $P_e^{(n)} = \frac{1}{2^{nR}}\sum_{k=1}^{2^{nR}} \lambda_k$
+- maximal probability of error: $\lambda^{(n)} = \max_{k\in [1:2^{nR}]} \lambda_k^{(n)}$
+- achievable rate: rate at which asymptotically error-free code is possible.  
+  That is, exists a codebook $X^n:[1:2^{nR}]\to \mathcal{X}^n$,
+  such that $\lambda^{(n)} \to 0$ as $n\to \infty$.  
+  Or equivalently, a transmission rate $R$ is achievable
+  if the error rate $\lambda^{(n)}$ can be arbitrarily small for sufficiently large block length $n$.
+- channel capacity: supremum of achievable rate.
+
+**NOTE** assumption that $W\sim\mathrm{DUnif}[1:2^{nR}]$ is valid.
+
+### Capacity of Discrete Memoryless Channels (DMC)
+
+We will show it latter that 
+channel capacity of a DMC $p(y|x)$ is 
+
+$$
+C=\max_{p(x)} I(X;Y)
+$$
+
+#### Noisy Typewriter
+
+**TODO**
+
+#### Binary Symmetric Channel
+
+**TODO**
+
+#### Binary Erasure Channel
+
+**TODO**
+
+#### Symmetric Channels
+
+Transition matrix: $A_{x,y} = p(y|x)$ whose shape is $|\mathcal{X}| \times |\mathcal{Y}|$.
+
+- symmetric
+- weak symmetric
+
+**TODO**
+
+#### Union of Disjoint Channels
+
+**TODO**
+
+### Channel Coding Theorem
+
+> Also known as Shannon's second theorem
+Channel Coding Theorem states that for discrete memoryless channel $p(y|x)$ is $C=\max_{p(x)} I(X;Y)$.
+
+#### Rate lower than capacity is achievable
+
+**TODO**
+
+#### Rate greater than capacity is impossible
+
+**TODO**
+
+### Forward Error Correction Codes
+
+**TODO**
+
+#### Hamming Code
+
+**TODO**
+
+### Source Channel Separation Theorem
 
 **TODO**
