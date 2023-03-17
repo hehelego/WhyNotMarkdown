@@ -22,21 +22,27 @@ Background settings of information theory:
 
 ## Elements in Digital Communication System
 
-The blocks
+The components
 
 - source
-- encoder
-- channel
-- decoder
-- sink
+- source encoder
+- channel encoder
+- modulator
+- noisy channel
+- demodulator
+- channel decoder
+- source decoder
+- destination
 
 Encode/Decode:
 
 - Source coding: data compression
 - Channel coding: error detection and correction
 
-Why modulation?  
-Answer: baseband transmission to passband transmission.
+Modulate/Demodulate:
+
+- baseband transmission to passband transmission
+- send digital data through waveform
 
 ### Source
 
@@ -548,8 +554,16 @@ $$
 That is: $D_{KL}(p||q)$ is a convex function of the vector $(p,q)$.
 
 ### Mutual Information Convexity
-
 For two random variables $X,Y$:
+
+Terminologies $X\to Y$:
+
+- $p(X)$ prior
+- $p(Y)$ observation
+- $p(Y|X)$ posterior
+- $p(X|Y)$ likelihood
+
+Convexity:
 
 - If $p(x)$ is fixed, then $I(X;Y)$ is convex in $p(y|x)$.  
   **Data compression** task is non-trivial.  
@@ -561,6 +575,101 @@ For two random variables $X,Y$:
   Design $p(x)$ to maximize the mutual information with fixed $p(y|x)$, where
   $p(x)$ coding, $p(y|x)$ channel characteristic, $p(y)$ output.  
   _Concave function maximization_ is non-trivial.
+
+First rewrite $I(X;Y)$ as a function of $p(X)$ and $p(Y|X)$.
+
+$$
+\begin{aligned}
+I(X;Y) 
+&= D_{KL}(\ p(X,Y) \ ||\  p(X)p(Y)\ )\\
+&= D_{KL}(\ p(X)p(Y|X) \ ||\ p(X)\sum_{x_i\in\mathcal{X}}p(x_i)p(Y|X=x_i)\ )
+\end{aligned}
+$$
+
+Let $P=p(X,Y)=p(X)p(Y|X)$ and $Q=p(X)p(Y)=p(X)\sum_{x_i\in\mathcal{X}}p(x_i)p(Y|X=x_i)$.
+
+#### Mutual Information Convex in posterior
+
+For $p_{\lambda}(Y|X) = \lambda p_1(Y|X) + (1-\lambda) p_2(Y|X)$, where $\lambda\in (0,1)$ and $p(X)$ is fixed.
+
+Consider $P_{\lambda}$ and $Q_{\lambda}$
+
+$$
+\begin{aligned}
+P_{\lambda}
+&= p_{\lambda}(X,Y)\\
+&= p(X) p_{\lambda}(Y|X)\\
+&= \lambda p_1(Y|X)p(X) + (1-\lambda) p_2(Y|X)p(X)\\
+& = \lambda P_1 + (1-\lambda) P_2\\
+Q_{\lambda}
+&= p(X)p_{\lambda}(Y)\\
+&= p(X)\sum_{x_i\in\mathcal{X}} p(x_i)p_{\lambda}(Y|X=x_i)\\
+&= \lambda p(X)\sum_{x_i\in\mathcal{X}} p(x_i)p_1(Y|X=x_i) + (1-\lambda) p(X)\sum_{x_i\in\mathcal{X}} p(x_i)p_2(Y|X=x_i)\\
+&= \lambda p(X) p_1(Y) + (1-\lambda) p(X) p_2(Y)\\
+&= \lambda Q_1 + (1-\lambda) Q_2
+\end{aligned}
+$$
+
+Thus the mutual information is convex in posterior by convexity of relative entropy.
+
+$$
+\begin{aligned}
+I_{\lambda}(X;Y)
+&= D_{KL}(\lambda P_1 + (1-\lambda) P_2 \ ||\ \lambda Q_1 + (1-\lambda) Q_2)\\
+&\leq \lambda D_{KL}(P_1||Q_1) +(1-\lambda) D_{KL}(P_2||Q_2)
+\end{aligned}
+$$
+
+#### Mutual Information Concave in prior
+
+For $p_{\lambda}(X) = \lambda p_1(X) + (1-\lambda) p_2(X)$, where $\lambda\in (0,1)$ and $p(Y|X)$ is fixed.
+
+By definition
+
+$$
+I
+= H(Y) - H(Y|X)
+=H\left(\sum_{x_i\in\mathcal{X}} p(Y|x_i)p(x_i)\right)
+-\sum_{x_i\in\mathcal{X}} H\left(Y|X=x_i\right)p(x_i)\\
+$$
+
+Substitute $p(x)$ with $p_{\lambda}(x)$
+
+$$
+\begin{aligned}
+I_{\lambda}
+&=H\left(\sum_{x_i\in\mathcal{X}} p(Y|x_i)p_{\lambda}(x_i)\right)
+-\sum_{x_i\in\mathcal{X}} H\left(Y|X=x_i\right)p(x_i)\\
+&=H\left(
+\lambda \sum_{x_i\in\mathcal{X}} p(Y|x_i)p_1(x_i)
++ (1-\lambda)\sum_{x_i\in\mathcal{X}}p(Y|x_i)p_2(x_i)\right)
+-\sum_{x_i\in\mathcal{X}} H\left(Y|X=x_i\right)p_{\lambda}(x_i)
+\end{aligned}
+$$
+
+Entropy function $H(\cdot)$ is concave:
+
+$$
+I_{\lambda}\geq
+\lambda H\left(\sum_{x_i\in\mathcal{X}} p(Y|x_i)p_1(x_i) \right)
++(1-\lambda) H\left(\sum_{x_i\in\mathcal{X}} p(Y|x_i)p_2(x_i) \right)
+-\sum_{x_i\in\mathcal{X}} H\left(Y|X=x_i\right)p_{\lambda}(x_i)
+$$
+
+Recombine into
+
+$$
+\begin{aligned}
+I_{\lambda}&\geq
+\lambda H\left(\sum_{x_i\in\mathcal{X}} p(Y|x_i)p_1(x_i) \right)
+-\lambda \sum_{x_i\in\mathcal{X}} H\left(Y|X=x_i\right)p_1(x_i)\\
+&+(1-\lambda) H\left(\sum_{x_i\in\mathcal{X}} p(Y|x_i)p_2(x_i) \right)
+-(1-\lambda) \sum_{x_i\in\mathcal{X}} H\left(Y|X=x_i\right)p_2(x_i)\\
+&= \lambda I_1 + (1-\lambda) I_2
+\end{aligned}
+$$
+
+That is: mutual information is concave in prior.
 
 ### Entropy Inequality
 
@@ -654,6 +763,8 @@ denoted by $X\to Y\to Z$.
 
 Example: $X,Y$ i.i.d. $\mathrm{Bern}(1/2)$ and $Z_1=X\oplus Y$, $Z_2=X+Y$.
 
+**Note**: sub-sequence of a Markov chain is also a Markov chain.
+
 #### Data Processing Inequality
 
 If $X\to Y\to Z$, then $X,Z$ are independent given $Y$.
@@ -680,9 +791,69 @@ In summary
   2. $I(X;Y|Z)\geq I(X;Y)$ case: independently $X,Y\sim \mathrm{Bern}(1/2)$, $Z=X \oplus Y$ (exclusive-or).  
   **Interpretation**: The connection between $X$ and $Y$ are clear only when $Z$ is known.
 
+### Sufficiently Statistic
+
+Suppose that $X \sim p(X,\theta)$,
+a function $f(X)$ is called a sufficient statistic if $I(\theta;f(X)) = I(\theta;X)$.
+
+For every function $f(X)$, since $\theta\to X\to f(X)$ form a Markov chain,
+$I(\theta;g(X))\leq I(\theta;X)$ by data processing inequality.  
+Equality hold for $I(\theta;X|f(X)=0)$, or equivalently, $\theta$ and $X$ are conditional independent given $f(X)$.
+
+Processing data generated from $p(X,\theta)$ with sufficient statistic
+preserves all the inferable information of $\theta$.  
+
+See [Sufficient statistic - Wikipedia](https://en.wikipedia.org/wiki/Sufficient_statistic)
+
 ### Fano's Inequality
 
-**TODO**
+Suppose that a random variable $X$ gives rise to another random variable $Y$.
+We can devise an estimator $\hat{X}$ such that $X\to Y\to \hat{X}$ is a Markov chain.  
+If $H(X|Y)=0$ ($X$ is a function of $Y$), then a zero error estimator $\hat{X}$ is possible.
+
+For $H(X|Y)\neq 0$, Fano's inequality gives a lower bound of the error probability $\Pr(X\neq \hat{X})$.
+
+Let $\mathcal{E}=\mathbf{1}_{\left[X \neq \hat{X}\right]}$ i.e., an error occurs. Let $P_e=\mathbb{E}\left[\mathcal{E}\right]$  
+Then
+
+$$
+\begin{aligned}
+H(\mathcal{E},X|\hat{X})
+&= H(\mathcal{E}|\hat{X}) + H(X|\hat{X},\mathcal{E})\\
+&= H(X|\hat{X}) + H(\mathcal{E}|\hat{X},X)\\
+H(\mathcal{E}|\hat{X}) + H(X|\hat{X},\mathcal{E})
+&= H(\mathcal{E}|\hat{X}) + P_e H(X|\hat{X},\mathcal{E}=1)\ + (1-P_e)H(X|\hat{X},\mathcal{E}=0)\\
+&= H(\mathcal{E}|X) + P_e H(X|\hat{X},\mathcal{X}=1) + (1-P_e)\times 0\\
+&\leq H(\mathcal{E}) + P_e \log (|\mathcal{X}|-1)\\
+H(X|\hat{X}) + H(\mathcal{E}|\hat{X},X)
+&=H(X|\hat{X}) 
+\end{aligned}
+$$
+
+Thus
+
+$$
+H(X|\hat{X})
+\leq H(P_e) + P_e \log (|\mathcal{X}|-1)
+\leq H(P_e) + P_e \log |\mathcal{X}|
+$$
+
+Considering that $X\to Y\to \hat{X}$, we have $H(X|\hat{X})\geq H(X|Y)$
+
+Thus
+
+$$
+H(X|Y) \leq H(X|\hat{X}) \leq H(P_e) + P_e \log |\mathcal{X}|
+$$
+
+This is called the Fano's inequality.
+If $P_e=0$, then $H(Y|X)=0$.
+
+A weaker lower bound of $P_e$ can be found as:
+
+$$
+P_e \geq \frac{H(X|Y)-1}{\log |\mathcal{X}|}
+$$
 
 ## Asymptotic Equipartition Property (AEP)
 
@@ -988,11 +1159,11 @@ For $(x^n,y^n) \in \mathcal{X}^n\times \mathcal{Y}^N$,
 $(x^n,y^n)$ is jointly typical iff the following three conditions are hold true
 
 $$
-\left| -\frac{1}{n}p(x^n) - H(X) \right| < \epsilon
+\left| -\frac{1}{n}\log p(x^n) - H(X) \right| < \epsilon
 \quad
-\left| -\frac{1}{n}p(y^n) - H(Y) \right| < \epsilon
+\left| -\frac{1}{n}\log p(y^n) - H(Y) \right| < \epsilon
 \quad
-\left| -\frac{1}{n}p(x^n,y^n) - H(X,Y) \right| < \epsilon
+\left| -\frac{1}{n}\log p(x^n,y^n) - H(X,Y) \right| < \epsilon
 $$
 
 The joint AEP states that
@@ -1000,11 +1171,12 @@ The joint AEP states that
 1. $\lim_{n\to\infty} \Pr\left[ (X^n,Y^n) \in A_{\epsilon}^{(n)} \right] = 1$
 2. For all $n$, $\left| A_{\epsilon}^{(n)} \right| \leq 2^{n(H(X,Y)+\epsilon)}$
 3. For every $\delta>0$, exists $N$ such that $\forall n>N . (1-\delta) 2^{n(H(X,Y)-\epsilon)} \leq |A^{(n)}_{\epsilon}|$
-4. For two randomly independently picked pair of sequence $(\tilde X^n,Y^n) \sim p(x^n)p(y^n)$
+4. For every $\delta>0$, exists $N$ such that $\forall n>N$:  
+   two randomly independently picked pair of sequence $(\tilde X^n,\tilde Y^n) \sim p(x^n)p(y^n)$
    $$
-   (1-\epsilon) 2^{-n(I(X;Y)+3\epsilon)}
+   (1-\delta) 2^{-n(I(X;Y)+3\epsilon)}
    \leq
-   \Pr\left[ (X^n,Y^n) \in A_{\epsilon}^{(n)} \right]
+   \Pr\left[ (\tilde X^n,\tilde Y^n) \in A_{\epsilon}^{(n)} \right]
    \leq
    2^{-n(I(X;Y)-3\epsilon)}
    $$
@@ -1013,7 +1185,22 @@ That is: joint typical pairs
 
 - of high probability
 - of low cardinality
-- of exponentially low error rate if $I(X;Y) > 0$.
+- exponentially rare in all pairs of typical sequences
+  - Pairs of typical sequences: $2^{nH(X)}\times 2^{nH(Y)} = 2^{n(H(X)+H(Y))}$.  
+  - Joint typical sequences: $2^{nH(X,Y)}=2^{n(H(X)+H(Y) - I(X;Y))}$
+
+For every $\delta>0$, exists $N$ such that $\forall n>N$:  
+
+$$
+\Pr\left[ (\tilde X^n,\tilde Y^n) \in A_{\epsilon}^{(n)} \right]
+=\sum_{(x^n,y^n)\in A^{(n)}_{\epsilon}} p(x^n)p(y^n)
+$$
+
+Bounds:
+
+- lower/upper bounds of cardinality of $A_{\epsilon}^{(n)}(p(x,y))$
+- lower/upper bounds of probability of $p(x^n)$ and $p(y^n)$
+
 
 ## Entropy Rate
 
@@ -1023,7 +1210,7 @@ Discrete-time stochastic process:
 $\{X_1,X_2,\ldots , X_n, \ldots\}$
 a series of random variables.
 
-Entropy rate of discrete-time integer-valued stochastic processes.  
+Entropy rate of discrete-time integer-valued stochastic processes,  
 where each $X_i \in \mathcal{X}$ is a finite set.
 
 #### Stationary Process
