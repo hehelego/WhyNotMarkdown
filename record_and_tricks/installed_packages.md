@@ -135,7 +135,9 @@
 ### language use
 
 - spell checker: `aspell`, `hunspell`
-- dictionary lookup: `dictd` (client CLI `/usr/bin/dict`. Offline dictionaries: GNU GCIDE and Princeton word-net)
+- dictionary lookup: `dictd` (client CLI `/usr/bin/dict`, config `/etc/dict/dictd.conf`)
+  - GNU GCIDE: AUR `dict-gcide`
+  - Princeton Word-Net: AUR `dict-wn`
 
 ### multimedia
 
