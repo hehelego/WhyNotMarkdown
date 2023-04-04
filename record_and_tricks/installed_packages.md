@@ -7,10 +7,10 @@
 - installer and reproducible installation: `archinstall`
 - distro: Arch Linux
 - kernel: `linux` (the stable version)
-- bootloader: `systemd-boot` (CLI `/usr/bin/bootctl`) (replacing `grub`)
-- init: `systemd` (the only officially supported init system on Arch Linus)
+- bootloader: `systemd-boot` (CLI `/usr/bin/bootctl`) or `grub`
+- init: `systemd` (the only officially supported init system on Arch Linux)
 - shell: `fish`
-- package-manager: `pacman`(with `pacman-contrib` and `pacutils`), `yay` (an AUR helper)
+- package-manager: `pacman` (with `pacman-contrib` and `pacutils`), `yay` (an AUR helper)
 - GNU tool chain: `base-devel` (compiler, assembler, linker, loader, debugger, build system...)
 - display server protocol: Wayland/X11 
 - display manager: `sddm`
@@ -18,7 +18,7 @@
 - terminal emulator: `alacritty`, `wezterm`
 - editor: `neovim`; additional ones `helix`, `kakoune`, `vscodium`
 - configuration/dotfiles manager: `chezmoi`
-- version control: `git`(TUI `lazygit`, `gitui`; github CLI `gh`)
+- version control: `git` (TUI `lazygit`, `gitui`; github CLI `gh`)
 - terminal multiplexer: `tmux`
 
 ## daily environment
@@ -32,7 +32,7 @@
 - password manager: `keepassxc`
 - messaging: `telegram-desktop`
 - document converter: `pandoc`
-- multimedia: `ffmpeg`,`vlc`,`mpv`,`feh`,`viu`
+- multimedia: `ffmpeg`,`imagemagick`,`vlc`,`mpv`,`feh`
 
 
 ### network accessing
@@ -109,7 +109,7 @@
 ### other utilities
 
 - `xdg-utils` (provides `/usr/bin/xdg-{mime,open}`)
-- x11 applications: `xorg-apps` group
+- X11 applications: `xorg-apps` group
 - program launcher: `rofi`
 - display color temperature adjustment: `redshift`; `gammastep`
 - system-wide desktop clipboard: `xclip`; `wl-clipboard`
@@ -124,19 +124,20 @@
 - visualizing topological graphs:`graphviz`
 - screenshot: `flameshot`, `spectacle`; `grim+slurp`
 - display the keyboard actions: `screenkey`; `showmethekey`
-- RDP and VNC support: `freerdp`
-- dictionary lookup: `ydcv-rs`
-- rustdesk: `rustdesk`, `rustdesk-server`
 
 ## MISC
 
-### uncategorized
+### remote desktop
 
-- BitTorrent client: `qbittorrent`
-- FOSS office suite: `libreoffice-fresh`
+- RDP and VNC support: `freerdp`
+- rustdesk: `rustdesk`, `rustdesk-server`
+
+### language use
+
 - spell checker: `aspell`, `hunspell`
+- dictionary lookup: `dictd` (client CLI `/usr/bin/dict`. Offline dictionaries: GNU GCIDE and Princeton word-net)
 
-### multimedia tools
+### multimedia
 
 - audio server: `pipewire` (replacing `pulseaudio`)
 - volume control: `/usr/bin/pactl`, `kmix`
@@ -145,8 +146,7 @@
 - metadata tools
   - `mediainfo`
   - `exiv2`
-- `you-get`
-
+- `you-get`, `yt-dlp` (a fork of `youtube-dl`)
 
 ### font family
 
@@ -158,7 +158,7 @@
 - The fandol fonts (`otf-fandol`, basic Chinese typesettings: Song/Hei/Kai/Fang)
 - display icons: nerd fonts, font awesome
 
-### hardware status monitoring/diagnosing tool
+### hardware monitor
 
 - `neofetch`
 - `/usr/bin/{lscpu,lspci,lshw}`
