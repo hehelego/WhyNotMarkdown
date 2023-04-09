@@ -135,7 +135,7 @@ The entropy of this binary random variable $H(X)=p\log\frac{1}{p} + (1-p)\log\fr
 is denoted as $H(p)$.
 This is a concave function.
 
-Extension: $H(\vec{p})$ where $\vec{p}=(p_1,p_2\ldots p_n)$ such that $\sum_{i} p_i=1$.
+**Extension**: $H(\vec{p})$ where $\vec{p}=(p_1,p_2\ldots p_n)$ such that $\sum_{i} p_i=1$.
 $H(\vec{p})=\sum_{i} p_i \log \frac{1}{p_i}$ is a concave function of $\vec{p}$.
 
 $$
@@ -1137,6 +1137,41 @@ as $n$ goes to infinite.
 
 We will show that $H(X)$ is the optimal average code length for error-free data compression.
 
+#### Joint Typicality Interpretation of a Inequality
+
+$X$ and $X'$ are independent identically distributed.
+
+$$
+\begin{aligned}
+\Pr(X\neq X')
+&=\sum_{x\in\mathcal{X}} p^2(x)
+=\sum_x p(x) 2^{\log p(x)}\\
+Y\gets \Pr(Y=\log p(x)) & = p(x)\quad \forall x\in\mathcal{X}\\
+\Pr(X\neq X')
+&=\sum_y p(y) 2^y 
+= \mathbb{E}\left[2^y\right]\\
+&\geq 2^{\mathbb{E} \left[y\right]}
+=2^{\sum_x p(x)\log p(x)}
+=2^{-H(X)}
+\end{aligned}
+$$
+
+Condition for equality: $Y$ is uniform or equivalently $X$ is uniform.
+
+**Interpretation**: The entropy of $X$ is $H(X)$, so it can be determined by $(T_1,T_2,\ldots T_n) \stackrel{iid}{\sim}\mathrm{Bern}(1/2)$ where $n=H(X)$.  
+Consider the typical set $A^{(n)}_{\epsilon}(T)$, for every $t^n\in A^{(n)}_{\epsilon}$, the probability $p(t^n)$ is roughly $2^{-nH(T)} = 2^{-H(X)}$.  
+Let $T^n_0\to X$ and $T^{n}_1\to X'$, the probability of $X=X'$ is roughly
+
+$$
+\begin{aligned}
+\Pr(T^n_0=T^n_1)
+&=\sum_{t^n\in A^{(n)}_{\epsilon}(T)} \Pr(T^n_1 = t^n | T^n_0=t^n)\Pr(T^n_0=t^n)\\
+&=\sum_{t^n\in A^{(n)}_{\epsilon}(T)} \Pr(T^n_1 = t^n)\Pr(T^n_0=t^n)\\
+&=\sum_{t^n\in A^{(n)}_{\epsilon}(T)} 2^{-H(X)}\Pr(T^n_0=t^n)\\
+&=2^{-H(X)}
+\end{aligned}
+$$
+
 #### Strong Typical Sequence
 
 See [Typical set - Wikipedia](https://en.wikipedia.org/wiki/Typical_set).
@@ -1261,4 +1296,471 @@ $$
 - For i.i.d. stochastic process: the entropy rate is the entropy of each random variable.
 - For Markov chain: $\lim_{n\to\infty} H(X_n|X_{n-1},\ldots,X_1) = \lim_{n\to\infty} H(X_n|X_{n-1}) = H(X_2|X_1)$.  
   Easy to find when the stationary distribution is known.
+
+
+## Differential Entropy
+
+Information theory for continuous random variables.
+
+- $X,Y,Z$ continuous random variable
+- $F_X(x) = \Pr(X<x)$ cumulative density function (CDF)
+- $f_X(x) = \frac{\mathrm{d}}{\mathrm{d}x} F_X(x)$ probability density function (PDF)
+- $M_X(t) = \mathbb{E}\left[ e^{t X} \right]$ moment generating function (Laplace transform of PDF)
+- $\varphi_X(t) = \mathbb{E}\left[ e^{i t X} \right]$ characteristic function (Fourier transform of PDF)
+
+### Definitions and Basic Properties
+
+Continuous random variables $X,Y$ on support $S$ with PDF $f(x,y)$ and CDF $F(x,y)$
+
+- differential entropy
+    $$
+    h(X)
+    =\mathbb{E}\left[\frac{1}{\log f(X)}\right]
+    =\int_S f(x) \log \frac{1}{f(x)} \mathrm{d}x
+    $$
+- joint differential entropy
+    $$
+    h(X,Y) 
+    =\mathbb{E}\left[\frac{1}{\log f(X,Y)}\right]
+    =\iint_S f(x,y) \log \frac{1}{f(x,y)} \mathrm{d}x\mathrm{d}y
+    $$
+- conditional differential entropy
+    $$
+    h(Y|X)
+    =\mathbb{E}\left[\frac{1}{\log f(Y|X)}\right]
+    =\iint_S f(x,y) \log \frac{1}{f(y|x)} \mathrm{d}x\mathrm{d}y
+    $$
+
+For two distributions $f,g$ on $I\subseteq \mathbb{R}$.
+The relative entropy (KL-divergence) is
+
+$$
+D_{KL}(f||g)
+= \mathbb{E}_{X\sim f}\left[\log \frac{f(X)}{g(X)}\right]
+=\int_I f(x) \log \frac{f(x)}{g(y)} \mathrm{d}x
+$$
+
+For random variables $(X,Y)\sim f(x,y)$ with marginal PDF $X\sim f(x),y\sim f(y)$
+The mutual information is
+
+$$
+i(X;Y)
+=D_{KL}(f(x,y) || f(x)f(y))
+=\iint f(x,y) \log \frac{f(x,y)}{f(x)f(y)} \mathrm{d}x\mathrm{d}y
+$$
+
+#### Algebraic Properties of Differential Entropy
+
+The same as discrete entropy.
+
+- $i(X;Y) = h(X) - h(X|Y) = h(Y) - h(Y|X) = h(X)+h(Y)-h(X,Y)$
+- $h(X,Y) = h(X) + h(Y|X) = h(Y)+h(Y|X)$
+- $h(aX+b) = h(X) + \log |a|$
+- $h(\mathbf{A}\mathbf{X} + \mathbf{b}) = h(\mathbf{X}) + \log |\det\mathbf{A}|$
+
+
+Consider a change in variable (or variable substitution)
+
+$$
+\begin{aligned}
+&&\mathbf{Y} &= \mathbf{A}\mathbf{X}+\mathbf{b}
+\qquad \mathbf{x}=\mathbf{A}^{-1}(\mathbf{y}-\mathbf{b})\\
+&\implies
+&|f_Y(\mathbf{y}) \mathrm{d} y_1 \cdots \mathrm{d} y_n|
+&=|f_X(\mathbf{x}) \mathrm{d} x_1 \cdots \mathrm{d} x_n|\\
+&\implies&
+f_Y(\mathbf{y})
+&=\left| \frac{\partial\mathbf{x}}{\partial\mathbf{y}} \right| f_X(\mathbf{x})
+=\left| {\left(\frac{\partial\mathbf{y}}{\partial\mathbf{x}}\right)}^{-1} \right| f_X(\mathbf{x})
+=\left|{\det(A)}^{-1}\right| f_X(\mathbf{x})
+\end{aligned}
+$$
+
+Thus
+
+$$
+\begin{aligned}
+h(\mathbf{Y})
+&=-\int_{\mathbf{y}\in\mathcal{Y}}
+f_Y(\mathbf{y}) \log f_Y(\mathbf{Y})\,
+\mathrm{d} y_1 \cdots \mathrm{d} y_n\\
+&=-\int_{\mathbf{x}\in\mathcal{X}}
+f_Y(\mathbf{A}\mathbf{x}+\mathbf{b}) \log f_Y(\mathbf{A}\mathbf{x}+\mathbf{b})\,
+\left| \det(A) \right|
+\mathrm{d} x_1 \cdots \mathrm{d} x_n\\
+&=-\int_{\mathbf{x}\in\mathcal{X}}
+\frac{1}{|\det(A)|}f_X(\mathbf{x}) \log \left( \frac{1}{|\det(A)|} f_X(\mathbf{x}) \right)\,
+\left| \det(A) \right|
+\mathrm{d} x_1 \cdots \mathrm{d} x_n\\
+&=-\int_{\mathbf{x}\in\mathcal{X}}
+f_X(\mathbf{x}) \log \left( \frac{1}{|\det(A)|} f_X(\mathbf{x}) \right)\,
+\mathrm{d} x_1 \cdots \mathrm{d} x_n\\
+&=-\int_{\mathbf{x}\in\mathcal{X}}
+f_X(\mathbf{x}) \log f_X(\mathbf{x}) \,
+\mathrm{d} x_1 \cdots \mathrm{d} x_n
++\int_{\mathbf{x}\in\mathcal{X}}
+f_X(\mathbf{x}) \log |\det(A)| \,
+\mathrm{d} x_1 \cdots \mathrm{d} x_n\\
+&=h(X) + \log |\det(A)|
+\end{aligned}
+$$
+
+**NOTE**: here $\mathrm{d} y_1 \cdots \mathrm{d} y_n$ means $\mathrm{d}y_1 \wedge \mathrm{d}y_2\cdots \mathrm{d}y_n$
+
+#### Differential Entropy is Unbounded
+
+Unlike the entropy of discrete r.v.s. the differential entropy is unbounded.
+This is because the PDFs, unlike the PMFs in discrete case, are not always bounded.
+
+Consider $\mathrm{Unif}(0,a)$, the differential entropy is 
+
+$$
+h(a) = \int_0^a \frac{1}{a}\log a \mathrm{d}x = \log a
+$$
+
+- For $a\in (0,1)$ the entropy is negative
+- $\lim_{a\to+\infty} h(a)=+\infty$
+
+The maximal entropy distribution is no longer a uniform distribution.
+
+#### Differential Relative Entropy is non-negative
+
+First-order approximation of $ln x$
+
+$$
+\ln x \leq x-1
+\iff
+\ln \frac{1}{x} \leq \frac{1}{x}-1
+\iff
+\ln x \geq 1-\frac{1}{x}
+$$
+
+Thus
+
+$$
+D(f||g) = \int f \ln \frac{f}{g} \geq \int f \left(1-\frac{g}{f}\right) = \int (f - g) = 0
+$$
+
+Corollary: 
+
+- $i(X;Y) \geq 0$, equality hold iff $X,Y$ are independent.
+- $h(Y|X) = h(Y) - i(X;Y) \leq h(Y)$, equality hold iff $X,Y$ are independent.
+
+### Typical Sequence of Continuous Random Variables
+
+Define the volume of $S\subseteq \mathbb{R}^n$ to be
+$$
+\operatorname{Volume}(V) = \int_S
+1\,
+\mathrm{d}x_1
+\mathrm{d}x_2
+\ldots
+\mathrm{d}x_n
+$$
+
+For $\mathbf{X}=(X_1,X_2\ldots X_n)\stackrel{iid}{\sim} f(X)$, define the typical set $A^{(n)}_{\epsilon}(X)$ to be
+
+$$
+\left\{ x^n\in \mathcal{X}^n \mid -\frac{1}{n}\log f(x^n) \in (h(X)-\epsilon,h(X)+\epsilon) \right\}
+$$
+
+By WLLN (converges in probability), for random vector of i.i.d. 
+
+$$
+\lim_{n\to\infty} -\frac{1}{n}\log f(X^n)
+=\lim_{n\to\infty} \frac{1}{n}\sum_{i=1}^n \log \frac{1}{f(X_i)}
+\to \mathbb{E}\left[\log \frac{1}{f(X)}\right]
+= h(X)
+$$
+
+The joint typical set $A^{(n)}_{\epsilon}(X,Y)$
+can be defined similarly where the three conditions are
+
+$$
+\begin{cases}
+-\frac{1}{n}\log f(x^n) \in (h(X)-\epsilon,h(X)+\epsilon)\\
+-\frac{1}{n}\log f(y^n) \in (h(Y)-\epsilon,h(Y)+\epsilon)\\
+-\frac{1}{n}\log f(x^n,y^n) \in (h(X,Y)-\epsilon,h(X,Y)+\epsilon)\\
+\end{cases}
+$$
+
+Properties of typical sequences
+
+- For every $\delta>0$, exists $N$ such that $\Pr(X^n\in A^{n}_{\epsilon}) > 1-\delta$ for all $n>N$.
+- $\operatorname{Volume}(A^{(n)}_{\epsilon}) \leq 2^{n(h(X)+\epsilon)}$ for all $n$.
+- For every $\delta>0$, exists $N$ such that $\operatorname{Volume}(A^{n}_{\epsilon}) > (1-\delta)2^{n(h(X)-\epsilon)}$ for all $n>N$.
+
+Can be easily proved with the similar method used in discrete typicality.  
+Here we only give a proof of property 2.
+
+$$
+\begin{aligned}
+1
+&=\int_{S^n} f(x^n) \mathrm{d}x_1\cdots \mathrm{d}x_n\\
+&\geq\int_{A^{(n)}_{\epsilon}} f(x^n) \mathrm{d}x_1\cdots \mathrm{d}x_n\\
+&\geq\int_{A^{(n)}_{\epsilon}} 2^{-n(h(X)+\epsilon)} \mathrm{d}x_1\cdots \mathrm{d}x_n\\
+&=2^{-n(h(X)+\epsilon)} \operatorname{Volume}(A^{(n)}_{\epsilon}(X))\\
+\operatorname{Volume}(A^{(n)}_{\epsilon}(X))
+&\leq 2^{n(h(X)+\epsilon)}
+\end{aligned}
+$$
+
+### Entropy of Quantization of Continuous Variables
+
+For a fixed positive real number $\Delta>0$,
+the real numbers $\mathbb{R}$ can be partitioned into $I_k = [(k-1)\Delta,k\Delta]$ for $k\in \mathbb{Z}$.
+
+For continuous random variable $X$, define $X^\Delta$ tobe a function of $X$ where
+
+$$
+X^\Delta=k \leftrightarrow X\in I_k
+\qquad
+\Pr(X^\Delta=k) = \Pr(X\in I_k) = \int_{x\in I_k} f(x)\mathrm{d}x
+$$
+
+For every $k\in \mathbb{Z}$:
+By mean value theorem, exists $x_k\in I_k$ such that $\int_{x\in I_k} f(x)\mathrm{d}x = f(x_k) \Delta$
+
+Thus
+
+$$
+\begin{aligned}
+H(X^\Delta) 
+&= \sum_{k} f(x_k)\Delta \log \frac{1}{f(x_k)\Delta}\\
+&= \sum_k f(x_k)\Delta \log \frac{1}{f(x_k)} + \sum_k f(x_k)\Delta \log \frac{1}{\Delta}\\
+&= \sum_k f(x_k)\Delta \log \frac{1}{f(x_k)} + \log \frac{1}{\Delta}\\
+&\approx h(X) - \log \Delta
+\end{aligned}
+$$
+
+Consider two-dimensional quantization $X\to X^\Delta$ and $Y\to Y^\Delta$:
+
+$$
+\begin{aligned}
+H(X^\Delta,Y^\Delta)
+&=\sum_{i,j} f(x_{ij},y_{ij})\Delta^2 \log \frac{1}{f(x_{ij},y_{ij})\Delta^2}\\
+&=\sum_{i,j} f(x_{ij},y_{ij})\Delta^2 \log \frac{1}{f(x_{ij},y_{ij})}
++\sum_{i,j} f(x_{ij},y_{ij})\Delta^2 \log \frac{1}{\Delta^2}\\
+&\approx h(X,Y) - \log \Delta^2
+\end{aligned}
+$$
+
+Also notice that
+
+$$
+\begin{aligned}
+I(X^\Delta, Y^\Delta)
+&=H(X^\Delta)+H(Y^\Delta)-H(X^\Delta,Y^\Delta)\\
+&\approx H(X)-\log \Delta + H(Y)-\log \Delta - H(X,Y) + \log \Delta^2\\
+&=I(X;Y)
+\end{aligned}
+$$
+
+Quantization does not change the mutual information.
+Helpful in providing theorems of Gaussian channels.
+
+### Entropy of Gaussian Variables
+
+#### Recall: One Dimensional Gaussian Distribution
+
+The standard normal random distribution:
+
+$$
+X\sim \mathcal{N}(0,1)
+\quad
+f(x) = \frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2} x^2}
+$$
+
+Any Gaussian variable can be viewed as a linear function of standard Gaussian.
+
+$$
+Y=\sigma X + \mu
+\iff
+Y\sim \mathcal{N}(\mu,\sigma^2)
+\qquad
+f(x) = \frac{1}{\sqrt{2\pi \sigma^2}}
+e^{ -\frac{1}{2} {\left( \frac{x-\mu}{\sigma} \right)}^2 }
+$$
+
+MGF of standard normal variable: $M_X(t) = e^{t^2/2}$
+
+$$
+M_Y(t)
+= \mathbb{E}\left[ e^{t(\mu + \sigma X)} \right]
+= e^{\mu t} e^{(\sigma t)X}
+= e^{\mu t} M_X(\sigma t)
+= e^{\mu t + \sigma^2 t^2/2}
+$$
+
+#### Recall: Multivariate Gaussian Distribution
+
+For a random vector $\mathbf{X}={(X_1,X_2,\ldots X_n)}^T$,
+if the marginal distribution of any linear combination $Y=\sum_i a_i X_i$ is a Gaussian distribution,
+then the random vector $\mathbf{X}$ is called a multivariate normal (MVN).
+
+Parameters of MVN:
+
+- mean vector (first moment): $\mathbf{\mu} = \mathbb{E} \mathbf{X}$
+- covariance vector (second moment): $\Sigma_{ij} = \operatorname{Cov}(X_i,X_j)$ or ($K_{ij}$ in some literature)
+
+PDF of MVN:
+
+$$
+f_X(\mathbf{x})
+= \frac{1}{\sqrt{{(2\pi)}^n |\Sigma|}}
+\exp\left(
+-\frac{1}{2}
+{(\mathbf{x}-\mathbf{\mu})}^T \Sigma^{-1} {(\mathbf{x}-\mathbf{\mu})}
+\right)
+$$
+
+MGF of MVN:
+
+$$
+M_{X}(\mathbf{t})=\exp(\mathbf{\mu}^T \mathbf{t} + \frac{1}{2}\mathbf{t}^T\Sigma \mathbf{t})
+$$
+
+If $\Sigma=\mathrm{diagonal}(\sigma_1^2,\sigma_2^2,\ldots,\sigma_n^2)$,
+then the MGF can be decomposed into $\prod_{i=1}^n \exp(\mu_i t_i + \sigma_i^2 t^2/2)$,
+so the coordinates of this MVN is independent.  
+For MVN: independent is equivalently to uncorrelated.
+
+For bivariate normal distribution (BVN):
+$\Sigma_{12} = \Sigma_{21} = \rho$ is called the _pearson correlation coefficient_
+
+$$
+\rho(X,Y)
+= \frac{\operatorname{Cov}(X,Y)}{\sqrt{\operatorname{Cov}(X,X)\operatorname{Cov}(Y,Y)}}
+= \frac{\operatorname{Cov}(X,Y)}{\sqrt{\operatorname{Var}(X)\operatorname{Var}(Y)}}
+= \frac{\operatorname{Cov}(X,Y)}{\sigma_X\sigma_Y}
+$$
+
+Thus, the correlation matrix can be rewrite into
+
+$$
+\Sigma = \begin{bmatrix}
+\sigma_1^2 & \rho \sigma_1\sigma_2\\
+\rho \sigma_2\sigma_1 & \sigma_2^2 \\
+\end{bmatrix}
+$$
+
+#### Entropy Calculation
+
+Suppose that $X\sim \mathcal{N}(\mu,\sigma^2)$ that is
+$f(x) = \frac{1}{\sqrt{2\pi \sigma^2}} 
+e^{ -\frac{1}{2} {\left( \frac{x-\mu}{\sigma} \right)}^2 }$.
+
+The entropy in nats is
+
+$$
+\begin{aligned}
+h(X) 
+&=\int f(x) \ln \frac{1}{f(x)} \mathrm{d}x
+=\int f(x) \ln \left[
+\sqrt{2\pi \sigma^2} e^{\frac{1}{2} {\left(\frac{x-\mu}{\sigma}\right)}^2}
+\right]\mathrm{d}x\\
+&=\int f(x) \ln \sqrt{2\pi \sigma^2} 
+\mathrm{d}x
++\int f(x) \frac{1}{2} {\left(\frac{x-\mu}{\sigma}\right)}^2 \mathrm{d}x\\
+&=\ln \sqrt{2\pi \sigma^2} + \frac{1}{2\sigma^2}\int {(x-\mu)}^2 f(x) \mathrm{d}x\\
+&=\ln \sqrt{2\pi \sigma^2} + \frac{\sigma^2}{2\sigma^2}\\
+&=\ln \sqrt{2\pi \sigma^2} + \frac{1}{2}\\
+&=\frac{1}{2} \ln (2\pi e \sigma^2)
+\end{aligned}
+$$
+
+So the entropy in bits is
+$h(X) = \frac{1}{2}\log (2\pi e\sigma^2)$.
+
+For $\mathbf{X} \sim \mathcal{N}(\mathbf{\mu},\Sigma)$ that is
+$f(\mathbf{x}) = \frac{1}{\sqrt{{(2\pi)}^n |\Sigma|}}
+\exp\left(
+-\frac12 {(\mathbf{x}-\mathbf{\mu})}^T \Sigma^{-1} {(\mathbf{x}-\mathbf{\mu})}
+\right)$
+
+The entropy in nats is
+
+$$
+\begin{aligned}
+h(\mathbf{X})
+&= \int f(\mathbf{x}) \log \frac{1}{f(\mathbf{x})} \mathrm{d}x_1\cdots\mathrm{d}x_n\\
+\end{aligned}
+$$
+
+So the entropy in bits is $h(\mathbf{X}) = \frac12 \log\left( {(2\pi e)}^n \det(\Sigma)\right)$
+
+**TODO** calculation
+
+### Maximal Entropy
+
+If $\mathbb{E}(X^2) = \sigma^2$ and $\mathbb{E}(X)=0$,
+then $h(X) \leq \frac{1}{2}\log(2\pi e \sigma^2)$.  
+The equality hold true for $X\sim\mathcal{N}(0,\sigma^2)$.  
+
+If $0=\mathbb{E}(\mathbf{X})$ and $\Sigma_{ij} = \mathbb{E}(X_i X_j)$
+then $h(X) \leq \frac{1}{2}\log\left({(2\pi e)}^n \det(\Sigma)\right)$.  
+The equality hold true for $\mathbf{X}\sim\mathcal{N}(\mathbf{0},\Sigma)$
+
+**TODO** proof with relative entropy
+
+**Extension**: if $\mathbb{E}\left[ X^k \right] = a$ is given, what is the maximal entropy distribution?
+
+**Corollary** bound on variance using entropy:
+
+If $h(X) = h$ is given,
+then $\operatorname{Var}(X) \geq \frac{1}{2\pi e}{2^{2h(X)}}$
+
+#### Upperbound of positive semi-definite matrix determinants
+
+This is the _Hadamard's inequality_.
+
+For an positive semi-definite matrix $A$, the determinant is bounded by the product of the main diagonal.
+
+$$
+\det(A) \leq \prod_i A_{ii}
+$$
+
+Consider a MVN vector $\mathbf{X} \sim \mathcal{N}(0,A)$,
+the variance of $X_i$ is $\operatorname{Var}(X_i) = \operatorname{Cov}(X_i,X_i) = A_{ii}$.
+
+Consider the union bound of differential entropy
+
+$$
+h(X_1,X_2,\ldots X_n) = \sum_{i=1}^n h(X_i|X_1,X_2\ldots X_{i-1})
+\leq \sum_{i=1}^n h(X_i)
+$$
+
+Apply the union bound
+
+$$
+\frac12 \log \left( {(2\pi e)}^n \det(A) \right)
+=h(\mathbf{X}) \leq \sum_i h(X_i)
+=\sum_{i=1}^{n} \frac12 \log (2\pi e A_{ii})
+=\frac12 \log \left( {(2\pi e)}^n\prod_{i=1}^{n} A_{ii}\right)
+$$
+
+Thus $\det(A) \geq \prod_{i=1}^n A_{ii}$.
+
+#### Lower bound of Mean Square Error (MSE)
+
+For any random variable $X$ and an estimator $\hat X$
+
+$$
+\mathbb{E}\left[
+{(X-\hat X)}^2
+\right]
+\geq\frac{1}{2\pi e} 2^{2h(X)}
+$$
+
+For estimating with a side information $\hat X(Y)$
+
+$$
+\mathbb{E}\left[
+{(X-\hat X(Y))}^2
+\right]
+\geq\frac{1}{2\pi e} 2^{2h(X|Y)}
+$$
+
+**TOOD** proof
+
 

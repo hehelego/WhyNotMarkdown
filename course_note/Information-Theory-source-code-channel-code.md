@@ -391,3 +391,70 @@ Channel Coding Theorem states that for discrete memoryless channel $p(y|x)$ is $
 ### Source Channel Separation Theorem
 
 **TODO**
+
+### Point-to-Point DMC with Feedback
+
+**TODO**
+
+For point-to-point DMC, introducing feedback cannot improve the capacity.
+
+- feedback can simplify the communication protocol
+- feedback can improve the rate at which $\lambda^{(n)}\to 0$
+
+In non-classic information settings such as broadcasting and MIMO, feedback can improve the capacity.
+
+### Selection of Channels
+
+For two DMCs 
+$c_1: (\mathcal{X}_1,p_1(y|x),\mathcal{Y}_1)$
+and
+$c_2: (\mathcal{X}_2,p_2(y|x),\mathcal{Y}_2)$.
+
+If 
+$\mathcal{X}_1\cap \mathcal{X}_2=\emptyset$
+and
+$\mathcal{Y}_1\cap \mathcal{Y}_2=\emptyset$.
+
+Then a disjoint merge (selection channel) can be constructed
+$c_1\cup c_2: (\mathcal{X},p(y|x),\mathcal{Y})$ where
+
+$$
+\mathcal{X} = \mathcal{X}_1 \cup \mathcal{X}_2
+\quad
+\mathcal{Y} = \mathcal{Y}_1 \cup \mathcal{Y}_2
+\quad
+p(y|x) = \begin{cases}
+\end{cases}
+$$
+
+The capacity of $c_1\cup c_2$ is $C$ where
+
+$$
+2^C = 2^{C_1} + 2^{C_2}
+$$
+
+**TODO: proof**
+
+## Gaussian Channel
+
+### Rational of Gaussian Model
+
+**TODO**
+
+Central limit theorem
+
+### AWGN Channel
+
+Send $X$, receive $Y$ where $Y=X+Z$ for 
+
+- $Z\sim \mathcal{N}(0,N)$
+- $\mathbb{E}[X^2]\leq P$, transmission power limit
+- $N>0$ non-zero noise power
+
+Theorem (AWGN channel capacity)
+
+$$
+C = \frac12 \log \left( 1 + \frac{P}{N} \right)
+$$
+
+
