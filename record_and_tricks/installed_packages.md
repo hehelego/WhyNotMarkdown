@@ -33,6 +33,7 @@
 - messaging: `telegram-desktop`
 - document converter: `pandoc`
 - multimedia: `ffmpeg`,`imagemagick`,`vlc`,`mpv`,`feh`
+- containerized environment: `podman`, `docker`
 
 
 ### network accessing
@@ -62,11 +63,14 @@
 - regex/fuzzy searcher: `fzf`,`ripgrep, ripgrep-all`,`fselect`,`the_silver_searcher`
 - accessing archives and compressed files: `tar`,`zip/unzip`,`bzip2`,`p7zip`,`gzip`,`xz`,`zstd`,`unrar`; `ark` for GUI
 - man pages: `man-db, man-pages`
-- tldr pages: `tldr`
+- TL;DR pages: `tldr`, `tealdeer`
 - CLI to free-desktop recycle bin: `trash-cli`
 - system services managing: `systemd` (provides `/usr/bin/systemctl`),`lnav`,`sysz`
 - fish shell prompt: `starship`
 - `pueue`: managing long-running shell command
+- `tokei` count lines of code
+- file type detection: `file`
+- find full path in `$PATH`: `which`
 - modern CLI/TUI utilities and replacement for `coreutils`
   - `zoxide`: alternative to `autojump`
   - `exa`: alternative to `coreutils/ls`
@@ -156,9 +160,10 @@
 - Adobe source code pro (`adobe-source-code-pro`)
 - The hack fonts (`ttf-hack`,`nerd-fonts-hack`)
 - The iosevka fonts (`ttf-iosevka-nerd`)
-- The liberation fonts (replacing windows fonts such as `Arial,Times New Roman,Courier New`)
+- The liberation fonts (`ttf-liberation` replacing windows fonts such as `Arial,Times New Roman,Courier New`)
 - The fandol fonts (`otf-fandol`, basic Chinese typesettings: Song/Hei/Kai/Fang)
-- display icons: nerd fonts, font awesome
+- Icons `nerd-fonts` group
+- Icons `ttf-font-awesome`
 
 ### hardware monitor
 
