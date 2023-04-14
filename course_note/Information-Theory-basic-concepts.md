@@ -1260,7 +1260,7 @@ $$
 \Pr(X_1=x_1,\ldots,X_n=x_n) = \Pr(X_{k}=x_1,\ldots,X_{k+n}=x_n)
 $$
 
-#### Markov stochastic process
+#### Markov Stochastic Process
 
 See [Markov chain - Wikipedia](https://en.wikipedia.org/wiki/Markov_chain)
 
@@ -1405,7 +1405,7 @@ f_X(\mathbf{x}) \log |\det(A)| \,
 \end{aligned}
 $$
 
-**NOTE**: here $\mathrm{d} y_1 \cdots \mathrm{d} y_n$ means $\mathrm{d}y_1 \wedge \mathrm{d}y_2\cdots \mathrm{d}y_n$
+**NOTE**: here $\mathrm{d} y_1 \cdots \mathrm{d} y_n$ means $\mathrm{d} y^n=\mathrm{d}y_1 \wedge \mathrm{d}y_2\cdots \mathrm{d}y_n$
 
 #### Differential Entropy is Unbounded
 
@@ -1601,16 +1601,16 @@ then the random vector $\mathbf{X}$ is called a multivariate normal (MVN).
 Parameters of MVN:
 
 - mean vector (first moment): $\mathbf{\mu} = \mathbb{E} \mathbf{X}$
-- covariance vector (second moment): $\Sigma_{ij} = \operatorname{Cov}(X_i,X_j)$ or ($K_{ij}$ in some literature)
+- covariance vector (second moment): $\mathbf{\Sigma}={(\mathbf{X}-\mathbf{\mu})} {(\mathbf{X}-\mathbf{\mu})}^T$ that is $\mathbf{\Sigma}_{ij} = \operatorname{Cov}(X_i,X_j)$ or ($\mathbf{K}_{ij}$ in some literature)
 
 PDF of MVN:
 
 $$
 f_X(\mathbf{x})
-= \frac{1}{\sqrt{{(2\pi)}^n |\Sigma|}}
+= \frac{1}{\sqrt{{(2\pi)}^n |\det(\mathbf{\Sigma})|}}
 \exp\left(
 -\frac{1}{2}
-{(\mathbf{x}-\mathbf{\mu})}^T \Sigma^{-1} {(\mathbf{x}-\mathbf{\mu})}
+{(\mathbf{x}-\mathbf{\mu})}^T \mathbf{\Sigma}^{-1} {(\mathbf{x}-\mathbf{\mu})}
 \right)
 $$
 
@@ -1644,6 +1644,12 @@ $$
 \end{bmatrix}
 $$
 
+If $\mathbf{X}\sim \mathcal{N}(\mathbf{\mu},\mathbf{K})$,
+then exists $\mathbf{A}_{n\times n}$ and $\mathbf{Z}=(Z_1,Z_2,\ldots,Z_n)\stackrel{iid}{\sim} \mathcal{N}(0,1)$
+such that $\mathbf{X} = \mathbf{A}\mathbf{Z}+\mathbf{\mu}$
+where $\mathbf{K} = \mathbb{E}\left({(AZ+\mu - \mu)}{(AZ+\mu -\mu)}^T\right) = A\mathbb{E}(ZZ^T)A^T = AA^T$
+that is $A=\sqrt{\mathbf{K}}$.
+
 #### Entropy Calculation
 
 Suppose that $X\sim \mathcal{N}(\mu,\sigma^2)$ that is
@@ -1672,45 +1678,99 @@ $$
 So the entropy in bits is
 $h(X) = \frac{1}{2}\log (2\pi e\sigma^2)$.
 
+**NOTE** Alternative derivation:  
+for standard normal variable $Z\sim\mathcal{N}(0,1)$, the differential entropy is $h(Z) = \frac{1}{2}\log (2\pi e)$,
+so the entropy of $X = \sigma Z + \mu$ is $h(\sigma Z + \mu) = h(Z) + \log |\sigma| = \frac12\log (2\pi e) + \log |\sigma| = \frac12 \log (2\pi e\sigma^2)$.
+
 For $\mathbf{X} \sim \mathcal{N}(\mathbf{\mu},\Sigma)$ that is
 $f(\mathbf{x}) = \frac{1}{\sqrt{{(2\pi)}^n |\Sigma|}}
 \exp\left(
 -\frac12 {(\mathbf{x}-\mathbf{\mu})}^T \Sigma^{-1} {(\mathbf{x}-\mathbf{\mu})}
 \right)$
 
-The entropy in nats is
+First consider the entropy of $Z^n\stackrel{iid}{\sim}\mathcal{N}(0,1)$:
+
+$$
+h(Z^n) = \sum_{i=1}^n h(Z_i) = n \cdot \frac12 \log(2\pi e) = \frac12 \log {(2\pi e)}^n
+$$
+
+Let $A=\sqrt{\mathbf{\Sigma}}$ that is $A^T A=AA^T=\mathbf{\Sigma}$, then $\mathbf{X} = \mathbf{A}\mathbf{Z} + \mathbf{\mu}$.  
+So the entropy of $\mathbf{X}$ is
 
 $$
 \begin{aligned}
 h(\mathbf{X})
-&= \int f(\mathbf{x}) \log \frac{1}{f(\mathbf{x})} \mathrm{d}x_1\cdots\mathrm{d}x_n\\
+&= h(\mathbf{A}\mathbf{Z} + \mathbf{\mu})\\
+&= h(\mathbf{Z}) + \log |\det(A)|\\
+&= \frac12 \log {(2\pi e)}^n + \log |\det(A)|\\
+&= \frac12 \log {(2\pi e)}^n + \frac12 \log |\det(\Sigma)|\\
+&= \frac12 \log \left( {(2\pi e)}^n |\det(\Sigma)| \right)
 \end{aligned}
 $$
 
-So the entropy in bits is $h(\mathbf{X}) = \frac12 \log\left( {(2\pi e)}^n \det(\Sigma)\right)$
-
-**TODO** calculation
 
 ### Maximal Entropy
 
-If $\mathbb{E}(X^2) = \sigma^2$ and $\mathbb{E}(X)=0$,
-then $h(X) \leq \frac{1}{2}\log(2\pi e \sigma^2)$.  
+If $\mathbb{E}(X)=0$ and $\mathbb{E}(X^2) = \sigma^2$, then $h(X) \leq \frac{1}{2}\log(2\pi e \sigma^2)$.  
 The equality hold true for $X\sim\mathcal{N}(0,\sigma^2)$.  
 
-If $0=\mathbb{E}(\mathbf{X})$ and $\Sigma_{ij} = \mathbb{E}(X_i X_j)$
-then $h(X) \leq \frac{1}{2}\log\left({(2\pi e)}^n \det(\Sigma)\right)$.  
+If $\mathbf{0}=\mathbb{E}(\mathbf{X})$ and $\mathbf{\Sigma} = \mathbb{E}(\mathbf{X} \mathbf{X}^T)$ then $h(X) \leq \frac{1}{2}\log\left({(2\pi e)}^n |\det(\Sigma)|\right)$.  
 The equality hold true for $\mathbf{X}\sim\mathcal{N}(\mathbf{0},\Sigma)$
 
-**TODO** proof with relative entropy
 
-**Extension**: if $\mathbb{E}\left[ X^k \right] = a$ is given, what is the maximal entropy distribution?
+**Corollary** bound on variance using entropy:  
+If $h(X)$ is given, then $\operatorname{Var}(X) \geq \frac{1}{2\pi e}{2^{2h(X)}}$
 
-**Corollary** bound on variance using entropy:
+Extension: [Maximum entropy probability distribution - Wikipedia](https://en.wikipedia.org/wiki/Maximum_entropy_probability_distribution)
 
-If $h(X) = h$ is given,
-then $\operatorname{Var}(X) \geq \frac{1}{2\pi e}{2^{2h(X)}}$
+#### Proof of Gaussian Maximal Entropy
 
-#### Upperbound of positive semi-definite matrix determinants
+Let $\phi$ be the PDF of $\mathcal{N}(\mathbf{0},\mathbf{\Sigma})$: 
+
+$$
+\phi(\mathbf{x}) = \frac{1}{\sqrt{{(2\pi)}^n |\det(\mathbf{\Sigma})|}} \exp\left(
+-\frac12 \mathbf{x}^T \mathbf{\Sigma}^{-1} \mathbf{x}
+\right)
+$$
+
+For every PDF $g$ such that $\int_{\mathbf{x}\in\mathbb{R}^n} x_i x_j g(\mathbf{x}) \mathrm{d}x^n = \mathbf{\Sigma}_{ij}$.  
+Consider the relative entropy (for sake of simplicity, use $\ln x$ rather than $\log_2 x$)
+
+$$
+\begin{aligned}
+D_{KL}(g||\phi)
+&=\int_{x^n\in\mathbb{R}^n} g(x) \ln \frac{g(x)}{\phi(x)} \mathrm{d} x^n\\
+&=\int_{\mathbb{R}^n} g(x)\ln g(x)\mathrm{d}x^n
+-\int_{\mathbb{R}^n} g(x)\ln \phi(x)\mathrm{d}x^n\\
+&=-h(g)
+-\int_{\mathbb{R}^n} g(x) \ln \frac{1}{\sqrt{{(2\pi)}^n |\det(\Sigma)|}}\mathrm{d}x^n
+-\int_{\mathbb{R}^n} g(x) \left(-\frac12 x^T \Sigma^{-1} x\right) \mathrm{d}x^n\\
+&=-h(g)
+-\int_{\mathbb{R}^n} \phi(x) \ln \frac{1}{\sqrt{{(2\pi)}^n |\det(\Sigma)|}}\mathrm{d}x^n
+-\int_{\mathbb{R}^n} \phi(x) \left(-\frac12 x^T \Sigma^{-1} x\right) \mathrm{d}x^n\\
+&=-h(g)-\int_{\mathbb{R}^n} \phi(x)\ln \phi(x)\mathrm{d}x^n\\
+&=-h(g)+h(\phi) \geq 0
+\end{aligned}
+$$
+
+The key identity is $\int_{\mathbb{R}^n} g(x) \left(-\frac12 x^T \Sigma^{-1} x\right) \mathrm{d}x^n=\int_{\mathbb{R}^n} \phi(x) \left(-\frac12 x^T \Sigma^{-1} x\right) \mathrm{d}x^n$,  
+which follows from the fact that $\int_{\mathbb{R}^n} x_i x_j g(x)\mathrm{d}x^n = \Sigma_{i,j} = \int_{\mathbb{R}^n} x_i x_j \phi(x)\mathrm{d}x^n$.
+
+$$
+\begin{aligned}
+\int_{\mathbb{R}^n} g(x) \left(-\frac12 x^T \Sigma^{-1} x\right) \mathrm{d}x^n
+&=-\frac12 \int_{\mathbb{R}^n} g(x) \left( \sum_{i,j} x_i {(\Sigma^{-1})}_{i,j} x_j \right) \mathrm{d}x^n\\
+&=-\frac12 \sum_{i,j} {(\Sigma^{-1})}_{i,j}\int_{\mathbb{R}^n} x_i x_j g(x) \mathrm{d} x^n\\
+&=-\frac12 \sum_{i,j} {(\Sigma^{-1})}_{i,j} \Sigma_{i,j}\\
+&=-\frac12 \sum_{i,j} {(\Sigma^{-1})}_{i,j}\int_{\mathbb{R}^n} x_i x_j \phi(x) \mathrm{d} x^n\\
+&=-\frac12 \int_{\mathbb{R}^n} \phi(x) \left( \sum_{i,j} x_i {(\Sigma^{-1})}_{i,j} x_j \right) \mathrm{d}x^n\\
+&=\int_{\mathbb{R}^n} \phi(x) \left(-\frac12 x^T \Sigma^{-1} x\right) \mathrm{d}x^n
+\end{aligned}
+$$
+
+**NOTE** the key observation is that $\int_{\mathbb{R}^n} g(x)\ln \phi(x)\mathrm{d}x^n$ can be determined solely by $\int_{\mathbb{R}^n} x_i x_j g(x)\mathrm{d}x^n$.
+
+#### Upperbound of Positive Semi-definite Matrix Determinants
 
 This is the _Hadamard's inequality_.
 
@@ -1741,7 +1801,7 @@ $$
 
 Thus $\det(A) \geq \prod_{i=1}^n A_{ii}$.
 
-#### Lower bound of Mean Square Error (MSE)
+#### Lower Bound of Mean Square Error (MSE)
 
 For any random variable $X$ and an estimator $\hat X$
 
@@ -1761,6 +1821,24 @@ $$
 \geq\frac{1}{2\pi e} 2^{2h(X|Y)}
 $$
 
-**TOOD** proof
+Proof: If $X$ and $\hat{X}$ shares no information that is $X$ and $\hat{X}$ are independent, then
 
+$$
+\begin{aligned}
+{(X-\hat{X})}^2
+&={(X-\mathbb{E}X + \mathbb{E}X-\hat{X})}^2\\
+&={(X-\mathbb{E}X)}^2 + {(\mathbb{E}X-\hat X)}^2 + 2(X-\mathbb{E}X)(\mathbb{E}X-\hat{X})\\
+\mathbb{E}\left[ {(X-\hat{X})}^2 \right]
+&=\operatorname{Var}(X)
++\mathbb{E}\left[ {(\mathbb{E}X-\hat{X})}^2 \right] + 2 \mathbb{E}(X-\mathbb{E}X) \mathbb{E}(\mathbb{E}X-\hat{X})\\
+&=\operatorname{Var}(X) +\mathbb{E}\left[ {(\mathbb{E}X-\hat{X})}^2 \right]\\
+&\geq \operatorname{Var}(X)\\
+\end{aligned}
+$$
 
+To minimize the MSE, $\hat{X}^\ast = \mathbb{E}X$ is the optimal estimator.  
+Further more, $\operatorname{Var}(X)\geq \frac{1}{2\pi e}2^{2h(X)}$ gives a lower bound on MSE with entropy (equality hold iff $X$ has a Gaussian distribution.
+
+Proof: for estimator with side information, say $\hat{X} = g(Y)$.  
+$\hat{X}=g(Y)$ and $X$ are conditionally independent given $Y$.  
+We can use the similar approach to find the optimal estimator that minimizes MSE.
