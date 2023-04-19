@@ -21,7 +21,9 @@
   4. prefix-free: $\forall x_0,x_1\in\mathcal{X} . x_0\neq x_1 \to \lnot \operatorname{prefix}(C(X_0),C(X_1))$
      where $\operatorname{prefix}(x,y)$ determines if $x$ is a prefix of $y$.
 
-- Simply algorithm to determine uniquely decodable codes:
+- Simply algorithm to determine uniquely decodable codes:  
+  Idea: The code is not uniquely decodable iff exists codewords $a_1\ldots a_p, x_1\ldots x_q, y_1\ldots y_r$ where $x_1\neq y_1$, such that $a_1 a_2\ldots a_p x_1 x_2 \ldots x_q = a_1 a_2 \ldots a_p y_1 y_2 \ldots y_r$.
+  When the common prefix is removed, the condition is reduced to $x_1\ldots x_q = y_1\ldots y_r$ for $x_1\neq y_1$.
 
   1. Enumerate pairs $a,b\in\mathcal{X}$ that $a\neq b$.
   2. Construct two regular expression
@@ -246,9 +248,10 @@ $$
 
 which converges to $H_D(X)$ i.e., the lower bound of DMS source coding.
 
-### Shannon–Fano–Elias Code
+#### See also
 
-**TODO**
+- [Shannon coding - Wikipedia](https://en.wikipedia.org/wiki/Shannon_coding)
+- [Shannon-Fano-Elias coding - Wikipedia](https://en.wikipedia.org/wiki/Shannon–Fano–Elias_coding)
 
 ### Huffman Code
 
@@ -274,9 +277,37 @@ Add zero probability dummy symbols to make sure $n \equiv 1\pmod{D-1}$.
 
 #### Optimality of Huffman Code
 
-The optimality of Huffman code can be proved by induction.
+Here we present a proof of optimality of binary Huffman code,
+this proof can be extended for showing optimality of $D$-ary Huffman code, 
 
-**TODO**
+WLOG, suppose that the probability of each symbol is $p_1 \geq p_2\cdots \geq p_n$,
+the codeword length is $l_1,l_2,\ldots,l_n$.
+
+Basic observations: exists a optimal code such that
+
+- If $p_i > p_j$ then $l_i \leq l_j$
+- The longest two codewords are of the same length, $l_n = l_{n-1}$
+- The two longest codewords differ only in the last bit and correspond to the two least likely symbols. (The codeword Trie is full)
+
+A proof of optimality by induction
+
+1. Only one symbol, Huffman code is optimal
+2. Suppose that Huffman code is optimal for $n$ symbols.  
+   For $n+1$ symbols. Let $l'=l_n-1=l_{n+1}-1$
+   $$
+   \begin{aligned}
+   L_{n+1}
+   &= \sum_{i=1}^{n-1} p_i l_i + p_n l_n + p_{n+1} l_{n+1}\\
+   &= \sum_{i=1}^{n-1} p_i l_i + (p_n + p_{n+1}) l' + (p_n+p_{n+1})
+   \end{aligned}
+   $$
+   So the optimal code length for $(p_1,p_2,\ldots,p_n,p_{n+1})$
+   is no less than sum of the optimal code length for $(p_1,p_2,\ldots p_n + p_{n+1})$ and $(p_n,p_{n+1})$.  
+   The optimal code for $(p_1,p_2,\ldots p_n+p_{n+1})$ can be found with Huffman code by induction hypothesis.  
+   Thus, by replacing the codeword $x=C_n(p_n+p_{n+1})$ with $C_{n+1}(p_n) = 0x$ and $C_{n+1}(p_{n+1})=1x$, an optimal code for $(p_1,p_2,\ldots p_n,p_{n+1})$ can be constructed.
+3. By induction, Huffman code is an optimal for any number of symbols.
+
+The (asymptotic) compression limit $H(X)$ can be achieved by combining block coding and Huffman code.
 
 ### Universal Codes
 
@@ -289,15 +320,18 @@ See [Lempel–Ziv–Welch - Wikipedia](https://en.wikipedia.org/wiki/Lempel–Zi
 ### Terminologies
 
 - source message $W$: a number in $[1:2^{nR}] = \{1,2,\ldots,2^{nR}\}$.  
-  Common assumption for simplification: $W\sim \mathrm{DUnif}[1:2^{nR}]$.
+  Common assumption for simplification: $W\sim \mathrm{DUnif}[1:2^{nR}]$.  
+  If the source message is sampled from a non-uniform distribution of entropy $R=H(W)$,
+  we can encoded $W$ with $R$ fair coin tosses ($R$ bits). The result should have uniform distribution.
 - source encoder: $[1:2^{nR}]\to \mathcal{X}^n$, encodes a source message into a fixed length sequence (the codeword).
 
   - block length $n$.
   - codebook: source encoder is often deterministic, denoted by $X^n(1),X^n(2), \ldots, X^{n}(2^{nR})$,
-    where $X^n(k) = (X_1(k),X_2(k),\ldots X_n(k)$.
+    where $X^n(k) = (X_1(k),X_2(k),\ldots X_n(k))$ for $k=1,2,\ldots 2^{nR}$.
   - transmission rate $R$: the (expected) number of bits transmitted by sending/receiving one symbol.  
-    The information in source message is $H(W)=\log 2^{nR}=nR$.
+    The information in source message is $H(W)=\log 2^{nR}=nR$.  
     A codeword $X^n(W)$ carries $nR$ bits with $n$ symbols.
+    So the average information transmitted by sending one symbol $X\in \mathcal{X}$ is $R$.
 
 - channel: $(\mathcal{X},p(Y^n|X^n),\mathcal{Y})$. The receiver end gets $Y^n\sim P(Y^n|X^n)$ when $X^n$ is send through the channel.  
   Often composed of a modulator, a noisy analog channel and a demodulator.
@@ -312,7 +346,7 @@ $$
 W\to X^n \to Y^n \to \hat{W}
 $$
 
-- conditional probability of error: $\lambda_k^{(n)}=\Pr(\hat{W} \neq k | X=X(k))$
+- conditional probability of error: $\lambda_k^{(n)}=\Pr(\hat{W} \neq k | W=k)$
 
   $$
   \begin{aligned}
@@ -329,9 +363,7 @@ $$
   such that $\lambda^{(n)} \to 0$ as $n\to \infty$.  
   Or equivalently, a transmission rate $R$ is achievable
   if the error rate $\lambda^{(n)}$ can be arbitrarily small for sufficiently large block length $n$.
-- channel capacity: supremum of achievable rate.
-
-**NOTE** assumption that $W\sim\mathrm{DUnif}[1:2^{nR}]$ is valid.
+- channel capacity: supremum of achievable rate. $C=\{R\in \mathbb{R}\mid R\ \text{achievable}\}$
 
 ### Capacity of Discrete Memoryless Channels (DMC)
 
@@ -344,28 +376,169 @@ $$
 
 #### Noisy Typewriter
 
-**TODO**
+- Input $\mathcal{X}=\{a,b,c,\ldots z\}$
+- Output $\mathcal{Y}=\{a,b,c,\ldots z\}$
+- Noise $\Pr(Y=i|X=i)=\Pr(Y=i+1|X=i)=\frac12$
+
+$$
+\begin{aligned}
+I(X;Y)
+&=H(Y) - H(Y|X)\\
+&=H(Y) - \sum_{x\in\mathcal{X}} H(Y|X=x)\Pr(X=x)\\
+&=H(Y) - \sum_{x\in\mathcal{X}} 1\cdot \Pr(X=x)\\
+&=H(Y) - 1\\
+&\leq \log |\mathcal{Y}| - 1 = \log 26 - 1 = \log 13
+\end{aligned}
+$$
+
+Upper bound achieved only if $Y$ is uniformly random:  
+Let $\Pr(Y=i) = \frac{1}{26} = \frac12 \Pr(X=i) + \frac12 \Pr(X=i-1)$ for $i=1,2,\ldots 26$.  
+The solution is $\Pr(X=i) = \frac{1}{26}$.
+
+
+Optimal channel code:
+
+- Source Message $\{1,2,3,\ldots 13\}$
+- Send $1\to a,2\to c,3\to e,4\to g,\ldots 13\to y$
+- Decode $\{a,b\}\to 1, \{c,d\}\to 2, \{e,f\}\to 3, \{y,z\}\to 13$
+
 
 #### Binary Symmetric Channel
 
-**TODO**
+- Input/Output $\mathcal{X}=\mathcal{Y}=\{0,1\}$.
+- Crossing probability $p$, $p(1|0)=p(0|1)=p$. That is: flip with probability $p$.
+- Alternative modeling $Y=X\oplus Z$ where $Z\sim\mathrm{Bern}(\frac12)$, $\oplus$ is the binary exclusive-or (xor).
+
+$$
+\begin{aligned}
+I(X;Y)
+&=H(Y) - H(Y|X)\\
+&=H(Y) - \sum_{x\in\mathcal{X}} H(Y|X=x)\Pr(X=x)\\
+&=H(Y) - \sum_{x\in\mathcal{X}} H(p)\cdot \Pr(X=x)\\
+&=H(Y) - H(p)\\
+&\leq 1 - H(p)
+\end{aligned}
+$$
+
+Upper bound achieved only if $Y$ is uniformly random:  
+Let $\Pr(Y=0)=\frac12 = (1-p)\Pr(X=0) + p\Pr(X=1)$.  
+The solution is $\Pr(X=0)=\Pr(X=1)=\frac12$.
+
+Optimal channel code:
+
+- Source message $W\in \{0,1\}$
+- Send $X=W$
+- Decode if $p\geq\frac12$ then $\hat{X} = Y$, otherwise $\hat{X} = \overline{Y}$.  
+
+This is the maximum posterior estimator (MAP),
+also the maximum likelihood estimator (MLE).
+
+**NOTE**: MAP decoding is optimal in general since it minimizes the error probability for every possible source message.  
+**NOTE** BSC with crossing probability $\frac12$ is not capable of transmitting any information since $Y\sim \mathrm{Bern}(\frac12)$ regardless of $X$.
 
 #### Binary Erasure Channel
 
-**TODO**
+- Input $\mathcal{X}=\{0,1\}$
+- Output $\mathcal{Y}=\{0,1,e\}$, $e$ stands for erasure.
+- Erasing probability, $p(e|0)=p(e|1)=\alpha$ and $p(0|0)=p(1|1)=1-\alpha$
+
+$$
+\begin{aligned}
+I(X;Y)
+&=H(Y) - H(Y|X)\\
+&=H(Y) - \sum_{x\in\mathcal{X}} H(Y|X=x)\Pr(X=x)\\
+&=H(Y) - \sum_{x\in\mathcal{X}} H(p)\cdot \Pr(X=x)\\
+&=H(Y) - H(p)\\
+\end{aligned}
+$$
+
+Let $E=\mathbf{1}\left[Y=e\right]$ be the indicator of event $Y=e$,
+then $E\sim\mathrm{Bern}(\alpha)$
+
+$$
+\begin{aligned}
+H(Y) 
+&= H(Y,E) \\
+&= H(E) + H(Y|E) \\
+&= H(\alpha) + (1-\alpha)H(Y|E=0) + \alpha H(Y|E=1)\\
+&= H(\alpha) + (1-\alpha)H(p_x) + \alpha \cdot 0\\
+&\geq H(\alpha) + (1-\alpha)
+\end{aligned}
+$$
+
+Thus, the maximum mutual information is $1-\alpha$.  
+Achieved when $p_x=(\frac12,\frac12)$.
+
+Optimal transmission protocol:
+
+- Source message $W\in\{0,1\}$
+- Send $X=W$ through the channel
+- If $Y=e$, resend, otherwise $\hat{X}=Y$.
+
+**NOTE** this protocol relies on _feedback_ (the transmitter can determine whether the receiver gets an erasure or not).
 
 #### Symmetric Channels
 
 Transition matrix: $A_{x,y} = p(y|x)$ whose shape is $|\mathcal{X}| \times |\mathcal{Y}|$.
 
-- symmetric
-- weak symmetric
+- symmetric: each row is a permutation, each column is a permutation.
+- weakly symmetric: each row is a permutation, sum of each column is equal
 
-**TODO**
+$$
+\begin{aligned}
+I(X;Y)
+&= H(Y) - H(Y|X)\\
+&= H(Y) - \sum_{x\in\mathcal{X}} H(Y|X=x) \Pr(X=x)\\
+&= H(Y) - \sum_{x\in\mathcal{X}} H(p(\ast|x)) \Pr(X=x)\\
+&= H(Y) - \sum_{x\in\mathcal{X}} H(A_{x,1},A_{x,2},\ldots) \Pr(X=x)\\
+&= H(Y) - H(A_{x,1},A_{x,2},\ldots)\\
+\end{aligned}
+$$
 
-#### Union of Disjoint Channels
+If $X\sim\mathrm{DUnif}(\mathcal{X})$, then
 
-**TODO**
+$$
+p(y)
+= \sum_{x\in\mathcal{X}}p(y|x)p(x)
+= \frac{1}{|\mathcal{X}|}\sum_{x\in\mathcal{X}} p(y|x)
+= \frac{1}{|\mathcal{X}|}\sum_{x\in\mathcal{X}} A_{x,y}
+$$
+
+The marginal distribution of $Y$ is a uniform distribution if the marginal distribution of $X$ is a uniform distribution.  
+By selecting a uniformly random $X$, the maximal mutual information is achieved.
+
+
+### Selection of Channels
+
+For two DMCs 
+$c_1: (\mathcal{X}_1,p_1(y|x),\mathcal{Y}_1)$
+and
+$c_2: (\mathcal{X}_2,p_2(y|x),\mathcal{Y}_2)$.
+
+If 
+$\mathcal{X}_1\cap \mathcal{X}_2=\emptyset$
+and
+$\mathcal{Y}_1\cap \mathcal{Y}_2=\emptyset$.
+
+Then a disjoint merge (selection channel) can be constructed
+$c_1\cup c_2: (\mathcal{X},p(y|x),\mathcal{Y})$ where
+
+$$
+\mathcal{X} = \mathcal{X}_1 \cup \mathcal{X}_2
+\quad
+\mathcal{Y} = \mathcal{Y}_1 \cup \mathcal{Y}_2
+\quad
+p(y|x) = \begin{cases}
+\end{cases}
+$$
+
+The capacity of $c_1\cup c_2$ is $C$ where
+
+$$
+2^C = 2^{C_1} + 2^{C_2}
+$$
+
+**TODO: proof**
 
 ### Channel Coding Theorem
 
@@ -403,37 +576,6 @@ For point-to-point DMC, introducing feedback cannot improve the capacity.
 
 In non-classic information settings such as broadcasting and MIMO, feedback can improve the capacity.
 
-### Selection of Channels
-
-For two DMCs 
-$c_1: (\mathcal{X}_1,p_1(y|x),\mathcal{Y}_1)$
-and
-$c_2: (\mathcal{X}_2,p_2(y|x),\mathcal{Y}_2)$.
-
-If 
-$\mathcal{X}_1\cap \mathcal{X}_2=\emptyset$
-and
-$\mathcal{Y}_1\cap \mathcal{Y}_2=\emptyset$.
-
-Then a disjoint merge (selection channel) can be constructed
-$c_1\cup c_2: (\mathcal{X},p(y|x),\mathcal{Y})$ where
-
-$$
-\mathcal{X} = \mathcal{X}_1 \cup \mathcal{X}_2
-\quad
-\mathcal{Y} = \mathcal{Y}_1 \cup \mathcal{Y}_2
-\quad
-p(y|x) = \begin{cases}
-\end{cases}
-$$
-
-The capacity of $c_1\cup c_2$ is $C$ where
-
-$$
-2^C = 2^{C_1} + 2^{C_2}
-$$
-
-**TODO: proof**
 
 ## Gaussian Channel
 
@@ -443,7 +585,11 @@ $$
 
 Central limit theorem
 
-### AWGN Channel
+### Additive Gaussian White Noise Channel
+
+> also known as AWGN channel
+
+#### Modeling
 
 Send $X$, receive $Y$ where $Y=X+Z$ for 
 
@@ -451,10 +597,16 @@ Send $X$, receive $Y$ where $Y=X+Z$ for
 - $\mathbb{E}[X^2]\leq P$, transmission power limit
 - $N>0$ non-zero noise power
 
-Theorem (AWGN channel capacity)
+#### Theorem (AWGN channel capacity)
 
 $$
 C = \frac12 \log \left( 1 + \frac{P}{N} \right)
 $$
 
+### Band-limited Gaussian Channel
 
+### Parallel Uncorrelated Gaussian Channel
+
+### Parallel Correlated Gaussian Channel
+
+### Parallel Correlated Gaussian Channel with Feedback
