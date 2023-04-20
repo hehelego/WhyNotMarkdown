@@ -510,18 +510,17 @@ By selecting a uniformly random $X$, the maximal mutual information is achieved.
 
 ### Selection of Channels
 
-For two DMCs 
-$c_1: (\mathcal{X}_1,p_1(y|x),\mathcal{Y}_1)$
-and
-$c_2: (\mathcal{X}_2,p_2(y|x),\mathcal{Y}_2)$.
+#### Construction
 
-If 
+For two DMCs 
+$c_1=(\mathcal{X}_1,p_1(y|x),\mathcal{Y}_1)$
+and
+$c_2=(\mathcal{X}_2,p_2(y|x),\mathcal{Y}_2)$,  
+where 
 $\mathcal{X}_1\cap \mathcal{X}_2=\emptyset$
 and
-$\mathcal{Y}_1\cap \mathcal{Y}_2=\emptyset$.
-
-Then a disjoint merge (selection channel) can be constructed
-$c_1\cup c_2: (\mathcal{X},p(y|x),\mathcal{Y})$ where
+$\mathcal{Y}_1\cap \mathcal{Y}_2=\emptyset$.  
+Then $c_1\cup c_2=(\mathcal{X},p(y|x),\mathcal{Y})$ can be defined as
 
 $$
 \mathcal{X} = \mathcal{X}_1 \cup \mathcal{X}_2
@@ -529,21 +528,108 @@ $$
 \mathcal{Y} = \mathcal{Y}_1 \cup \mathcal{Y}_2
 \quad
 p(y|x) = \begin{cases}
+p_1(y|x) & (x,y) \in (\mathcal{X}_1,\mathcal{Y}_1)\\
+p_2(y|x) & (x,y) \in (\mathcal{X}_2,\mathcal{Y}_2)\\
+0 & \text{otherwise}
 \end{cases}
 $$
 
+This is called selection of channels.  
 The capacity of $c_1\cup c_2$ is $C$ where
 
 $$
 2^C = 2^{C_1} + 2^{C_2}
 $$
 
-**TODO: proof**
+#### Capacity
+
+Consider the variable depicting the channel used:
+
+$$
+S=\begin{cases}
+1 & (x,y)\in (\mathcal{X}_1,\mathcal{Y}_1)\\
+2 & (x,y)\in (\mathcal{X}_2,\mathcal{Y}_2)\\
+\end{cases}
+$$
+
+Suppose that $p(S) = (\beta,1-\beta)$ and $S$ is fully determined by $X$ or $Y$:
+
+$$
+\begin{aligned}
+H(Y)
+&= H(S,Y)\\
+&= H(S) + H(Y|S)\\
+&= H(\beta) + H(Y|S)\\
+H(Y|X)
+&= H(Y,S|X)\\
+&= H(S|X) + H(Y|S,X)\\
+&= 0+H(Y|S,X)\\
+&= H(Y|S,X)\\
+I(X;Y)
+&= H(Y) - H(Y|X)\\
+&= H(\beta) + H(Y|S) - H(Y|S,X)\\
+&= H(\beta) + I(X;Y|S) \\
+&= H(\beta) + \beta I(X;Y|S=1) + (1-\beta)I(X;Y|S=2)\\
+&\leq H(\beta) + \beta C_1 + (1-\beta) C_2
+\end{aligned}
+$$
+
+The upperbound is achieved when the following conditions are satisfied
+
+- $p(x|S=1)$ is the distribution that maximizes $I(X_1,Y_1)$ (optimal channel code for $C_1$).
+- $p(x|S=2)$ is the distribution that maximizes $I(X_2,Y_2)$ (optimal channel code for $C_1$).
+
+Let $g(x) = H(x) + x C_1 + (1-x) C_2$ for $x\in \left[0,1\right]$, we shall find the maximum of $g(x)$.
+
+$$
+\begin{aligned}
+\frac{\mathrm{d}}{\mathrm{d}x} g(x)
+&=-\frac{\ln x + 1}{\ln 2} + \frac{\ln (1-x) + 1}{\ln 2} + (C_1 - C_2)\\
+\frac{\mathrm{d}^2}{\mathrm{d}x^2} g(x)
+&=-\frac{1}{x\ln 2} - \frac{1}{(1-x)\ln 2} < 0\\
+\end{aligned}
+$$
+
+Thus, the point $x_0$ such that $g'(x_0)=0$ maximizes $g(x)$
+
+$$
+0=\frac{-\ln x + \ln (1-x)}{\ln 2} + (C_1 - C_2)
+\implies
+x_0 = \frac{2^{C_1}}{2^{C_1}+2^{C_2}}
+$$
+
+The maximum $g(x)$ is
+
+$$
+\begin{aligned}
+g(x_0)
+&=\frac{2^{C_1}}{2^{C_1}+2^{C_2}} \log \frac{2^{C_1}+2^{C_2}}{2^{C_1}}
++\frac{2^{C_2}}{2^{C_1}+2^{C_2}} \log \frac{2^{C_1}+2^{C_2}}{2^{C_2}}
++C_1 \frac{2^{C_1}}{2^{C_1}+2^{C_2}}
++C_2 \frac{2^{C_2}}{2^{C_1}+2^{C_2}}\\
+&=\frac{2^{C_1}+2^{C_2}}{2^{C_1}+2^{C_2}}\log (2^{C_1} + 2^{C_2})
++\frac{-C_1 2^{C_1}-C_2 2^{C_2}}{2^{C_1}+2^{C_2}}
++C_1 \frac{2^{C_1}}{2^{C_1}+2^{C_2}}
++C_2 \frac{2^{C_2}}{2^{C_1}+2^{C_2}}\\
+&=\log (2^{C_1}+2^{C_2})
+\end{aligned}
+$$
+
+Therefore, the maximum mutual information i.e., the channel capacity of $c_1\cup c_2$, satisfies
+
+$$
+C=\log (2^{C_1}+2^{C_2})
+\qquad
+2^{C} = 2^{C_1}+2^{C_2}
+$$
 
 ### Channel Coding Theorem
 
 > Also known as Shannon's second theorem
-Channel Coding Theorem states that for discrete memoryless channel $p(y|x)$ is $C=\max_{p(x)} I(X;Y)$.
+
+For discrete memoryless channel $(\mathcal{X},p(y|x),\mathcal{Y})$,
+the channel capacity is $C=\max_{p(x)} I(X;Y)$,
+where $p(x)$ is a distribution on $\mathcal{X}$ and $p(x,y)=p(x)p(y|x)$.
 
 #### Rate lower than capacity is achievable
 
