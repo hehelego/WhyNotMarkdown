@@ -1842,3 +1842,32 @@ Further more, $\operatorname{Var}(X)\geq \frac{1}{2\pi e}2^{2h(X)}$ gives a lowe
 Proof: for estimator with side information, say $\hat{X} = g(Y)$.  
 $\hat{X}=g(Y)$ and $X$ are conditionally independent given $Y$.  
 We can use the similar approach to find the optimal estimator that minimizes MSE.
+
+#### Exponential Distribution Maximal Entropy
+
+For a continuous random variable $X$ with support $[0,+\infty)$ and $\mathbb{E}X=\mu$,
+the maximum entropy distribution is $\operatorname{Expo}(\lambda)$ where $\mu\lambda=1$.
+
+For every function $f(x)$ such that
+$\int_0^{+\infty} f(x)\mathrm{d}x = 1$ and 
+$\int_0^{+\infty} x f(x)\mathrm{d}x = \mu$,  
+Consider the relative entropy $D_{KL}(f(x),\lambda e^{-\lambda x})$.
+
+$$
+\begin{aligned}
+0
+&\geq D_{KL}(f(x),\lambda e^{-\lambda x})\\
+&=\int_0^{+\infty} f(x) \ln \frac{\lambda e^{-\lambda x}}{f(x)} \mathrm{d}x\\
+&=\int_0^{+\infty} f(x) \ln \lambda \mathrm{d}x
++\int_0^{+\infty} f(x) \ln e^{-\lambda x} \mathrm{d}x
++\int_0^{+\infty} f(x) \ln \frac{1}{f(x)} \mathrm{d}x\\
+&=\ln \lambda - \lambda\int_0^{+\infty} x f(x)\mathrm{d}x + h(f)\\
+&=\ln \lambda - \lambda \mu + h(f)\\
+&=\ln \lambda - 1 + h(f)\\
+h(f) & \leq 1 - \ln \lambda\\
+&= \ln \frac{e}{\lambda}\ (\text{nats})\\
+&= \log \frac{e}{\lambda}\ (\text{bits})
+\end{aligned}
+$$
+
+Equality holds if and only if $f(x)\equiv \lambda e^{-\lambda x}$.
