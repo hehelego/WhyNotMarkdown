@@ -667,9 +667,48 @@ In non-classic information settings such as broadcasting and MIMO, feedback can 
 
 ### Rational of Gaussian Model
 
-**TODO**
+The central limit theorem (CLT) state that:  
+For a sequence of independent and identically distributed $X_1,X_2,\ldots$
+where $\mathbb{E}X=\mu, \operatorname{Var}(X)=\sigma^2$
 
-Central limit theorem
+$$
+\bar{X}_n = \frac{1}{n}\sum_{i=1}^{n} X_i
+\quad
+\sqrt{n} (\bar{X}_n - \mu) \to \mathcal{N}(0,\sigma^2)
+$$
+
+WLOG, let $\mathbb{E}X=0,\mathbb{E}X^2=1$. Let $M(t)=\mathbb{E}(e^{tX})$ be the MGF of $X$.
+
+$$
+\begin{aligned}
+M(t)
+&=\mathbb{E}(e^{tX}) 
+=\mathbb{E}\left[\sum_{i=0}^{\infty} \frac{{(tX)}^n}{n!}\right]
+
+=\sum_{i=0}^{\infty} \frac{t^n}{n!} \mathbb{E}(X^n)\\
+e^{t \sqrt n (\bar{X}_n - \mu) }
+&=e^{\sum_{i=1}^n \frac{t}{\sqrt n} X_i}
+=\prod_{i=1}^n e^{\frac{t}{\sqrt n} X_i}\\
+\mathbb{E}\left[ e^{t \sqrt n (\bar{X}_n - \mu) } \right]
+&=\mathbb{E}\left[ \prod_{i=1}^n e^{\frac{t}{\sqrt n} X_i} \right]
+=\prod_{i=1}^n \mathbb{E}\left[  e^{\frac{t}{\sqrt n} X_i} \right]
+=\prod_{i=1}^n M\left(\frac{t}{\sqrt n} \right)
+=M^n\left(\frac{t}{\sqrt n} \right)\\
+&\to {\left(
+M(0) + \frac{t}{\sqrt n}M'(0) + \frac{t^2}{n} \frac{M''(0)}{2} + o(t^2/n)
+\right)}^n\\
+&\to {\left( 1 + \frac{t^2}{2n} \right)}^n
+={\left( 1 + \frac{t^2}{2n} \right)}^{\frac{2n}{t^2} \cdot \frac{t^2}{2}}
+=\operatorname{power}\left(
+{\left( 1 + \frac{t^2}{2n} \right)}^{\frac{2n}{t^2}}, \frac{t^2}{2}
+\right)\\
+&\to e^{t^2/2}
+\end{aligned}
+$$
+
+This is the $\mathcal{N}(0,1)$ MGF, so $\sqrt{n}(\bar{X}-\mu) \to \mathcal{N}(\mu,\sigma^2)$.  
+
+CLT explains the ubiquity Gaussian models.
 
 ### Additive Gaussian White Noise Channel
 
@@ -677,11 +716,11 @@ Central limit theorem
 
 #### Modeling
 
-Send $X$, receive $Y$ where $Y=X+Z$ for 
+A channel $X\to Y$ where
 
-- $Z\sim \mathcal{N}(0,N)$
-- $\mathbb{E}[X^2]\leq P$, transmission power limit
-- $N>0$ non-zero noise power
+- $Y=X+Z$ additive noise
+- $Z\sim \mathcal{N}(0,N)$ Gaussian white noise
+- $\mathbb{E}[X^2]\leq P$ power limit
 
 #### Theorem (AWGN channel capacity)
 
@@ -689,10 +728,99 @@ $$
 C = \frac12 \log \left( 1 + \frac{P}{N} \right)
 $$
 
+#### Intuition
+
+First consider the mutual information shared by $X$ and $Y$
+
+$$
+i(X;Y) = h(Y) - h(Y|X) = h(Y) - h(X+Z|X) = h(Y) - h(Z)
+$$
+
+$h(Z) = \frac12\log (2\pi e N)$ is fixed.  
+
+Now consider the upperbound of $h(Y)$ (bound entropy with variance)
+
+$$
+\begin{aligned}
+h(Y)
+&\leq \frac12 \log (2\pi e \operatorname{Var}(Y))\\
+&=\frac12 \log \left(2\pi e 
+\left(
+\operatorname{Var}(X) + \operatorname{Var}(Z) + \operatorname{Cov}(X,Z)
+\right)
+\right)\\
+&=\frac12 \log \left(2\pi e 
+\left(
+\operatorname{Var}(X) + N
+\right)
+\right)\\
+&\leq\frac12 \log \left(2\pi e 
+\left( P + N \right)
+\right)\\
+\end{aligned}
+$$
+
+Equality is hold iff $X\sim\mathcal{N}(0,P)$.
+
+And the upperbound of the mutual information is
+
+$$
+i(X;Y) = h(Y) - h(Z) \leq \frac12 \log \frac{2\pi e (P+N)}{2\pi e N} = \frac12 \log \left( 1 + \frac{P}{N} \right)
+$$
+
+Therefore, the channel capacity is $C = \max_{f(x)} i(X;Y) = \frac12 \log (1+P/N)$.
+
+#### Achievable
+
+**TODO**
+
+#### Reverse
+
+**TODO**
+
 ### Band-limited Gaussian Channel
+
+Consider a linear time-invariant system $Y(t) = X(t) + Z(t)$,
+where $X(t)$ is $W$ band-limited and $Z(t)$ is a Gaussian process with mean $0$ and power spectrum density $N_0/2$.
+
+Spectrum of $X(t)$ contains no component whose frequency is greater than $W$.
+
+$$
+X(\omega) = \mathcal{F}\left[X(t)\right] = \int_{-\infty}^{+\infty} X(t)e^{-j\omega t}\mathrm{d}t
+\qquad
+\forall \omega . (|\omega| > W \to X(\omega)=0)
+$$
+
+The channel is capable of transmitting information at $R$ bits per second where $R\leq C$ and
+
+$$
+C = W\log \left( 1 + \frac{P}{W N_0} \right)\quad \text{bits per second}
+$$
+
+In $[0,T]$ time interval
+
+- $2W\times T$ samples
+- power per sample $\frac{P\times T}{2W \times T}$
+- per sample noise power $\frac{2W (N_0/2) \times T}{2W\times T}$
+- average SNR (signal to noise ratio) $\frac{P}{N_0 W}$
+
+Thus, the bit rate limit is
+
+$$
+\frac{2W\times T \cdot \frac12 \log \left( 1 + \frac{P}{N_0 W} \right)}{T}
+=W\log\left( 1 + \frac{P}{N_0 W} \right)
+$$
 
 ### Parallel Uncorrelated Gaussian Channel
 
+#### Modeling
+
+#### Water-Filling Solution
+
 ### Parallel Correlated Gaussian Channel
+
+#### Modeling
+
+#### Reducing to Uncorrelated Case
 
 ### Parallel Correlated Gaussian Channel with Feedback
