@@ -374,6 +374,17 @@ $$
 C=\max_{p(x)} I(X;Y)
 $$
 
+**Interpretation:** Consider a $(2^{nR},n)$ code transmitting $R$ bits per symbol.
+
+1. The total number of possible received sequences is $|A^{(n)}_{\epsilon}(Y)| = 2^{nH(Y)}$.
+2. When the input $X^n$ is known the number of possible received sequences is $|A^{(n)}_{\epsilon}(Y|X)|\approx 2^{nH(Y|X)}$.
+3. For error-free decoding, partition $A^{(n)}(Y)$ into subsets of $2^{nH(Y|X)}$ elements.
+4. Distinguishable sequences $2^{nH(Y)} / 2^{nH(Y|X)} = 2^{n(H(Y)-H(Y|X))} = 2^{n I(X;Y)}$.
+5. Can carry $\log 2^{n I(X;Y)} = nI(X;Y)$ bits. So $R \leq \max_{p(x)} I(X;Y)$
+
+![channel code typicality interpretation](../static/EE142-channel-code-typicality.png)
+
+
 #### Noisy Typewriter
 
 - Input $\mathcal{X}=\{a,b,c,\ldots z\}$
@@ -633,35 +644,176 @@ where $p(x)$ is a distribution on $\mathcal{X}$ and $p(x,y)=p(x)p(y|x)$.
 
 #### Rate lower than capacity is achievable
 
-**TODO**
+**Idea** random codebook
+
+Consider the following transmission protocol: random code and joint typicality decode.
+
+1. Find $p(x)$ that maximize the input-output mutual information.
+2. Generate $2^{nR}$ codewords of length $n$ according to i.i.d. $p(x)$  
+   Compose them into a codebook $X^n(1),X^n(2),\ldots,X^n(2^{nR})$.
+3. On source message $W\in [1:2^{nR}]$, send $X^n(W)$ over the channel.
+4. On receiving $Y^n$, find $\hat{W}=g(Y^n)=k$ such that $(X^n(k),Y^n)\in A^{(n)}_{\epsilon}(X,Y)$.  
+   If no such codeword can be found or at least two codewords satisfies the condition, declare an error.
+
+Consider the condition probability of error
+
+$$
+\lambda^{(n)}_i
+= \Pr(g(Y^n)\neq i | X^n=X^n(i))
+= \sum_{y^n\in\mathcal{Y}^n: g(y^n)\neq i} p(y^n|X^n(i))
+\qquad i\in [1:2^{nR}]
+$$
+
+For simplicity, consider the case for $i=1$.
+
+There are two types of error (not disjoint) in the transmission
+
+- $(X^n(1),Y^n)$ is not jointly typical.  
+  $X^n(1)$ is generated according to $p(x^n)$ and $Y^n$ is generated according to $p(y^n|X^n(1))$.  
+  Therefore $(X^n(1),Y^n) \sim p(x^n)p(y^n|x^n) = p(x^n,y^n)$,  
+  thus $(X^n(1),Y^n)\in A^{(n)}_{\epsilon}(X,Y) \geq 2^{-n(H(X,Y)+\epsilon)}$
+- exists $j\neq 1$ such that $(X^n(j),Y^n)$ is jointly typical.  
+  $X^n(j)$ is generated according to $p(x^n)$ while $Y^n$ is generated according to $p(y^n|X^n(1))$.
+  $X^n(1)$ is independent of $X^n(j)$ so the distribution of $Y^n$ is simply $p(y^n)$.  
+  Therefore $(X^n(j),Y^n) \sim p(x^n)p(y^n)$,  
+  thus $(X^n(j),Y^n)\in A^{(n)}_{\epsilon}(X,Y) \leq 2^{-n(I(X,Y)-3\epsilon)}$
+
+Let $E_1,E_2,\ldots E_{2^{nR}}$ be the event that $(X^n(1),Y^n)\in A^{(n)}_{\epsilon}(X,Y)$.
+
+$$
+\begin{aligned}
+\lambda_1^{(n)} 
+&= \Pr(\bar{E_1}\cup E_2\cup E_3\cdots E_{2^{nR}})\\
+&\leq \Pr(\bar{E_1}) + \sum_{j=2}^{2^{nR}} \Pr(E_i)\\
+&\leq 2^{-n(H(X,Y)+\epsilon)} + (2^{nR}-1) 2^{-n(I(X;Y)-3\epsilon)}\\
+&\leq 2^{-n(H(X,Y)+\epsilon)} + 2^{-n(I(X;Y)-R-3\epsilon)}\\
+\end{aligned}
+$$
+
+If $I(X;Y)\geq R+3\epsilon$, then $\lambda_1^{(n)}\to 0$.  
+The overall error probability $P_e^{(n)} = \frac{1}{2^{nR}} \sum_{i=1}^{2^{nR}} \lambda_i^{(n)} = \lambda_1^{(n)}$ also converges to $0$.
+
+Asymptotically error-free is guaranteed if $R\leq \max I(X;Y)$.
 
 #### Rate greater than capacity is impossible
 
-**TODO**
+**Idea** Fano's inequality
+
+Recall: Fano's inequality is stated as follows:  
+If $X\to Y\to \hat{X}=g(Y)$,
+then $H(X|Y)\leq H(P_e) + P_e \log |\mathcal{X}|$.  
+
+This can be weaken to $P_e \geq \frac{H(X|Y)-1}{\log |\mathcal{X}|}$
+
+Since the source message is uniformly random generated from $[1:2^{nR}]$, $H(W) = nR$.  
+Apply Fano's inequality
+
+$$
+\begin{aligned}
+P_e^{(n)}
+&= \Pr(W\neq \hat{W}) \\
+&\geq \frac{H(W|\hat{W}) - 1}{\log 2^{nR}}\\
+&= \frac{H(W|\hat{W})-1}{nR}\\
+&= \frac{H(W) - I(W;\hat{W}) - 1}{nR}\\
+&\geq \frac{H(W) - I(X^n;Y^n) - 1}{nR}\\
+&=1 - \frac{I(X;Y)}{R} - \frac{1}{nR}\\
+\lim_{n\to\infty} P_e^{(n)}
+&\geq \lim_{n\to\infty}\left(1 - \frac{I(X;Y)}{R} - \frac{1}{nR}\right)
+=1 - \frac{I(X;Y)}{R}
+\end{aligned}
+$$
+
+To make sure that $P_e^{(n)}\to 0$, $R \leq \max I(X;Y)$ must be true.  
+Otherwise $P^{(n)}_e$ will converge to a positive real number.  
+So any $R>\max I(X;Y)$ is not achievable.
 
 ### Forward Error Correction Codes
 
-**TODO**
+The goal of channel code is to add redundancy for error detection and correction.  
+Research on channel codes (or forward error correction code) grows into the field of _coding theory_
 
-#### Hamming Code
+Classical results:
 
-**TODO**
+- Hamming ECC Code
+- Reed-Muller Code
+- BCH Code
+- Reed-Solomon Erasure Code
+- Low Density Parity Check (LDPC)
+- Turbo code
+- Polar Code
 
-### Source Channel Separation Theorem
-
-**TODO**
 
 ### Point-to-Point DMC with Feedback
 
-**TODO**
+#### Modeling
+
+![point-to-point DMC with feedback](../static/EE142-feeback-DMC.png)
+
+Feedback:
+A received symbol $Y_i$ is send back to the transmitter immediately noiselessly.
+The transmitter decide next symbol to send based on the source message and the feedback symbol.
+
+#### Condition for error-free decode
+
+Apply the Fano's inequality to find lower bound of the error probability $P_e^{(n)}$
+
+$$
+\begin{aligned}
+H(W|\hat{W}) &\leq H(P_e^{(n)}) + P_e^{(n)} \log |\mathcal{W}|\\
+P_e^{(n)} &\geq \frac{H(W|\hat{W}) - 1}{nR}\\
+&=\frac{H(W)-I(W;\hat{W})-1}{nR}\\
+&=1-\frac{1}{nR} - \frac{I(W;\hat{W})}{nR}\\
+\lim_{n\to\infty} P_e^{(n)} &\geq 1 - 0 - \frac{I(W;\hat{W})}{nR}
+\end{aligned}
+$$
+
+Now consider the lower bound of $I(W;\hat{W})$
+
+$$
+\begin{aligned}
+I(W;\hat{W}) & \leq I(W;Y^n)\\
+&=H(Y^n) - H(Y^n|W)\\
+&=H(Y^n) - \sum_{i=1}^n H(Y_i|Y_1\ldots Y_{i-1},W)\\
+&=H(Y^n) - \sum_{i=1}^n H(Y_i|Y_1\ldots Y_{i-1},W,X_i)\\
+&=H(Y^n) - \sum_{i=1}^n H(Y_i|X_i)\\
+&\leq \sum_{i=1}^n H(Y_i) - \sum_{i=1}^n H(Y_i|X_i)\\
+&=\sum_{i=1}^n I(X_i;Y_i)\\
+&\leq nC
+\end{aligned}
+$$
+
+Two key steps in the derivation
+- $H(Y_i|Y_1\ldots Y_{i-1},W) = H(Y_i|Y_1\ldots Y_{i-1},W,X_i)$ since $X$ is determined by $(Y_1\ldots Y_{i-1},W)$.
+- $H(Y_i|Y_1\ldots Y_{i-1},W,X_i) = H(Y_i|X_i)$ since $Y_i$ is conditionally independent of previous $Y$ and $W$ when given $X_i$.
+
+Finally, combine the two bounds: $\lim_{n\to\infty} P_e^{(n)} \geq 1 - \frac{C}{R}$.
+To achieve asymptotically zero error probability, $R\leq C$ has to be satisfied.
+
+#### Interpretation
 
 For point-to-point DMC, introducing feedback cannot improve the capacity.
+With that said having a feedback does bring some advantages:
 
 - feedback can simplify the communication protocol
 - feedback can improve the rate at which $\lambda^{(n)}\to 0$
 
 In non-classic information settings such as broadcasting and MIMO, feedback can improve the capacity.
 
+### Source Channel Separation Theorem
+
+Theorem statement
+
+- For a discrete-time integer-valued stochastic process $V^n$.
+- Send $V^n$ through a discrete memoryless channel.
+- At asymptotically zero error probability.
+- This is possible if and only if $C\geq \lim_{n\to\infty} \frac{H(V^n)}{n}$.
+- That is error-free is possible iff entropy rate is bounded by channel capacity.
+
+Proof sketch
+
+- Achievable: Combining _source coding theorem_ and  _noisy channel coding theorem_.  
+  That is: Huffman coding + random code with joint typicality decoder.
+- Converse: Apply Fano's inequality. Establish bound on input-output mutual information.
 
 ## Gaussian Channel
 
@@ -728,6 +880,22 @@ $$
 C = \frac12 \log \left( 1 + \frac{P}{N} \right)
 $$
 
+#### Sphere Packing
+
+When $X^n \in \mathbb{R}^n$ is sent through the channel,
+the typical received sequences are $A^{(n)}_{\epsilon}(Y|X)$.  
+The volume of the set is $2^{n h(Y|X)}$.  
+
+All typical received sequences are $A^{(n)}_{\epsilon}(Y)$.
+The volume of the set is $2^{n h(Y)}$.  
+
+Partition the marginal typical sequences $A^{(n)}_{\epsilon}(Y)$ into disjoint subsets for error-free decode.  
+An error occurs if independently generated sequences $(\tilde X,\tilde Y)$ are being jointly typical, which converges to zero.  
+
+Thus, the number of separable outcomes is $2^{n (h(Y)-h(Y|X))} = 2^{n I(X;Y)}$
+so $nI(X;Y)$ bits is transmitted per $n$ symbol sent.  
+The capacity is $\max I(X;Y)$
+
 #### Intuition
 
 First consider the mutual information shared by $X$ and $Y$
@@ -770,15 +938,14 @@ $$
 
 Therefore, the channel capacity is $C = \max_{f(x)} i(X;Y) = \frac12 \log (1+P/N)$.
 
-#### Achievable
+#### Proof
 
-**TODO**
-
-#### Reverse
-
-**TODO**
+- Achievable: Similar to noisy channel code theorem for DMC. Random codebook from a truncated Gaussian distribution.
+- Converse: Fano's inequality and bound on input-output mutual information.
 
 ### Band-limited Gaussian Channel
+
+See [Shannon–Hartley theorem - Wikipedia](https://en.wikipedia.org/wiki/Shannon–Hartley_theorem).
 
 Consider a linear time-invariant system $Y(t) = X(t) + Z(t)$,
 where $X(t)$ is $W$ band-limited and $Z(t)$ is a Gaussian process with mean $0$ and power spectrum density $N_0/2$.
@@ -813,14 +980,20 @@ $$
 
 ### Parallel Uncorrelated Gaussian Channel
 
+**TODO**
+
 #### Modeling
 
 #### Water-Filling Solution
 
 ### Parallel Correlated Gaussian Channel
 
+**TODO**
+
 #### Modeling
 
 #### Reducing to Uncorrelated Case
 
 ### Parallel Correlated Gaussian Channel with Feedback
+
+**TODO**
