@@ -980,11 +980,55 @@ $$
 
 ### Parallel Uncorrelated Gaussian Channel
 
-**TODO**
-
 #### Modeling
 
+$n$ parallel independent Gaussian channels working together with constraint on the total transmission power.
+
+- $\vec{Y} = \vec{X} + \vec{Z}$
+- $Z_i \sim \mathcal{N}(0,N_i)$ such that $(Z_1,Z_2,\ldots Z_n)$ are independent.
+- $\sum_{i=1}^{n} \mathbb{E}(X_i^2) \leq P$
+
+Find
+
+$$
+C = \max_{p(x_1,x_2,\ldots x_n): \sum_{i=1}^n \mathbb{E}(X_i^2) \leq P} I(\vec{Y};\vec{X})
+$$
+
 #### Water-Filling Solution
+
+We shall use optimal channel code on each parallel channel.
+Let $P_i$ be the power allocated for the $i$-th channel.
+
+$$
+C(\vec{P}) = \sum_{i=1}^n \frac12\log\left(1+\frac{P_i}{N_i}\right)
+\propto \sum_{i=1}^n \ln\left(1+\frac{P_i}{N_i}\right)
+$$
+
+Applying Lagrange multiplier to find the maximum value.
+
+$$
+\mathcal{L} = \sum_{i=1}^n \ln\left(1+\frac{P_i}{N_i}\right) - \lambda\left( \sum_{i=1}^n P_i - P\right)
+$$
+
+Then
+
+$$
+0
+= \frac{\partial L}{\partial P_i}
+= \frac{1}{1+P_i/N_i}\times \frac{1}{N_i} - 2 \lambda
+\implies P_i = \max\left( \frac{1}{2\lambda} - N_i, 0 \right)
+$$
+
+Let $\nu = \frac{1}{2\lambda}$ then $P_i(\nu) = {(\nu - N_i)}^+$ where ${(x)}^+ = \max(x,0)$.  
+Here $\sum_{i=1}^n P_i(\nu)$ is a monotonic function of $\nu$,
+so we can use binary search to $\nu_0$ such that $\sum_{i=1}^n P_i(\nu_0) = P$.  
+Then the optimal power allocation is $P_i^\ast = {\left(\nu_0 - N_i\right)}^{+}$.
+
+This is called a Water-Filling solution.  
+The intuition is that to pour $P$ unit volume water into the container,
+the result should be $P_i = {(\nu - N_i)}^{+}$ such that $\sum P_i = P$.
+
+![water filling solution](../static/EE142-water-filling.png)
 
 ### Parallel Correlated Gaussian Channel
 
