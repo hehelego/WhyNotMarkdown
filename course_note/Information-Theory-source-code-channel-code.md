@@ -1041,3 +1041,79 @@ the result should be $P_i = {(\nu - N_i)}^{+}$ such that $\sum P_i = P$.
 ### Parallel Correlated Gaussian Channel with Feedback
 
 **TODO**
+
+## Rate Distortion Theory
+
+### Introduction
+
+Lossy compression is an extension of (asymptotically) error-free source coding,
+where the loss in accuracy is measured by a _distortion measure function_.  
+Rate distortion theory studies the limit of lossy compression:
+
+- The minimum code length with a constraint on distortion:  
+  The rate-distortion function $R(D)$
+- The minimum distortion required to achieve a given code length:  
+  The distortion-rate function $D(R)$
+
+### Terminologies and Notations
+
+Lossy compression:
+
+- Source $X_1,X_2,\ldots,X_n$ where $X_i\in \mathcal{X}$.  
+  Common assumption: the source is memoryless, with PDF $f(x)$ or PMF $p(x)$.
+- Encoder: $f:\mathcal{X}^n \to \hat{\mathcal{X}}^n$
+- Decoder: $g:\hat{\mathcal{X}}^n\to \mathcal{X}^n$
+- Distortion metric function: $d:\mathcal{X}\times\hat{\mathcal{X}}\to \mathbb{R}^{+}$  
+    Two common metric of distortion
+    - Hamming distortion:
+      $\mathcal{X}=\hat{\mathcal{X}}$ and $d(x,\hat{x}) = [x\neq\hat{x}]$.
+    - Mean Square Error distortion
+      $\mathcal{X},\hat{\mathcal{X}}\subseteq \mathbb{R}$ and $d(x,\hat{x}) = {(x-\hat{x})}^2$.
+
+A rate-distortion pair $(R,D)$ is said to be achievable
+if there exists a $(2^{nR},n)$ loosy compression such that
+$\mathbb{E}\left[ d(X,\hat{X}) \right] \leq D$
+is satisfied.
+
+The main theorem of rate-distortion theory states that 
+
+$$
+R(D) = \min_{p(\hat{x}|x): \mathbb{E}\left[ d(X,\hat{X}) \right] \leq D} I(X;\hat{X})
+$$
+
+### Quantization
+
+Scalar quantization with $\log M$ bit.
+
+- Source: $U_1,U_2,\ldots$ a random process.  
+  Common assumption: $U$ is a memoryless with PDF $f(u)$ or PMF $p(u)$
+- Region: $R_1,R_2,\ldots, R_M$ disjoint partition of support of $\mathbb{R}$
+- Boundary: $b_0 = -\infty, b_1,b_2,b_2,\ldots b_M, b_{M+1}=+\infty$
+- Representation: $a_1,a_2,\ldots a_M$
+- Encode: $f: U\to V$ where $f(u) = a_i$ for $u\in R_i$
+
+The MSE is
+
+$$
+\mathbb{E}\left[ {(U-V)}^2 \right]
+=\sum_{i=1}^M \int f(u) {(u-a_i)}^2 \mathrm{d}u
+$$
+
+
+#### Lloyd-Max Algorithm
+
+#### Entropy Quantization
+
+#### High Rate quantization
+
+The PDF within each quantization region $R_i$ is roughly uniform
+
+$$
+f(u) \approx \begin{cases}
+\frac{\Pr(u\in R_i)}{\operatorname{Vol}(R_i)} & u \in R_i\\
+0 & u \not\in \bigcup_{i=1}^{M} R_i
+\end{cases}
+$$
+
+The result: uniform quantization.
+
