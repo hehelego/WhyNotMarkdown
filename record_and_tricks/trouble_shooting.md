@@ -524,3 +524,29 @@ colors, dialog layout, icons 都不太对劲.
 添加`QT_QPA_PLATFORMTHEME=qt5ct`环境变量
 
 可以在KDE store中搜索kvantum获取更多theme
+
+## fixing pdf.js layout in qutebrowser
+
+### 问题描述
+
+在 qutebrowser 中启用 pdf.js, 打开一个常规含有 text 的 pdf document,
+发现 pdf.js 的 menu bar 不能正确显示, 文本渲染的位置存在偏移.
+
+- qutebrowser version: v2.5.4
+- Backend: QtWebEngine 5.15.14, based on Chromium 87.0.4280.144
+- Qt: 5.15.9 (compiled 5.15.8)
+
+时间在 2023 年 5 月.
+
+### 参考信息
+
+在 qutebrowser 的 github repository 中找到了以下相关 issue
+
+- [github: qutebrowser issue 7701](https://github.com/qutebrowser/qutebrowser/issues/7701)
+
+### 解决方案
+
+依照这里的方法设置 `qt.args` 启用 qt6 的 experimental features.
+
+- [github qutebrowser discussions on qt.flags and qt.args](https://github.com/qutebrowser/qutebrowser/discussions/6573)
+当 qutebrowser 完全迁移到 qt6 后, 应当不再会有此问题.
