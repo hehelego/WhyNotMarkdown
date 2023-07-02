@@ -90,7 +90,7 @@
   - Rust
   - Haskell
   - Node.js
-- LaTeX: `texlive`, `texlive-lang` group; `biber`; `tllocalmgr`
+- LaTeX: `texlive`, `texlive-lang` group; `biber`; (fix `tlmgr` following the instruction on arch linux wiki)
 - alternative to TexLive suite: `tectonic`
 - Mathematical software: `sagemath`, `octave`
 - scientific python ecosystem:
