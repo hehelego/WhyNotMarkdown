@@ -239,18 +239,17 @@ okular打开包含中文的pdf,发现未嵌入的字体渲染异常.
 
 ### 参考信息
 
-- [linux-wiki.cn: PDF中文显示](http://linux-wiki.cn/wiki/PDF%E4%B8%AD%E6%96%87%E6%98%BE%E7%A4%BA)
-- [ubuntu zh-wiki: PDF文档乱码问题 - okular乱码](https://wiki.ubuntu.org.cn/PDF%E6%96%87%E6%A1%A3%E7%9A%84%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98)
-- [michellel.top 's cnblog: okular打开pdf,中文无法显示](https://www.cnblogs.com/guochaoxxl/p/6823148.html)
+- [linux-wiki.cn: PDF中文显示](http://linux-wiki.cn/wiki/PDF中文显示)
+- [ubuntu zh-wiki: PDF文档乱码问题 - okular乱码](https://wiki.ubuntu.org.cn/PDF文档的乱码问题)
+- [Poppler homepage](https://poppler.freedesktop.org/)
 
-这些PDF没有将使用的字体内嵌,此时okular的后端`poppler`会寻找合适的已安装字体,  
-而poppler的中文字体相关数据在`poppler-data`中,这个东西没有正确被安装,所以中文字体渲染出现了问题.
+`okular` 使用 `poppler` 来解析 PDF 文件, 而后者的 CJK 支持需要 `poppler-data`.
 
 ### 解决方案
 
-- 安装`poppler,poppler-data`等poppler相关的软件包.  
-- 安装更多字体.  
-  例如:MS windows中常见的`Courier,Times fonts` fallback到noto fonts的效果并不好,用liberation fonts替代效果更好.
+- 安装更多字体, 尤其是 MS Windows 中常见字体(`Arial`, `Courier`, `Times fonts`)的替代品, 可以使用 `ttf-liberation`.
+- 安装 `poppler-data`
+- 替换基于 `poppler` 的 `okular`, 使用基于 `mupdf` 的 PDF viewer, 比如 `zathura` 配合 `zathura-pdf-mupdf`
 
 ## pulseaudio can't resume sink/source after recovery from hibernation/suspend
 
