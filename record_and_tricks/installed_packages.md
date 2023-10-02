@@ -51,6 +51,7 @@
 - `v2ray`: frontend `v2raya`
 - `proxychains-ng`
 - network traffic analyzer: `wireshark`, `tcpdump`
+- `bind`: DNS protocol
 
 ### CLI utilities
 
@@ -73,7 +74,7 @@
 - find full path in `$PATH`: `which`
 - modern CLI/TUI utilities and replacement for `coreutils`
   - `zoxide`: alternative to `autojump`
-  - `exa`: alternative to `coreutils/ls`
+  - `eza`: alternative to `coreutils/ls`
   - `bat`: alternative to `coreutils/cat`
   - `fd`: alternative to `coreutils/find`
   - `delta`: alternative to `diffutils/diff` (**NOTE**: `delta` can not produce patches)
@@ -92,7 +93,7 @@
   - Node.js
 - LaTeX: `texlive`, `texlive-lang` group; `biber`; (fix `tlmgr` following the instruction on arch linux wiki)
 - alternative to TexLive suite: `tectonic`
-- Mathematical software: `sagemath`, `octave`
+- Mathematical software: `sagemath`, `octave`, `z3`, `python-z3`
 - scientific python ecosystem:
   - `python-{scipy,numpy,sympy}`
   - `python-{matplotlib,seaborn}`
