@@ -52,6 +52,7 @@
 - `proxychains-ng`
 - network traffic analyzer: `wireshark`, `tcpdump`
 - `bind`: DNS protocol
+- `hblock`: hosts based tracker/advertisement blocking
 
 ### CLI utilities
 
