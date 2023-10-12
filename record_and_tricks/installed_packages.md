@@ -61,7 +61,7 @@
   - age encryption protocol: `rust-rage`, `age`
   - OpenSSL toolkit: `openssl`
 - file transfer: `rsync`
-- file manager: `ranger`, `ncdu`
+- file manager: `ranger`, `nnn`, `ncdu`
 - regex/fuzzy searcher: `fzf`,`ripgrep, ripgrep-all`,`fselect`,`the_silver_searcher`
 - accessing archives and compressed files: `tar`,`zip/unzip`,`bzip2`,`p7zip`,`gzip`,`xz`,`zstd`,`unrar`; `ark` for GUI
 - man pages: `man-db, man-pages`
