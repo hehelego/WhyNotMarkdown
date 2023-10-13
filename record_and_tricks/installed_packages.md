@@ -19,7 +19,7 @@
 - editor: `neovim`; additional ones `helix`, `kakoune`, `vscodium`
 - configuration/dotfiles manager: `chezmoi`
 - version control: `git` (TUI `lazygit`, `gitui`; github CLI `gh`)
-- terminal multiplexer: `tmux`
+- terminal multiplexer: `tmux`, `zellij`
 
 ## daily environment
 
@@ -62,7 +62,8 @@
   - OpenSSL toolkit: `openssl`
 - file transfer: `rsync`
 - file manager: `ranger`, `nnn`, `ncdu`
-- regex/fuzzy searcher: `fzf`,`ripgrep, ripgrep-all`,`fselect`,`the_silver_searcher`
+- regex/fuzzy searcher: `fzf`,`ripgrep, ripgrep-all`
+- `fselect` SQL like file searching
 - accessing archives and compressed files: `tar`,`zip/unzip`,`bzip2`,`p7zip`,`gzip`,`xz`,`zstd`,`unrar`; `ark` for GUI
 - man pages: `man-db, man-pages`
 - TL;DR pages: `tldr`, `tealdeer`
