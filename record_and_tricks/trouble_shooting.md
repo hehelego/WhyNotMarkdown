@@ -549,3 +549,38 @@ colors, dialog layout, icons 都不太对劲.
 
 - [github qutebrowser discussions on qt.flags and qt.args](https://github.com/qutebrowser/qutebrowser/discussions/6573)
 当 qutebrowser 完全迁移到 qt6 后, 应当不再会有此问题.
+
+## OCaml findlib cannot locate packages installed by opam
+
+### Description
+
+Setup OCaml developing environment following the official guide.
+Install `utop` with `opam install utop`.
+`utop` command always exit with the following error message
+
+```plaintext
+Fatal error: exception Fl_package_base.No_such_package("utop", "")` error
+```
+
+### Investigation
+
+1. Search for `Fl_package_base` in source code of `utop`.
+2. Infer from the context that the error is triggered because `findlib` failed to locate the directory in which `opam` is installed.
+3. Read the man page of `ocamlfind` and `findlib.conf`, also look into the document of `findlib`.
+4. `findlib` looks up for packages in the directories specified in the `OCAMLPATH` environment.
+5. Inspect the output of `opam env`. Find out that `OCAMLPATH` is never properly set.
+6. Use `which utop` to find the install directory of `utop`.
+
+### Solution
+
+```fish
+set -x OCAMLPATH $HOME/.opam/default/lib
+```
+
+To allow `findlib` to index packages installed with `opam`.
+
+### Reference
+
+- [ocaml findlib user guide: Looking up package directories](http://projects.camlcity.org/projects/dl/findlib-1.9.6/doc/guide-html/x81.html)
+- [github issue: ocaml-community/utop issue 112](https://github.com/ocaml-community/utop/issues/112)
+
