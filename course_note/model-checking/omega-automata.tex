@@ -1,0 +1,103 @@
+\documentclass{article}
+
+\usepackage{amsmath, amsthm, amssymb}
+
+\title{Quick Note on Omega-Automaton}
+\author{hehelego}
+\date{Dec 25, 2023}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemmma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem{subdef}{Definition}[definition]
+
+\setlength\parindent{0pt}
+
+\begin{document}
+\maketitle
+
+\newcommand{\exinf}{\stackrel{\infty}{\exists}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\TT}{\mathbf{T}}
+\newcommand{\FF}{\mathbf{F}}
+\newcommand{\BOOL}{\{\TT,\FF\}}
+
+Define the \(\exinf\) quantifier, which reads as ``exists infinitely many''.
+\[
+	\exinf i\in\NN. p(i) = \forall n\in\NN . \exists i > n . p(i)
+\]
+All occurrences of \(\Sigma\) in this note refers to a finite alphabet set.
+
+\(\epsilon\) denotes a \emph{null letter}, an automaton is said to consume a \(\epsilon\) letter when when it is not consuming any input.
+
+\section{\(\omega\)-Words and \(\omega\)-Automata}
+
+\begin{definition}
+	A \(\omega\)-word over a \(\Sigma\) is a mapping from \(\NN\) to \(\Sigma\). In other words, a \(\omega\)-word is an infinite sequence \(w=w_0w_1\ldots\) where \(w_i\in\Sigma\) for every \(i\in\NN\).
+\end{definition}
+\begin{subdef}
+	A \(\omega\)-language \(L\) is a subset of all \(\omega\)-words, \(L\subseteq\Sigma^\omega\) where \(\Sigma^\omega=\{w_0w_1\ldots \mid \forall i\in\NN .\ w_i\in\Sigma\}\) is the set of all \(\omega\)-words.
+\end{subdef}
+\begin{subdef}
+	For every \(w\in\Sigma^\omega\) define \(\inf(w) = \{x\in\Sigma | \exinf i\in\NN . w_i=x \}\) to be the letters that occurred infinitely many times in \(w\).
+\end{subdef}
+
+\begin{definition}
+	A \(\omega\)-automaton is a tuple \(A=(Q,\Sigma,\delta,Q_0,\mathsf{Accept})\), where
+	\begin{itemize}
+		\item \(Q\) is a \emph{finite} state set.
+		\item \(\Sigma\) is a finite alphabet set.
+		\item \(\delta \subseteq Q\times\Sigma\times Q\) or \(\delta: Q\times \Sigma\to \mathcal{P}(Q)\) is the state transition relation/function.
+		\item \(\emptyset \subsetneq Q_0\subseteq Q\) is the set of initial states.
+		\item \(\mathsf{Accept}:Q^\omega\to\BOOL\) is an specific accepting condition predicate.
+	\end{itemize}
+	An \(\omega\)-automaton is said to be \emph{deterministic} if \(|Q_0|=1\) and
+	\[
+		\forall (q,a)\in Q\times \Sigma .
+		\left|\left\{q'\in Q\mid (q,a,q')\in \delta\right\}\right|\leq 1
+	\]
+\end{definition}
+
+\begin{subdef}
+	A run of \(w\in\Sigma^\omega\) on \(A=(Q,\Sigma,\delta,Q_0,\ast)\) is \(\rho\in Q^\omega\), where \(\rho_0\in Q_0\) and \((\rho_i,w_i,\rho_{i+1})\in\delta\) for every \(i\in\mathbb{N}\).
+	The predicate \(\operatorname{run}(\rho,w,A)\) is defined to be true if \(\rho\) is a valid run of \(w\) on \(A\).
+\end{subdef}
+
+\begin{subdef}
+	The language recognized by \(A=(Q,\Sigma,\delta,Q_0,\mathsf{Accept})\) is
+	\[
+		\mathcal{L}(A) = \{w\in\Sigma^\omega\mid
+		\exists \rho\in Q^\omega .
+		\operatorname{run}(\rho,w,A) \land \mathsf{Accept}(\rho)\}
+	\]
+	A \(\omega\)-automaton \(A\) recognizes a \(\omega\)-word \(w\) if \(w\) has an accepting run \(\rho\) on \(A\).
+\end{subdef}
+
+\begin{subdef}
+	An \(\omega\)-automaton with \(\epsilon\) transition is a tuple \(A'=(Q,\Sigma,\delta\cup\delta_{\epsilon},Q_0,\mathsf{Accept}\) where \(\delta\subseteq Q\times\Sigma\times Q\) and \(\delta'\subseteq Q\times\{\epsilon\}\times Q\).
+
+\end{subdef}
+
+\section{B\"uchi Automata}
+
+A B\"uchi automaton is a \(\omega\)-automata \(A=(Q,\Sigma,\delta,Q_0,F)\), where \(F\subseteq Q\) and \(\mathsf{Accept}(\rho) = \inf(\rho)\cap F \neq \emptyset\).
+So a B\"uchi automaton accepts a run \(\rho\) if at least one good state \(g\in F\) is infinitely often visited.
+
+The power of NBA is strictly stronger than DBA.
+The language of NBAs are \(\omega\) regular languages.
+
+\section{Omega Regular Language}
+
+\begin{definition}
+\end{definition}
+
+
+\section{Omega-Automata}
+
+
+\section{Set Operations}
+
+\section{Complement of a NBA}
+
+\end{document}
