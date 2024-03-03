@@ -1,0 +1,696 @@
+\documentclass{article}
+
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[breakable, skins]{tcolorbox}
+
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{xca}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\intoo}{\int_{-\infty}^{+\infty}}
+\newcommand{\dx}{\mathrm{d}x}
+\newcommand{\dy}{\mathrm{d}y}
+\newcommand{\dt}{\mathrm{d}t}
+
+\newcommand{\Bern}{\mathrm{Bern}}
+\newcommand{\Bin}{\mathrm{Bin}}
+\newcommand{\Geom}{\mathrm{Geom}}
+\newcommand{\HGeom}{\mathrm{HGeom}}
+\newcommand{\NBin}{\mathrm{Bin}}
+\newcommand{\Pois}{\mathrm{Pois}}
+\newcommand{\Unif}{\mathrm{Unif}}
+\newcommand{\Expo}{\mathrm{Expo}}
+\newcommand{\Norm}{\mathcal{N}}
+\newcommand{\BetaD}{\mathrm{Beta}}
+\newcommand{\GammaD}{\mathrm{Gamma}}
+
+\newcommand{\dist}{\sim}
+\newcommand{\iid}{\stackrel{\mathrm{iid}}{\dist}}
+
+\title{Note on Stochastic Process: Part 1}
+
+\begin{document}
+
+\section{About the course}
+
+ShanghaiTech MATH2105 Stochastic Process, Spring 2024.
+
+A not very rigorous and theoretical presentation of the basics of the discipline. Optimized for non-math major students.
+
+\subsection{main contents}
+
+\begin{enumerate}
+	\item Review on basic probability theory
+	\item Conditional probability
+	\item Discrete time Markov chain
+	\item Markov Chain Mote Carlo (MCMC) sampling
+	\item Poisson process
+	\item Continuous time Markov chain
+	\item Brownian process
+	\item (Optional) Time series
+	\item (Optional) Martingale theory
+\end{enumerate}
+
+\subsection{Assessments}
+
+\begin{itemize}
+	\item 20\% homework (on blackboard system)
+	\item 30\% final exam
+	\item 20\% 2 programming homework (implementation and written report)
+	\item 20\% group project (group of 3, to be announced later)
+	\item 10\% attendance
+\end{itemize}
+
+\subsection{References}
+
+\begin{description}
+	\item[main] \emph{Introduction to probability models} (Not very theoretical. More or less a toolbox)
+\end{description}
+
+\pagebreak
+
+\section{Part 1: Review}
+
+\subsection{Probability space}
+
+\begin{definition}[probability space]
+	A probability space is a 3-tuple \((\Omega,\mathcal{F},\Pr)\) where
+	\begin{itemize}
+		\item Sample space: a set \(\Omega\)
+		\item Event space: \(\mathcal{F}\subseteq \rho(\Omega)\) is a \(\sigma\)-algebra over \(\Omega\), such that
+		      \begin{itemize}
+			      \item \(\Omega\in \mathcal{F}\) contains the event space
+			      \item \(E\in\mathcal{F} \implies E^c\in \mathcal{F}\) closure under complement
+			      \item \(E_1,E_2,\ldots\in\mathcal{F} \implies \bigcup_{i=1}^{\infty} E_i\in \mathcal{F}\) .
+			            Closure under union of countably many events.
+		      \end{itemize}
+		\item Probability measure: \(\Pr: \mathcal{F}\to [0,1]\)
+		      \begin{itemize}
+			      \item \(0\leq \Pr(\cdot)\leq 1\)
+			      \item \(\Pr(\Omega)=1\)
+			      \item For countably many \emph{mutually exclusive}\footnote{
+				            Events \(E_1,\ldots,E_n,\ldots\) are said to be mutually exclusive if \(i\neq j\to E_i\cap E_j=\emptyset\) for every pair \((i,j)\).
+			            } sets \(E_1,E_2,\ldots\)
+			            \[
+				            \Pr\left(\bigcup_{i=1}^{\infty} E_i\right) = \sum_{i=1}^{\infty} \Pr(E_i)
+			            \]
+		      \end{itemize}
+	\end{itemize}
+\end{definition}
+
+
+\begin{remark}
+	We can derive useful facts from the axioms of probability:
+	\begin{itemize}
+		\item Probability of complementary events.
+		      \[
+			      1 = \Pr(\Omega) = \Pr(E \cup E^c) = \Pr(E) + \Pr(E^c)
+		      \]
+		\item Principle of inclusion exclusion.
+		      \begin{align*}
+			      \Pr(A)          & = \Pr\left[(A\cap B) \cup (A\cap B^c)\right] = \Pr(A\cap B) + \Pr(A\cap B^c)    \\
+			      \Pr(B)          & = \Pr\left[(A\cap B) \cup (B\cap A^c)\right] = \Pr(A\cap B) + \Pr(B\cap A^c)    \\
+			      \Pr(A) + \Pr(B) & = 2\Pr(A\cap B) + \Pr(A\cap B^c) + \Pr(B\cap A^c) = \Pr(A\cap B) + \Pr(A\cup B) \\
+			      \Pr(A\cup B)    & = \Pr(A) + \Pr(B) - \Pr(A\cap B)
+		      \end{align*}
+	\end{itemize}
+\end{remark}
+
+\subsection{Conditional probability}
+
+
+\begin{definition}[conditional probability]
+	For a event, \(F\), of non-zero probability: \(\Pr(F)\neq 0\). Define \(\Pr(\cdot | F)\) as
+	\[
+		\Pr(E|F) = \frac{\Pr(EF)}{\Pr(F)}
+	\]
+\end{definition}
+
+\begin{tcolorbox}[title=example]
+	Draw 2 balls from a urn containing 7 black balls and 5 white balls without replacement.
+	What is the probability that two balls are black.
+
+	Let \(E,F\) be the event that the 1st/2nd draw is black, respectively.
+
+	\[
+		\Pr(EF) = \Pr(E)\Pr(F|E) = \frac{7}{7+5} \times \frac{7-1}{7+5-1} = \frac{\binom{7}{2}}{\binom{7+5}{2}}
+	\]
+\end{tcolorbox}
+
+\begin{definition}[independent events]
+	\(E,F\) are independent if \( \Pr(E|F) = \Pr(E) \), or equivalently \(\Pr(EF)=\Pr(E)\Pr(F)\).
+\end{definition}
+
+\begin{definition}[mutually independent]
+	\(n\) events \(E_1,\ldots, E_n\) are mutually independent (or shortly independent) if
+	\[
+		\Pr\left(\bigcap_{E\in S} E\right) = \prod_{E\in S} \Pr(E)
+	\]
+	for every subset \(S\subseteq \{E_1,\ldots,E_n\}\).
+\end{definition}
+
+
+\begin{tcolorbox}[title=mutually independent and pairwise independent]
+	Suppose that in a probability space, the sample space is \(\Omega = \{1,2,3,4\}\), and each outcome is equally likely.
+	Consider the events \(E=\{1,2\}, F=\{1,3\}, G=\{1,4\}\).
+	\begin{description}
+		\item[pairwise independent]: \(\Pr(E|F) = \frac12 = \Pr(E)\). Symmetry.
+		\item[not mutually independent]: \(\Pr(E|F,G) = 0 \neq \Pr(E)\)
+	\end{description}
+\end{tcolorbox}
+
+\begin{theorem}[Law of total probability. LOTP]
+	Let \(F_1,F_2,\ldots F_n\) be a partition of \(\Omega\), then
+	\[
+		\Pr(E) = \sum_{i=1}^{n} \Pr(E|F_i)\Pr(F)
+	\]
+	This is because \(EF_1, EF_2,\ldots, EF_n\) is a partition of \(E\)
+\end{theorem}
+
+\begin{theorem}[Bayesian equation]
+	\[
+		\Pr(E|F) = \frac{\Pr(F|E)\Pr(E)}{\Pr(F)}
+	\]
+\end{theorem}
+
+\begin{theorem}[Chain rule]
+	\[
+		\Pr\left(\bigcap_{i=1}^\infty E_i \right) = \prod_{i=1}^\infty \Pr(E_i | E_1 \ldots E_{i-1})
+	\]
+	For example \(\Pr(ABC) = \Pr(A)\Pr(B|A)\Pr(C|AB)\)
+\end{theorem}
+
+
+\begin{tcolorbox}[title=multiple choice problem]
+	Suppose that you are encountered with a multiple choice question with \(m\) options.
+	You know the correct answer with probability \(p\) and make an arbitrary guess when you are unaware of the correct answer.
+	Given that you picked the correct answer, what is the probability that you know the answer?\\
+
+	Let \(C\) be the event that the student makes the correct choice,
+	and \(K\) be the event that the student knows the answer.
+	By Bayesian rule and LOTP
+	\begin{align*}
+		\Pr(K|C)
+		 & = \frac{Pr(C|K)\Pr(K)}{\Pr(C)}                              \\
+		 & = \frac{Pr(C|K)\Pr(K)}{ Pr(C|K)\Pr(K) + Pr(C|K^c)\Pr(K^c) } \\
+		 & = \frac{1 \times p}{1\times p + \frac{1}{m}\times (1-p)}    \\
+		 & = \frac{mp}{(m-1)p + 1}
+	\end{align*}
+\end{tcolorbox}
+
+\subsection{Random variables and distribution}
+
+\begin{definition}[random variable]
+	A random variable \(X\) is a function \(X:\Omega\to\mathbb{F}\).
+	For every possible sample \(s\in\Omega\), the random variable \(X\) assigns \(X(s)\) to the event.
+\end{definition}
+\begin{definition}[function of a random variable]
+	Let \(X: \Omega\to\mathbb{F}\) be a random variable and \(g: \mathbb{F}\to\mathbb{F}'\) be a function over.
+	Then \(Y=g(X)\) is also a random variable, defined as \( Y(s) = g(X(s)) \) for every \(s\in\Omega\).
+\end{definition}
+
+
+\begin{definition}[distribution functions of a random variable]
+	Cumulative density function (discrete/continuous),
+	probability mass function (discrete),
+	probability density function (continuous).\\
+	\begin{itemize}
+		\item CDF: \(F_X(x) = \Pr(X<x)\)
+		\item PDF: differentiation of the CDF
+		\item PMF: the finite difference of CDF.
+	\end{itemize}
+	Required properties:
+	\begin{itemize}
+		\item CDF should be right continuous
+		\item limits of a CDF: \(\lim_{x\to -\infty} F(x)=0\) and \(\lim_{x\to +\infty} F(x)=1\)
+		\item A PMF sums to 1 over the support set.
+		      A PDF integrates to 1 over the support set.
+		\item If the CDF of \(X\), \(F_X(x)\), is differentiable, then the derivative is the PDF \(f_X(x)\).
+	\end{itemize}
+\end{definition}
+
+\begin{definition}[random vector: joint and marginal distributions]
+	Joint CDF is used to characterize a random vector (multiple random variables) \(X_1,X_2,\ldots, X_n\).
+	\[
+		F_{X_1,X_2,\ldots X_n}(x_1,x_2,\ldots x_n) = \Pr(X_1<x_1,X_2<x_2,\ldots X_n<x_n)
+	\]
+	If the CDF is differentiable, the joint PDF is defined as
+	\[
+		f_{X_1,X_2,\ldots X_n}(x_1,x_2,\ldots x_n) = \frac{\partial^n}{\partial x_1 \partial x_2 \cdots \partial x_n} F_{X_1,X_2,\ldots X_n}(x_1,x_2,\ldots x_n)
+	\]
+	For discrete random variables, we use joint PMF to characterize them.
+	\[
+		p_{X_1,X_2,\ldots X_n}(x_1,x_2,\ldots x_n) = \Pr(X_1=x_1,X_2=x_2,\ldots X_n=x_n)
+	\]
+
+	The marginal distribution of \(X_i\) is simply the CDF of \(X_i\).
+	\[
+		f_{X}(x) = \intoo f_{X,Y}(x,y) \dy
+	\]
+	We also define the conditional distribution
+	\[
+		f_{X|Y}(x|y) = \frac{f_{X,Y}(x,y)}{f_{Y}(y)}
+	\]
+\end{definition}
+
+\begin{remark}[LOTP for joint random variables]
+	Let \(X,Y\) be two continuous random variables and \(N,M\) be two discrete random variables.
+	\begin{center}
+		\begin{tabular}{c|cc}
+			           & discrete                                        & continuous                                       \\ \hline
+			discrete   & \( p_{N}(n) = \sum_{m} p_{N|M}(n|m) p_{M}(m) \) & \( p_{N}(n) = \intoo p_{N|X}(n|x) f_{X}(x)\dx \) \\
+			continuous & \( f_{X}(x) = \sum_{n} f_{X|N}(x|n) p_{N}(n) \) & \( f_{X}(x) = \intoo f_{X|Y}(x|y) f_{Y}(y)\dy \) \\
+		\end{tabular}
+	\end{center}
+\end{remark}
+
+\begin{definition}[independence of random variables]
+	If the joint CDF is equal to the product of marginal CDFs, then the random variables are said to be independent.
+	\[
+		F_{X,Y}(x,y) = F_X(x)F_Y(y)
+		\qquad
+		f_{X,Y}(x,y) = f_X(x)f_Y(y)
+		\qquad
+		f_{X|Y}(x|y) = f_X(x)
+	\]
+	Independence is equivalent to the separability of PDF/PMF:
+	That is if \(f_{X,Y}(x,y)\) can be decomposed into \(f_{X,Y}(x,y) = h(x)g(y)\) then \(X,Y\) are independent.
+\end{definition}
+
+\begin{definition}[expectation]
+	Essentially the mean value of a random variable over the probability space, weighted by probability.
+	\[
+		\E(X) = \sum_x x p(x)
+		\qquad
+		\E(X) = \intoo x f(x)\dx
+	\]
+\end{definition}
+\begin{theorem}{Law of unconscious statistics (LOTUS)}
+	To compute the expectation of a function without evaluating its PMF/PDF.
+	\[
+		\E(g(X)) = \sum_x g(x) p(x)
+		\qquad
+		\E(g(X)) = \intoo g(x) f(x)\dx
+	\]
+	where \(p(x)\) is the PMF, and \(f(x)\) is the PDF.
+\end{theorem}
+\begin{definition}[moments]
+	The \(k\)-th moment of a random variable \(X\) is defined as the expectation of the \(k\)-th power of \(X\).
+	\[
+		\E(X^k) = \sum_x x^k p(x)
+		\qquad
+		\E(X^k) = \intoo x^k f(x)\dx
+	\]
+\end{definition}
+\begin{definition}[variance and standard deviation]
+	For a sequence of independent and identically distributed random variables \(X_1,X_2,\ldots X_n\).
+	The variance of a random variable \(X\) is defined as
+	\[
+		\Var(X) = \E\left[{\left(X-\E{X}\right)}^2\right]
+		= \E\left[ X^2 - 2X \E(X) + {(\E X)}^2 \right]
+		= \E(X^2) - (2\E X)\E X + {(\E X)}^2
+		= \E(X^2)-{(\E{X})}^2
+	\]
+	The standard deviation is defined as \( \sigma (X) = \sqrt{\Var(X)} \).
+\end{definition}
+\begin{theorem}[linearity]
+	For two random variables:
+	\[
+		\E(X+Y)  =  \E(X) + \E(Y)
+	\]
+	For a random variable and a constant:
+	\[
+		\E(aX)  =  a\E(X)
+	\]
+\end{theorem}
+\begin{tcolorbox}[title=example: linearity]
+	\begin{align*}
+		\E({(X-\E X)}^2) & = \E\left[X^2 - 2X\E X + {(\E X)}^2\right] \\
+		                 & = \E(X^2) - \E(2X\E X) + {(\E X)}^2        \\
+		                 & = \E(X^2) - 2\E X\E(X) + {(\E X)}^2        \\
+		                 & = \E(X^2) - 2{(\E X)}^2 + {(\E X)}^2       \\
+		                 & = \E(X^2) - {(\E X)}^2
+	\end{align*}
+\end{tcolorbox}
+
+\begin{remark}
+	If \(X,Y\) are independent, or \(f_{X,Y}(x,y) = f_X(x)f_X(y)\),
+	then \(E(XY)=E(X)E(Y)\).
+\end{remark}
+
+\begin{definition}[covariance, correlation]
+	The covariance between two random variable \(X,Y\) is defined as
+	\[
+		\Cov(X,Y) = \E\left[(X-\E X)(Y-\E Y)\right] = \E(XY) - \E(X)\E(Y)
+	\]
+	The correlation is defined as
+	\[
+		\rho(X,Y) = \frac{\Cov(X,Y)}{\sqrt{\Cov(X,X)\Cov(Y,Y)}}
+		\quad
+		-1 \leq \rho \leq 1
+	\]
+\end{definition}
+\begin{theorem}[covariance is a inner product]
+	The following properties can be checked.
+	Let \(X,Y,Z\) be three random variables and \(a\) be a constant number.
+	\begin{itemize}
+		\item \(\Cov(X,X) \geq 0\)
+		\item \(\Cov(X,Y) = \Cov(Y,X)\)
+		\item \(\Cov(X+Y,Z) = \Cov(X,Z) + \Cov(Y,Z)\)
+		\item \(\Cov(aX,Y) = a \Cov(X,Y) \)
+	\end{itemize}
+\end{theorem}
+\begin{theorem}[independent implies uncorrelated]
+	If \(X,Y\) are independent, then \(\Cov(X,Y)=0\).
+	The converse is not true.
+\end{theorem}
+
+\begin{definition}[sample mean and sample variance]
+	For \(n\) independent and identically distributed random variables with mean \(\mu\) and variance \(\sigma^2\).
+	The sample mean
+	\[
+		\bar{X}=\frac{1}{n}\sum_{i=1}^n X_i
+	\]
+	\(\bar{X}\) an unbiased estimator of the expectation
+	\[
+		\E(\bar{X}) = \E\left(\frac{1}{n}\sum_{i=1}^n X_i\right) = \frac{1}{n}\sum_{i=1}^n\E(X_i) = \mu
+	\]
+	The variance of \(\bar{X}\) is
+	\[
+		\Var(\bar{X}) = \frac{1}{n^2}\Cov\left(\sum_{i=1}^n X_i,\sum_{j=1}^n X_j\right)
+		= \frac{1}{n^2}\sum_{i,j} \Cov(X_i,X_j)
+		= \frac{1}{n^2}\sum_{i} \Cov(X_i,X_i)
+		= \frac{1}{n}\sigma^2
+	\]
+	The sample variance
+	\[
+		S^2 = \frac{1}{n-1}\sum_{i=1}^n {(X_i - \bar{X})}^2
+	\]
+	\(S^2\) an unbiased estimator of the variance
+	\begin{align*}
+		\E(S^2)
+		 & = \E\left[ \frac{1}{n-1}\sum_{i=1}^n {(X_i - \bar{X})}^2 \right]
+		= \frac{1}{n-1} \E\left[ \sum_{i=1}^n {(X_i - \mu + \mu - \bar{X})}^2 \right] \\
+		 & = \frac{1}{n-1} \E\left[
+		\sum_{i=1}^n \left(
+		{(X_i-\mu)}^2 + 2(X_i-\mu)(\mu-\bar{X}) + {(\mu-\bar{X})}^2
+		\right)
+		\right]                                                                       \\
+		 & = \frac{1}{n-1} \sum_{i=1}^n \left(
+		\E{(X_i-\mu)}^2 + 2\E\left[(X_i-\mu)(\mu-\bar{X})\right] + \E{(\mu-\bar{X})}^2
+		\right)                                                                       \\
+		 & = \frac{1}{n-1} \sum_{i=1}^n \left(
+		\sigma^2 + 2\Cov(X_i-\mu,\mu-\bar{X}) + \E{(\E\bar{X}-\bar{X})}^2
+		\right)                                                                       \\
+		 & = \frac{1}{n-1} \sum_{i=1}^n \left(
+		\sigma^2 + 2\Cov(X_i-\mu,\mu-\bar{X}) + \Var(\bar{X})
+		\right)                                                                       \\
+		 & = \frac{1}{n-1} \sum_{i=1}^n \left(
+		\sigma^2 + 2\Cov\left(X_i-\mu,\mu-\frac{1}{n}X_i\right) + \frac{1}{n}\sigma^2
+		\right)                                                                       \\
+		 & = \frac{1}{n-1} \sum_{i=1}^n \left(
+		\sigma^2 - \frac{2}{n}\sigma^2 + \frac{1}{n}\sigma^2
+		\right)                                                                       \\
+		 & = \frac{n}{n-1} \frac{n-2+1}{n} \sigma^2 = \sigma^2
+	\end{align*}
+\end{definition}
+
+\begin{theorem}[PDF of sum of independent random variables]
+	If \(X,Y\) are independent, then \(Z=X+Y\) has PDF \(f_Z = f_X \ast f_Y\) where \(\ast\) is the convolution operator.
+	\begin{align*}
+		F_Z(a) & = \Pr(X+Y\leq a)                         \\
+		       & = \intoo \Pr(X+Y\leq a | X=x) f_X(x) \dx \\
+		       & = \intoo \Pr(Y\leq a-x | X=x) f_X(x) \dx \\
+		       & = \intoo \Pr(Y\leq a-x ) f_X(x) \dx
+		= \intoo F_Y( a-x ) f_X(x) \dx                    \\
+		f_Z(a) & = \intoo f_Y( a-x ) f_X(x) \dx           \\
+	\end{align*}
+\end{theorem}
+
+
+\subsection{Transforms of random variables}
+
+\begin{theorem}[PDF of a function of a random variable]
+	Let \(Y=g(X)\), then the PDF of \(Y\) satisfies the following equation
+	\[
+		f_Y(y) |\dy| = f_X(x) |\dx|
+		\iff
+		f_Y(y) = f_X(x) \left\vert{\left( \frac{\dy}{\dx} \right)}^{-1}\right\vert
+	\]
+\end{theorem}
+\begin{theorem}[PDF of a function of two random variables]
+	Suppose that \( (U,V) = g(X,Y) \), then
+	\[
+		f_{U,V}(u,v) |\mathrm{d}u\mathrm{d}v| = f_{X,Y}(x,y) |\mathrm{d}x\mathrm{d}y| =
+		\iff
+		f_{U,V}(u,v) = f_{X,Y}(x,y)
+		\left\vert{\left( \frac{\partial(u,v)}{\partial(x,y)} \right)}^{-1}\right\vert
+	\]
+\end{theorem}
+
+\subsection{Classical distributions}
+
+\begin{table}[htbp]
+	\caption{Notable discrete distributions}
+	\begin{center}
+		\begin{tabular}[c]{l|l|l}
+			\hline
+			distribution       & support              & parameters                         \\
+			\hline
+			\(\Bern(p)\)       & \(\{0,1\}\)          & \(p\in [0,1]\)                     \\
+			\(\Bin(n,p)\)      & \(\{0,1,\ldots n\}\) & \(n\in\mathbb{N}\), \(p\in [0,1]\) \\
+			\(\Geom(p)\)       & \(\{0,1,\ldots\}\)   & \(p\in [0,1]\)                     \\
+			\(\NBin(r,p)\)     & \(\{r,r+1,\ldots\}\) & \(n\in\mathbb{N}\), \(p\in [0,1]\) \\
+			\(\Pois(\lambda)\) & \(\{0,1,2,\ldots\}\) & \(\lambda > 0\)                    \\
+			\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\begin{table}[htbp]
+	\caption{Notable continuous distributions}
+	\begin{center}
+		\begin{tabular}[c]{l|l|l}
+			\hline
+			distribution               & support               & parameters        \\
+			\hline
+			\(\Unif(a,b)\)             & \([a,b]\)             & \(a<b\)           \\
+			\(\Expo(\lambda)\)         & \((0,+\infty)\)       & \(\lambda>0\)     \\
+			\(\BetaD(a,b)\)            & \((0,1)\)             & \(a,b>1\)         \\
+			\(\Gamma(\alpha,\lambda)\) & \((0,+\infty)\)       & \(\lambda>0\)     \\
+			\(\Norm(\mu,\sigma^2)\)    & \((-\infty,+\infty)\) & mean and variance \\
+			\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+If \(X\dist\BetaD(a,b)\) then the PDF is
+\[
+	f(x) = \frac{1}{\beta(a,b)} x^{a-1} x^{b-1}
+	\quad 0<x<1
+\]
+
+\begin{remark}[beta-binomial conjugation]
+	Suppose that \(X|P=p\dist\Bin(n,p)\) where \(P\dist\BetaD(a,b)\).
+	Then posterior distribution is \(P|X=k \dist \BetaD(a+k,b+n-k)\).
+\end{remark}
+
+
+If \(X\dist\GammaD(\alpha,\lambda)\) then the PDF is
+\[
+	f(x) = \frac{
+		\lambda e^{-\lambda x} {(\lambda x)}^{\alpha -1}
+	}
+	{\Gamma(\alpha)}
+	\quad x>0
+\]
+
+\begin{remark}[gamma and sum of iid exponential variables]
+	Let \(X_1,X_2,\ldots X_n\iid\Expo(\lambda)\) then
+	\(\sum_{i=1}^n X_i \dist \GammaD(n,\lambda)\)
+\end{remark}
+
+
+
+If \(\mathbf{X}\dist\Norm(\mathbf{\mu},\mathbf{K})\), where \(\mathbf{K}\), the covariance matrix \(K_{ij}=\Cov(X_i,X_j)\), is a symmetric positive semi-definite matrix.
+\[
+	f(\mathbf{x}) = \frac{1}{\sqrt{{(2\pi)}^n \det(K)}}
+	\exp\left[
+	- \frac12
+	{(\mathbf{x}- \mathbf\mu)}^T \mathbf{K}^{-1} {(\mathbf{x}- \mathbf\mu)}
+	\right]
+	\quad \mathbf{x} \in \mathbb{R}^n
+\]
+
+\begin{theorem}[MVN: uncorrelated implies independent]
+	If \(\mathbf{X}\) consists of uncorrelated coordinates, then \(\Cov(X_i,X_j) = \sigma^2_i [i=j]\), so \(\mathbf{K}\) is a diagonal matrix.
+	It can be verified that the joint PDF can be separated into product of \(n\) Gaussian PDFs
+	\begin{align*}
+		f(\mathbf{x}) & = \frac{1}{\sqrt{{(2\pi)}^n \prod_i \sigma_i^2 }} \exp\left[ -\frac12
+			{(\mathbf{x}- \mathbf\mu)}^T \operatorname{diag}(\sigma_1^{-2},\ldots,\sigma_n^{-2}) {(\mathbf{x}- \mathbf\mu)}
+		\right]                                                                                                              \\
+		              & = \frac{1}{\sqrt{{(2\pi)}^n \prod_i \sigma_i^2 }} \exp\left[
+			\sum_{j=1}^n \frac{{(x_j-\mu_j)}^2}{2\sigma_j^2}
+		\right]                                                                                                              \\
+		              & = \prod_{i=1}^n \frac{1}{\sqrt{2\pi \sigma_i}} \prod_{j=1}^n \exp\left[
+			\frac{{(x_j-\mu_j)}^2}{2\sigma_j^2}
+		\right]                                                                                                              \\
+		              & = \prod_{i=1}^n \frac{1}{\sqrt{2\pi \sigma_i}} \exp\left(-\frac{{(x_i-\mu_i)}^2}{2\sigma_i^2}\right)
+	\end{align*}
+\end{theorem}
+
+
+\subsubsection{Hypothesis testing: Chi-Square, Student-t, and F-distribution}
+
+(skipped)
+
+\subsection{Generating function}
+
+\begin{definition}[probability generating function (PGF)]
+	The PGF of a discrete random variable is
+	\[
+		g_X(t) = \E(t^X) = \sum_{k=-\infty}^{+\infty} \Pr(X=k) t^k
+	\]
+	Basically the Z transform of the PMF.
+	\[
+		g_X(0) = \sum_k \Pr(X=k) \cdot 1 = 1
+	\]
+	Further
+	\[
+		\frac{\mathrm{d}^n}{\mathrm{d}t^n}\E(t^X) =
+		\E\left[\frac{\mathrm{d}^n}{\mathrm{d}t^n} t^X \right] = \E\left[ \prod_{i=0}^{n-1} (X-i) t^{X-n} \right]
+	\]
+	Thus
+	\[
+		\frac{\mathrm{d}^n}{\mathrm{d}t^n}\E(t^X) \vert_{t=1} = \E \prod_{i=0}^{n-1} (X-i)
+	\]
+\end{definition}
+\begin{theorem}[PGF of sum of independent variables]
+	If \(X,Y\) are independent, the PGF of \(X+Y\) is the product of the PGF of \(X\) and \(Y\).
+	\[
+		\E(t^{X+Y}) = \E(t^X t^Y) = \E(t^X) \E(t^Y)
+	\]
+	The converse is also true.
+\end{theorem}
+\begin{theorem}[PGF of randomly stopped sum]
+	Let \(X_1, X_2, \ldots\) be a sequence of independent and identically distributed random variables with common PGF \(G_X(\cdot)\). Let \(N\) be a random variable, independent of the \(X_i\)s, with PGF \(G_N(\cdot)\), and let \(T_N=\sum_{i=1}^N X_i\).
+	Then the PGF of \(T_N\) is
+	\begin{align*}
+		G_{T_N}(t) & = \E_{N,\mathbf{X}}\left\{ t^{\sum_{i=1}^N X_i} \right\}
+		= \E_N\left\{ \E_{\mathbf{X}|N}\left[ t^{\sum_{i=1}^N X_i} \mid N \right] \right\}
+		= \E_N\left\{ \E_{\mathbf{X}|N}\left[ \prod_{i=1}^N t^{X_i} \mid N \right] \right\}               \\
+		           & = \E_N\left\{ \prod_{i=1}^N \E_{\mathbf{X}|N}\left[  t^{X_i} \mid N \right] \right\}
+		= \E_N\left\{ \prod_{i=1}^N \E_{\mathbf{X}}\left[  t^{X_i} \right] \right\}
+		= \E_N\left\{ {(G_X(t))}^N \right\}                                                               \\
+		           & = \sum_{n=0}^{\infty} {(G_X(t))}^n \Pr(N=n)
+		= G_N(G(X))
+	\end{align*}
+\end{theorem}
+
+\begin{definition}[moment generating function (MGF)]
+	The MGF of a random variable is
+	\[
+		M_X(t) = \E(e^{tX})
+		= \sum_{k=-\infty}^{+\infty} \Pr(X=k) e^{tk}
+		= \intoo e^{tx}f(x)\dx
+	\]
+	Basically the Laplace transform of the PDF.\\
+	Alternatively, consider the Taylor's series of \(e^x\)
+	\[
+		M_X(t) = \E(e^{tX}) = \E\left[\sum_{n=0}^\infty \frac{X^n}{n!}t^n \right] = \sum_{n=0}^\infty \frac{\E(X^n)}{n!}t^n
+	\]
+	Therefore
+	\[
+		\frac{\mathrm{d}^n}{\mathrm{d}t^n}M_X(t) \vert_{t=0} = \E(X^n)
+	\]
+	Another interpretation: (Caution: exchanging differentiation and expectation/summation)
+	\[
+		\frac{\mathrm{d}^n}{\mathrm{d}t^n}\E(e^{tX}) = \E\left[\frac{\mathrm{d}^n}{\mathrm{d}t^n} e^{tX}\right] = \E(X^n e^{tX})
+	\]
+\end{definition}
+\begin{remark}[Characteristic functions]
+	Let \(i = \sqrt{-1}\), then the CF of a random variable \(X\) is defined as
+	\( \phi_X(t) = \E(e^{itX}) \).
+	Essentially the Fourier transform of the PDF/PMF.
+	It exhibits similar properties to the MGF.
+\end{remark}
+\begin{theorem}[MGF of sum of independent variables]
+	Suppose that \(X,Y\) are independent, then
+	\[
+		\E(e^{t(X+Y)}) = \E(e^{tX} e^{tY}) = \E(e^{tX}) \E(e^{tY})
+	\]
+	The converse is also true.
+\end{theorem}
+\begin{theorem}[MGF of a location-scale transformation]
+	\[
+		\E(e^{t(aX+b)}) = \E(e^{(at)X} e^{bt}) = e^{bt} M_X(at)
+	\]
+\end{theorem}
+
+\begin{definition}[joint MGF]
+	Let \(X,Y\) be two random variable, the joint MGF can be defined as
+	\[
+		M_{X,Y}(u,v) = \E(e^{uX + vY}) = \E(e^{uX} e^{vY})
+	\]
+\end{definition}
+\begin{theorem}[joint MGF and independence]
+	\(X,Y\) are independent if and only if their joint MGF can be separated into product of MGFs of \(X\) and \(Y\).
+\end{theorem}
+
+\subsubsection{Inequalities}
+
+\begin{itemize}
+	\item Markov's inequality: For \(X\) be a positive random variable \( \Pr(X>a) \leq \frac{\E(X)}{a} \) for all \(a>0\).\\
+	      Consider the indicator \(\mathbf{1}_{X>a}\), \( X \geq a\mathbf{1}_{X>a} \implies \E(X) \geq a \Pr(X>a) \)
+	\item Chebyshev's inequality: For random variable \(X\), \(\Pr(|X-\mu|>a) \leq \frac{\sigma^2}{a^2}\) for all \(a>0\)\\
+	      Apply Markov's inequality on \(Y={(X-\mu)}^2\).
+	\item Chernoff's inequality: For \(t\geq 0\), \(\Pr(X\geq a) = \Pr(e^{tX}\geq e^{ta}) \leq M_X(t)e^{-ta}\).\\
+	      Apply Markov's inequality on \(Y=e^{tX}\)
+\end{itemize}
+
+\subsubsection{Law of Large Numbers}
+
+For independent and identically distributed random variables \(X_1,X_2,\ldots X_n\) with mean \(\mu\), the sample mean converges to \(\mu\) as \(n\to\infty\).
+
+\begin{itemize}
+	\item Strong LLN: almost surely convergence.
+	      \[
+		      \Pr\left( \lim_{n\to\infty} \frac{\sum_{i=1}^n X_i}{n} \right) = 1
+	      \]
+	\item Weak LLN: convergence in probability
+	      \[
+		      \forall \delta>0
+		      .
+		      \forall \epsilon>0
+		      .
+		      \exists N\in\mathbb{N}
+		      .
+		      \forall n>N
+		      .
+		      \Pr(|\bar{X}-\mu|>\delta) < \epsilon
+	      \]
+	      Apply Chebyshev's inequality on \(\bar{X}\) whose variance converges to 0.
+\end{itemize}
+
+\subsubsection{Central Limit Theorem}
+
+For independent and identically distributed random variables \(X_1,X_2,\ldots X_n\) with mean \(\mu\) and variance \(\sigma^2\)
+
+\[
+	\frac{\sigma^{-1}\sum_{i=1}^n (X_i-\mu)}{\sqrt n} \to \Norm(0,1)
+\]
+
+\end{document}
