@@ -344,7 +344,6 @@ systemctl restart systemd-timesyncd.service
   exit
   ```
 
-  a
 2. 配置 init ram fs
   编辑`/etc/mkinitcpio.conf`,在`HOOKS`中添加`resume`. 或者这添加`systemd`.  
   使用`sudo mkinitcpio -P`重新重新生成initramfs.
