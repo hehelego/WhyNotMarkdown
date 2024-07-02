@@ -528,3 +528,10 @@ reload tmux conf `tmux source ~/.tmux.conf`
 - `<prefix>+I` install plugins
 - `<prefix>+u` update plugins
 - `<prefix>+alt+u` uninstall plugins
+
+## monitor cpu speed, manually
+
+```fish
+watch -n 1 "cat /proc/cpuinfo | grep '^cpu MHz'"
+```
+

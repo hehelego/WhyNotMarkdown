@@ -1,17 +1,12 @@
 # record on trouble shooting
 
-> 我的环境(更新时间 2020.12.31), 信息来源于lshw,neofetch,uname等等工具  
+> Redminders:
 >
-> - 小新pro13 2020,amdcpu版本(xiaoxin pro 13-are 2020);可选配件是ryzen4800u+16gRAM+512gSSD
-> - fOS: `ArchLinux on x86_64`
-> - DE: KDE plasma / i3wm
->
-> 一些redminder
->
-> - 学会使用搜索引擎. arch wiki,arch forum,StackOverflow,UnixStackExchange,github,网友blog...到处都是资料(别忘了还有gentoo wiki).
-> - arch是rolling release, 记得每天`sudo pacman -Syu`,记得即使更换掉过时软件包.
-> - 任何更新都可能影响之前的解决方案,尽量查阅第一手资料,确保时效性.
-> - re-boot/re-login/restart xorg都有可能有用.
+> - Use search engines wisely.
+> - Look for good sources: gentoo wiki, arch wiki, arch forum, StackOverflow, Unix StackExchange, github, etc.
+> - Tricks that work in the past may become out-dated.
+> - Remember to update software packages regularly, especially when using Arch Linux, a rolling release distro.
+> - A reboot may solve your problem easily: restart the machine, restart x server, restart desktop environment.
 
 [TOC]
 
