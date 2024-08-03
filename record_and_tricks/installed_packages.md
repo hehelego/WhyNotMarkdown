@@ -70,8 +70,8 @@
 - CLI to free-desktop recycle bin: `trash-cli`
 - system services managing: `systemd` (provides `/usr/bin/systemctl`),`lnav`,`sysz`
 - fish shell prompt: `starship`
-- `pueue`: managing long-running shell command
 - `tokei` count lines of code
+- `just`: a handy command runner
 - file type detection: `file`
 - find full path in `$PATH`: `which`
 - modern CLI/TUI utilities and replacement for `coreutils`
@@ -88,14 +88,25 @@
 ### working
 
 - programming language tool chain
-  - C/C++
-  - Python
-  - Rust
-  - Haskell
+  - C/C++ `musl`
+  - Python `python-pipx`
+  - Rust `rust`
+  - Haskell `ghcup`
+  - OCaml `opam`, `dune`
+  - Agda
+  - Coq
   - Node.js
+- `mold`: a faster modern linker replacing `ld` and `ld.gold`.
+- build systems:
+  - `xmake`
+  - `cmake`
+  - `ninja`
+  - `meson`
+  - `ccache` and `sccache`
+- SMT solvers: `cvc4`, `python-cvc4`, `z3`, `python-z3`, `vampire`
 - LaTeX: `texlive`, `texlive-lang` group; `biber`; (fix `tlmgr` following the instruction on arch linux wiki)
 - alternative to TexLive suite: `tectonic`
-- Mathematical software: `sagemath`, `octave`, `z3`, `python-z3`
+- Mathematical software: `sagemath`, `octave`
 - scientific python ecosystem:
   - `python-{scipy,numpy,sympy}`
   - `python-{matplotlib,seaborn}`
@@ -121,6 +132,7 @@
 - display color temperature adjustment: `redshift`; `gammastep`
 - system-wide desktop clipboard: `xclip`; `wl-clipboard`
 - replace mouse with your keyboard: `keynav`, `warpd`
+- keyboard remapping: `keyd`
 - desktop notification center: `dunst`
 - controlling android devices: `scrcpy`
 - connecting with smartphone: `kdeconnect`
