@@ -50,3 +50,12 @@ stay focused,be motivated.
 去探索吸引你的乐趣,
 去体验你真实的感受.
 
+----------------------------------------------------------------
+
+## TODO
+
+- [ ] note on basic program semantics theory: `1dc5ca4e726cf585dc58781312b2e0288cfff34f`
+- [ ] course note of stochastic process: `f1c8b6529ab1fce76f341134b85e159f82b8746a`
+- [ ] note on the normalization properties of STLC: `9e710d7cd89602ffe8c6e6b2113f5685524cce09`
+- [ ] note on monad transformers (and possibly algebraic systems): `94fbcc1f24b51e16526cb20ac7d1226684204dfc`
+- [ ] note on omega automata and temporal logic model checking: `9fcec622efb28628961b73516c46036b38fdd9c6`
