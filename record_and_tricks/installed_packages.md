@@ -48,10 +48,10 @@
 - `curl`, `httpie`
 - `wget`, `aria2`
 - `nmap`: provides `/usr/bin/{nmap,ncat,nping}`
-- `v2ray`: frontend `v2raya`
+- `v2ray` (front-end `v2raya`)
 - `proxychains-ng`
 - network traffic analyzer: `wireshark`, `tcpdump`
-- `bind`: DNS protocol
+- `bind`: DNS protocol implementation
 - `hblock`: hosts based tracker/advertisement blocking
 
 ### CLI utilities
@@ -62,19 +62,19 @@
   - OpenSSL toolkit: `openssl`
 - file transfer: `rsync`
 - file manager: `ranger`, `nnn`, `ncdu`
-- regex/fuzzy searcher: `fzf`,`ripgrep, ripgrep-all`
+- regex/fuzzy searcher: `fzf`, `ripgrep`. `ripgrep-all` search PDF/zip/docx ...
 - `fselect` SQL like file searching
-- accessing archives and compressed files: `tar`,`zip/unzip`,`bzip2`,`p7zip`,`gzip`,`xz`,`zstd`,`unrar`; `ark` for GUI
+- archives and compressed files: `tar`,`zip/unzip`,`bzip2`,`p7zip`,`gzip`,`xz`,`zstd`,`unrar`. GUI client `ark`.
 - man pages: `man-db, man-pages`
 - TL;DR pages: `tldr`, `tealdeer`
 - CLI to free-desktop recycle bin: `trash-cli`
-- system services managing: `systemd` (provides `/usr/bin/systemctl`),`lnav`,`sysz`
-- fish shell prompt: `starship`
-- `tokei` count lines of code
+- system services managing: `/usr/bin/systemctl` (provided by `systemd`). TUI client `sysz`.
+- `starship`: fancy shell prompt and status line
+- `tokei`: count lines of code
 - `just`: a handy command runner
-- file type detection: `file`
-- find full path in `$PATH`: `which`
-- modern CLI/TUI utilities and replacement for `coreutils`
+- `file`: file type identification
+- `which`: find full path of commands
+- modern CLI/TUI utilities
   - `zoxide`: alternative to `autojump`
   - `eza`: alternative to `coreutils/ls`
   - `bat`: alternative to `coreutils/cat`
@@ -117,12 +117,12 @@
   - `perf`: performance audit tool provided by Linux kernel
   - `strace`: tracing system calls
   - `valgrind`: memory leak detector
-  - `lsof`: list all opened files
-  - `htop,bashtop,bpytop,btop`: resources (processes, network, disks, memory) monitor
+  - `htop,btop`: resources (processes, network, disks, memory) monitor
   - `iotop`: I/O usage monitor
   - `powertop`: power consumption monitor
   - `s-tui`: CPU usage monitor
   - `radeontop`, `nvtop`: GPU usage monitor for AMD/Nvidia graphics cards
+  - `util-linux`: provides `lsblk, lspmem, lscpu, lsfd`):
 
 ### other utilities
 
@@ -135,13 +135,12 @@
 - keyboard remapping: `keyd`
 - desktop notification center: `dunst`
 - controlling android devices: `scrcpy`
-- connecting with smartphone: `kdeconnect`
 - GUI file explorer: `dolphin`
 - disk snapshot and recovering: `syncthing`, `timeshift`, `btrfs-prog`
-- screen video recording: `simplescreenrecorder`
+- visualizing topological graphs: `graphviz`
 - terminal text recording: `asciinema`
-- visualizing topological graphs:`graphviz`
-- screenshot: `flameshot`, `spectacle`; `grim+slurp`
+- screenshot: `flameshot`, `spectacle`. `grim+slurp` for wayland.
+- screen video recording: `simplescreenrecorder`. `wf-recorder` for wayland.
 - display the keyboard actions: `screenkey`; `showmethekey`
 
 ## MISC
@@ -160,14 +159,12 @@
 
 ### multimedia
 
-- audio server: `pipewire` (replacing `pulseaudio`)
-- volume control: `/usr/bin/pactl`, `kmix`
+- audio server: `pipewire`, `pipewire-{alsa,audio,jack,pulse}`, `wireplumber`
+- volume control: `pavucontrol`, `wireplumber` (`/usr/bin/wpctl`)
+- bluetooth `bluez`, `bluez-utils`
 - media player controlling: `playerctl`
 - graphics drawing: `kolourpaint` + `gimp` + `inkspace`
-- metadata tools
-  - `mediainfo`
-  - `exiv2`
-- `you-get`, `yt-dlp` (a fork of `youtube-dl`)
+- metadata tools: `mediainfo`, `exiv2`
 
 ### font family
 
@@ -182,8 +179,9 @@
 
 ### hardware monitor
 
-- `neofetch`
-- `/usr/bin/{lscpu,lspci,lshw}`
-- `hwinfo`
-- `lsusb`
-- `smartmontools`
+- `hwinfo`, `lshw`
+- `util-linux`: provides `lsblk`, `lsmem`, `lscpu`, `lsfd`, `lspci` ...
+- `pciutils`: provides `lspci`
+- `usbutils`: provides `lsusb`, `lsusb.py`
+- `udisks2`: provides `udisksctl`
+- `smartmontools`: provides `smartctl`
