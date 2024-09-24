@@ -142,6 +142,7 @@
 - screenshot: `flameshot`, `spectacle`. `grim+slurp` for wayland.
 - screen video recording: `simplescreenrecorder`. `wf-recorder` for wayland.
 - display the keyboard actions: `screenkey`; `showmethekey`
+- OCR utility: `tesseract`
 
 ## MISC
 
