@@ -74,6 +74,7 @@
 - `just`: a handy command runner
 - `file`: file type identification
 - `which`: find full path of commands
+- `pueue`: manage background porcesses
 - modern CLI/TUI utilities
   - `zoxide`: alternative to `autojump`
   - `eza`: alternative to `coreutils/ls`
