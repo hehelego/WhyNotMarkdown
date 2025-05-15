@@ -455,9 +455,7 @@ HandlePowerKey=suspend
 
 For further information, read vim doc the `:help expand()` in `builtin.txt`.
 
-### example
-
-To read the lines of a text file containing the word "vim".
+For example, to read the lines of a text file containing the word "vim".
 
 ```vimscript
 :vnew
@@ -475,6 +473,31 @@ This trick is useful when combined with:
 - `uniq`: remove adjacent repeated lines
 - `nl`: add line number for every line of a text line
 - `jq`: filter and transform json files
+
+## sponge: soak up standard input and write to a file
+
+### the trick
+
+To replace the content of a file with the output of a command which takes the file as intput:
+
+```bash
+$filter_program $file | sponge $file
+```
+
+If we redirect the output of the filter program directly to the file:
+
+```bash
+$filter_program $file > $file
+```
+
+The shell will handle the command line in the following steps:
+
+1. substitute variables with values.
+2. open the output files and set the standard output to the destination file.
+3. start running the filter program process
+
+In step 2, contents in `$file` is cleared, so the filter program receives empty input.
+This is usually not the intended behavior for the user.
 
 ## i3wm focus到产生notification的windo
 
