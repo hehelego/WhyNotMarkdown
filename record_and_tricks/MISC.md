@@ -446,6 +446,36 @@ HandlePowerKey=suspend
   - `Ctrl+Shift+y` download
 - `Ctrl+Shift+r` override cache, reload page
 
+## viewing the result of current buffer filtered by an external command in vim
+
+### the trick
+
+1. create a new unnamed empty buffer: `:new` or `:vnew`
+2. feed the last focused buffer to the external command, and read the output into the empty buffer: `:read !grep pattern < #`
+
+For further information, read vim doc the `:help expand()` in `builtin.txt`.
+
+### example
+
+To read the lines of a text file containing the word "vim".
+
+```vimscript
+:vnew
+:read !grep 'vim' < #
+```
+
+### notes
+
+This trick is useful when combined with:
+
+- `grep`: regular expression filtering
+- `awk`: AWK text manipulation
+- `sed`: text stream transform
+- `sort`: sort lines in a text file
+- `uniq`: remove adjacent repeated lines
+- `nl`: add line number for every line of a text line
+- `jq`: filter and transform json files
+
 ## i3wm focus到产生notification的windo
 
 [i3wm faq: how to jump to urgent workspace](https://faq.i3wm.org/question/853/how-to-jump-to-urgent-workspace/index.html)
