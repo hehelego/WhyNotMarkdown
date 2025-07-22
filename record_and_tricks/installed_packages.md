@@ -34,6 +34,7 @@
 - document converter: `pandoc`
 - multimedia: `ffmpeg`,`imagemagick`,`vlc`,`mpv`,`feh`
 - containerized environment: `podman`, `docker`
+- note taking: `zk`, `anki`
 
 
 ### network accessing
