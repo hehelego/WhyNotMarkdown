@@ -588,3 +588,24 @@ reload tmux conf `tmux source ~/.tmux.conf`
 watch -n 1 "cat /proc/cpuinfo | grep '^cpu MHz'"
 ```
 
+## monitor memory usaage and kill OOM processes with systemd-oomd
+
+The `systemd-oomd` is a OOM daemon that will terminate processes that use too much swap memory.
+
+```
+systemctl enable --now systemd-oomd.service
+oomctl dump
+```
+
+If a process got terminated by the OOM killer, you can see system logs like this one:
+
+```
+[32701.201220] Out of memory: Killed process 11609 (a.out) total-vm:5529343872kB, anon-rss:18780416kB, file-rss:0kB, shmem-rss:0kB, UID:1000 pgtables:10820680kB oom_score_adj:0
+```
+
+See
+
+- [Improving performance - ArchWiki](https://wiki.archlinux.org/title/Improving_performance#Improving_system_responsiveness_under_low-memory_conditions)
+- `systemd-oomd(8)`
+- `oomd.conf(5)`
+- `oomctl(1)`
