@@ -154,10 +154,58 @@ The first incompleteness theorem:
 
 ## In recursive function and combinatorial calculus
 
+Preliminaries
+
+- Defining number theoretic functions with recursion: Primitive recursive functions. Recursive functions (all minimization must be defined). Partial recursive functions (general minimization).
+- Closure property of PR, REC, and PartRec.
+- All recursive function can be represented in a proper first-order arithmetic theory.
+- A number theoretic function is partial recursive if and only if it is Turing computable.
+- A total partial recursive function is recursive.
+
+Key results
+
+- enumeration of partial recursive functions $\phi^n_z(x_1,\ldots,x_n) = U(\mu y . T_n(z,x_1,\ldots,x_n,y))$
+  - $n$ arity of the function
+  - $z$ index / code of a Turing machine
+  - $T_n(z,x_1,\ldots,x_n,y)$ the characteristic function of the relation "$y$ is the Gödel number of the computation history of the Turing machine whose code is $z$ when given $a^{x_1} \# a^{x_2} \cdots \# a^{x_n}$ as the input".
+  - $U(\cdot)$ decode the output from an accepting computation history.
+- $s^m_n$ theorem. Primitive recursive function $s^m_n(z,y_1,\ldots,y_m)$ for specialization / partial application such that $\phi_z^{m+n}(x_1,\ldots,x_n,y_1,\ldots,y_m) = \phi_{s^m_n(z, y_1,\ldots,y_m)}(x_1,\ldots,x_n)$.
+  - specialization of partial recursive functions is a primitive recursive procedure on the code of the function.
+  - $z$ the code of a function with $m+n$ parameters.
+  - $s^m_n(z,y_1,\ldots,y_m)$ the code of the specialized function with $m$ fixed parameters.
+
+### recursion theorem
+
+Let $f : \mathbb{N}^{n+1} \to \mathbb{N}$ be a partial recursive function, there exists $e$ such that $f(x_1,\ldots, x_n, e) = \phi^n_e(x_1,\ldots,x_n)$.
+
+Let $d$ be the index of $(x_1,\ldots,x_n,y) \mapsto f(x_1,\ldots,x_n,s^1_n(y,y))$.
+That is, $f(x_1,\ldots,x_n,s^1_n(y,y)) = \phi^{n+1}_d(x_1,\ldots,x_n,y)$.
+
+By $s^m_n$ theorem, $\phi^{n+1}_d(x_1,\ldots,x_n,y) = \phi^n_{s^1_n(d,y)}(x_1,\ldots,x_n)$.
+
+Let $e = s^1_n(d, d)$, then $f(x_1,\ldots, x_n,e)$ is
+
+$$
+f(x_1,\ldots, x_n,s_n^1(d,d)) = \phi^{n+1}_d(x_1,\ldots,x_n,d) = \phi^n_{s^1_n(d,d)}(x_1,\ldots, x_n) = \phi^n_e(x_1,\ldots,x_n)
+$$
+
+### fixed point theorem
+
+Let $h : \mathbb{N} \to \mathbb{N}$ be a recursive function, there exists $e$ such that $\phi^1_e = \phi^1_{h(e)}$.
+
+The function $f(x,z) = \phi^1_{h(z)}(x)$ is recursive.
+Apply the recursion theorem to get an index $e$ such that
+
+$$
+f(x,e) = \phi^1_{h(e)}(x) = \phi^1_e(x)
+$$
+
+Intuitive reading: $h$ is a program transformer. Every program transformer has a fixed point in the sense that $e$ and $h(e)$ encode the same partial recursive function.
+
 ## references
 
 - Michael Sipser, An introduction to the theory of computation, 2nd edition. Chapter 6 Advanced Topics in Computability Theory.
 - Herbert B. Enderton, A mathematical introduction to logic, 2nd edition. Chapter 3 Undecidability.
-- Dean, Walter and Alberto Naibo, "Recursive Functions", The Stanford Encyclopedia of Philosophy (Summer 2025 Edition), Edward N. Zalta & Uri Nodelman (eds.). <https://plato.stanford.edu/archives/sum2025/entries/recursive-functions/>.
+- Elliot Mendelson, Introduction to mathematical logic, 5th ed. Chapter 5 Computability.
 
 Related topics: the provability modal logic and meta programming in dependent type theories.
